@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import { RequestService } from '../services/request.service';
-import { EventsExchangeService } from '../services/events-exchange.service';
+import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
-import { Wall } from '../commonClasses/wall';
-import { Post } from '../commonClasses/posts';
+import { Wall } from '../../commonClasses/wall';
+import { Post } from '../../commonClasses/posts';
 
 
 @Component({

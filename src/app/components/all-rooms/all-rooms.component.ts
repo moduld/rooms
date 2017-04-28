@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../services/request.service';
-import { EventsExchangeService } from '../services/events-exchange.service';
+import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
-import { Room } from '../commonClasses/room';
+import { Room } from '../../commonClasses/room';
 
 
 @Component({

@@ -1,33 +1,100 @@
-  <div class="main_container" appIeHeight>
+  <!--<div class="main_container" appIeHeight>-->
 
 
-    <div class="posts" *ngFor="let post of allPosts; let i = index">
-      <div class="post_info">
-                 <span class="user_info">
-                    <span class="avatar" [ngStyle]="{'background-image': post.owner.thumbnail}"></span>
-                    <span class="name">{{post.owner.user_name}}</span>
-                </span>
-        <span class="date">{{post.created_at | date: 'dd MMM y'}}</span>
+    <!--<div class="posts" *ngFor="let post of allPosts; let i = index">-->
+      <!--<div class="post_info">-->
+                 <!--<span class="user_info">-->
+                    <!--<span class="avatar" [ngStyle]="{'background-image': post.owner.thumbnail}"></span>-->
+                    <!--<span class="name">{{post.owner.user_name}}</span>-->
+                <!--</span>-->
+        <!--<span class="date">{{post.created_at | date: 'dd MMM y'}}</span>-->
+      <!--</div>-->
+      <!--<div class="post_body">-->
+        <!--<img *ngIf="post.media.length" [src]="post.media[0].thumbnail" alt="#" class="post_img" >-->
+        <!--<p class="post_text" *ngIf="post.text.length">{{post.text}}</p>-->
+        <!--<i class="line"></i>-->
+      <!--</div>-->
+
+      <!--<div class="post_footer">-->
+        <!--<div class="icons_wrapper">-->
+          <!--<span class="icon-heart">{{post.likes_count}}</span>-->
+          <!--<span class="icon-comment">{{post.comments_count}}</span>-->
+        <!--</div>-->
+        <!--<div class="dots_wrapp">-->
+          <!--<i class="dots"></i>-->
+          <!--<i class="dots"></i>-->
+          <!--<i class="dots"></i>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+
+  <!--</div>-->
+  <div class="tags__wall">
+      <div class="tags-container">
+          <div class="tags tags-mb">
+              <span class="tags__active">Animals and nature</span>
+              <span>Fast And Furious Facial</span>
+              <span>My Motivation</span>
+              <span>Combing Hair</span>
+          </div>
+          <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
       </div>
-      <div class="post_body">
-        <img *ngIf="post.media.length" [src]="post.media[0].thumbnail" alt="#" class="post_img" >
-        <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
-        <i class="line"></i>
+  </div>
+
+  <div class="container-plus sticky">
+      <div class="wall__plus wall__plus-pos">
+          <span class="wall__plus-icon"></span>
       </div>
+      <div class="container-rooms wall wall-pt">
+          <div class="row">
 
-      <div class="post_footer">
-        <div class="icons_wrapper">
-          <span class="icon-heart">{{post.likes_count}}</span>
-          <span class="icon-comment">{{post.comments_count}}</span>
-        </div>
-        <div class="dots_wrapp">
-          <i class="dots"></i>
-          <i class="dots"></i>
-          <i class="dots"></i>
-        </div>
+
+              <div class="col-lg-4 col-md-6 col-xs-12" *ngFor="let post of allPosts; let i = index">
+                  <div class="wall__block">
+                      <div class="wall__user header__user">
+                          <div class="user__wrap">
+                              <div class=" wall__avatar wall__avatar-pos">
+                                  <img [src]="post.owner.thumbnail" alt="">
+                              </div>
+                              <span class="user__name  ">{{post.owner.user_name}}</span>
+                          </div>
+
+                      </div>
+                      <span class="wall__date wall__date-pos">{{post.created_at | date: 'dd MMM y'}}</span>
+                      <div class="wall__container">
+                          <div class="wall__content wall__content-pb">
+                              <div class="wall__img wall__img-big"><img [src]="post.media[0].thumbnail" *ngIf="post.media.length"  alt=""></div>
+                              <p class="wall__text">{{post.text}}</p>
+
+                              <!--<div class="wall__imglist wall__imglist-bottom">-->
+                                  <!--<div class="img"><img src="img/wall/wall-img-1.jpg" alt=""></div>-->
+                                  <!--<div class="img"><img src="img/wall/wall-img-2.jpg" alt=""></div>-->
+                                  <!--<div class="img"><img src="img/wall/wall-img-3.jpg" alt=""></div>-->
+                                  <!--<div class="img"><img src="img/wall/wall-img-4.jpg" alt=""></div>-->
+                              <!--</div>-->
+                          </div>
+                          <div class="wall__info">
+                              <div class="wall__soc">
+                                  <div class="wall__like"><span class="icon icon-like"></span><span
+                                          class="number">{{post.likes_count}}</span>
+                                  </div>
+                                  <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                          class="number">{{post.comments_count}}</span>
+                                  </div>
+                              </div>
+                              <div class="wall__menu">
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="clearfix visible-sm visible-md"></div>
+
+          </div>
       </div>
-    </div>
-
-
-
   </div>
