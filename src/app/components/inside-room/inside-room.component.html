@@ -1,0 +1,33 @@
+  <div class="main_container" appIeHeight>
+
+
+    <div class="posts" *ngFor="let post of allPosts; let i = index">
+      <div class="post_info">
+                 <span class="user_info">
+                    <span class="avatar" [ngStyle]="{'background-image': post.owner.thumbnail}"></span>
+                    <span class="name">{{post.owner.user_name}}</span>
+                </span>
+        <span class="date">{{post.created_at | date: 'dd MMM y'}}</span>
+      </div>
+      <div class="post_body">
+        <img *ngIf="post.media.length" [src]="post.media[0].thumbnail" alt="#" class="post_img" >
+        <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
+        <i class="line"></i>
+      </div>
+
+      <div class="post_footer">
+        <div class="icons_wrapper">
+          <span class="icon-heart">{{post.likes_count}}</span>
+          <span class="icon-comment">{{post.comments_count}}</span>
+        </div>
+        <div class="dots_wrapp">
+          <i class="dots"></i>
+          <i class="dots"></i>
+          <i class="dots"></i>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>

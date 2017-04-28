@@ -1,1 +1,554 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Bold';
+  src: url("./fonts/sfuitext-bold-webfont.woff2") format("woff2"), url("./fonts/sfuitext-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Medium';
+  src: url("./fonts/sfuitext-medium-webfont.woff2") format("woff2"), url("./fonts/sfuitext-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Regular';
+  src: url("./fonts/sfuitext-regular-webfont.woff2") format("woff2"), url("./fonts/sfuitext-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("./icons/icomoon.eot?b7fxrm");
+  src: url("./icons/icomoon.eot?b7fxrm#iefix") format("embedded-opentype"), url("./icons/icomoon.ttf?b7fxrm") format("truetype"), url("./icons/icomoon.woff?b7fxrm") format("woff"), url("./icons/icomoon.svg?b7fxrm#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+[class^="icon-"]:before, [class*=" icon-"]:before,
+[class^="icon-"]:after, [class*=" icon-"]:after {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-plus:before {
+  content: "\e900"; }
+
+.icon-people:before {
+  content: "\e906"; }
+
+.icon-bell:before {
+  content: "\e901"; }
+
+.icon-comment:before {
+  content: "\e902"; }
+
+.icon-eye:before {
+  content: "\e903"; }
+
+.icon-heart:before {
+  content: "\e9da"; }
+
+.icon-mail:before {
+  content: "\e904"; }
+
+.icon-search:before {
+  content: "\e905"; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.flex-center, .user_info, .dots_wrapp, .header .icon-search, .header .icons_wrapper, .header .icon-bell,
+.header .icon-mail, .header .rooms_block, .header .room_name_wrapp, .header .rooms, .header .room_tags, app-inside-room .icons_wrapper, app-inside-room .icon-heart,
+app-inside-room .icon-comment, app-all-rooms .room_footer, app-all-rooms .new_room .room_info, .footer, .footer .add_post {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.flex-between, .header .main_container, app-inside-room .post_info, app-inside-room .post_footer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+.flex-around {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+
+.flex-column, body, app-all-rooms .room_info, app-all-rooms .new_room {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.backgr-center, .user_info .avatar, .header .logo, .header .rooms:before, app-all-rooms .image {
+  background: center center no-repeat; }
+
+.main_container {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto; }
+
+.orange_room {
+  background-color: #ecb255; }
+
+.green_room {
+  background-color: #78de9a; }
+
+.blue_room {
+  background-color: #00add2; }
+
+.violet_room {
+  background-color: #9954ee; }
+
+.red_room {
+  background-color: #e64980; }
+
+.yello_room {
+  background-color: #fab005; }
+
+.green_room_hi {
+  background-color: #78de9a; }
+
+html {
+  height: 100%; }
+
+body {
+  min-height: 100%;
+  font-family: Regular, sans-serif; }
+
+.user_info .avatar {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 10px; }
+
+.user_info .name {
+  color: #868e96;
+  font-family: Medium, sans-serif;
+  font-size: 14px; }
+
+.dots_wrapp .dots {
+  background: transparent;
+  height: 8px;
+  width: 8px;
+  border: 2px solid #868e96;
+  border-radius: 50%;
+  display: block;
+  margin-right: 5px; }
+  .dots_wrapp .dots:last-child {
+    margin-right: 0; }
+
+@media screen and (max-width: 1190px) {
+  .main_container {
+    padding: 0 15px; } }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  body {
+    min-height: 100vh;
+    height: 100%; } }
+
+.header {
+  width: 100%;
+  color: #868e96;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: relative; }
+  .header .main_container {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  .header .logo {
+    width: 89px;
+    height: 32px;
+    background-image: url("./img/Logo.png");
+    margin: 14px 0; }
+  .header .search {
+    min-width: 350px;
+    position: relative; }
+  .header .search_field {
+    display: block;
+    width: 100%;
+    padding: 6px 45px 6px 10px;
+    background: #f8f9fa;
+    border: none;
+    border-radius: 5px; }
+  .header ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #00add2; }
+  .header ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #00add2; }
+  .header :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #00add2; }
+  .header :-moz-placeholder {
+    /* Firefox 18- */
+    color: #00add2; }
+  .header .icon-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 45px;
+    color: #00add2;
+    font-size: 25px; }
+  .header .icon-bell,
+  .header .icon-mail {
+    height: 34px;
+    width: 34px;
+    background: #f8f9fa;
+    font-size: 25px;
+    color: #868e96;
+    border-radius: 50%;
+    margin-right: 20px; }
+  .header .new_events {
+    background: #ecf6fb;
+    color: #00add2;
+    position: relative; }
+    .header .new_events:after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      right: 5px;
+      padding: 3px;
+      border-radius: 50%;
+      background: #fa5252; }
+  .header .rooms_block {
+    width: 100%;
+    background: #f8f9fa;
+    min-height: 58px;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch; }
+  .header .room_name_wrapp {
+    font-size: 16px;
+    margin: 10px 0;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  .header .rooms:before {
+    content: '';
+    height: 19px;
+    width: 19px;
+    background-image: url("./img/icn_room.png");
+    display: block;
+    margin-right: 10px; }
+  .header .rooms:after {
+    content: '';
+    display: block;
+    padding: 2px;
+    border-radius: 50%;
+    background: #868e96;
+    margin-left: 15px; }
+  .header .room_name {
+    margin-left: 10px;
+    color: #ecb255;
+    font-family: Medium, sans-serif; }
+  .header .room_tags {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  .header .room_tag {
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: white;
+    margin: 10px 0 10px 15px; }
+  .header .active_tag {
+    background: #ecb255;
+    color: white; }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* STYLES IE11 */
+  .header {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .header .rooms_block {
+      width: 100%;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center; } }
+
+@media screen and (max-width: 768px) {
+  .header .search {
+    min-width: 245px; }
+  .header .icons_wrapper {
+    width: 100%;
+    padding: 10px;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end; } }
+
+@media screen and (max-width: 400px) {
+  .header .logo {
+    margin: 10px auto; }
+  .header .search {
+    min-width: 100%; }
+  .header .icons_wrapper {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center; } }
+
+app-inside-room {
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
+  width: 100%;
+  background: #fef9f2;
+  color: #868e96; }
+  app-inside-room .main_container {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: normal;
+    -moz-column-gap: normal;
+    column-gap: normal;
+    padding-bottom: 10px; }
+  app-inside-room .posts {
+    max-height: 500px;
+    max-width: 350px;
+    width: 100%;
+    display: inline-block;
+    margin-top: 30px;
+    border-radius: 10px; }
+    app-inside-room .posts:after {
+      content: '';
+      display: table;
+      clear: both; }
+  app-inside-room .post_info {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%; }
+  app-inside-room .date {
+    font-size: 14px; }
+  app-inside-room .post_body {
+    width: 100%;
+    margin-top: 10px;
+    background: white;
+    border-radius: 10px 10px 0 0; }
+  app-inside-room .post_img {
+    max-height: 250px;
+    width: 100%;
+    border-radius: 10px 10px 0 0; }
+    app-inside-room .post_img + .post_text {
+      border-radius: 0; }
+    app-inside-room .post_img + .line {
+      display: none; }
+  app-inside-room .post_text {
+    padding: 15px;
+    background: white;
+    color: #343a40;
+    border-radius: 10px 10px 0 0;
+    font-family: Regular, sans-serif;
+    font-size: 16px;
+    line-height: 21px;
+    overflow-y: auto; }
+  app-inside-room .line {
+    background: white;
+    padding: 0 15px;
+    width: 100%;
+    display: block; }
+    app-inside-room .line:before {
+      content: '';
+      border-top: 1px solid #868e96;
+      display: block; }
+  app-inside-room .post_footer {
+    width: 100%;
+    padding: 15px;
+    background: white;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3); }
+  app-inside-room .icon-heart,
+  app-inside-room .icon-comment {
+    margin-right: 15px;
+    font-size: 13px; }
+    app-inside-room .icon-heart:last-child,
+    app-inside-room .icon-comment:last-child {
+      margin-right: 0; }
+  app-inside-room .icon-heart:before {
+    color: #c4205b;
+    margin-right: 5px;
+    font-size: 18px; }
+  app-inside-room .icon-comment:before {
+    color: #00add2;
+    margin-right: 5px;
+    font-size: 18px; }
+
+@media screen and (max-width: 860px) {
+  app-inside-room .main_container {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2; } }
+
+@media screen and (max-width: 600px) {
+  app-inside-room .main_container {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center; } }
+
+app-all-rooms {
+  -webkit-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
+  width: 100%;
+  background: #fef9f2;
+  color: #868e96; }
+  app-all-rooms .main_container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+  app-all-rooms .rooms {
+    height: 410px;
+    width: 100%;
+    max-width: 255px;
+    border-radius: 10px;
+    margin: 30px 10px 0;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3); }
+  app-all-rooms .image {
+    height: 255px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: transparent; }
+  app-all-rooms .room_info {
+    padding: 15px;
+    color: white;
+    font-size: 14px; }
+  app-all-rooms .room_name {
+    font-size: 20px;
+    text-transform: uppercase; }
+  app-all-rooms .views,
+  app-all-rooms .members {
+    margin-top: 18px; }
+    app-all-rooms .views:before,
+    app-all-rooms .members:before {
+      color: #868e96;
+      margin-right: 8px; }
+  app-all-rooms .line {
+    padding: 0 15px;
+    width: 100%;
+    display: block; }
+    app-all-rooms .line:before {
+      content: '';
+      border-top: 1px solid white;
+      display: block; }
+  app-all-rooms .room_footer {
+    height: 40px; }
+  app-all-rooms .dots {
+    border-color: white; }
+  app-all-rooms .new_room {
+    background: white; }
+    app-all-rooms .new_room .image {
+      height: 236px;
+      width: 225px;
+      margin: 15px;
+      background-image: url("./img/Rooms.png");
+      border-radius: 5px; }
+    app-all-rooms .new_room .room_info {
+      -webkit-flex: auto;
+      -ms-flex: auto;
+      flex: auto; }
+    app-all-rooms .new_room .room_name {
+      color: #00add2;
+      text-transform: uppercase; }
+
+@media screen and (max-width: 1160px) {
+  app-all-rooms .main_container {
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around; } }
+
+.footer {
+  font-family: Medium, sans-serif;
+  padding: 12px 0;
+  background: #fef9f2;
+  position: relative; }
+  .footer .link {
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #868e96;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer; }
+    .footer .link:hover {
+      color: #343a40; }
+  .footer .add_post {
+    position: absolute;
+    top: -30px;
+    right: 100px;
+    height: 66px;
+    width: 66px;
+    border-radius: 50%;
+    background: #00add2;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 30px;
+    cursor: pointer; }
+
+@media screen and (max-width: 768px) {
+  .footer {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    .footer .link {
+      margin-bottom: 10px; }
+    .footer .add_post {
+      top: 30px;
+      right: 20px; } }

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rooms</title>
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="libs/jquery-3.1.1.min.js"></script>
+    <script src="libs/html5shiv.min.js"></script>
+    <script src="libs/respond.min.js"></script>
+    <script src="libs/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="body-wall">
+
+<!--<header class="header">
+    <div class="navbar-container navbar-2">
+        <div class="row">
+
+
+            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                <div class="header__user navbar-2__user">
+                    <a href="#" class="navbar-2__rooms gray-line">
+                        <span class="r-icon "></span>
+                        <span class="r-text hidden-xs hidden-sm hidden-md">Rooms</span>
+                    </a>
+                    <span class="messages-bg gray-line"><span class="messages "></span></span>
+                    <span class="notify-bg gray-line"><span class="notify "></span></span>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-2 col-sm-2 col-xs-2 ">
+                <div class="header__logo navbar-2__logo">
+                    <span class="logo logo-1"></span>
+                    <span class="logo logo-2 hidden-xs hidden-sm hidden-md"></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5 col-sm-4 col-xs-2">
+                <div class="header__user">
+                    <div class="user">
+                        <div class="user__wrap">
+                            <span class="user__avatar navbar-2__avatar"></span>
+                            <span class="user__name hidden-xs hidden-sm ">Matilda Boyd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="navbar-2__secondline">
+        <div class="navbar-container navbar-2 ">
+            <div class="row ">
+                <div class="col-lg-4 col-md-3 col-sm-2 col-xs-2">
+                    <div class="navbar-2__setting">
+                        <div class="icon-setting icon-setting-pos">
+                            <span class="icon">
+                            </span>
+                        </div>
+                        <span class="text hidden-xs hidden-sm hidden-md">Room setting</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8 col-xs-8">
+                    <div class="navbar-2__name">
+                        <h3 class="room-name">Room name #<span class="room-number">1</span></h3>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3 col-sm-2 col-xs-2">
+                    <div class="navbar-2__search">
+                        <span class="icon-search"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>-->
+
+<header class="header header-shad">
+    <div class="navbar-container ">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-5 col-lg-3">
+                <div class="header__logo">
+                    <span class="logo logo-1"></span>
+                    <span class="logo logo-2 hidden-xs hidden-sm hidden-md"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-10 col-xs-7 col-lg-push-5 col-md-push-6  ">
+                <div class="header__user navbar-2">
+                    <span class="messages-bg  gray-line"><span class="messages ">
+                        <div class="notif notif-nav messag"></div>
+                        </span>
+                    </span>
+                    <span class="notify-bg gray-line"><span class="notify "></span></span>
+                    <div class="user">
+                        <div class="user__wrap">
+                            <span class="user__avatar"></span>
+                            <span class="user__name hidden-xs hidden-sm hidden-md">Matilda Boyd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6  col-xs-12 col-lg-pull-4 col-md-pull-4  ">
+                <div class="navbar-2">
+                    <div class="navbar-2__name navbar-2__setting">
+                        <span class="icon-setting icon-setting-pos icon"></span>
+                        <h3 class="room-name room-name-wall">Room name #<span class="room-number">1</span></h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+        <div class="tags__wall">
+            <div class="tags-container">
+            <div class="tags tags-mb">
+            <span class="tags__active">Animals and nature</span>
+            <span>Fast And Furious Facial</span>
+            <span>My Motivation</span>
+            <span>Combing Hair</span>
+        </div>
+            <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
+            </div>
+        </div>
+
+
+<div class="container-plus sticky">
+    <div class="wall__plus wall__plus-pos">
+        <span class="wall__plus-icon"></span>
+    </div>
+    <div class="container-rooms wall wall-pt wall-2 sticky">
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar1.png" alt="">
+                            </div>
+                            <span class="user__name  ">Emilie Maldonado</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">21 Feb 2017</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall-2__content">
+                            <p class="wall__text">Summer is often synonymous with beaches, ballparks and barbecues, all
+                                offering tempting snacks and treats. To many women who are watching their weight, the
+                                back-to-school season is an ideal time to enroll in their own “Making Smarter Food
+                                Choices
+                                101″ class and refocus on a balanced diet and healthy lifestyle.</p>
+                            <div class="wall__img wall-2__img-right">
+                                <img src="img/wall/wall-2-img1.jpg" alt="">
+                            </div>
+
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar2.png" alt="">
+                            </div>
+                            <span class="user__name   ">Tom Jennings</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">28 Aug 2017</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall-2__content">
+                            <p class="wall__text">The secret of the youth has been searched since long time ago. Many
+                                researchers have done some experiments to find ways to slow down the aging process.
+                                There
+                                are some techniques which have been implemented, but the most important things for us to
+                                do
+                                are being consistent in implementing healthy lifestyle and eating habits.</p>
+                            <div class="wall__img wall-2__img-right">
+                                <div class="wall__imgrow wall__imgrow-up">
+                                    <div class="wall__img wall-2__img-wide"><img src="img/wall/wall-2-img2.jpg" alt="">
+                                    </div>
+
+                                </div>
+                                <div class="wall__imgrow wall__imgrow-down">
+                                    <div class="wall__imgrow-left">
+                                        <div class="wall__img wall-2__img-normal"><img src="img/wall/wall-2-img3.jpg"
+                                                                                       alt="">
+                                        </div>
+                                    </div>
+                                    <div class="wall__imgrow-right">
+                                        <div class="wall__img wall-2__img-normal"><img src="img/wall/wall-2-img4.jpg"
+                                                                                       alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix visible-md visible-lg"></div>
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar3.png" alt="">
+                            </div>
+                            <span class="user__name   ">Derrick Summers</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">16 Jul 2017</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall-2__content">
+                            <p class="wall__text">Computer users and programmers have become so accustomed to using
+                                Windows,
+                                even for the changing capabilities and the appearances of the graphical interface of the
+                                versions, therefore it has remained Microsoft’s product. Although, Lycoris, Red Hat,
+                                Mandrake, Suse, Knoppix, Slackware and Lindows make up some of the different versions of
+                                LINUX. These companies release their own versions of the operating systems with minor
+                                changes, and yet always with the same bottom line.</p>
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar4.png" alt="">
+                            </div>
+                            <span class="user__name   ">Leon Gross</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">17 Apr 2017</span>
+                    <div class="wall__container ">
+                        <div class="wall__content wall-2__content">
+                            <div class="wall-2__imgblock">
+                                <div class="wall__img wall-2__img-height"><img src="img/wall/wall-2-img5.jpg" alt="">
+                                </div>
+                                <div class="wall__img wall-2__img-height"><img src="img/wall/wall-2-img6.jpg" alt="">
+                                </div>
+                                <div class="wall__img wall-2__img-height"><img src="img/wall/wall-2-img7.jpg" alt="">
+                                </div>
+                                <div class="wall__img wall-2__img-height"><img src="img/wall/wall-2-img8.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix visible-md visible-lg"></div>
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar5.png" alt="">
+                            </div>
+                            <span class="user__name   ">Luella Ford</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">12 Sep 2017</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall-2__content">
+                            <div class="wall__img wall__img-big">
+                                <img src="img/wall/wall-2-img9.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img src="img/wall/user-avatar6.png" alt="">
+                            </div>
+                            <span class="user__name   ">Thomas Ross</span>
+                        </div>
+
+                    </div>
+                    <span class="wall__date wall__date-pos">02 Dec 2017</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall-2__content">
+                            <div class="wall__text">
+                                <p>Many people has the notion that enlightenment is one state. Many also believe that
+                                    when
+                                    it is
+                                    attained, a person is forever in that state.</p>
+                                <p>The following is not a definitive article on this subject. It is just an expression
+                                    of my
+                                    own
+                                    thoughts.</p>
+                            </div>
+                            <div class="wall__img wall-2__img-right">
+                                <img src="img/wall/wall-2-img10.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like"></span><span
+                                        class="number">13</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">4</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer footer-rooms">
+    <ul class="footer__menu">
+        <li class="footer__item"><a href="">ABOUT US</a></li>
+        <li class="footer__item"><a href="">SUPPORT</a></li>
+        <li class="footer__item"><a href="">PRIVACY</a></li>
+        <li class="footer__item"><a href="">TERMS</a></li>
+    </ul>
+</footer>
+
+</body>
+</html>

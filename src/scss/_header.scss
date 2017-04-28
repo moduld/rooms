@@ -1,0 +1,179 @@
+.header{
+  width: 100%;
+  color: $gray_text;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  .main_container{
+    @extend .flex-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .logo{
+    width: 89px;
+    height: 32px;
+    @extend .backgr-center;
+    background-image: url("./img/Logo.png") ;
+    margin: 14px 0;
+  }
+  .search{
+    min-width: 350px;
+    position: relative;
+  }
+  .search_field{
+    display: block;
+    width: 100%;
+    padding: 6px 45px 6px 10px;
+    background: $light_gray;
+    border: none;
+    border-radius: 5px;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $blue;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $blue;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $blue;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $blue;
+  }
+  .icon-search{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 45px;
+    color: $blue;
+    @extend .flex-center;
+    font-size: 25px;
+  }
+  .icons_wrapper{
+    @extend .flex-center;
+  }
+  .icon-bell,
+  .icon-mail{
+    height: 34px;
+    width: 34px;
+    @extend .flex-center;
+    background: $light_gray;
+    font-size: 25px;
+    color: $gray_text;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .new_events{
+    background: $light_blue;
+    color: $blue;
+    position: relative;
+    &:after{
+      content: '';
+      position: absolute;
+      top: 1px;
+      right: 5px;
+      padding: 3px;
+      border-radius: 50%;
+      background: $red_dot;
+    }
+  }
+
+  .rooms_block{
+    width: 100%;
+    background: $light_gray;
+    min-height: 58px;
+    @extend .flex-center;
+    align-items: stretch;
+  }
+  .room_name_wrapp{
+    @extend .flex-center;
+    font-size: 16px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  .rooms{
+    @extend .flex-center;
+    &:before{
+      content: '';
+      height: 19px;
+      width: 19px;
+      @extend .backgr-center;
+      background-image: url("./img/icn_room.png");
+      display: block;
+      margin-right: 10px;
+  }
+    &:after{
+      content: '';
+      display: block;
+      padding: 2px;
+      border-radius: 50%;
+      background: $gray_text;
+      margin-left: 15px;
+    }
+  }
+  .room_name{
+    margin-left: 10px;
+    color: $orange;
+    font-family: $font_medium;
+  }
+  .room_tags{
+    @extend .flex-center;
+    flex-wrap: wrap;
+  }
+  .room_tag{
+    font-size: 14px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: white;
+    margin: 10px 0 10px 15px;
+  }
+  .active_tag{
+    background: $orange;
+    color: white;
+  }
+  .add_post{
+
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* STYLES IE11 */
+    .header{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .rooms_block{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+}
+
+@media screen and (max-width: 768px){
+ .header{
+   .search{
+     min-width: 245px;
+   }
+   .icons_wrapper{
+     width: 100%;
+     padding: 10px;
+     justify-content: flex-end;
+   }
+ }
+}
+
+@media screen and (max-width: 400px){
+  .header{
+    .logo{
+      margin: 10px auto;
+    }
+    .search{
+      min-width: 100%;
+    }
+    .icons_wrapper{
+      justify-content: center;
+    }
+  }
+}

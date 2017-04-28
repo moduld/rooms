@@ -1,0 +1,108 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-around{
+  display: flex;
+  justify-content: space-around;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+.backgr-center{
+  background: center center no-repeat;
+}
+.main_container{
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.orange_room{
+  background-color: $orange;
+}
+.green_room{
+  background-color: $room_green;
+}
+.blue_room{
+  background-color: $blue;
+}
+.violet_room{
+  background-color: $room_wiolet;
+}
+.red_room{
+  background-color: $room_red;
+}
+.yello_room{
+  background-color: $room_yello;
+}
+.green_room_hi{
+  background-color: $room_green;
+}
+
+html{
+  height: 100%;
+}
+body{
+  min-height: 100%;
+  @extend .flex-column;
+  font-family: $font_regular;
+}
+
+.user_info{
+  @extend .flex-center;
+  .avatar{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    @extend .backgr-center;
+    //background-image: url("./img/photos.png");
+    margin-right: 10px;
+  }
+  .name{
+    color: $gray_text;
+    font-family: $font_medium;
+    font-size: 14px;
+  }
+}
+
+.dots_wrapp{
+  @extend .flex-center;
+  .dots{
+    background: transparent;
+    height: 8px;
+    width: 8px;
+    border: 2px solid $gray_text;
+    border-radius: 50%;
+    display: block;
+    margin-right: 5px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1190px){
+  .main_container{
+    padding: 0 15px;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  body{
+    min-height: 100vh;
+    height: 100%;
+  }
+}
