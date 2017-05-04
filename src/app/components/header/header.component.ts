@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import {RequestService} from '../../services/request.service';
+import {UserStoreService} from '../../services/user-store.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  error: any;
 
+  constructor(private requestService : RequestService,  private storeservice: UserStoreService) { }
+
+  userData: any;
   ngOnInit() {
+
+  }
+
+  logOut(){
+    this.requestService.logOut().subscribe(
+        data=>{
+          console.log(data);
+        },
+        error => {
+          this.error = error.json();
+          console.log(this.error);
+        }
+    )
   }
 
 }

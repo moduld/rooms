@@ -17,12 +17,19 @@ export class AppComponent {
   hideSubheader: boolean;
   subheaderWall: any[] = [];
   subheaderRoomName: string = '';
+  showHeader: boolean = true;
+  showFooter: boolean = true;
 
   constructor( private router: Router, private exchangeService: EventsExchangeService){
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
         event.url === '/' ? this.hideSubheader = false :  this.hideSubheader = true;
+
+        if (event.url === '/registration' || event.url === '/login'){
+          this.showHeader = false;
+          this.showFooter = false;
+        }
       }
     });
 

@@ -10,6 +10,8 @@ var cleanCSS = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require("gulp-rename");
+var path = require('path');
+var less = require('gulp-less');
 
 // for gulp watch
 gulp.task('stylesHandle', function () {
@@ -18,6 +20,14 @@ gulp.task('stylesHandle', function () {
         .pipe(autoprefixer({
             browsers: ['last 5 versions'],
             cascade: false
+        }))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('less', function () {
+    return gulp.src('./less/*.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
         }))
         .pipe(gulp.dest('./'));
 });

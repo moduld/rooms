@@ -7,15 +7,25 @@ import {Routes, RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
 import { InsideRoomComponent } from './components/inside-room/inside-room.component';
+import { HeaderComponent } from './components/header/header.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 import { RequestService } from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
+import { UserStoreService } from './services/user-store.service';
+import { ErrorShowService } from './services/error-show.service';
+
 import { IeHeightDirective } from './directives/ie-height.directive';
-import { HeaderComponent } from './components/header/header.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+
+
 
 let appRoutes: Routes =[
   { path: 'room/:id', component: InsideRoomComponent},
-  { path: '', component: AllRoomsComponent, pathMatch:'full' }
+  { path: 'all-rooms', component: AllRoomsComponent},
+  { path: 'registration', component: RegistrationComponent},
+  { path: 'login', component: LogInComponent},
+  { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
 @NgModule({
@@ -24,7 +34,9 @@ let appRoutes: Routes =[
     AllRoomsComponent,
     InsideRoomComponent,
     IeHeightDirective,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +46,9 @@ let appRoutes: Routes =[
   ],
   providers: [
     RequestService,
-    EventsExchangeService
+    EventsExchangeService,
+    UserStoreService,
+    ErrorShowService
   ],
   bootstrap: [AppComponent]
 })

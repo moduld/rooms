@@ -60,21 +60,30 @@
 
 
 
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let room of allRooms; let i = index" [routerLink]="['room', room.room.room_id]">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let room of allRooms; let i = index" [routerLink]="['/room', room.room_id]">
         <div class="rooms__block" [ngStyle]="{'background-color': room.room.color}">
-          <div class="rooms__img"><img [src]="room.room.thumbnail" alt=""></div>
+          <div class="rooms__img">
+            <img [src]="room.room.thumbnail" alt="" *ngIf="room.room.thumbnail">
+          </div>
           <div class="rooms__about">
             <h3 class="rooms__name rooms__name-pos">{{room.room.room_name}}</h3>
             <ul class="rooms__info rooms__info-pos">
-              <li><span class="icons eye"></span><span class="numbers">{{room.room.num_visits}}</span><span
-                      class="desc">visits</span></li>
-              <li><span class="icons members"></span><span class="numbers">{{room.room.members_count}}</span><span class="desc">members</span>
+              <li>
+                <span class="icons eye"></span>
+                <span class="numbers">{{room.room.num_visits}}</span>
+                <span class="desc">visits</span>
+              </li>
+              <li>
+                <span class="icons members"></span>
+                <span class="numbers">{{room.room.members_count}}</span>
+                <span class="desc">members</span>
               </li>
             </ul>
             <div class="rooms__menu">
               <div class="menu-button">
-                <span class="menu-circle"></span><span class="menu-circle"></span><span
-                      class="menu-circle"></span>
+                <span class="menu-circle"></span>
+                <span class="menu-circle"></span>
+                <span class="menu-circle"></span>
               </div>
             </div>
           </div>
