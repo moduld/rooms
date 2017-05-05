@@ -14,10 +14,16 @@ export class EventsExchangeService {
   currentRoomName: string;
 
   private emitChangeSource = new Subject<any>();
+  private headerChangeSourse = new Subject<any>();
   changeEmitted = this.emitChangeSource.asObservable();
+  changeHeaderViewEmitted = this.headerChangeSourse.asObservable();
 
   wallsToHeader(change: any):void {
     this.emitChangeSource.next(change);
+  }
+
+  changeHeaderView(flag: boolean): void {
+    this.headerChangeSourse.next(flag);
   }
 
 }

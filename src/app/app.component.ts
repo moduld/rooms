@@ -33,10 +33,5 @@ export class AppComponent {
       }
     });
 
-    exchangeService.changeEmitted.subscribe(
-        allWalls => {
-          this.subheaderWall = allWalls.walls;
-          this.subheaderRoomName = allWalls.room_details.room_name;
-        })
   }
 }

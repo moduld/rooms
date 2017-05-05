@@ -771,29 +771,10 @@ textarea:focus:-ms-input-placeholder {
   opacity: 0.7;
 }
 .mod {
-  z-index: 40;
-  display: block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-left: 15px;
-  padding-right: 15px;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   /* Firefox 19+ */
   /* Firefox 18- */
   /* Firefox 19+ */
   /* Firefox 18- */
-}
-.mod__container {
-  max-height: 100vh;
-  overflow-y: scroll;
-  padding-bottom: 120px;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
 }
 .mod__container::-webkit-scrollbar {
   display: none;
@@ -1062,9 +1043,6 @@ textarea:focus:-ms-input-placeholder {
 .mod__radio .radio:checked + label {
   border: 1px solid #47a9d4;
   color: #47a9d4;
-}
-.newpost {
-  margin-top: 120px;
 }
 .newpost__file {
   display: block;
@@ -3943,4 +3921,18 @@ textarea:focus:-ms-input-placeholder {
     margin-bottom: 5px;
   }
   /*End Sign in / Sign up*/
+}
+.modal-backdrop.fade {
+  opacity: 0.7;
+}
+.modal.fade {
+  opacity: 1;
+}
+.modal-dialog {
+  width: 100% !important;
+  max-width: 790px !important;
+  margin-top: 50% !important;
+}
+.modal.fade .modal-dialog {
+  transform: translate(0, -25%) translateY(-50%);
 }

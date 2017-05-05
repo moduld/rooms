@@ -46,7 +46,8 @@ export class RequestService  {
 
 
     return this.http.get(this.commonLink + 'room/wall/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-      console.log(resp.json().room_walls)
+      console.log(resp.json());
+
       return resp.json().room_walls;
     })
       .catch((error: any)=> { return Observable.throw(error);});
@@ -58,7 +59,7 @@ export class RequestService  {
     params.set('room_id', this.roomId);
     params.set('wall_id', wall_id);
 
-    return this.http.get(this.commonLink + 'wall/post/getposts', {
+    return this.http.get(this.commonLink + 'wall/post/get/all', {
       search: params
     }).map((resp:Response)=>{
       return resp.json().posts;
@@ -69,13 +70,14 @@ export class RequestService  {
   addRequiredDataToTheService(): void {
     let storedUserData = this.storeservice.getUserData();
     if (storedUserData){
+      console.log(storedUserData)
       // this.userId = storedUserData['user_data']['user_id'];
       this.token = storedUserData['token'];
       this.headers.append('Authorization', "Bearer " + this.token);
       this.options = new RequestOptions({ headers: this.headers })
 
     }
-    console.log(this.headers)
+
   }
 
   registration(user_data: any) : Observable<UserInfo> {
@@ -107,6 +109,47 @@ export class RequestService  {
         .catch((error: any)=> {
       return Observable.throw(error);
     });
+  }
+
+  postInteractionUser(user_interract_key: string, user_interract_id: number, flag_key: string, flag: number): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId
+    };
+    sendData['user_id_' + user_interract_key] = user_interract_id;
+    sendData[flag_key] = flag;
+  return this.http.post(this.commonLink + 'user/' + user_interract_key, JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+    return resp.json();
+  })
+      .catch((error: any)=> { return Observable.throw(error);});
+}
+
+  postDelete(post_id: number, room_id: number): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      post_id: post_id,
+      room_id: room_id
+    };
+    return this.http.post(this.commonLink + 'wall/post/remove', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  postLikeAndUnlike(post_id, flag): Observable<any>{
+    let sendData = {
+      user_id: this.userId,
+      post_id: post_id,
+      like: flag ? 0 : 1
+    };
+    return this.http.post(this.commonLink + 'wall/post/like', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
   }
 
 }

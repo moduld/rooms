@@ -1,16 +1,20 @@
-<header class="header">
+
+<header class="header header-shad">
   <div class="navbar-container ">
     <div class="row">
-      <div class="col-md-2 col-sm-1 col-xs-5 col-lg-3">
+      <div class="col-md-2 col-sm-2 col-xs-5 col-lg-3">
         <div class="header__logo">
           <span class="logo logo-1"></span>
           <span class="logo logo-2 hidden-xs hidden-sm hidden-md"></span>
         </div>
       </div>
 
-      <div class="col-lg-4 col-md-5 col-sm-6 col-xs-7 col-lg-push-5 col-md-push-5 col-sm-push-6">
-        <div class="header__user">
-          <span class="messages-bg gray-line"><span class="messages "></span></span>
+      <div class="col-lg-4 col-md-4 col-sm-10 col-xs-7 col-lg-push-5 col-md-push-6  ">
+        <div class="header__user navbar-2">
+                    <span class="messages-bg  gray-line"><span class="messages ">
+                        <div class="notif notif-nav messag"></div>
+                        </span>
+                    </span>
           <span class="notify-bg gray-line"><span class="notify "></span></span>
           <div class="user">
             <div class="user__wrap">
@@ -21,7 +25,16 @@
         </div>
       </div>
 
-      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 col-lg-pull-4 col-md-pull-5 col-sm-pull-4">
+      <div class="col-lg-5 col-md-6  col-xs-12 col-lg-pull-4 col-md-pull-4" *ngIf="!headerFieldToggle">
+        <div class="navbar-2">
+          <div class="navbar-2__name navbar-2__setting">
+            <span class="icon-setting icon-setting-pos icon"></span>
+            <h3 class="room-name room-name-wall">{{subheaderRoomName}}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12 col-lg-pull-4 col-md-pull-5 col-sm-pull-4" *ngIf="headerFieldToggle">
         <form class="header__search">
           <input name="search" placeholder="Search" type="text">
           <button class="icon-search">
@@ -29,6 +42,8 @@
           </button>
         </form>
       </div>
+
+
 
     </div>
   </div>

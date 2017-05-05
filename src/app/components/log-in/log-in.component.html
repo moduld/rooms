@@ -1,0 +1,40 @@
+<div class="sign">
+  <div class="sign__bg  visible-lg"></div>
+  <div class="sign__block ">
+    <div class="login sticky">
+      <div class="login__container">
+        <h2 class="login__welcome login__welcome-pos">Welcome to <span>TIFO!</span></h2>
+        <p class="login__desc login__desc-pos">Log in to meet photos and videos
+          from your friends.</p>
+        <form action="#" class="login__form" #regForm="ngForm" (ngSubmit)="sendLogInData(regForm)">
+          <label for="email" class="login__label">Email</label>
+          <div class="login__input-wrap">
+            <input id="email" type="email" class="login__input" name="email" #inputEmail [(ngModel)]="email"  (input)="changeState('email', email)" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required>
+            <span class="icon icon-email"></span>
+            <span class="mistake">{{emailMistake}}</span>
+          </div>
+          <label for="password" class="login__label">Password</label>
+          <div class="login__input-wrap">
+            <input id="password" type="password" class="login__input" name="password" #inputPassword [(ngModel)]="password" (input)="changeState('password', password)" minlength="4" maxlength="21" required>
+            <span class="icon icon-pass"></span>
+            <span class="mistake">{{passwordMistake}}</span>
+          </div>
+          <button class="login__submit"  [disabled]="regForm.invalid" [disabled]="buttonDisabled">Log in</button>
+        </form>
+        <span class="login__account">Don't have an account? <a href="" class="" [routerLink]="'/registration'">Sign up</a></span>
+      </div>
+    </div>
+    <div class="footer footer-rooms sign-footer">
+      <div class="sign__links">
+        <a href="" class="sign__app sign__app-as"></a>
+        <a href="" class="sign__app sign__app-gp"></a>
+      </div>
+      <ul class="footer__menu">
+        <li class="footer__item"><a href="">ABOUT US</a></li>
+        <li class="footer__item"><a href="">SUPPORT</a></li>
+        <li class="footer__item"><a href="">PRIVACY</a></li>
+        <li class="footer__item"><a href="">TERMS</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

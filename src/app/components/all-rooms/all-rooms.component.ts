@@ -28,5 +28,7 @@ export class AllRoomsComponent implements OnInit {
           }, error => {this.error = error; console.log(error);}
       )
     }
+
+      this.eventsExchange.changeHeaderView(true);
   }
 }

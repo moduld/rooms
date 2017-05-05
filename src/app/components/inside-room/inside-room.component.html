@@ -1,36 +1,4 @@
-  <!--<div class="main_container" appIeHeight>-->
 
-
-    <!--<div class="posts" *ngFor="let post of allPosts; let i = index">-->
-      <!--<div class="post_info">-->
-                 <!--<span class="user_info">-->
-                    <!--<span class="avatar" [ngStyle]="{'background-image': post.owner.thumbnail}"></span>-->
-                    <!--<span class="name">{{post.owner.user_name}}</span>-->
-                <!--</span>-->
-        <!--<span class="date">{{post.created_at | date: 'dd MMM y'}}</span>-->
-      <!--</div>-->
-      <!--<div class="post_body">-->
-        <!--<img *ngIf="post.media.length" [src]="post.media[0].thumbnail" alt="#" class="post_img" >-->
-        <!--<p class="post_text" *ngIf="post.text.length">{{post.text}}</p>-->
-        <!--<i class="line"></i>-->
-      <!--</div>-->
-
-      <!--<div class="post_footer">-->
-        <!--<div class="icons_wrapper">-->
-          <!--<span class="icon-heart">{{post.likes_count}}</span>-->
-          <!--<span class="icon-comment">{{post.comments_count}}</span>-->
-        <!--</div>-->
-        <!--<div class="dots_wrapp">-->
-          <!--<i class="dots"></i>-->
-          <!--<i class="dots"></i>-->
-          <!--<i class="dots"></i>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-
-
-
-  <!--</div>-->
   <div class="tags__wall">
       <div class="tags-container">
           <div class="tags tags-mb">
@@ -44,7 +12,7 @@
   </div>
 
   <div class="container-plus sticky">
-      <div class="wall__plus wall__plus-pos">
+      <div class="wall__plus wall__plus-pos" (click)="openNewPostModal()">
           <span class="wall__plus-icon"></span>
       </div>
       <div class="container-rooms wall wall-pt">
@@ -77,7 +45,7 @@
                           </div>
                           <div class="wall__info">
                               <div class="wall__soc">
-                                  <div class="wall__like"><span class="icon icon-like"></span><span
+                                  <div class="wall__like"><span class="icon icon-like" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)"></span><span
                                           class="number">{{post.likes_count}}</span>
                                   </div>
                                   <div class="wall__comm"><span class="icon icon-comm"></span><span
@@ -88,6 +56,58 @@
                                   <span></span>
                                   <span></span>
                                   <span></span>
+
+                                  <div class="notif notif-comm messag">
+                                      <div class="messag__head comm__head">
+                                          <span class="messag__title">Edit Post</span>
+                                      </div>
+                                      <ul class="messag__wrap comm__wrap">
+                                          <li class="comm__block" (click)="postOwnerInterraction('mute', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-mute"></span>
+                                              </div>
+                                              <span class="comm__text">Mute User</span>
+                                          </li>
+                                          <li class="comm__block" (click)="postOwnerInterraction('block', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-block"></span>
+                                              </div>
+                                              <span class="comm__text">Block User</span>
+                                          </li>
+                                          <li class="comm__block" (click)="postOwnerInterraction('fave', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-fave"></span>
+                                              </div>
+                                              <span class="comm__text">Fave User</span>
+                                          </li>
+
+                                          <li class="comm__block" (click)="postInterraction()" *ngIf="post.user_id === post.owner.user_id">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-delete"></span>
+                                              </div>
+                                              <span class="comm__text">Edit Post</span>
+                                          </li>
+                                          <li class="comm__block" (click)="postInterraction()" *ngIf="userArmin">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-delete"></span>
+                                              </div>
+                                              <span class="comm__text">Ban User</span>
+                                          </li>
+                                          <li class="comm__block" (click)="postInterraction('move', post.post_id, post.room_id)" *ngIf="userArmin">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-delete"></span>
+                                              </div>
+                                              <span class="comm__text">Move Post</span>
+                                          </li>
+                                          <li class="comm__block" (click)="postInterraction('remove', post.post_id, post.room_id, i)"  *ngIf="post.user_id === post.owner.user_id || userArmin">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-delete"></span>
+                                              </div>
+                                              <span class="comm__text">Delete Post</span>
+                                          </li>
+                                      </ul>
+                                  </div>
+
                               </div>
                           </div>
                       </div>

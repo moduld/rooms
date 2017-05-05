@@ -1,0 +1,16 @@
+.wall__menu{
+    height: 35px;
+}
+.notif{
+    display: none;
+}
+.notif .comm__wrap{
+    padding-top: 0;
+}
+.wall__menu:hover > span{
+    border-color: #47a9d4;
+    background-color: #47a9d4;
+}
+.wall__menu:hover > .notif{
+    display: block;
+}

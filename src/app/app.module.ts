@@ -4,11 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {Routes, RouterModule} from '@angular/router';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
 import { InsideRoomComponent } from './components/inside-room/inside-room.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+
+import { CreatePostComponent } from './modals/create-post/create-post.component';
+
 
 import { RequestService } from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
@@ -36,13 +41,16 @@ let appRoutes: Routes =[
     IeHeightDirective,
     HeaderComponent,
     RegistrationComponent,
-    LogInComponent
+    LogInComponent,
+    CreatePostComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgbModule.forRoot()
   ],
   providers: [
     RequestService,
@@ -50,6 +58,7 @@ let appRoutes: Routes =[
     UserStoreService,
     ErrorShowService
   ],
+  entryComponents: [CreatePostComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
