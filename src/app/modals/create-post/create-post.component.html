@@ -1,30 +1,38 @@
 <div class="mod ">
   <div class="mod__container">
     <div class="mod__wrap newpost">
-      <form action="">
+      <span class="close-modal"></span>
+      <form action="#" #postForm="ngForm" (submit)="createNewPost(postForm)">
         <div class="row">
-          <div class="col-lg-6 col-xs-12">
-            <div class="mod__block newpost__block">
-              <h3 class="mod__title mod__title-pos">New Post</h3>
-              <textarea class="" placeholder="Type here.." name="" id="" cols="30" rows="10"></textarea>
+          <div class="col-lg-6 col-xs-6">
+            <h3 class="mod__title mod__title-pos">New Post</h3>
+          </div>
+          <div class="col-lg-6 col-xs-6">
+            <div class="mod__check-wrap">
+              <div class="mod__check">
+                <input type="checkbox" name="mod_type" id="mod_type" [(ngModel)]="viewToggle" checked hidden>
+                <label class="attach attach-left" for="mod_type"><span class="att  attach-1"></span></label>
+                <label class="attach attach-right" for="mod_type"><span class="poll attach-2"></span></label>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col-lg-6 col-xs-12">
-            <div class="mod__block">
-              <div class="mod__check-wrap">
-                <div class="mod__check">
-                  <div class="attach attach-active"><span class="att  attach-1"></span></div>
-                  <div class="attach"><span class="poll attach-2"></span></div>
-                </div>
-              </div>
-              <div class="newpost__down">
+            <textarea name="text" placeholder="Type here.." [(ngModel)]="textField" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-lg-6 col-xs-12">
+            <!--files view-->
+            <div class="mod__block" *ngIf="viewToggle">
+
+              <div class="newpost__down" fileDrop (onFileDrop)="onFileDrop($event)">
                 <label for="newpost-file" class="newpost__label">
                   <span class="attach attach__pos"></span>
                   <span class="drag">Drag & Drop to Upload</span>
                   <span class="drag">or</span>
                   <span class="click-upl">Сlick to upload the file</span>
                 </label>
-                <input type="file" id="newpost-file">
+                <input type="file" name="files" id="newpost-file" (change)="fileDropped($event)">
               </div>
               <div class="newpost__images">
                 <div class="newpost__img newpost__img-pos">
@@ -46,9 +54,44 @@
               </div>
             </div>
 
+<!--pool view-->
+            <div class="mod__block" *ngIf="!viewToggle">
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Question</span>
+                <input type="text"  placeholder="Enter your question" [(ngModel)]="question" name="question" required>
+              </div>
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Choices:</span>
+                <input type="text" placeholder="Enter choice #1" name="choice1" [(ngModel)]="choice_1" required>
+                <input type="text" placeholder="Enter choice #2" name="choice2" [(ngModel)]="choice_2" required>
+                <input type="text" placeholder="Enter choice #3" name="choice3" [(ngModel)]="choice_3">
+                <input type="text" placeholder="Enter choice #4" name="choice4" [(ngModel)]="choice_4">
+              </div>
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Poll Duration (days)</span>
+                <div class="mod__radio">
+                  <input type="radio" name="duration" [value]="1" class="radio" [(ngModel)]="duration_model" id="radio1">
+                  <label for="radio1">1</label>
+                  <input type="radio" name="duration" [value]="2" class="radio" [(ngModel)]="duration_model" id="radio2">
+                  <label for="radio2">2</label>
+                  <input type="radio" name="duration" [value]="3" class="radio" [(ngModel)]="duration_model" id="radio3">
+                  <label for="radio3">3</label>
+                  <input type="radio" name="duration" [value]="4" class="radio" [(ngModel)]="duration_model" id="radio4">
+                  <label for="radio4">4</label>
+                  <input type="radio" name="duration" [value]="5" class="radio" [(ngModel)]=duration_model id="radio5">
+                  <label for="radio5">5</label>
+                  <input type="radio" name="duration" [value]="6" class="radio" [(ngModel)]=duration_model id="radio6">
+                  <label for="radio6">6</label>
+                  <input type="radio" name="duration" [value]="7" class="radio" [(ngModel)]=duration_model id="radio7">
+                  <label for="radio7">7</label>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
-        <button class="mod__submit">Create a post</button>
+        <button class="mod__submit" type="submit" [disabled]="postForm.invalid" >Create a post</button>
       </form>
     </div>
   </div>

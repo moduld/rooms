@@ -95,14 +95,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         )
       }
 
-        if (int_key === 'remove'){
-            this.requestService.postDelete(post_id, room_id).subscribe(
-                data=>{
-                    console.log(data);
-                },
-                error => {this.error = error; console.log(error);}
-            )
-        }
+
     }
 
     likeAndUnlikePost(post_id: number, flag: number, post: any): void{
@@ -117,7 +110,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     openNewPostModal(): void {
         const modalRef = this.modalService.open(CreatePostComponent);
-        modalRef.componentInstance.name = 'World';
+        modalRef.componentInstance.room_id = this.roomId;
+        modalRef.componentInstance.wall_id = this.wallId;
     }
 
 }

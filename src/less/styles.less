@@ -953,19 +953,31 @@ textarea:focus:-ms-input-placeholder {
     border-radius: 8px;
     background-color: #ffffff;
 
-    &:after {
-      content: " ";
-      position: absolute;
-      top: 0;
-      right: -35px;
-      width: 14px;
-      height: 14px;
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-image: url('./img/assets/close@2x.png');
-      cursor: pointer;
-    }
+    //&:after {
+    //  content: " ";
+    //  position: absolute;
+    //  top: 0;
+    //  right: -35px;
+    //  width: 14px;
+    //  height: 14px;
+    //  background-size: cover;
+    //  background-position: center center;
+    //  background-repeat: no-repeat;
+    //  background-image: url('./img/assets/close@2x.png');
+    //  cursor: pointer;
+    //}
+  }
+  .close-modal{
+    position: absolute;
+    top: 0;
+    right: -35px;
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url('./img/assets/close@2x.png');
+    cursor: pointer;
   }
 
   &__block {
@@ -1037,7 +1049,7 @@ textarea:focus:-ms-input-placeholder {
     float: right;
     padding: 5px;
     height: 44px;
-
+    width: 150px;
     &-wrap {
       height: 44px;
       margin-bottom: 15px;
@@ -1092,14 +1104,22 @@ textarea:focus:-ms-input-placeholder {
         //background-image: url('./img/poll.png');
       }
     }
-
-    .attach-active {
+    #mod_type:checked ~ .attach-left{
       -webkit-box-shadow: 0 2px 4px rgba(173, 181, 189, 0.4);
       box-shadow: 0 2px 4px rgba(173, 181, 189, 0.4);
       -webkit-border-radius: 17px;
       border-radius: 17px;
       background-color: #ffffff;
     }
+    #mod_type:not(:checked) ~ .attach-right{
+      -webkit-box-shadow: 0 2px 4px rgba(173, 181, 189, 0.4);
+      box-shadow: 0 2px 4px rgba(173, 181, 189, 0.4);
+      -webkit-border-radius: 17px;
+      border-radius: 17px;
+      background-color: #ffffff;
+    }
+
+
 
   }
 
@@ -3557,15 +3577,15 @@ textarea:focus:-ms-input-placeholder {
 }
 
 //add button close to the modals
-@media screen and (max-width: 669px) {
+@media screen and (max-width: 900px) {
   .mod{
     &__wrap{
 
 
-      &:after{
+      .close-modal{
         background-image: url('./img/assets/delete@2x.png');
-        top:20px;
-        right: 20px;
+        top:10px;
+        right: 10px;
       }
     }
   }
@@ -5541,8 +5561,8 @@ textarea:focus:-ms-input-placeholder {
 .modal-dialog{
   width: 100% !important;
   max-width: 790px !important;
-  margin-top: 50% !important;
+  margin: 30px auto;
 }
 .modal.fade .modal-dialog{
-  transform: translate(0, -25%) translateY(-50%);
+  transform: translate(0, -25%) translateY(30%);
 }

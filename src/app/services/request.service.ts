@@ -152,4 +152,44 @@ export class RequestService  {
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
+  getLinkForFileUpload(settings: any): Observable<any>{
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('folder', settings.folder);
+    params.set('content_type', settings.content_type);
+    params.set('ext', settings.ext);
+    params.set('num_urls', '1');
+
+    return this.http.get(this.commonLink + 'getSignedURL', {search: params}).map((resp:Response)=>{
+      return resp.json();
+    }).catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  fileUpload(settings: any): Observable<any>{
+
+    let headers: Headers = new Headers({ 'Content-Type': settings.content_type });
+    let options: RequestOptions  = new RequestOptions({ headers: headers });
+
+    return this.http.put(settings.link, settings.file, options).map((resp:Response)=>{
+      settings.multimedia = settings.link.split('?')[0];
+      return settings
+    }).catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  createNewPost(wall_id: number, room_id: number, dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      wall_id: wall_id,
+      room_id: room_id,
+      text: dataToServer.text,
+      media: dataToServer.media
+
+    };
+    return this.http.post(this.commonLink + 'wall/post/new', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
 }
