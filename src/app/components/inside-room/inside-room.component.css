@@ -14,3 +14,31 @@
 .wall__menu:hover > .notif{
     display: block;
 }
+.post_images{
+    width: 75px;
+    height: 100%;
+    border-radius: 10px;
+    max-height: 75px;
+    /*max-width: 75px;*/
+    margin: auto;
+    background: center center no-repeat;
+    background-size: cover;
+}
+.post_with_3_picture > .post_images:first-child{
+    width: 95%;
+}
+.post_with_3_picture > .post_images:nth-child(2){
+    width: 45%;
+}
+.post_with_3_picture > .post_images:nth-child(3){
+    width: 45%;
+}
+
+.post_with_2_picture > .post_images{
+    width: 95%;
+}
+
+.post_with_1_picture > .post_images{
+    width: 95%;
+    max-height: none;
+}

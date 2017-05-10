@@ -33,19 +33,14 @@
                       <span class="wall__date wall__date-pos">{{post.created_at | date: 'dd MMM y'}}</span>
                       <div class="wall__container">
                           <div class="wall__content wall__content-pb">
-                              <div class="wall__img wall__img-big"><img [src]="post.media[0].thumbnail" *ngIf="post.media.length"  alt=""></div>
                               <p class="wall__text">{{post.text}}</p>
-
-                              <!--<div class="wall__imglist wall__imglist-bottom">-->
-                                  <!--<div class="img"><img src="img/wall/wall-img-1.jpg" alt=""></div>-->
-                                  <!--<div class="img"><img src="img/wall/wall-img-2.jpg" alt=""></div>-->
-                                  <!--<div class="img"><img src="img/wall/wall-img-3.jpg" alt=""></div>-->
-                                  <!--<div class="img"><img src="img/wall/wall-img-4.jpg" alt=""></div>-->
-                              <!--</div>-->
+                              <div class="wall__img " *ngIf="post.media.length" [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
+                                  <div class="post_images" *ngFor="let img of post.media" [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
+                              </div>
                           </div>
                           <div class="wall__info">
                               <div class="wall__soc">
-                                  <div class="wall__like"><span class="icon icon-like" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)"></span><span
+                                  <div class="wall__like"><span class="icon icon-like-empty" [ngClass]="{'icon-like': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)"></span><span
                                           class="number">{{post.likes_count}}</span>
                                   </div>
                                   <div class="wall__comm"><span class="icon icon-comm"></span><span
@@ -83,7 +78,7 @@
 
                                           <li class="comm__block" (click)="postInterraction()" *ngIf="post.user_id === post.owner.user_id">
                                               <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-delete"></span>
+                                                  <span class="comm__icon comm__icon-edite"></span>
                                               </div>
                                               <span class="comm__text">Edit Post</span>
                                           </li>

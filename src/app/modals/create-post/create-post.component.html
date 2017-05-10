@@ -1,7 +1,7 @@
 <div class="mod ">
   <div class="mod__container">
     <div class="mod__wrap newpost">
-      <span class="close-modal"></span>
+      <span class="close-modal" (click)="activeModal.dismiss()"></span>
       <form action="#" #postForm="ngForm" (submit)="createNewPost(postForm)">
         <div class="row">
           <div class="col-lg-6 col-xs-6">
@@ -32,25 +32,14 @@
                   <span class="drag">or</span>
                   <span class="click-upl">Сlick to upload the file</span>
                 </label>
-                <input type="file" name="files" id="newpost-file" (change)="fileDropped($event)">
+                <input type="file" name="files" id="newpost-file" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)">
               </div>
               <div class="newpost__images">
-                <div class="newpost__img newpost__img-pos">
-                  <img src="img/modal/cat-1.jpg" alt="">
-                  <span class="img-close"></span>
+                <div class="newpost__img newpost__img-pos" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}">
+                  <img [src]="imgObj.img_src"  alt="" class="newPost_image_preview">
+                  <span class="img-close" (click)="deletePreviewedImg(i)"></span>
                 </div>
-                <div class="newpost__img newpost__img-pos">
-                  <img src="img/modal/cat-2.jpg" alt="">
-                  <span class="img-close"></span>
-                </div>
-                <div class="newpost__img newpost__img-pos">
-                  <img src="img/modal/cat-3.jpg" alt="">
-                  <span class="img-close"></span>
-                </div>
-                <div class="newpost__img newpost__img-pos">
-                  <img src="img/modal/cat-4.jpg" alt="">
-                  <span class="img-close"></span>
-                </div>
+
               </div>
             </div>
 

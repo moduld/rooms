@@ -182,10 +182,11 @@ export class RequestService  {
       user_id: this.userId,
       wall_id: wall_id,
       room_id: room_id,
-      text: dataToServer.text,
-      media: dataToServer.media
-
+      text: dataToServer.text
     };
+    dataToServer.media ? sendData['media'] = dataToServer.media : '';
+    dataToServer.poll ?  sendData['poll'] = dataToServer.poll : '';
+
     return this.http.post(this.commonLink + 'wall/post/new', JSON.stringify(sendData), this.options).map((resp:Response)=>{
 
       return resp.json();

@@ -112,6 +112,13 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(CreatePostComponent);
         modalRef.componentInstance.room_id = this.roomId;
         modalRef.componentInstance.wall_id = this.wallId;
+        modalRef.result.then((newPost) => {
+            console.log(newPost.post)
+            this.allPosts.unshift(newPost.post)
+        });
     }
+
+
+
 
 }

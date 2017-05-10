@@ -19,6 +19,7 @@ export class CreatePostComponent implements OnInit {
   dataToServer: any = {};
   textField: string;
   duration_model: number;
+  previewFiles: any[] = [];
   private file: File;
 
   @Input() wall_id;
@@ -30,7 +31,7 @@ export class CreatePostComponent implements OnInit {
     readAs: 'ArrayBuffer'
   };
   public onFileDrop(file: File): void {
-    this.makeRequestSettings(file)
+    this.mediaToAppServer.length < 4 && this.makeRequestSettings(file)
   }
 
   ngOnInit() {
@@ -44,8 +45,14 @@ export class CreatePostComponent implements OnInit {
   }
 
   makeRequestSettings(data: any): void {
+
     let settings = this.fileService.toNowFileInfo(data);
-    this.requestService.getLinkForFileUpload(settings).subscribe(
+
+      settings && this.mediaToAppServer.push(settings);
+      console.log(settings)
+
+    // settings && this.previewFiles.push(data);
+    settings && this.requestService.getLinkForFileUpload(settings).subscribe(
         data=>{
           settings.link = data.urls[0];
           this.putFileToServer(settings)
@@ -59,8 +66,8 @@ export class CreatePostComponent implements OnInit {
 
     this.requestService.fileUpload(settings).subscribe(
         data=>{
-          console.log(data)
-          this.mediaToAppServer.push(data);
+          settings.uploaded = true;
+          data.typeForApp === 'image' ? settings.img_src = settings.multimedia : ''
         },
         error => {this.error = error; console.log(error);}
     );
@@ -74,12 +81,6 @@ export class CreatePostComponent implements OnInit {
       for (let i = 0; i < this.mediaToAppServer.length; i++){
         this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
       }
-      this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
-          data=>{
-            console.log(data)
-          },
-          error => {this.error = error; console.log(error);}
-      );
     } else {
       this.dataToServer.poll = {};
       this.dataToServer.poll['question'] = postForm.value.question;
@@ -88,15 +89,18 @@ export class CreatePostComponent implements OnInit {
       postForm.value.choice3 ? this.dataToServer.poll['choice3'] =  postForm.value.choice3 : '';
       postForm.value.choice4 ? this.dataToServer.poll['choice4'] =  postForm.value.choice4 : '';
       this.dataToServer.poll['duration'] = postForm.value.duration;
-
-      this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
-          data=>{
-            console.log(data)
-          },
-          error => {this.error = error; console.log(error);}
-      );
     }
+
+    this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
+        data=>{
+          this.activeModal.close(data)
+        },
+        error => {this.error = error; console.log(error);}
+    );
   }
 
+  deletePreviewedImg(index: number): void {
+    this.mediaToAppServer.splice(index, 1)
+  }
 
 }

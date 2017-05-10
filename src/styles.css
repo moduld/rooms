@@ -1148,8 +1148,8 @@ textarea:focus:-ms-input-placeholder {
 .newpost__img {
   display: inline-block;
   vertical-align: top;
-  width: 100%;
-  max-width: 80px;
+  width: 80px;
+  height: 80px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
   position: relative;
@@ -1369,18 +1369,19 @@ span.tags__active,
   background-color: #fff;
   padding: 16px;
   padding-top: 12px;
-  min-height: 276px;
   -webkit-border-radius: 8px 8px 0 0;
   border-radius: 8px 8px 0 0;
-}
-.wall__content-pb {
-  padding-bottom: 89px;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
 }
 .wall__text {
   color: #343a40;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
+  overflow: hidden;
+  max-height: 100px;
 }
 .wall__text p {
   margin-bottom: 15px;
@@ -1437,6 +1438,9 @@ span.tags__active,
   background-position: center center;
   background-repeat: no-repeat;
   margin-right: 7px;
+}
+.wall__soc .icon-like-empty {
+  background-image: url('img/assets/heart_empty@2x.png');
 }
 .wall__soc .icon-like {
   background-image: url('img/assets/heart@2x.png');
@@ -1498,13 +1502,16 @@ span.tags__active,
   -webkit-border-radius: 8px;
   border-radius: 8px;
   overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
 }
 .wall__img img {
-  width: 100%;
-  max-width: 100%;
-}
-.wall__img-big {
-  width: 100%;
+  width: auto;
+  height: 100%;
+  border-radius: 10px;
+  max-height: 75px;
+  margin: auto;
 }
 .wall__img-wide {
   width: 100%;
@@ -1818,6 +1825,11 @@ footer,
   width: 12px;
   height: 12px;
   background-image: url('img/assets/delete_icon@2x.png');
+}
+.notif .comm__icon-edite {
+  width: 12px;
+  height: 12px;
+  background-image: url('img/assets/edit_room@2x.png');
 }
 .notif .comm__radio {
   cursor: pointer;
