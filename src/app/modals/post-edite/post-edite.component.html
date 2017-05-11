@@ -1,0 +1,42 @@
+<div class="mod ">
+  <div class="mod__container">
+    <div class="mod__wrap newpost">
+      <span class="close-modal" (click)="activeModal.dismiss()"></span>
+      <form action="#" #postEditForm="ngForm" (submit)="editThisPost(postEditForm)">
+        <div class="row">
+          <div class="col-lg-12 col-xs-12">
+            <h3 class="mod__title mod__title-pos">Edit Post</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-xs-12">
+            <textarea name="text" placeholder="Type here.." [(ngModel)]="textField" cols="30" rows="10"></textarea>
+          </div>
+          <div class="col-lg-6 col-xs-12">
+            <!--files view-->
+            <div class="mod__block">
+              <div class="newpost__down" fileDrop (onFileDrop)="onFileDrop($event)">
+                <label for="newpost-file" class="newpost__label">
+                  <span class="attach attach__pos"></span>
+                  <span class="drag">Drag & Drop to Upload</span>
+                  <span class="drag">or</span>
+                  <span class="click-upl">Сlick to upload the file</span>
+                </label>
+                <input type="file" name="files" id="newpost-file" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)">
+              </div>
+              <div class="newpost__images">
+                <div class="newpost__img newpost__img-pos" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}">
+                  <img [src]="imgObj.img_src"  alt="" class="newPost_image_preview">
+                  <span class="img-close" (click)="deletePreviewedImg(i)"></span>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <button class="mod__submit" type="submit" [disabled]="postEditForm.invalid" >Create a post</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -24,6 +24,7 @@ import { FileInfoService } from './services/file-info.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { PostEditeComponent } from './modals/post-edite/post-edite.component';
 
 
 
@@ -44,7 +45,8 @@ let appRoutes: Routes =[
     HeaderComponent,
     RegistrationComponent,
     LogInComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    PostEditeComponent
 
   ],
   imports: [

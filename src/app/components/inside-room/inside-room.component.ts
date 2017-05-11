@@ -83,10 +83,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         )
     }
 
-    postInterraction(int_key: string, post_id: number, room_id: number, index: number): void {
+    postInterraction(int_key: string, post: Post, index?: number): void {
 
       if (int_key === 'remove'){
-        this.requestService.postDelete(post_id, room_id).subscribe(
+        this.requestService.postDelete(post.post_id, post.room_id).subscribe(
             data=>{
                 console.log(data);
                 this.allPosts.splice(index, 1)
@@ -94,6 +94,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {this.error = error; console.log(error);}
         )
       }
+
+        if (int_key === 'edite'){
+
+        }
 
 
     }
@@ -116,6 +120,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             console.log(newPost.post)
             this.allPosts.unshift(newPost.post)
         });
+    }
+
+    openEditPOstModal():void {
+
     }
 
 

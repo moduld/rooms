@@ -76,7 +76,7 @@
                                               <span class="comm__text">Fave User</span>
                                           </li>
 
-                                          <li class="comm__block" (click)="postInterraction()" *ngIf="post.user_id === post.owner.user_id">
+                                          <li class="comm__block" (click)="postInterraction('edite',  post)" *ngIf="post.user_id === post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-edite"></span>
                                               </div>
@@ -88,13 +88,13 @@
                                               </div>
                                               <span class="comm__text">Ban User</span>
                                           </li>
-                                          <li class="comm__block" (click)="postInterraction('move', post.post_id, post.room_id)" *ngIf="userArmin">
+                                          <li class="comm__block" (click)="postInterraction('move', post)" *ngIf="userArmin">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-delete"></span>
                                               </div>
                                               <span class="comm__text">Move Post</span>
                                           </li>
-                                          <li class="comm__block" (click)="postInterraction('remove', post.post_id, post.room_id, i)"  *ngIf="post.user_id === post.owner.user_id || userArmin">
+                                          <li class="comm__block" (click)="postInterraction('remove', post, i)"  *ngIf="post.user_id === post.owner.user_id || userArmin">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-delete"></span>
                                               </div>
