@@ -46,7 +46,6 @@ export class RequestService  {
 
 
     return this.http.get(this.commonLink + 'room/wall/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-      console.log(resp.json());
 
       return resp.json().room_walls;
     })
@@ -188,6 +187,21 @@ export class RequestService  {
     dataToServer.poll ?  sendData['poll'] = dataToServer.poll : '';
 
     return this.http.post(this.commonLink + 'wall/post/new', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  editePost(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      post_id: dataToServer.post_id,
+      text: dataToServer.text,
+      media: dataToServer.media
+    };
+    console.log(dataToServer)
+    return this.http.post(this.commonLink + 'wall/post/edit', JSON.stringify(sendData), this.options).map((resp:Response)=>{
 
       return resp.json();
     })

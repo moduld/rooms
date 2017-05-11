@@ -12,16 +12,15 @@ import { RequestService } from '../../services/request.service';
   templateUrl: 'post-edite.component.html',
   styleUrls: ['post-edite.component.css']
 })
-export class PostEditeComponent implements OnInit {
+export class PostEditeComponent implements OnInit{
+
   error: any;
   mediaToAppServer: any[] = [];
   dataToServer: any = {};
   textField: string;
-  previewFiles: any[] = [];
   private file: File;
 
-  @Input() wall_id;
-  @Input() room_id;
+  @Input() post;
 
   constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService,) { }
 
@@ -34,7 +33,17 @@ export class PostEditeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.textField = '';
+    this.textField = this.post.text;
+    this.mediaToAppServer = this.post.media;
+    this.addPostPropertyes()
+  }
+
+  addPostPropertyes(): void {
+    for (let i = 0; i < this.post.media.length; i++){
+      this.post.media[i]['img_src'] = this.post.media[i].thumbnail;
+      this.post.media[i]['uploaded'] = true;
+      this.post.media[i]['typeForApp'] = this.post.media[i]['type'];
+    }
   }
 
   fileDropped (event: any): void {
@@ -46,9 +55,7 @@ export class PostEditeComponent implements OnInit {
     let settings = this.fileService.toNowFileInfo(data);
 
     settings && this.mediaToAppServer.push(settings);
-    console.log(settings)
 
-    // settings && this.previewFiles.push(data);
     settings && this.requestService.getLinkForFileUpload(settings).subscribe(
         data=>{
           settings.link = data.urls[0];
@@ -70,25 +77,17 @@ export class PostEditeComponent implements OnInit {
     );
   }
 
-  createNewPost(postForm: NgForm):void {
+  editThisPost(postForm: NgForm):void {
 
     this.dataToServer.text = postForm.value.text;
-    if (postForm.value.mod_type){
-      this.dataToServer.media = [];
-      for (let i = 0; i < this.mediaToAppServer.length; i++){
-        this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
-      }
-    } else {
-      this.dataToServer.poll = {};
-      this.dataToServer.poll['question'] = postForm.value.question;
-      postForm.value.choice1 ? this.dataToServer.poll['choice1'] = postForm.value.choice1 : '';
-      postForm.value.choice2 ? this.dataToServer.poll['choice2'] =  postForm.value.choice2 : '';
-      postForm.value.choice3 ? this.dataToServer.poll['choice3'] =  postForm.value.choice3 : '';
-      postForm.value.choice4 ? this.dataToServer.poll['choice4'] =  postForm.value.choice4 : '';
-      this.dataToServer.poll['duration'] = postForm.value.duration;
-    }
+    this.dataToServer.media = [];
 
-    this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
+    for (let i = 0; i < this.mediaToAppServer.length; i++){
+      this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
+    }
+    this.dataToServer.post_id = this.post.post_id;
+
+    this.requestService.editePost(this.dataToServer).subscribe(
         data=>{
           this.activeModal.close(data)
         },

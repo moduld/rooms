@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 import { CreatePostComponent } from './modals/create-post/create-post.component';
+import { PostEditeComponent } from './modals/post-edite/post-edite.component';
 
 
 import { RequestService } from './services/request.service';
@@ -24,7 +25,6 @@ import { FileInfoService } from './services/file-info.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
-import { PostEditeComponent } from './modals/post-edite/post-edite.component';
 
 
 
@@ -64,7 +64,7 @@ let appRoutes: Routes =[
     ErrorShowService,
     FileInfoService
   ],
-  entryComponents: [CreatePostComponent],
+  entryComponents: [CreatePostComponent, PostEditeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

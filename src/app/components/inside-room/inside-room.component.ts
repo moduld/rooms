@@ -12,6 +12,7 @@ import { Post } from '../../commonClasses/posts';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
+import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   wallId: any;
   allPosts: Post[];
   userArmin: boolean;
+  roomTags: any[];
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -44,7 +46,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
+            console.log(data)
           this.wallId = data.walls[0].wall_id;
+          this.roomTags = data.walls;
           this.storeservice.storeCurrentUserRooms(data);
           this.exchangeService.wallsToHeader(data);
           this.getPosts(this.wallId);
@@ -64,10 +68,11 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
   getPosts(wallId: number): void {
-    this.requestService.getRoomPosts(this.wallId).subscribe(
+    this.requestService.getRoomPosts(wallId).subscribe(
         data=>{
           console.log(data);
           this.allPosts = data;
+          this.wallId = wallId
         },
         error => {this.error = error; console.log(error);}
     )
@@ -96,7 +101,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
       }
 
         if (int_key === 'edite'){
-
+            this.openEditPOstModal(post, index)
         }
 
 
@@ -105,7 +110,6 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     likeAndUnlikePost(post_id: number, flag: number, post: any): void{
         this.requestService.postLikeAndUnlike(post_id, flag).subscribe(
             data=>{
-                console.log(data);
                 post.liked_by_user = flag ? 0 : 1;
             },
             error => {this.error = error; console.log(error);}
@@ -117,16 +121,22 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.room_id = this.roomId;
         modalRef.componentInstance.wall_id = this.wallId;
         modalRef.result.then((newPost) => {
-            console.log(newPost.post)
             this.allPosts.unshift(newPost.post)
         });
     }
 
-    openEditPOstModal():void {
+    openEditPOstModal(post: Post, index):void {
 
+        const modalRef = this.modalService.open(PostEditeComponent);
+        modalRef.componentInstance.post = post;
+        modalRef.result.then((editedPost) => {
+            this.allPosts.splice(index, 1, editedPost.post)
+        });
     }
 
-
+    goToAnotherWall(tag: any): void {
+      this.getPosts(tag.wall_id)
+    }
 
 
 }

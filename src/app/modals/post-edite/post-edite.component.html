@@ -27,6 +27,7 @@
               <div class="newpost__images">
                 <div class="newpost__img newpost__img-pos" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}">
                   <img [src]="imgObj.img_src"  alt="" class="newPost_image_preview">
+                  <span>{{!imgObj.uploaded}}</span>
                   <span class="img-close" (click)="deletePreviewedImg(i)"></span>
                 </div>
 

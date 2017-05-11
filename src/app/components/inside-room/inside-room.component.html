@@ -2,10 +2,7 @@
   <div class="tags__wall">
       <div class="tags-container">
           <div class="tags tags-mb">
-              <span class="tags__active">Animals and nature</span>
-              <span>Fast And Furious Facial</span>
-              <span>My Motivation</span>
-              <span >Combing Hair</span>
+              <span *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}" (click)="goToAnotherWall(tag)">{{tag.wall_name}}</span>
           </div>
           <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
       </div>
@@ -76,7 +73,7 @@
                                               <span class="comm__text">Fave User</span>
                                           </li>
 
-                                          <li class="comm__block" (click)="postInterraction('edite',  post)" *ngIf="post.user_id === post.owner.user_id">
+                                          <li class="comm__block" (click)="postInterraction('edite',  post, i)" *ngIf="post.user_id === post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-edite"></span>
                                               </div>
