@@ -2,7 +2,7 @@
   <div class="tags__wall">
       <div class="tags-container">
           <div class="tags tags-mb">
-              <span *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}" (click)="goToAnotherWall(tag)">{{tag.wall_name}}</span>
+              <span *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}" (click)="goToAnotherWall(tag, tag.wall_id !== wallId)">{{tag.wall_name}}</span>
           </div>
           <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
       </div>

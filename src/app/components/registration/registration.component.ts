@@ -22,6 +22,10 @@ export class RegistrationComponent implements OnInit{
   emailFieldState: boolean = true;
   nameFieldState: boolean = true;
 
+  user_name: string = '';
+  email: string = '';
+  password: string = '';
+
   constructor(private requestService : RequestService, private errorService: ErrorShowService) { }
   @ViewChild("inputEmail")
   inputEmail: ElementRef;

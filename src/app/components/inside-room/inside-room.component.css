@@ -18,27 +18,29 @@
     width: 75px;
     height: 100%;
     border-radius: 10px;
-    max-height: 75px;
-    /*max-width: 75px;*/
+    max-height: 45%;
     margin: auto;
     background: center center no-repeat;
     background-size: cover;
 }
 .post_with_3_picture > .post_images:first-child{
-    width: 95%;
+    width: 100%;
 }
 .post_with_3_picture > .post_images:nth-child(2){
-    width: 45%;
+    width: 48%;
+    margin-right: 2%;
+
 }
 .post_with_3_picture > .post_images:nth-child(3){
-    width: 45%;
+    width: 48%;
+    margin-left: 2%;
 }
 
 .post_with_2_picture > .post_images{
-    width: 95%;
+    width: 100%;
 }
 
 .post_with_1_picture > .post_images{
-    width: 95%;
+    width: 100%;
     max-height: none;
 }

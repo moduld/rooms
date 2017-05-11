@@ -20,6 +20,9 @@ export class LogInComponent implements OnInit {
   emailFieldState: boolean = true;
   passwordFieldState: boolean = true;
 
+  email: string = '';
+  password: string = '';
+
   constructor(private requestService : RequestService, private errorService: ErrorShowService) { }
   @ViewChild("inputEmail")
   inputEmail: ElementRef;

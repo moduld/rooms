@@ -91,6 +91,14 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     postInterraction(int_key: string, post: Post, index?: number): void {
 
       if (int_key === 'remove'){
+          this.removePost(post, index)
+      }
+      if (int_key === 'edite'){
+          this.openEditPOstModal(post, index)
+      }
+    }
+
+    removePost(post: Post, index: number): void {
         this.requestService.postDelete(post.post_id, post.room_id).subscribe(
             data=>{
                 console.log(data);
@@ -98,19 +106,13 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             },
             error => {this.error = error; console.log(error);}
         )
-      }
-
-        if (int_key === 'edite'){
-            this.openEditPOstModal(post, index)
-        }
-
-
     }
 
     likeAndUnlikePost(post_id: number, flag: number, post: any): void{
         this.requestService.postLikeAndUnlike(post_id, flag).subscribe(
             data=>{
                 post.liked_by_user = flag ? 0 : 1;
+                post.liked_by_user ? post.likes_count++ : post.likes_count--
             },
             error => {this.error = error; console.log(error);}
         )
@@ -134,8 +136,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         });
     }
 
-    goToAnotherWall(tag: any): void {
-      this.getPosts(tag.wall_id)
+    goToAnotherWall(tag: any, flag: boolean): void {
+      flag && this.getPosts(tag.wall_id)
     }
 
 
