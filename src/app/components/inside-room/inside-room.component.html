@@ -27,7 +27,7 @@
                           </div>
 
                       </div>
-                      <span class="wall__date wall__date-pos">{{post.created_at | date: 'dd MMM y'}}</span>
+                      <span class="wall__date wall__date-pos">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
                       <div class="wall__container">
                           <div class="wall__content wall__content-pb">
                               <p class="wall__text">{{post.text}}</p>

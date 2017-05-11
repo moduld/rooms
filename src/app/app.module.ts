@@ -25,6 +25,7 @@ import { FileInfoService } from './services/file-info.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
+import { CreateRoomComponent } from './modals/create-room/create-room.component';
 
 
 
@@ -46,7 +47,8 @@ let appRoutes: Routes =[
     RegistrationComponent,
     LogInComponent,
     CreatePostComponent,
-    PostEditeComponent
+    PostEditeComponent,
+    CreateRoomComponent
 
   ],
   imports: [
@@ -64,7 +66,9 @@ let appRoutes: Routes =[
     ErrorShowService,
     FileInfoService
   ],
-  entryComponents: [CreatePostComponent, PostEditeComponent],
+  entryComponents: [CreatePostComponent,
+    PostEditeComponent,
+    CreateRoomComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

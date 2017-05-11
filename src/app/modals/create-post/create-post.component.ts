@@ -25,7 +25,7 @@ export class CreatePostComponent implements OnInit {
   @Input() wall_id;
   @Input() room_id;
 
-  constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService,) { }
+  constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService) { }
 
   @Output() public options = {
     readAs: 'ArrayBuffer'

@@ -1,0 +1,51 @@
+<div class="mod ">
+  <div class="mod__container">
+    <div class="mod__wrap newpost newroom">
+      <span class="close-modal" (click)="activeModal.dismiss()"></span>
+      <form action="#" #newRoomForm="ngForm" (submit)="createNewPost(newRoomForm)">
+        <div class="row">
+          <div class="col-lg-6 col-xs-12">
+            <div class="mod__block newpost__block">
+              <h3 class="mod__title mod__title-pos">New Room</h3>
+              <div class="newpost__down">
+                <label for="newpost-file" class="newpost__label" [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">
+                  <span class="picture picture-pos"></span>
+                  <span class="room-cover">Add room cover</span>
+                </label>
+                <input type="file" id="newpost-file" (change)="fileDropped($event)">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6 col-xs-12">
+            <div class="mod__block newroom__pad">
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Title</span>
+                <input type="text" placeholder="Enter room name" name="room_name" class="login__input" [(ngModel)]="roomName"  minlength="3" maxlength="34" pattern="[a-zA-Z0-9-]+" required>
+                <span class="mistake">Wrong room name format</span>
+              </div>
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Description</span>
+                <textarea class="newroom__desc" placeholder="Enter room description (optional)" name="room_desc" [(ngModel)]="roomDeskription" cols="30" rows="10"></textarea>
+              </div>
+              <div class="mod__inpblock">
+                <span class="mod__desc mod__desc-pos">Room Type</span>
+                <ul class="room-type">
+                  <li>Private <input type="checkbox"  name="public" class="checkbox" id="checkbox1" [(ngModel)]="publicFlag" checked >
+                    <label for="checkbox1"></label></li>
+                  <li>Searchable <input type="checkbox" name="searchable_flag" class="checkbox" id="checkbox2" [(ngModel)]="searchableFlag" checked >
+                    <label for="checkbox2"></label></li>
+                </ul>
+              </div>
+              <button class="mod__submit" type="submit"  >Create a post</button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

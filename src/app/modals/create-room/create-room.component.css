@@ -1,0 +1,23 @@
+.mistake{
+    display: none;
+    width: 100%;
+    padding: 8px;
+    background: #ff6555;
+    font-family: sans-serif;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+.login__input.ng-touched.login__input.ng-valid{
+    border: 1px solid green;
+}
+.login__input.ng-touched.login__input.ng-invalid{
+    border: 1px solid #ff6555;
+}
+.login__input.ng-touched.login__input.ng-invalid ~ .mistake{
+    display: block;
+}
+.newpost__label{
+    background-repeat: no-repeat;
+    background-position: center center;
+}
