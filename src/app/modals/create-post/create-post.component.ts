@@ -19,7 +19,6 @@ export class CreatePostComponent implements OnInit {
   dataToServer: any = {};
   textField: string;
   duration_model: number;
-  previewFiles: any[] = [];
   private file: File;
 
   @Input() wall_id;
@@ -49,10 +48,8 @@ export class CreatePostComponent implements OnInit {
     let settings = this.fileService.toNowFileInfo(data);
 
       settings && this.mediaToAppServer.push(settings);
-      console.log(settings)
 
-    // settings && this.previewFiles.push(data);
-    settings && this.requestService.getLinkForFileUpload(settings).subscribe(
+      settings && this.requestService.getLinkForFileUpload(settings).subscribe(
         data=>{
           settings.link = data.urls[0];
           this.putFileToServer(settings)

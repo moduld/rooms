@@ -49,53 +49,81 @@
                                   <span></span>
                                   <span></span>
 
-                                  <div class="notif notif-comm messag">
+                                  <div class="notif notif-comm messag" *ngIf="membership.member">
                                       <div class="messag__head comm__head">
-                                          <span class="messag__title">Edit Post</span>
+                                          <span class="messag__title">Post menu</span>
                                       </div>
                                       <ul class="messag__wrap comm__wrap">
-                                          <li class="comm__block" (click)="postOwnerInterraction('mute', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                          <!--all done-->
+                                          <li class="comm__block" (click)="postOwnerInterraction('mute', post.owner.user_id, i)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-mute"></span>
                                               </div>
                                               <span class="comm__text">Mute User</span>
                                           </li>
-                                          <li class="comm__block" (click)="postOwnerInterraction('block', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                          <!--all done-->
+                                          <li class="comm__block" (click)="postOwnerInterraction('block', post.owner.user_id, i)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-block"></span>
                                               </div>
                                               <span class="comm__text">Block User</span>
                                           </li>
-                                          <li class="comm__block" (click)="postOwnerInterraction('fave', post.owner.user_id)" *ngIf="post.user_id !== post.owner.user_id">
+                                          <!--done, need key in post info-->
+                                          <li class="comm__block" (click)="postOwnerInterraction('fave', post.owner.user_id)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-fave"></span>
                                               </div>
                                               <span class="comm__text">Fave User</span>
                                           </li>
-
-                                          <li class="comm__block" (click)="postInterraction('edite',  post, i)" *ngIf="post.user_id === post.owner.user_id">
+                                            <!--all done-->
+                                          <li class="comm__block" (click)="postInterraction('edite',  post, i)" *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-edite"></span>
                                               </div>
                                               <span class="comm__text">Edit Post</span>
                                           </li>
-                                          <li class="comm__block" (click)="postInterraction()" *ngIf="userArmin">
+                                          <!--all done-->
+                                          <li class="comm__block with_ban_select" (click)="postInterraction('ban', post)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-delete"></span>
                                               </div>
                                               <span class="comm__text">Ban User</span>
+
+                                              <select name="ban_days" class="ban-days" [(ngModel)]="banDays" *ngIf="post.bunned" (change)="postInterraction('do_ban', post, i, banDays)">
+                                                  <option value="0" selected disabled>Days for ban</option>
+                                                  <option value="3">3 days</option>
+                                                  <option value="7">7 days</option>
+                                                  <option value="14">14 days</option>
+                                                  <option value="30">30 days</option>
+                                                  <option value="60">60 days</option>
+                                                  <option value="3000">3000 days</option>
+                                              </select>
                                           </li>
-                                          <li class="comm__block" (click)="postInterraction('move', post)" *ngIf="userArmin">
+                                            <!--all done-->
+                                          <li class="comm__block with_ban_select" (click)="postInterraction('move', post)" *ngIf="userArmin">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-delete"></span>
                                               </div>
                                               <span class="comm__text">Move Post</span>
+
+                                              <select name="move_to" class="ban-days" [(ngModel)]="wallsIds" *ngIf="post.movedTo" (change)="postInterraction('do_move', post, i, wallsIds)">
+                                                  <option value="0" selected disabled>Move to wall</option>
+                                                  <option *ngFor="let wall of roomTags" [ngValue]="wall.wall_id">{{wall.wall_name}}</option>
+                                              </select>
                                           </li>
-                                          <li class="comm__block" (click)="postInterraction('remove', post, i)"  *ngIf="post.user_id === post.owner.user_id || userArmin">
+                                          <!--all done-->
+                                          <li class="comm__block" (click)="postInterraction('remove', post, i)"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id || userArmin">
                                               <div class="comm__icon-pos">
                                                   <span class="comm__icon comm__icon-delete"></span>
                                               </div>
-                                              <span class="comm__text">Delete Post</span>
+                                              <span class="comm__text">{{currentUserData.user_data.user_id === post.owner.user_id ? 'Delete Post' : 'Remove Post'}}</span>
+                                          </li>
+                                          <!--all done-->
+                                          <li class="comm__block" (click)="postInterraction('inappropriate', post)"  *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
+                                              <div class="comm__icon-pos">
+                                                  <span class="comm__icon comm__icon-delete"></span>
+                                              </div>
+                                              <span class="comm__text">Flag inappropriate </span>
                                           </li>
                                       </ul>
                                   </div>

@@ -23,17 +23,17 @@ export class AllRoomsComponent implements OnInit {
   allRooms: Room[] = [];
 
   ngOnInit() {
-    if (this.eventsExchange.allRoomsChached.length){
-      this.allRooms = this.eventsExchange.allRoomsChached
-    } else {
+
+      this.allRooms = this.eventsExchange.allRoomsChached;
+
       this.requestService.getAllRooms().subscribe(
           data=>{
             console.log(data);
             this.allRooms = data;
-            this.eventsExchange.allRoomsChached = data
+            // this.eventsExchange.allRoomsChached = data
           }, error => {this.error = error; console.log(error);}
-      )
-    }
+      );
+
 
       this.eventsExchange.changeHeaderView(true);
   }
@@ -43,6 +43,7 @@ export class AllRoomsComponent implements OnInit {
         const modalRef = this.modalService.open(CreateRoomComponent);
         modalRef.result.then((newRoom) => {
             console.log(newRoom)
+            this.allRooms.unshift(newRoom)
         });
     }
 }

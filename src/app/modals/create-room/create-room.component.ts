@@ -17,14 +17,15 @@ export class CreateRoomComponent implements OnInit {
   error: any;
   publicFlag: boolean = true;
   searchableFlag: boolean = true;
-  dataToServer: string = '';
-  coverImg: string;
+  dataToServer: any = {};
   imagePreview: string = '';
+  roomName: string = '';
+  roomDeskription: string = '';
 
   constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService) { }
 
   ngOnInit() {
-
+    this.dataToServer['multimedia'] = '';
   }
 
   fileDropped(event: any): void {
@@ -34,7 +35,6 @@ export class CreateRoomComponent implements OnInit {
       this.requestService.getLinkForFileUpload(settings).subscribe(
           data=>{
             settings.link = data.urls[0];
-            this.coverImg = data.urls[0];
             this.putFileToServer(settings)
           },
           error => {this.error = error; console.log(error);}
@@ -47,21 +47,21 @@ export class CreateRoomComponent implements OnInit {
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           this.imagePreview = settings.multimedia;
+          this.dataToServer['multimedia'] = settings.multimedia;
         },
         error => {this.error = error; console.log(error);}
     );
   }
 
   createNewRoom(roomForm: NgForm):void {
-    this.dataToServer['room_name'] = roomForm.value.text;
 
-
-    // this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
-    //     data=>{
-    //       this.activeModal.close(data)
-    //     },
-    //     error => {this.error = error; console.log(error);}
-    // );
+    this.dataToServer['roomData'] = roomForm.value;
+    this.requestService.createNewRoom(this.dataToServer).subscribe(
+        data=>{
+          this.activeModal.close(data)
+        },
+        error => {this.error = error; console.log(error);}
+    );
   }
 
 }

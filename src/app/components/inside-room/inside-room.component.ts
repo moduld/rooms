@@ -8,6 +8,7 @@ import {UserStoreService} from '../../services/user-store.service';
 
 import { Wall } from '../../commonClasses/wall';
 import { Post } from '../../commonClasses/posts';
+import { UserInfo } from '../../commonClasses/userInfo';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -29,6 +30,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   allPosts: Post[];
   userArmin: boolean;
   roomTags: any[];
+  membership: any;
+  currentUserData: UserInfo;
+  banDays: number = 0;
+    wallsIds: number = 0;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -42,17 +47,22 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.currentUserData = this.storeservice.getUserData();
+    console.log(this.currentUserData)
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
 
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
-            console.log(data)
-          this.wallId = data.walls[0].wall_id;
-          this.roomTags = data.walls;
-          this.storeservice.storeCurrentUserRooms(data);
-          this.exchangeService.wallsToHeader(data);
-          this.getPosts(this.wallId);
-          this.isAdmin()
+            if (data['message'] === undefined){
+                console.log(data)
+                this.wallId = data.walls[0].wall_id;
+                this.roomTags = data.walls;
+                this.storeservice.storeCurrentUserRooms(data);
+                this.exchangeService.wallsToHeader(data);
+                this.getPosts(this.wallId);
+                this.isAdmin()
+            }
+
         },
         error => {this.error = error; console.log(error);}
     );
@@ -61,9 +71,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   }
     isAdmin():void {
-        let storedUserData = this.storeservice.getStoredCurrentUserRooms().membership;
-        console.log(storedUserData)
-        storedUserData['admin'] || storedUserData['moderator'] || storedUserData['supermoderator'] ? this.userArmin = true : this.userArmin = false;
+        this.membership = this.storeservice.getStoredCurrentUserRooms().membership;
+        this.membership['admin'] || this.membership['moderator'] || this.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
         console.log(this.userArmin)
     }
 
@@ -78,17 +87,17 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     )
   }
 
-    postOwnerInterraction(int_key: string, owner_id: number): void {
+    postOwnerInterraction(int_key: string, owner_id: number, index: number): void {
         this.requestService.postInteractionUser(int_key, owner_id, int_key, 1).subscribe(
             data=>{
                 console.log(data);
-
+                int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== owner_id}) : ''
             },
             error => {this.error = error; console.log(error);}
         )
     }
 
-    postInterraction(int_key: string, post: Post, index?: number): void {
+    postInterraction(int_key: string, post: Post, index?: number, data?: number): void {
 
       if (int_key === 'remove'){
           this.removePost(post, index)
@@ -96,6 +105,23 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
       if (int_key === 'edite'){
           this.openEditPOstModal(post, index)
       }
+      if (int_key === 'inappropriate'){
+          this.inappropriatePost(post)
+      }
+        if (int_key === 'ban'){
+            post['bunned'] = true;
+        }
+        if (int_key === 'do_ban'){
+            post['ban_days'] = data;
+            this.userToBan(post)
+        }
+        if (int_key === 'move'){
+            post['movedTo'] = true;
+        }
+        if (int_key === 'do_move'){
+            post['move_to_wall_id'] = data;
+            this.movePost(post, index)
+        }
     }
 
     removePost(post: Post, index: number): void {
@@ -113,6 +139,32 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             data=>{
                 post.liked_by_user = flag ? 0 : 1;
                 post.liked_by_user ? post.likes_count++ : post.likes_count--
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    inappropriatePost(post: Post):void {
+        this.requestService.postInappropriate(post.post_id).subscribe(
+            data=>{
+
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    userToBan(data: any): void {
+        this.requestService.userToBan(data).subscribe(
+            data=>{
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    movePost(data: any, index: number): void {
+        this.requestService.movePost(data).subscribe(
+            data=>{
+                this.allPosts.splice(index, 1)
             },
             error => {this.error = error; console.log(error);}
         )

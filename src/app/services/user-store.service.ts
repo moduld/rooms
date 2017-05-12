@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Wall } from '../commonClasses/wall';
+import { UserInfo } from '../commonClasses/userInfo';
 
 @Injectable()
 export class UserStoreService {
@@ -9,7 +10,7 @@ export class UserStoreService {
 
   constructor() { }
 
-  getUserData ():string {
+  getUserData ():UserInfo {
     return localStorage.getItem('tifo-user-data') && JSON.parse(localStorage.getItem('tifo-user-data')) || ''
   }
 

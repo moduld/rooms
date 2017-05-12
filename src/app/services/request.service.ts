@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, URLSearchParams, Headers, RequestOptions, Request} from '@angular/http';
+import {Location} from '@angular/common';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -16,17 +17,18 @@ import { UserInfo } from '../commonClasses/userInfo';
 @Injectable()
 export class RequestService  {
 
-  constructor(private http: Http, private storeservice: UserStoreService)  {}
+  constructor(private http: Http, private storeservice: UserStoreService, private location: Location)  {}
 
-  commonLink: string = 'http://test.tifoo.net/';
-  userId: any = '567';
+  commonLink: string = 'http://dev.tifos.net/';
+  // userId: any = '567';
+  userId: any = '';
   token: string = '';
   roomId: any;
   headers: Headers = new Headers({ 'Content-Type': 'application/json' });
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
   getAllRooms(): Observable<Room[]> {
-    this.addRequiredDataToTheService()
+    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
@@ -37,7 +39,7 @@ export class RequestService  {
   }
 
   getWalls( room_id: any ): Observable<Wall> {
-
+    !this.token && this.addRequiredDataToTheService();
     this.roomId = room_id;
 
     let params: URLSearchParams = new URLSearchParams();
@@ -58,9 +60,7 @@ export class RequestService  {
     params.set('room_id', this.roomId);
     params.set('wall_id', wall_id);
 
-    return this.http.get(this.commonLink + 'wall/post/get/all', {
-      search: params
-    }).map((resp:Response)=>{
+    return this.http.get(this.commonLink + 'wall/post/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
       return resp.json().posts;
     }).catch((error: any)=> { return Observable.throw(error);});
 
@@ -70,7 +70,7 @@ export class RequestService  {
     let storedUserData = this.storeservice.getUserData();
     if (storedUserData){
       console.log(storedUserData)
-      // this.userId = storedUserData['user_data']['user_id'];
+      this.userId = storedUserData['user_data']['user_id'];
       this.token = storedUserData['token'];
       this.headers.append('Authorization', "Bearer " + this.token);
       this.options = new RequestOptions({ headers: this.headers })
@@ -151,6 +151,46 @@ export class RequestService  {
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
+  postInappropriate(post_id): Observable<any>{
+    let sendData = {
+      user_id: this.userId,
+      post_id: post_id,
+    };
+    return this.http.post(this.commonLink + 'wall/post/report', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  userToBan(data: any): Observable<any>{
+    let sendData = {
+      user_id: this.userId,
+      room_id: data.room_id,
+      user_id_member: data.owner.user_id,
+      ban_days: data.ban_days
+    };
+    return this.http.post(this.commonLink + 'room/member/ban', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+  movePost(data: any): Observable<any>{
+    let sendData = {
+      user_id: this.userId,
+      post_id: data.post_id,
+      room_id: data.room_id,
+      wall_id: data.move_to_wall_id
+
+    };
+    return this.http.post(this.commonLink + 'wall/post/move', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
   getLinkForFileUpload(settings: any): Observable<any>{
 
     let params: URLSearchParams = new URLSearchParams();
@@ -202,6 +242,23 @@ export class RequestService  {
     };
     console.log(dataToServer)
     return this.http.post(this.commonLink + 'wall/post/edit', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+
+      return resp.json();
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  createNewRoom(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_name: dataToServer.roomData.room_name,
+      room_desc: dataToServer.roomData.room_desc,
+      searchable_flag: dataToServer.roomData.searchable_flag ? 1 : 0,
+      multimedia: dataToServer.multimedia
+    };
+    sendData['public'] = dataToServer.roomData.public ? 1 : 0;
+
+    return this.http.post(this.commonLink + 'room/create', JSON.stringify(sendData), this.options).map((resp:Response)=>{
 
       return resp.json();
     })
