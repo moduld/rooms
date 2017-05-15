@@ -72,11 +72,11 @@ export class RequestService  {
       console.log(storedUserData)
       this.userId = storedUserData['user_data']['user_id'];
       this.token = storedUserData['token'];
-      this.headers.append('Authorization', "Bearer " + this.token);
-      this.options = new RequestOptions({ headers: this.headers })
-
+      if (this.headers.get('Authorization') === null){
+        this.headers.append('Authorization', "Bearer " + this.token);
+        this.options = new RequestOptions({ headers: this.headers })
+      }
     }
-
   }
 
   registration(user_data: any) : Observable<UserInfo> {
@@ -102,7 +102,7 @@ export class RequestService  {
   logOut() : Observable<any> {
 
     return this.http.get(this.commonLink + 'user/logout', this.options).map((resp:Response)=>{
-      this.storeservice.deleteUserData();
+      this.headers.delete('Authorization');
       return resp.json();
     })
         .catch((error: any)=> {
@@ -117,11 +117,13 @@ export class RequestService  {
     };
     sendData['user_id_' + user_interract_key] = user_interract_id;
     sendData[flag_key] = flag;
-  return this.http.post(this.commonLink + 'user/' + user_interract_key, JSON.stringify(sendData), this.options).map((resp:Response)=>{
 
-    return resp.json();
-  })
-      .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      sendData: sendData,
+      apiLink: 'user/' + user_interract_key
+    };
+
+    return this.makePostRequest(data)
 }
 
   postDelete(post_id: number, room_id: number): Observable<any> {
@@ -131,11 +133,12 @@ export class RequestService  {
       post_id: post_id,
       room_id: room_id
     };
-    return this.http.post(this.commonLink + 'wall/post/remove', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/remove'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
 
   postLikeAndUnlike(post_id, flag): Observable<any>{
@@ -144,11 +147,12 @@ export class RequestService  {
       post_id: post_id,
       like: flag ? 0 : 1
     };
-    return this.http.post(this.commonLink + 'wall/post/like', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/like'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
 
   postInappropriate(post_id): Observable<any>{
@@ -156,39 +160,44 @@ export class RequestService  {
       user_id: this.userId,
       post_id: post_id,
     };
-    return this.http.post(this.commonLink + 'wall/post/report', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/report'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
 
-  userToBan(data: any): Observable<any>{
+  userToBan(post: any): Observable<any>{
     let sendData = {
       user_id: this.userId,
-      room_id: data.room_id,
-      user_id_member: data.owner.user_id,
-      ban_days: data.ban_days
+      room_id: post.room_id,
+      user_id_member: post.owner.user_id,
+      ban_days: post.ban_days
     };
-    return this.http.post(this.commonLink + 'room/member/ban', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/member/ban'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
-  movePost(data: any): Observable<any>{
+
+  movePost(post: any): Observable<any>{
     let sendData = {
       user_id: this.userId,
-      post_id: data.post_id,
-      room_id: data.room_id,
-      wall_id: data.move_to_wall_id
+      post_id: post.post_id,
+      room_id: post.room_id,
+      wall_id: post.move_to_wall_id
 
     };
-    return this.http.post(this.commonLink + 'wall/post/move', JSON.stringify(sendData), this.options).map((resp:Response)=>{
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/move'
+    };
+
+    return this.makePostRequest(data)
   }
 
   getLinkForFileUpload(settings: any): Observable<any>{
@@ -226,11 +235,12 @@ export class RequestService  {
     dataToServer.media ? sendData['media'] = dataToServer.media : '';
     dataToServer.poll ?  sendData['poll'] = dataToServer.poll : '';
 
-    return this.http.post(this.commonLink + 'wall/post/new', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/new'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
 
   editePost(dataToServer: any): Observable<any> {
@@ -240,12 +250,12 @@ export class RequestService  {
       text: dataToServer.text,
       media: dataToServer.media
     };
-    console.log(dataToServer)
-    return this.http.post(this.commonLink + 'wall/post/edit', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/post/edit'
+    };
 
-      return resp.json();
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    return this.makePostRequest(data)
   }
 
   createNewRoom(dataToServer: any): Observable<any> {
@@ -258,7 +268,34 @@ export class RequestService  {
     };
     sendData['public'] = dataToServer.roomData.public ? 1 : 0;
 
-    return this.http.post(this.commonLink + 'room/create', JSON.stringify(sendData), this.options).map((resp:Response)=>{
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/create'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  votePost(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      poll_id: dataToServer.poll.poll_id,
+      choice: dataToServer.voted_data,
+      room_id: dataToServer.room_id
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/poll/vote'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+
+  makePostRequest(data: any): Observable<any> {
+
+    return this.http.post(this.commonLink + data.apiLink, JSON.stringify(data.sendData), this.options).map((resp:Response)=>{
 
       return resp.json();
     })

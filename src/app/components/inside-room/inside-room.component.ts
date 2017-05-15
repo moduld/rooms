@@ -33,7 +33,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   membership: any;
   currentUserData: UserInfo;
   banDays: number = 0;
-    wallsIds: number = 0;
+    wallsIds: number;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -60,7 +60,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.storeservice.storeCurrentUserRooms(data);
                 this.exchangeService.wallsToHeader(data);
                 this.getPosts(this.wallId);
-                this.isAdmin()
+                this.isAdmin();
+                this.wallsIds = this.wallId;
             }
 
         },
@@ -90,7 +91,6 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     postOwnerInterraction(int_key: string, owner_id: number, index: number): void {
         this.requestService.postInteractionUser(int_key, owner_id, int_key, 1).subscribe(
             data=>{
-                console.log(data);
                 int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== owner_id}) : ''
             },
             error => {this.error = error; console.log(error);}
@@ -109,14 +109,14 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
           this.inappropriatePost(post)
       }
         if (int_key === 'ban'){
-            post['bunned'] = true;
+            post['bunned'] = !post['bunned'];
         }
         if (int_key === 'do_ban'){
             post['ban_days'] = data;
             this.userToBan(post)
         }
         if (int_key === 'move'){
-            post['movedTo'] = true;
+            post['movedTo'] = !post['movedTo'];
         }
         if (int_key === 'do_move'){
             post['move_to_wall_id'] = data;
@@ -192,5 +192,20 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
       flag && this.getPosts(tag.wall_id)
     }
 
+    onMouseLeave(post: Post): void {
 
+       post['bunned'] = false;
+       post['movedTo'] = false;
+    }
+
+    voteForPost(assessment: string, post: Post): void {
+
+        post['voted_data'] = assessment;
+        this.requestService.votePost(post).subscribe(
+            data=>{
+                post['poll'] = data.poll;
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
 }

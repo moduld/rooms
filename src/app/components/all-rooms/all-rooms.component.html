@@ -33,7 +33,7 @@
 
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let room of allRooms; let i = index"
-             [routerLink]="['/room', room.room_id]">
+             [routerLink]="['/room', room.room.room_id]">
             <div class="rooms__block" [ngStyle]="{'background-color': room.room.color}">
                 <div class="rooms__img">
                     <img [src]="room.room.thumbnail" alt="" *ngIf="room.room.thumbnail">

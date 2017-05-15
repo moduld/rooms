@@ -1,140 +1,223 @@
+<div class="tags__wall">
+    <div class="tags-container">
+        <div class="tags tags-mb">
+            <span *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}"
+                  (click)="goToAnotherWall(tag, tag.wall_id !== wallId)">{{tag.wall_name}}</span>
+        </div>
+        <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
+    </div>
+</div>
 
-  <div class="tags__wall">
-      <div class="tags-container">
-          <div class="tags tags-mb">
-              <span *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}" (click)="goToAnotherWall(tag, tag.wall_id !== wallId)">{{tag.wall_name}}</span>
-          </div>
-          <div class="tags__search tags__search-pos visible-lg"><span class="icon"></span></div>
-      </div>
-  </div>
-
-  <div class="container-plus sticky">
-      <div class="wall__plus wall__plus-pos" (click)="openNewPostModal()">
-          <span class="wall__plus-icon"></span>
-      </div>
-      <div class="container-rooms wall wall-pt">
-          <div class="row">
+<div class="container-plus sticky">
+    <div class="wall__plus wall__plus-pos" (click)="openNewPostModal()">
+        <span class="wall__plus-icon"></span>
+    </div>
+    <div class="container-rooms wall wall-pt">
+        <div class="row">
 
 
-              <div class="col-lg-4 col-md-6 col-xs-12" *ngFor="let post of allPosts; let i = index">
-                  <div class="wall__block">
-                      <div class="wall__user header__user">
-                          <div class="user__wrap">
-                              <div class=" wall__avatar wall__avatar-pos">
-                                  <img [src]="post.owner.thumbnail" alt="">
-                              </div>
-                              <span class="user__name  ">{{post.owner.user_name}}</span>
-                          </div>
+            <div class="col-lg-4 col-md-6 col-xs-12" *ngFor="let post of allPosts; let i = index">
+                <div class="wall__block">
+                    <div class="wall__user header__user">
+                        <div class="user__wrap">
+                            <div class=" wall__avatar wall__avatar-pos">
+                                <img [src]="post.owner.thumbnail" alt="">
+                            </div>
+                            <span class="user__name  ">{{post.owner.user_name}}</span>
+                        </div>
 
-                      </div>
-                      <span class="wall__date wall__date-pos">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
-                      <div class="wall__container">
-                          <div class="wall__content wall__content-pb">
-                              <p class="wall__text">{{post.text}}</p>
-                              <div class="wall__img " *ngIf="post.media.length" [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
-                                  <div class="post_images" *ngFor="let img of post.media" [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
-                              </div>
-                          </div>
-                          <div class="wall__info">
-                              <div class="wall__soc">
-                                  <div class="wall__like"><span class="icon icon-like-empty" [ngClass]="{'icon-like': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)"></span><span
-                                          class="number">{{post.likes_count}}</span>
-                                  </div>
-                                  <div class="wall__comm"><span class="icon icon-comm"></span><span
-                                          class="number">{{post.comments_count}}</span>
-                                  </div>
-                              </div>
-                              <div class="wall__menu">
-                                  <span></span>
-                                  <span></span>
-                                  <span></span>
+                    </div>
+                    <span class="wall__date wall__date-pos">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+                    <div class="wall__container">
+                        <div class="wall__content wall__content-pb" *ngIf="!post.poll">
+                            <p class="wall__text">{{post.text}}</p>
+                            <div class="wall__img " *ngIf="post.media.length"
+                                 [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
+                                <div class="post_images" *ngFor="let img of post.media"
+                                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
+                            </div>
+                        </div>
 
-                                  <div class="notif notif-comm messag" *ngIf="membership.member">
-                                      <div class="messag__head comm__head">
-                                          <span class="messag__title">Post menu</span>
-                                      </div>
-                                      <ul class="messag__wrap comm__wrap">
-                                          <!--all done-->
-                                          <li class="comm__block" (click)="postOwnerInterraction('mute', post.owner.user_id, i)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-mute"></span>
-                                              </div>
-                                              <span class="comm__text">Mute User</span>
-                                          </li>
-                                          <!--all done-->
-                                          <li class="comm__block" (click)="postOwnerInterraction('block', post.owner.user_id, i)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-block"></span>
-                                              </div>
-                                              <span class="comm__text">Block User</span>
-                                          </li>
-                                          <!--done, need key in post info-->
-                                          <li class="comm__block" (click)="postOwnerInterraction('fave', post.owner.user_id)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-fave"></span>
-                                              </div>
-                                              <span class="comm__text">Fave User</span>
-                                          </li>
-                                            <!--all done-->
-                                          <li class="comm__block" (click)="postInterraction('edite',  post, i)" *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-edite"></span>
-                                              </div>
-                                              <span class="comm__text">Edit Post</span>
-                                          </li>
-                                          <!--all done-->
-                                          <li class="comm__block with_ban_select" (click)="postInterraction('ban', post)" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-delete"></span>
-                                              </div>
-                                              <span class="comm__text">Ban User</span>
 
-                                              <select name="ban_days" class="ban-days" [(ngModel)]="banDays" *ngIf="post.bunned" (change)="postInterraction('do_ban', post, i, banDays)">
-                                                  <option value="0" selected disabled>Days for ban</option>
-                                                  <option value="3">3 days</option>
-                                                  <option value="7">7 days</option>
-                                                  <option value="14">14 days</option>
-                                                  <option value="30">30 days</option>
-                                                  <option value="60">60 days</option>
-                                                  <option value="3000">3000 days</option>
-                                              </select>
-                                          </li>
-                                            <!--all done-->
-                                          <li class="comm__block with_ban_select" (click)="postInterraction('move', post)" *ngIf="userArmin">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-delete"></span>
-                                              </div>
-                                              <span class="comm__text">Move Post</span>
+                        <div class="wall__content " *ngIf="post.poll">
+                            <p class="wall__text">{{post.text}}</p>
+                            <div class="question wall__question">
+                                <div class="question__block">
+                                    <span class="question__quest question__quest-pos">
+                                        {{post.poll.question}}
+                                    </span>
+                                    <!--<div class="wall__imgrow wall__imgrow-up">-->
+                                        <!--<div class="wall__img wall__img-wide">-->
+                                            <!--<img src="img/wall/wall-img-wide-2.jpg" alt="">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <ul class="list-unstyled question__poll question__poll-pos no_voted" *ngIf="!post.poll.voted">
+                                        <li class="question__item question__item-pos" (click)="voteForPost('1', post)">
+                                            <span class="question__choice">{{post.poll.choice1}}</span>
+                                        </li>
+                                        <li class="question__item question__item-pos" (click)="voteForPost('2', post)">
+                                            <span class="question__choice">{{post.poll.choice2}}</span>
+                                        </li>
+                                        <li class="question__item question__item-pos" *ngIf="post.poll.choice3" (click)="voteForPost('3', post)">
+                                            <span class="question__choice">{{post.poll.choice3}}</span>
+                                        </li>
+                                        <li class="question__item question__item-pos" *ngIf="post.poll.choice4" (click)="voteForPost('4', post)">
+                                            <span class="question__choice">{{post.poll.choice4}}</span>
+                                        </li>
+                                    </ul>
 
-                                              <select name="move_to" class="ban-days" [(ngModel)]="wallsIds" *ngIf="post.movedTo" (change)="postInterraction('do_move', post, i, wallsIds)">
-                                                  <option value="0" selected disabled>Move to wall</option>
-                                                  <option *ngFor="let wall of roomTags" [ngValue]="wall.wall_id">{{wall.wall_name}}</option>
-                                              </select>
-                                          </li>
-                                          <!--all done-->
-                                          <li class="comm__block" (click)="postInterraction('remove', post, i)"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id || userArmin">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-delete"></span>
-                                              </div>
-                                              <span class="comm__text">{{currentUserData.user_data.user_id === post.owner.user_id ? 'Delete Post' : 'Remove Post'}}</span>
-                                          </li>
-                                          <!--all done-->
-                                          <li class="comm__block" (click)="postInterraction('inappropriate', post)"  *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
-                                              <div class="comm__icon-pos">
-                                                  <span class="comm__icon comm__icon-delete"></span>
-                                              </div>
-                                              <span class="comm__text">Flag inappropriate </span>
-                                          </li>
-                                      </ul>
-                                  </div>
 
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="clearfix visible-sm visible-md"></div>
+                                    <ul class="list-unstyled question__poll question__poll-pos" *ngIf="post.poll.voted">
+                                        <li class="question__item question__item-pos" >
+                                                <ngb-progressbar  [value]="post.poll.choice1total" ></ngb-progressbar>
+                                                <span class="question__choice">{{post.poll.choice1}}</span>
+                                                <span class="question__perc question__perc-pos">{{post.poll.choice1total}}%</span>
 
-          </div>
-      </div>
-  </div>
+                                        </li>
+                                        <li class="question__item question__item-pos" >
+                                            <ngb-progressbar  [value]="post.poll.choice2total"></ngb-progressbar>
+                                            <span class="question__choice">{{post.poll.choice2}}</span>
+                                            <span class="question__perc question__perc-pos">{{post.poll.choice2total}}%</span>
+                                        </li>
+
+                                        <li class="question__item question__item-pos" *ngIf="post.poll.choice3">
+                                            <ngb-progressbar  [value]="post.poll.choice3total"></ngb-progressbar>
+                                            <span class="question__choice">{{post.poll.choice3}}</span>
+                                            <span class="question__perc question__perc-pos">{{post.poll.choice3total}}%</span>
+                                        </li>
+                                        <li class="question__item question__item-pos" *ngIf="post.poll.choice4">
+                                            <ngb-progressbar  [value]="post.poll.choice4total"></ngb-progressbar>
+                                            <span class="question__choice">{{post.poll.choice4}}</span>
+                                            <span class="question__perc question__perc-pos">{{post.poll.choice4total}}%</span>
+                                        </li>
+                                    </ul>
+                                    <div class="question__info">
+                                        <div class="question__votes">
+                                            <span class="icon icon-votes"></span>
+                                            <span class="question__infotext">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+                                        </div>
+                                        <div class="question__days">
+                                            <span  class="icon icon-days" ></span>
+                                            <span class="question__infotext">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="wall__info">
+                            <div class="wall__soc">
+                                <div class="wall__like"><span class="icon icon-like-empty"
+                                                              [ngClass]="{'icon-like': post.liked_by_user}"
+                                                              (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)"></span><span
+                                        class="number">{{post.likes_count}}</span>
+                                </div>
+                                <div class="wall__comm"><span class="icon icon-comm"></span><span
+                                        class="number">{{post.comments_count}}</span>
+                                </div>
+                            </div>
+                            <div class="wall__menu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                                <div class="notif notif-comm messag" *ngIf="membership.member">
+                                    <div class="messag__head comm__head">
+                                        <span class="messag__title">Post menu</span>
+                                    </div>
+                                    <ul class="messag__wrap comm__wrap" (mouseleave)="onMouseLeave( post)">
+                                        <!--all done-->
+                                        <li class="comm__block"
+                                            (click)="postOwnerInterraction('mute', post.owner.user_id, i)"
+                                            *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
+                                            <div class="comm__icon-pos">
+                                                <span class="comm__icon comm__icon-mute"></span>
+                                            </div>
+                                            <span class="comm__text">Mute User</span>
+                                        </li>
+                                        <!--all done-->
+                                        <li class="comm__block"
+                                            (click)="postOwnerInterraction('block', post.owner.user_id, i)"
+                                            *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
+                                            <div class="comm__icon-pos">
+                                                <span class="comm__icon comm__icon-block"></span>
+                                            </div>
+                                            <span class="comm__text">Block User</span>
+                                        </li>
+
+                                        <!--all done-->
+                                        <li class="comm__block" (click)="postInterraction('edite',  post, i)"
+                                            *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
+                                            <div class="comm__icon-pos">
+                                                <span class="comm__icon comm__icon-edite"></span>
+                                            </div>
+                                            <span class="comm__text">Edit Post</span>
+                                        </li>
+                                        <!--all done-->
+                                        <li class="comm__block comm_block_with_select"  *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
+                                            <div class="comm__icon-pos list_item_with_select"
+                                                 (click)="postInterraction('ban', post)">
+                                                <span class="comm__icon comm__icon-delete"></span>
+                                                <span class="comm__text">Ban User</span>
+                                            </div>
+
+                                            <select name="ban_days" class="ban-days" [(ngModel)]="banDays"
+                                                    *ngIf="post.bunned"
+                                                    (change)="postInterraction('do_ban', post, i, banDays)">
+                                                <option value="0" selected disabled>Days for ban</option>
+                                                <option value="3">3 days</option>
+                                                <option value="7">7 days</option>
+                                                <option value="14">14 days</option>
+                                                <option value="30">30 days</option>
+                                                <option value="60">60 days</option>
+                                                <option value="3000">3000 days</option>
+                                            </select>
+                                        </li>
+                                        <!--all done-->
+                                        <li class="comm__block comm_block_with_select" *ngIf="userArmin">
+                                            <div class="comm__icon-pos list_item_with_select"
+                                                 (click)="postInterraction('move', post)" >
+                                                <span class="comm__icon comm__icon-delete"></span>
+                                                <span class="comm__text">Move Post</span>
+                                            </div>
+                                            <span>{{wallsIds}}</span>
+                                            <select name="move_to" class="ban-days" [(ngModel)]="wallsIds"
+                                                    *ngIf="post.movedTo"
+                                                    (change)="postInterraction('do_move', post, i, wallsIds)">
+                                                <option *ngFor="let wall of roomTags" [ngValue]="wall.wall_id">
+                                                    {{wall.wall_name}}
+                                                </option>
+                                            </select>
+                                        </li>
+                                        <!--all done-->
+                                        <li class="comm__block" (click)="postInterraction('remove', post, i)"
+                                            *ngIf="currentUserData.user_data.user_id === post.owner.user_id || userArmin">
+                                            <div class="comm__icon-pos">
+                                                <span class="comm__icon comm__icon-delete"></span>
+                                            </div>
+                                            <span class="comm__text">{{currentUserData.user_data.user_id === post.owner.user_id ? 'Delete Post' : 'Remove Post'}}</span>
+                                        </li>
+                                        <!--all done-->
+                                        <li class="comm__block" (click)="postInterraction('inappropriate', post)"
+                                            *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
+                                            <div class="comm__icon-pos">
+                                                <span class="comm__icon comm__icon-delete"></span>
+                                            </div>
+                                            <span class="comm__text">Flag inappropriate </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix visible-sm visible-md"></div>
+
+        </div>
+    </div>
+</div>

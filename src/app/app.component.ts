@@ -29,6 +29,9 @@ export class AppComponent {
         if (event.url === '/registration' || event.url === '/login'){
           this.showHeader = false;
           this.showFooter = false;
+        } else {
+          this.showHeader = true;
+          this.showFooter = true;
         }
       }
     });

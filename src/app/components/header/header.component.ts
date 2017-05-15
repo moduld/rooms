@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   subheaderRoomName: string = '';
   headerFieldToggle: boolean;
 
-  constructor(private requestService : RequestService,  private storeservice: UserStoreService,  private exchangeService: EventsExchangeService) {
+  constructor(private requestService : RequestService,  private storeservice: UserStoreService,  private exchangeService: EventsExchangeService, private router: Router) {
 
     exchangeService.changeEmitted.subscribe(
         allWalls => {
@@ -37,6 +38,8 @@ export class HeaderComponent implements OnInit {
     this.requestService.logOut().subscribe(
         data=>{
           console.log(data);
+            this.storeservice.deleteUserData();
+            this.router.navigateByUrl('/login');
         },
         error => {
           this.error = error.json();

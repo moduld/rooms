@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { NgForm} from '@angular/forms';
+import {Router} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
 import {ErrorShowService} from '../../services/error-show.service';
@@ -26,7 +27,7 @@ export class RegistrationComponent implements OnInit{
   email: string = '';
   password: string = '';
 
-  constructor(private requestService : RequestService, private errorService: ErrorShowService) { }
+  constructor(private requestService : RequestService, private errorService: ErrorShowService, private router: Router) { }
   @ViewChild("inputEmail")
   inputEmail: ElementRef;
 
@@ -46,6 +47,7 @@ export class RegistrationComponent implements OnInit{
     this.requestService.registration(regForm.value).subscribe(
         data=>{
           console.log(data);
+          this.router.navigateByUrl('/all-rooms');
         },
         error => {
           this.error = error.json();

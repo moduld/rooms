@@ -26,12 +26,13 @@ import { FileInfoService } from './services/file-info.service';
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CreateRoomComponent } from './modals/create-room/create-room.component';
+import { CanActivateComponent } from './components/can-activate/can-activate.component';
 
 
 
 let appRoutes: Routes =[
-  { path: 'room/:id', component: InsideRoomComponent},
-  { path: 'all-rooms', component: AllRoomsComponent},
+  { path: 'room/:id', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
+  { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
@@ -48,7 +49,8 @@ let appRoutes: Routes =[
     LogInComponent,
     CreatePostComponent,
     PostEditeComponent,
-    CreateRoomComponent
+    CreateRoomComponent,
+    CanActivateComponent
 
   ],
   imports: [
@@ -64,7 +66,8 @@ let appRoutes: Routes =[
     EventsExchangeService,
     UserStoreService,
     ErrorShowService,
-    FileInfoService
+    FileInfoService,
+    CanActivateComponent
   ],
   entryComponents: [CreatePostComponent,
     PostEditeComponent,
