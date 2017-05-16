@@ -5,7 +5,7 @@ interface RoomInfo{
     color: string;
     members_count: number;
     multimedia: any;
-    num_visits: number;
+    visits_count: number;
     public: number;
     room_alias: string;
     room_desc: string;

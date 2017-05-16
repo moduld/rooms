@@ -1,8 +1,16 @@
+:host{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+}
 .header{
   width: 100%;
   color: $gray_text;
+  background: white;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
-  position: relative;
   .main_container{
     @extend .flex-between;
     align-items: center;
@@ -12,7 +20,7 @@
     width: 89px;
     height: 32px;
     @extend .backgr-center;
-    background-image: url("./img/Logo.png") ;
+    background-image: url("../../../img/Logo.png") ;
     margin: 14px 0;
   }
   .search{
@@ -52,7 +60,7 @@
   .icons_wrapper{
     @extend .flex-center;
   }
-  .icon-bell,
+  .icon-bell-o,
   .icon-mail{
     height: 34px;
     width: 34px;
@@ -78,62 +86,8 @@
     }
   }
 
-  .rooms_block{
-    width: 100%;
-    background: $light_gray;
-    min-height: 58px;
-    @extend .flex-center;
-    align-items: stretch;
-  }
-  .room_name_wrapp{
-    @extend .flex-center;
-    font-size: 16px;
-    margin: 10px 0;
-    flex-wrap: wrap;
-  }
-  .rooms{
-    @extend .flex-center;
-    &:before{
-      content: '';
-      height: 19px;
-      width: 19px;
-      @extend .backgr-center;
-      background-image: url("./img/icn_room.png");
-      display: block;
-      margin-right: 10px;
-  }
-    &:after{
-      content: '';
-      display: block;
-      padding: 2px;
-      border-radius: 50%;
-      background: $gray_text;
-      margin-left: 15px;
-    }
-  }
-  .room_name{
-    margin-left: 10px;
-    color: $orange;
-    font-family: $font_medium;
-  }
-  .room_tags{
-    @extend .flex-center;
-    flex-wrap: wrap;
-  }
-  .room_tag{
-    font-size: 14px;
-    padding: 10px 15px;
-    border-radius: 20px;
-    background: white;
-    margin: 10px 0 10px 15px;
-  }
-  .active_tag{
-    background: $orange;
-    color: white;
-  }
-  .add_post{
 
-  }
+
 }
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
@@ -142,29 +96,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      .rooms_block{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
     }
 }
 
 @media screen and (max-width: 768px){
  .header{
+   .logo{
+     width: 100%;
+   }
    .search{
-     min-width: 245px;
+     min-width: 200px;
+     width: 50%;
    }
    .icons_wrapper{
-     width: 100%;
+     width: 50%;
      padding: 10px;
      justify-content: flex-end;
    }
  }
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 550px){
   .header{
     .logo{
       margin: 10px auto;
@@ -174,6 +126,7 @@
     }
     .icons_wrapper{
       justify-content: center;
+      width: 100%;
     }
   }
 }

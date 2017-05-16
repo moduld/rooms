@@ -2,8 +2,8 @@
   @extend .flex-center;
 font-family: $font_medium;
   padding: 12px 0;
-  background: $background;
-  position: relative;
+  background: $posts_background;
+
   .link{
     padding: 8px 15px;
     text-decoration: none;
@@ -15,20 +15,7 @@ font-family: $font_medium;
       color: $dark_text;
     }
   }
-  .add_post{
-    position: absolute;
-    top: -30px;
-    right: 100px;
-    height: 66px;
-    width: 66px;
-    border-radius: 50%;
-    background: $blue;
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
-    color: white;
-    font-size: 30px;
-    @extend .flex-center;
-    cursor: pointer;
-  }
+
 }
 
 @media screen and (max-width: 768px){
@@ -36,10 +23,6 @@ font-family: $font_medium;
     flex-direction: column;
     .link{
       margin-bottom: 10px;
-    }
-    .add_post{
-      top: 30px;
-      right: 20px;
     }
   }
 }

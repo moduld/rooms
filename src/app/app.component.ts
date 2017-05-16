@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Router, NavigationEnd} from '@angular/router';
 
@@ -9,7 +9,8 @@ import { Wall } from './commonClasses/wall';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
 

@@ -1,3 +1,21 @@
+$light_gray: #f8f9fa;
+$light_blue: #ecf6fb;
+$orange: #ecb255;
+$blue: #00add2;
+$red: #c4205b;
+$red_dot: #fa5252;
+$gray_text: #868e96;
+$dark_text: #343a40;
+$background: #fef9f2;
+$posts_background: #f1f3f5;
+$tags_active: #47a9d4;
+$line: #f1f3f5;
+
+
+$font_regular: Regular, sans-serif;
+$font_medium: Medium, sans-serif;
+$font_bold: Bold, sans-serif;
+
 *{
   margin: 0;
   padding: 0;
@@ -30,36 +48,7 @@
   margin: 0 auto;
 }
 
-.orange_room{
-  background-color: $orange;
-}
-.green_room{
-  background-color: $room_green;
-}
-.blue_room{
-  background-color: $blue;
-}
-.violet_room{
-  background-color: $room_wiolet;
-}
-.red_room{
-  background-color: $room_red;
-}
-.yello_room{
-  background-color: $room_yello;
-}
-.green_room_hi{
-  background-color: $room_green;
-}
 
-html{
-  height: 100%;
-}
-body{
-  min-height: 100%;
-  @extend .flex-column;
-  font-family: $font_regular;
-}
 
 .user_info{
   @extend .flex-center;
@@ -91,6 +80,81 @@ body{
     &:last-child{
       margin-right: 0;
     }
+  }
+}
+.drop_down_container{
+  position: relative;
+  &:hover > .drop_down_menu{
+    display: block;
+  }
+}
+.drop_down_menu{
+  position: absolute;
+  top: 120%;
+  left: -151px;
+  width: 200px;
+  background: white;
+  display: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.drop_down_item{
+  position: relative;
+  border-top: 1px solid $line;
+  border-bottom: 1px solid $line;
+  list-style: none;
+  cursor: pointer;
+  &:first-child{
+    border-top: none;
+    cursor: default;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+  &:hover{
+
+  }
+}
+.drop_down_title{
+  padding: 15px;
+  text-align: center;
+  color: white;
+  background: $blue;
+  border-radius: 5px 5px 0 0;
+  font-size: 20px;
+  font-weight: bold;
+  &:before{
+    content: '';
+    border-bottom: 10px solid $blue;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    left: 84%;
+    transform: translateX(-50%);
+  }
+  &:after{
+    content: '';
+    height: 25px;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    top: -25px;
+    left: 0;
+  }
+}
+.drop_down_fill{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: $gray_text;
+  transition: 0.3s;
+  &:hover{
+    color: $blue;
+  }
+  &:before{
+    margin-right: 10px;
   }
 }
 

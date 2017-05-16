@@ -19,7 +19,7 @@ import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 @Component({
   selector: 'app-inside-room',
   templateUrl: 'inside-room.component.html',
-  styleUrls: ['inside-room.component.css']
+  styleUrls: ['inside-room.component.scss']
 })
 export class InsideRoomComponent implements OnInit, OnDestroy {
 

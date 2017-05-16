@@ -12,7 +12,7 @@ import {CreateRoomComponent} from '../../modals/create-room/create-room.componen
 @Component({
   selector: 'app-all-rooms',
   templateUrl: 'all-rooms.component.html',
-  styleUrls: ['all-rooms.component.css']
+  styleUrls: ['all-rooms.component.scss']
 })
 export class AllRoomsComponent implements OnInit {
 

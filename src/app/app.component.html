@@ -1,48 +1,11 @@
-<!--<header class="header">-->
-    <!--<div class="main_container">-->
-        <!--<div class="logo" routerLink=""></div>-->
-        <!--<div class="search">-->
-            <!--<input type="text" class="search_field" placeholder="Search">-->
-            <!--<span class="icon-search"></span>-->
-        <!--</div>-->
-        <!--<div class="icons_wrapper">-->
-            <!--<span class="icon-mail"></span>-->
-            <!--<span class="icon-bell new_events"></span>-->
-            <!--<span class="user_info">-->
-                <!--<span class="avatar"></span>-->
-                <!--<span class="name">Matilda Boyd</span>-->
-            <!--</span>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div class="rooms_block" *ngIf="hideSubheader">-->
-        <!--<div class="main_container">-->
-            <!--<div class="room_name_wrapp">-->
-                <!--<span class="rooms" routerLink="">Rooms</span>-->
-                <!--<span class="room_name">{{subheaderRoomName}}</span>-->
-            <!--</div>-->
-            <!--<div class="room_tags">-->
-                <!--<span class="room_tag active_tag" *ngFor="let wallTag of subheaderWall">{{wallTag.wall_name}}</span>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</header>-->
 <app-header *ngIf="showHeader"></app-header>
 
 <router-outlet></router-outlet>
 
+<footer class="footer"  *ngIf="showFooter">
 
-<footer class="footer footer-rooms" *ngIf="showFooter">
-    <ul class="footer__menu">
-        <li class="footer__item"><a href="">ABOUT US</a></li>
-        <li class="footer__item"><a href="">SUPPORT</a></li>
-        <li class="footer__item"><a href="">PRIVACY</a></li>
-        <li class="footer__item"><a href="">TERMS</a></li>
-    </ul>
+    <a href="#" class="link">ABOUT US</a>
+    <a href="#" class="link">SUPPORT</a>
+    <a href="#" class="link">PRIVACY</a>
+    <a href="#" class="link">TERMS</a>
 </footer>
-<!--<footer class="footer">-->
-    <!--<span class="add_post icon-plus" *ngIf="hideSubheader"></span>-->
-    <!--<a href="#" class="link">ABOUT US</a>-->
-    <!--<a href="#" class="link">SUPPORT</a>-->
-    <!--<a href="#" class="link">PRIVACY</a>-->
-    <!--<a href="#" class="link">TERMS</a>-->
-<!--</footer>-->

@@ -1,8 +1,11 @@
-app-all-rooms{
+:host {
   flex: auto;
   width: 100%;
-  background: $background;
+  background: $posts_background;
   color: $gray_text;
+  position: relative;
+  margin-top: 60px;
+}
   .main_container{
     display: flex;
     align-items: flex-start;
@@ -14,16 +17,17 @@ app-all-rooms{
     height: 410px;
     width: 100%;
     max-width: 255px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 30px 10px 0;
     box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
   }
   .image{
     height: 255px;
     width: 100%;
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
     @extend .backgr-center;
     background-color: transparent;
+    background-size: cover;
   }
   .room_info{
     padding: 15px;
@@ -38,11 +42,19 @@ app-all-rooms{
   .views,
   .members{
     margin-top: 18px;
+    @extend .flex-center;
+    justify-content: flex-start;
     &:before{
       color: $gray_text;
       margin-right: 8px;
+      font-size: 16px;
     }
   }
+.views{
+  &:before{
+    font-size: 20px;
+}
+}
   .line{
     padding: 0 15px;
     width: 100%;
@@ -68,7 +80,6 @@ app-all-rooms{
       height: 236px;
       width: 225px;
       margin: 15px;
-      background-image: url("./img/Rooms.png");
       border-radius: 5px;
 
     }
@@ -81,12 +92,37 @@ app-all-rooms{
       text-transform: uppercase;
     }
   }
+.add_post{
+  position: absolute;
+  bottom: -30px;
+  right: 100px;
+  height: 66px;
+  width: 66px;
+  border-radius: 50%;
+  background: $blue;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 30px;
+  @extend .flex-center;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 1160px){
-  app-all-rooms{
-    .main_container{
-      justify-content: space-around;
-    }
+@media screen and (max-width: 875px){
+  .main_container{
+    justify-content: center;
   }
+}
+
+
+@media screen and (max-width: 768px){
+:host{
+  margin-top: 115px;
+}
+}
+
+@media screen and (max-width: 550px){
+  :host{
+    margin-top: 143px;
+  }
+
 }
