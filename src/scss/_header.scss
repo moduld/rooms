@@ -22,6 +22,7 @@
     @extend .backgr-center;
     background-image: url("../../../img/Logo.png") ;
     margin: 14px 0;
+    background-size: contain;
   }
   .search{
     min-width: 350px;

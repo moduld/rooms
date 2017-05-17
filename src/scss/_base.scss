@@ -1,7 +1,7 @@
 $light_gray: #f8f9fa;
 $light_blue: #ecf6fb;
 $orange: #ecb255;
-$blue: #00add2;
+$blue: #00a7cf ;
 $red: #c4205b;
 $red_dot: #fa5252;
 $gray_text: #868e96;
@@ -10,6 +10,8 @@ $background: #fef9f2;
 $posts_background: #f1f3f5;
 $tags_active: #47a9d4;
 $line: #f1f3f5;
+$gray_background: #dee2e6;
+
 
 
 $font_regular: Regular, sans-serif;
@@ -157,6 +159,8 @@ $font_bold: Bold, sans-serif;
     margin-right: 10px;
   }
 }
+
+
 
 @media screen and (max-width: 1190px){
   .main_container{

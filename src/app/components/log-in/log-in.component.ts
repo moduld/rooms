@@ -8,7 +8,7 @@ import {ErrorShowService} from '../../services/error-show.service';
 @Component({
   selector: 'app-log-in',
   templateUrl: 'log-in.component.html',
-  styleUrls: ['log-in.component.css']
+  styleUrls: ['log-in.component.scss']
 })
 export class LogInComponent implements OnInit {
 

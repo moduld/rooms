@@ -22,6 +22,7 @@
         <i class="line"></i>
         <div class="post_body">
             <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
+            <p class="post_text" *ngIf="post.poll">{{post.poll.question}}</p>
 
 
             <div class="post_images_wrapp " *ngIf="post.media.length"
@@ -30,6 +31,19 @@
                 <div class="post_images" *ngFor="let img of post.media"
                      [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
             </div>
+
+            <div class="no_voted_view" *ngIf="post.poll && !post.poll.voted">
+                <span class="vote_items" (click)="voteForPost('1', post)">{{post.poll.choice1}}</span>
+                <span class="vote_items" (click)="voteForPost('2', post)">{{post.poll.choice2}}</span>
+                <span class="vote_items" (click)="voteForPost('3', post)" *ngIf="post.poll.choice3">{{post.poll.choice3}}</span>
+                <span class="vote_items"  (click)="voteForPost('4', post)" *ngIf="post.poll.choice4">{{post.poll.choice4}}</span>
+            </div>
+
+            <div class="vote_info_wrapp"  *ngIf="post.poll">
+                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+                <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+            </div>
+
 
         </div>
 

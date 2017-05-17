@@ -36,17 +36,17 @@
     transition: 0.3s;
     box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.1);
     &:hover{
-      background: $tags_active;
+      background: $blue;
       color: white;
     }
   }
   .tags__active{
-    background: $tags_active;
+    background: $blue;
     color: white;
   }
 
   .posts{
-    height: 325px;
+    height: 370px;
     max-width: 31%;
     width: 100%;
     margin: 30px 10px 0;
@@ -222,6 +222,38 @@
     @extend .flex-center;
     cursor: pointer;
   }
+.vote_items{
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  background: $blue;
+  margin-top: 10px;
+  font-size: 12px;
+  color: white;
+  white-space: nowrap;
+  overflow-y: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+  &:hover{
+    box-shadow: none;
+  }
+}
+.no_voted_view{
+  margin-bottom: 10px;
+}
+.vote_info_wrapp{
+  margin-top: auto;
+  color: $gray_text;
+  font-size: 12px;
+}
+.icon-square-check,
+.icon-calendar{
+  margin-right: 10px;
+  &:before{
+    margin-right: 3px;
+  }
+}
 
 
 
