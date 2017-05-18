@@ -86,7 +86,22 @@
       background: $red_dot;
     }
   }
-
+.name_and_settings{
+  @extend .flex-center;
+}
+  .room_name{
+    color: $blue;
+    font-size: 30px;
+    margin-left: 10px;
+  }
+  .drop_down_menu{
+    left: 0;
+  }
+  .drop_down_title{
+    &:before{
+      left: 8%;
+    }
+  }
 
 
 }

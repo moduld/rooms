@@ -10,7 +10,7 @@ import { RequestService } from '../../services/request.service';
 @Component({
   selector: 'app-post-edite',
   templateUrl: 'post-edite.component.html',
-  styleUrls: ['post-edite.component.css']
+  styleUrls: ['post-edite.component.scss']
 })
 export class PostEditeComponent implements OnInit{
 

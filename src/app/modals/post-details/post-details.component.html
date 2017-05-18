@@ -1,0 +1,18 @@
+<div class="modal_wrapper" >
+  <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
+  <div class="slider_container">
+
+  </div>
+  <div class="post_content">
+    <div class="post_info">
+                 <span class="user_info">
+                    <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="name">{{post.owner.user_name}}</span>
+                </span>
+      <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+    </div>
+    <i class="line"></i>
+  </div>
+
+
+</div>

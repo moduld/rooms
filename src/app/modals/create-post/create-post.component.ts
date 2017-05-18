@@ -23,6 +23,7 @@ export class CreatePostComponent implements OnInit {
 
   @Input() wall_id;
   @Input() room_id;
+  @Input() allow_comment_flag;
 
   constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService) { }
 
@@ -73,6 +74,8 @@ export class CreatePostComponent implements OnInit {
   createNewPost(postForm: NgForm):void {
 
     this.dataToServer.text = postForm.value.text;
+    this.dataToServer.allow_comment_flag = this.allow_comment_flag;
+    console.log(this.allow_comment_flag);
     if (postForm.value.mod_type){
       this.dataToServer.media = [];
       for (let i = 0; i < this.mediaToAppServer.length; i++){
@@ -87,7 +90,6 @@ export class CreatePostComponent implements OnInit {
       postForm.value.choice4 ? this.dataToServer.poll['choice4'] =  postForm.value.choice4 : '';
       this.dataToServer.poll['duration'] = postForm.value.duration;
     }
-
     this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
         data=>{
           this.activeModal.close(data)

@@ -1,10 +1,40 @@
 <header class="header">
   <div class="main_container">
     <div class="logo" [routerLink]="'/all-rooms'"></div>
-    <div class="search">
+
+    <div class="search" *ngIf="headerFieldToggle">
       <input type="text" class="search_field" placeholder="Search">
       <span class="icon-search"></span>
     </div>
+    <div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle">
+      <div class="dots_wrapp">
+        <span class="dots"></span>
+        <span class="dots"></span>
+        <span class="dots"></span>
+      </div>
+      <span class="room_name">{{subheaderRoomName}}</span>
+
+      <ul class="drop_down_menu">
+        <li class="drop_down_item drop_down_title">
+          Room menu
+        </li>
+        <li class="drop_down_item" *ngIf="!currentRoom.membership.member">
+          <span class="drop_down_fill icon-room-in" (click)="interractWithUser('join')" >Join Room</span>
+        </li>
+        <!--*ngIf="currentRoom.membership.member && currentRoom.is_admin"-->
+        <li class="drop_down_item" >
+          <span class="drop_down_fill icon-gear" [routerLink]="'/room-settings'" >Room Settings</span>
+        </li>
+        <li class="drop_down_item">
+          <span class="drop_down_fill icon-question" >About Room</span>
+        </li>
+        <li class="drop_down_item" *ngIf="currentRoom.membership.member">
+          <span class="drop_down_fill icon-room-out" (click)="interractWithUser('leave')" >Leave Room</span>
+        </li>
+
+      </ul>
+    </div>
+
     <div class="icons_wrapper">
       <span class="icon-mail"></span>
       <span class="icon-bell-o new_events"></span>

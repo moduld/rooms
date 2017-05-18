@@ -1,0 +1,25 @@
+<div class="room_settings_header">
+    rtberbnetybety
+</div>
+<div class="main_container">
+    <aside class="aside">
+        <ul class="aside_content">
+            <li class="aside_items aside_items_title">Members</li>
+            <li class="aside_items">Joiner requests</li>
+            <li class="aside_items">Add moderator</li>
+            <li class="aside_items">Add talker</li>
+            <li class="aside_items">Members list</li>
+            <li class="aside_items aside_items_title">Walls</li>
+            <li class="aside_items">Add walls</li>
+            <li class="aside_items">Edit walls</li>
+            <li class="aside_items">Change walls order</li>
+            <li class="aside_items aside_items_title">Room</li>
+            <li class="aside_items" [routerLink]="'/room-settings/edit-room'" routerLinkActive="active">Edit room</li>
+        </ul>
+    </aside>
+
+    <div class="main_field">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+

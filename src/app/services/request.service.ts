@@ -230,7 +230,8 @@ export class RequestService  {
       user_id: this.userId,
       wall_id: wall_id,
       room_id: room_id,
-      text: dataToServer.text
+      text: dataToServer.text,
+      allow_comment_flag: dataToServer.allow_comment_flag
     };
     dataToServer.media ? sendData['media'] = dataToServer.media : '';
     dataToServer.poll ?  sendData['poll'] = dataToServer.poll : '';
@@ -271,6 +272,41 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'room/create'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  joinAndLeaveRoom(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_details.room_id
+    };
+
+    let data = {
+      sendData: sendData
+    };
+    dataToServer.flag === 'join' ? data['apiLink'] = 'room/join' : '';
+    dataToServer.flag === 'leave' ? data['apiLink'] = 'room/leave' : '';
+
+    return this.makePostRequest(data)
+  }
+
+
+  updateRoom(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      room_name: dataToServer.roomData.room_name,
+      room_desc: dataToServer.roomData.room_desc,
+      searchable_flag: dataToServer.roomData.searchable_flag ? 1 : 0,
+      multimedia: dataToServer.multimedia
+    };
+    sendData['public'] = dataToServer.roomData.public ? 1 : 0;
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/update'
     };
 
     return this.makePostRequest(data)

@@ -1,0 +1,22 @@
+
+.modal_wrapper{
+  width: 100%;
+  min-height: 600px;
+  border-radius: 5px;
+  background: white;
+  position: relative;
+  padding: 30px;
+}
+.icon-cancel{
+  position: absolute;
+  color: white;
+  top: -17px;
+  right: -40px;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover{
+    color: $blue;
+  }
+}

@@ -1,7 +1,6 @@
-<form action="#" class="modal_wrapper" #newRoomForm="ngForm" (submit)="createNewRoom(newRoomForm)">
-  <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
+<form action="#" class="modal_wrapper" #updateRoomForm="ngForm" (submit)="updateTheRoom(updateRoomForm)">
   <div class="top_wrapper">
-    <h3 class="title">New Room</h3>
+    <h3 class="title">Edit Room</h3>
   </div>
   <div class="main_wrapper">
     <label for="input_file" class="room_thumbnail icon-image" [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">
@@ -34,7 +33,7 @@
         </div>
       </div>
 
-      <button type="submit" class="form_button" [disabled]="newRoomForm.invalid">Create room</button>
+      <button type="submit" class="form_button" [disabled]="updateRoomForm.invalid">Create room</button>
 
     </div>
 

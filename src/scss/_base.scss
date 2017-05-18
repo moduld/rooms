@@ -71,6 +71,8 @@ $font_bold: Bold, sans-serif;
 
 .dots_wrapp{
   @extend .flex-center;
+
+  transition: 0.3s;
   .dots{
     background: transparent;
     height: 8px;
@@ -83,11 +85,16 @@ $font_bold: Bold, sans-serif;
       margin-right: 0;
     }
   }
+
 }
 .drop_down_container{
   position: relative;
+  cursor: pointer;
   &:hover > .drop_down_menu{
     display: block;
+  }
+  &:hover  .dots{
+    border-color: $blue;
   }
 }
 .drop_down_menu{

@@ -50,12 +50,14 @@
 }
 .toggler:checked ~ .icon-clip{
   background: white;
+  box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
   &:before{
     color: $blue;
   }
 }
 .toggler:not(:checked) ~ .icon-chart{
   background: white;
+  box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
   &:before{
     color: $blue;
   }
@@ -236,9 +238,12 @@
     margin: 20px 0 0 ;
   }
   .preview_wrapp{
-    justify-content: center;
+    justify-content: space-around;
   }
   .images{
-    margin: 0 15px;
+    margin: 0 2px;
+    &:last-child{
+      margin: 0 2px;
+    }
   }
 }

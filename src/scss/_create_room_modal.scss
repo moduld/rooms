@@ -1,0 +1,187 @@
+
+.modal_wrapper{
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  position: relative;
+  padding: 30px;
+}
+.icon-cancel{
+  position: absolute;
+  color: white;
+  top: -17px;
+  right: -40px;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover{
+    color: $blue;
+  }
+}
+.top_wrapper{
+  @extend .flex-between;
+  align-items: center;
+}
+.title{
+  color: $blue;
+  font-family: $font_bold;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+.main_wrapper{
+  display: flex;
+  width: 100%;
+  min-height: 350px;
+  margin-top: 10px;
+}
+.room_thumbnail{
+  flex: 1;
+  margin-right: 15px;
+  border-radius: 5px;
+  background: $gray_background;
+  @extend .flex-column;
+  justify-content: center;
+  align-items: center;
+  @extend .backgr-center;
+  background-size: cover;
+  &:before{
+    font-size: 60px;
+    color: $blue;
+  }
+  &:after{
+    content: "Add room cover";
+    font-size: 25px;
+    color: $gray_text;
+    margin-top: 20px;
+    font-family: $font_medium!important;
+  }
+}
+.right_zone_wrapper{
+  flex: 1;
+  margin-left: 15px;
+}
+.room_description{
+  resize: none;
+}
+
+
+
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 35px auto 0;
+  cursor: pointer;
+  display: block;
+}
+
+.input_wrapp{
+  @extend .flex-column;
+  color: $blue;
+  font-weight: 600;
+}
+.with_margin{
+  margin-top: 22px;
+  .input_field{
+    margin-top: 10px;
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+}
+.input_field{
+  border: 1px solid $gray_background;
+  border-radius: 5px;
+  padding: 7px 10px;
+  width: 100%;
+}
+.toggle_wrapper{
+  color: $dark_text;
+  @extend .flex-between;
+  align-items: center;
+  &:last-child{
+    margin-top: 10px;
+  }
+}
+.toggle_field{
+  width: 50px;
+  height: 25px;
+  background: $gray_background;
+  border-radius: 12px;
+  @extend .flex-center;
+  justify-content: flex-start;
+  &:before{
+    content: '';
+    height: 23px;
+    width: 23px;
+    border-radius: 50%;
+    background: white;
+    display: block;
+    margin: 1px;
+    transform: translate3d(0, 0, 0);
+    transition: 0.3s;
+  }
+}
+.toggle_input:checked + .toggle_field{
+  background: $blue;
+  &:before{
+    transform: translate3d(25px, 0, 0);
+  }
+}
+
+.mistake{
+  display: none;
+  width: 100%;
+  padding: 8px;
+  background: $red_dot;
+  font-family: sans-serif;
+  border-radius: 5px;
+  margin-top: 3px;
+  color: white;
+}
+
+
+.input_field.ng-touched.input_field.ng-invalid{
+  border: 1px solid $red_dot;
+}
+.input_field.ng-touched.input_field.ng-invalid ~ .mistake{
+  display: block;
+}
+
+
+
+@media screen and (max-width: 900px){
+  .icon-cancel{
+    color: $gray_text;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    line-height: 15px;
+  }
+
+}
+
+@media screen and (max-width: 768px){
+  .main_wrapper{
+    flex-direction: column;
+  }
+  .room_thumbnail{
+    height: 200px;
+    margin-right: 0;
+    &:before{
+      font-size: 40px;
+    }
+    &:after{
+      font-size: 18px;
+    }
+  }
+  .right_zone_wrapper{
+    margin: 20px 0 0 ;
+  }
+}

@@ -14,6 +14,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
+import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   currentUserData: UserInfo;
   banDays: number = 0;
     wallsIds: number;
+    currentWall: any;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -48,20 +50,21 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
-    console.log(this.currentUserData)
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
 
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
             if (data['message'] === undefined){
-                console.log(data)
+                this.currentWall = data;
                 this.wallId = data.walls[0].wall_id;
                 this.roomTags = data.walls;
                 this.storeservice.storeCurrentUserRooms(data);
+                this.isAdmin();
+                data['is_admin'] = this.userArmin;
                 this.exchangeService.wallsToHeader(data);
                 this.getPosts(this.wallId);
-                this.isAdmin();
                 this.wallsIds = this.wallId;
+
             }
 
         },
@@ -74,7 +77,6 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     isAdmin():void {
         this.membership = this.storeservice.getStoredCurrentUserRooms().membership;
         this.membership['admin'] || this.membership['moderator'] || this.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
-        console.log(this.userArmin)
     }
 
   getPosts(wallId: number): void {
@@ -174,6 +176,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(CreatePostComponent);
         modalRef.componentInstance.room_id = this.roomId;
         modalRef.componentInstance.wall_id = this.wallId;
+        modalRef.componentInstance.allow_comment_flag = this.currentWall.walls[0].allow_comment_flag;
         modalRef.result.then((newPost) => {
             this.allPosts.unshift(newPost.post)
         });
@@ -207,5 +210,13 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             },
             error => {this.error = error; console.log(error);}
         )
+    }
+
+    openPostDetailsModal(post: Post):void {
+        const modalRef = this.modalService.open(PostDetailsComponent);
+        modalRef.componentInstance.post = post;
+        modalRef.result.then((post) => {
+
+        });
     }
 }

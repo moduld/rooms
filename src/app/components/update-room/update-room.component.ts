@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { NgForm} from '@angular/forms';
 
-import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
 
 @Component({
-  selector: 'app-create-room',
-  templateUrl: 'create-room.component.html',
-  styleUrls: ['create-room.component.scss']
+  selector: 'app-update-room',
+  templateUrl: 'update-room.component.html',
+  styleUrls: ['update-room.component.scss']
 })
-export class CreateRoomComponent implements OnInit {
+export class UpdateRoomComponent implements OnInit {
 
   error: any;
   publicFlag: boolean = true;
@@ -22,10 +21,16 @@ export class CreateRoomComponent implements OnInit {
   roomName: string = '';
   roomDeskription: string = '';
 
-  constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService) { }
+
+  constructor( private fileService: FileInfoService, private requestService: RequestService) { }
 
   ngOnInit() {
-    this.dataToServer['multimedia'] = '';
+    // this.roomName = this.room.room_details.room_name;
+    // this.imagePreview = this.room.room_details.thumbnail || '';
+    // this.dataToServer['multimedia'] = this.room.room_details.thumbnail || '';
+    // this.roomDeskription = this.room.room_details.room_desc;
+    // this.publicFlag = this.room.room_details.public;
+    // this.searchableFlag = this.room.room_details.searchable_flag;
   }
 
   fileDropped(event: any): void {
@@ -53,15 +58,16 @@ export class CreateRoomComponent implements OnInit {
     );
   }
 
-  createNewRoom(roomForm: NgForm):void {
+  updateTheRoom(roomForm: NgForm):void {
 
-    this.dataToServer['roomData'] = roomForm.value;
-    this.requestService.createNewRoom(this.dataToServer).subscribe(
-        data=>{
-          this.activeModal.close(data)
-        },
-        error => {this.error = error; console.log(error);}
-    );
+    // this.dataToServer['roomData'] = roomForm.value;
+    // this.dataToServer.room_id = this.room.room_details.room_id;
+    // this.requestService.updateRoom(this.dataToServer).subscribe(
+    //     data=>{
+    //       this.activeModal.close(data)
+    //     },
+    //     error => {this.error = error; console.log(error);}
+    // );
   }
 
 }

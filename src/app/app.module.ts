@@ -27,14 +27,20 @@ import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CreateRoomComponent } from './modals/create-room/create-room.component';
 import { CanActivateComponent } from './components/can-activate/can-activate.component';
+import { PostDetailsComponent } from './modals/post-details/post-details.component';
+import { RoomSettingsComponent } from './components/room-settings/room-settings.component';
+import { UpdateRoomComponent } from './components/update-room/update-room.component';
 
-
+let settingsRoutes: Routes = [
+  { path: 'edit-room', component: UpdateRoomComponent},
+];
 
 let appRoutes: Routes =[
   { path: 'room/:id', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
   { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
+  { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -50,8 +56,10 @@ let appRoutes: Routes =[
     CreatePostComponent,
     PostEditeComponent,
     CreateRoomComponent,
-    CanActivateComponent
-
+    CanActivateComponent,
+    PostDetailsComponent,
+    RoomSettingsComponent,
+    UpdateRoomComponent
   ],
   imports: [
     BrowserModule,
@@ -69,9 +77,11 @@ let appRoutes: Routes =[
     FileInfoService,
     CanActivateComponent
   ],
-  entryComponents: [CreatePostComponent,
+  entryComponents: [
+    CreatePostComponent,
     PostEditeComponent,
-    CreateRoomComponent],
+    CreateRoomComponent,
+    PostDetailsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,6 +15,7 @@ export class EventsExchangeService {
 
   private emitChangeSource = new Subject<any>();
   private headerChangeSourse = new Subject<any>();
+
   changeEmitted = this.emitChangeSource.asObservable();
   changeHeaderViewEmitted = this.headerChangeSourse.asObservable();
 
@@ -25,5 +26,6 @@ export class EventsExchangeService {
   changeHeaderView(flag: boolean): void {
     this.headerChangeSourse.next(flag);
   }
+
 
 }

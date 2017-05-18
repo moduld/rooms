@@ -1,0 +1,68 @@
+:host{
+  flex: 1;
+  background: $line;
+  margin-top: 60px;
+  font-family: $font_medium;
+  width: 100%;
+}
+.room_settings_header{
+  min-height: 60px;
+  background: $light_gray;
+  color: $blue;
+  @extend .flex-center;
+  font-size: 24px;
+}
+.main_container{
+  display: flex;
+  align-items: center;
+  margin-top: 35px;
+}
+.aside{
+  width: 190px;
+}
+.aside_items{
+  list-style: none;
+  color: $dark_text;
+  font-size: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  &:hover{
+    color: $blue;
+  }
+}
+.aside_items_title{
+  text-transform: uppercase;
+  color: $gray_text;
+  margin-top: 20px;
+  cursor: default;
+  &:hover{
+    color: $gray_text;
+  }
+  &:first-child{
+    margin-top: 0;
+  }
+}
+.active{
+  color: $blue;
+}
+.main_field{
+  flex: 1;
+  @extend .flex-column;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px){
+  :host{
+
+    margin-top: 115px;
+
+  }
+}
+
+@media screen and (max-width: 768px){
+  :host{
+
+    margin-top: 115px;
+
+  }
+}
