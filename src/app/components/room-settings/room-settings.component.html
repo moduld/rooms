@@ -1,6 +1,4 @@
-<div class="room_settings_header">
-    rtberbnetybety
-</div>
+<div class="room_settings_header">{{currentRoom.room_details.room_alias}}</div>
 <div class="main_container">
     <aside class="aside">
         <ul class="aside_content">
@@ -10,11 +8,16 @@
             <li class="aside_items">Add talker</li>
             <li class="aside_items">Members list</li>
             <li class="aside_items aside_items_title">Walls</li>
-            <li class="aside_items">Add walls</li>
-            <li class="aside_items">Edit walls</li>
+            <li class="aside_items" [routerLink]="'/room-settings/add-wall'" routerLinkActive="active">Add wall</li>
+            <li class="aside_items" [routerLink]="'/room-settings/walls-list'" routerLinkActive="active">Edit walls</li>
             <li class="aside_items">Change walls order</li>
             <li class="aside_items aside_items_title">Room</li>
             <li class="aside_items" [routerLink]="'/room-settings/edit-room'" routerLinkActive="active">Edit room</li>
+            <li class="aside_items" (click)="showDeleteBlock = true">Delete room</li>
+            <li class="aside_items confirm_block" *ngIf="showDeleteBlock">
+                <button class="action_button" (click)="showDeleteBlock = false">Cancel</button>
+                <button class="action_button" (click)="deleteRoom()">Confirm</button>
+            </li>
         </ul>
     </aside>
 

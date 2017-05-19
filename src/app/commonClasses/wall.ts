@@ -42,4 +42,6 @@ export class Wall {
     membership: Membership;
     room_details: RoomDetails;
     walls: Walls[];
+    is_admin?: boolean;
+    flag?: string;
 }

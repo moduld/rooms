@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 import { Wall } from '../commonClasses/wall';
 import { UserInfo } from '../commonClasses/userInfo';
 
+import { Subject } from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
+
 @Injectable()
 export class UserStoreService {
 
   currentUserRooms: Wall;
+  private roomChanged = new Subject<any>();
+  roomChangedAsObservable = this.roomChanged.asObservable();
 
   constructor() { }
 
@@ -24,10 +29,12 @@ export class UserStoreService {
 
   storeCurrentUserRooms(data: Wall): void {
     this.currentUserRooms = data;
+    this.roomChanged.next(data);
   }
 
   getStoredCurrentUserRooms(): Wall {
-    return this.currentUserRooms;
+    return  this.currentUserRooms
   }
+
 
 }

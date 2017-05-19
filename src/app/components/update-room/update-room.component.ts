@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import {Router} from '@angular/router';
 import { NgForm} from '@angular/forms';
 
-
+import {UserStoreService} from '../../services/user-store.service';
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
+
+import { Wall } from '../../commonClasses/wall';
 
 @Component({
   selector: 'app-update-room',
@@ -14,6 +16,7 @@ import { FileInfoService } from '../../services/file-info.service';
 export class UpdateRoomComponent implements OnInit {
 
   error: any;
+  currentRoom: Wall;
   publicFlag: boolean = true;
   searchableFlag: boolean = true;
   dataToServer: any = {};
@@ -22,15 +25,19 @@ export class UpdateRoomComponent implements OnInit {
   roomDeskription: string = '';
 
 
-  constructor( private fileService: FileInfoService, private requestService: RequestService) { }
+  constructor( private fileService: FileInfoService,
+               private requestService: RequestService,
+               private storeservice: UserStoreService,
+               private router: Router) { }
 
   ngOnInit() {
-    // this.roomName = this.room.room_details.room_name;
-    // this.imagePreview = this.room.room_details.thumbnail || '';
-    // this.dataToServer['multimedia'] = this.room.room_details.thumbnail || '';
-    // this.roomDeskription = this.room.room_details.room_desc;
-    // this.publicFlag = this.room.room_details.public;
-    // this.searchableFlag = this.room.room_details.searchable_flag;
+    this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
+    this.roomName = this.currentRoom.room_details.room_name;
+    this.imagePreview = this.currentRoom.room_details.thumbnail || '';
+    this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
+    this.roomDeskription = this.currentRoom.room_details.room_desc;
+    this.publicFlag = !!this.currentRoom.room_details.public;
+    this.searchableFlag = !!this.currentRoom.room_details.searchable_flag;
   }
 
   fileDropped(event: any): void {
@@ -60,14 +67,16 @@ export class UpdateRoomComponent implements OnInit {
 
   updateTheRoom(roomForm: NgForm):void {
 
-    // this.dataToServer['roomData'] = roomForm.value;
-    // this.dataToServer.room_id = this.room.room_details.room_id;
-    // this.requestService.updateRoom(this.dataToServer).subscribe(
-    //     data=>{
-    //       this.activeModal.close(data)
-    //     },
-    //     error => {this.error = error; console.log(error);}
-    // );
+    this.dataToServer['roomData'] = roomForm.value;
+    this.dataToServer.room_id = this.currentRoom.room_details.room_id;
+    this.requestService.updateRoom(this.dataToServer).subscribe(
+        data=>{
+          this.currentRoom.room_details =  data.room;
+          this.storeservice.storeCurrentUserRooms(this.currentRoom);
+          this.router.navigateByUrl('/room-settings');
+        },
+        error => {this.error = error; console.log(error);}
+    );
   }
 
 }

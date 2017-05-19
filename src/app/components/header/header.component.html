@@ -7,14 +7,14 @@
       <span class="icon-search"></span>
     </div>
     <div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle">
-      <div class="dots_wrapp">
+      <div class="dots_wrapp" *ngIf="showDropdownMenu">
         <span class="dots"></span>
         <span class="dots"></span>
         <span class="dots"></span>
       </div>
-      <span class="room_name">{{subheaderRoomName}}</span>
+      <span class="room_name">{{currentRoom.room_details.room_name}}</span>
 
-      <ul class="drop_down_menu">
+      <ul class="drop_down_menu" *ngIf="showDropdownMenu">
         <li class="drop_down_item drop_down_title">
           Room menu
         </li>
@@ -38,10 +38,14 @@
     <div class="icons_wrapper">
       <span class="icon-mail"></span>
       <span class="icon-bell-o new_events"></span>
-      <span class="user_info" (click)="logOut()">
+      <div class="user_info drop_down_container" >
                 <span class="avatar"></span>
                 <span class="name">Matilda Boyd</span>
-            </span>
+        <ul class="drop_down_menu">
+          <li class="drop_down_profile_item">Profile</li>
+          <li class="drop_down_profile_item" (click)="logOut()">Logout</li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>

@@ -3,7 +3,7 @@ import { ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
 import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+// import { EventsExchangeService } from '../../services/events-exchange.service';
 import {UserStoreService} from '../../services/user-store.service';
 
 import { Wall } from '../../commonClasses/wall';
@@ -39,7 +39,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
-              private exchangeService: EventsExchangeService,
+              // private exchangeService: EventsExchangeService,
               private storeservice: UserStoreService,
               private modalService: NgbModal){
   }
@@ -61,7 +61,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.storeservice.storeCurrentUserRooms(data);
                 this.isAdmin();
                 data['is_admin'] = this.userArmin;
-                this.exchangeService.wallsToHeader(data);
+                // this.exchangeService.wallsToHeader(data);
                 this.getPosts(this.wallId);
                 this.wallsIds = this.wallId;
 
@@ -71,7 +71,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         error => {this.error = error; console.log(error);}
     );
 
-      this.exchangeService.changeHeaderView(false);
+      // this.exchangeService.changeHeaderView(false);
 
   }
     isAdmin():void {

@@ -328,6 +328,52 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
+  deleteRoom(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/remove'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  newWall(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      wall_name: dataToServer.wall_name
+    };
+    sendData['allow_post_flag'] = dataToServer.allow_post_flag ? 1 : 0;
+    sendData['allow_comment_flag'] = dataToServer.allow_comment_flag ? 1 : 0;
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/wall/add'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  deleteWall(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      wall_id: dataToServer.wall_id
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/wall/remove'
+    };
+
+    return this.makePostRequest(data)
+  }
+
 
   makePostRequest(data: any): Observable<any> {
 

@@ -1,0 +1,75 @@
+:host{
+  width: 100%;
+  max-width: 800px;
+  @extend .flex-column;
+  margin: 0 auto;
+}
+.title{
+  color: $blue;
+  font-family: $font_bold;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 35px auto 0;
+  cursor: pointer;
+  display: block;
+}
+.wall{
+  margin-top: 20px;
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  background: white;
+  @extend .flex-center;
+  justify-content: space-between;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px 0 10px 10px;
+}
+.drop_down_container{
+  padding: 12px;
+  &:before{
+    font-size: 25px;
+
+  }
+}
+.drop_down_menu{
+  top: 100%;
+  z-index: 2;
+}
+.wall_name{
+  color: $blue;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.buttons_wrapp{
+  @extend .flex-column;
+  width: 100%;
+}
+.action_button{
+  width: 100%;
+  border: none;
+  padding: 7px 15px;
+  color: white;
+  background: $blue;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover:first-child{
+    color: $green;
+  }
+  &:hover:last-child{
+    color: $red_dot;
+  }
+  &:last-child{
+    margin-top: 5px;
+  }
+}

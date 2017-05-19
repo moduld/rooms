@@ -6,6 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
@@ -30,9 +31,15 @@ import { CanActivateComponent } from './components/can-activate/can-activate.com
 import { PostDetailsComponent } from './modals/post-details/post-details.component';
 import { RoomSettingsComponent } from './components/room-settings/room-settings.component';
 import { UpdateRoomComponent } from './components/update-room/update-room.component';
+import { AddWallComponent } from './components/add-wall/add-wall.component';
+import { WallsListComponent } from './components/walls-list/walls-list.component';
+import { EditWallComponent } from './components/edit-wall/edit-wall.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
+  { path: 'add-wall', component: AddWallComponent},
+  { path: 'edit-wall/:id', component: EditWallComponent},
+  { path: 'walls-list', component: WallsListComponent}
 ];
 
 let appRoutes: Routes =[
@@ -59,7 +66,10 @@ let appRoutes: Routes =[
     CanActivateComponent,
     PostDetailsComponent,
     RoomSettingsComponent,
-    UpdateRoomComponent
+    UpdateRoomComponent,
+    AddWallComponent,
+    WallsListComponent,
+    EditWallComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +77,8 @@ let appRoutes: Routes =[
     HttpModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
-    FileDropModule
+    FileDropModule,
+    DragulaModule
   ],
   providers: [
     RequestService,
@@ -81,7 +92,8 @@ let appRoutes: Routes =[
     CreatePostComponent,
     PostEditeComponent,
     CreateRoomComponent,
-    PostDetailsComponent],
+    PostDetailsComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

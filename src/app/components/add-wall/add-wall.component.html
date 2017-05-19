@@ -1,0 +1,20 @@
+<form action="#" class="modal_wrapper" #newWallForm="ngForm" (submit)="createNewWall(newWallForm)">
+     <span class="input_wrapp ">
+        Title:
+        <input type="text" class="input_field" placeholder="Enter wall name" name="wall_name" [(ngModel)]="wallName">
+    </span>
+    <div class="toggle_wrapper">
+        <span class="toggle_name">Allow members to post</span>
+        <input type="checkbox" id="allow_to_post" class="toggle_input" name="allow_post_flag" [(ngModel)]="postFlag" checked hidden>
+        <label for="allow_to_post" class="toggle_field"></label>
+    </div>
+    <div class="toggle_wrapper with_margin">
+        <span class="toggle_name">Allow members to comment</span>
+        <input type="checkbox" id="allow_to_comment" class="toggle_input" name="allow_comment_flag" [(ngModel)]="commentFlag"
+               checked hidden>
+        <label for="allow_to_comment" class="toggle_field"></label>
+    </div>
+
+    <button type="submit" class="form_button">Save</button>
+
+</form>

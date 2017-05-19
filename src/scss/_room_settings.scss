@@ -14,7 +14,7 @@
 }
 .main_container{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 35px;
 }
 .aside{
@@ -50,19 +50,58 @@
   @extend .flex-column;
   align-items: center;
 }
-
-@media screen and (max-width: 768px){
-  :host{
-
-    margin-top: 115px;
-
+.confirm_block{
+  padding: 10px 0 0;
+  @extend .flex-between;
+}
+.action_button{
+  border: none;
+  padding: 7px 15px;
+  color: white;
+  background: $blue;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover:first-child{
+    color: $green;
+  }
+  &:hover:last-child{
+    color: $red_dot;
+  }
+  &:first-child{
+    margin-right: 5px;
+  }
+  &:last-child{
+    margin-left: 5px;
   }
 }
 
 @media screen and (max-width: 768px){
   :host{
-
     margin-top: 115px;
+  }
+  .main_container{
+    flex-direction: column;
+  }
+  .aside{
+    width: 100%;
+  }
+  .aside_content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .aside_items_title{
+    width: 100%;
+    text-align: center;
+  }
+  .main_field{
+    width: 100%;
+    margin-top: 25px;
+  }
+}
 
+@media screen and (max-width: 550px){
+  :host{
+    margin-top: 142px;
   }
 }

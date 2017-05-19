@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+
+import { Wall } from '../../commonClasses/wall';
 
 
 @Component({
@@ -14,35 +16,53 @@ import { EventsExchangeService } from '../../services/events-exchange.service';
 export class HeaderComponent implements OnInit {
 
   error: any;
-  currentRoom: any = {};
+  currentRoom: Wall;
+
+
 
   subheaderWall: any[] = [];
   subheaderRoomName: string = '';
   headerFieldToggle: boolean;
+  showDropdownMenu: boolean;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
               private router: Router) {
 
-    exchangeService.changeEmitted.subscribe(
-        allWalls => {
-          this.currentRoom = allWalls;
-          this.subheaderWall = allWalls.walls;
-          this.subheaderRoomName = allWalls.room_details.room_name;
-            console.log(this.currentRoom)
+    storeservice.roomChangedAsObservable.subscribe(
+        room => {
+          this.currentRoom = room;
+            this.headerFieldToggle = false;
+            this.showDropdownMenu = true;
         });
-    exchangeService.changeHeaderViewEmitted.subscribe(
-        flag => {
-          this.headerFieldToggle = flag;
-        })
+    // exchangeService.changeHeaderViewEmitted.subscribe(
+    //     flag => {
+    //       this.headerFieldToggle = flag;
+    //     })
+
+      router.events.forEach((event) => {
+          if (event instanceof NavigationEnd ){
+              if (event.url === '/' || event.url === '/all-rooms'){
+                  this.headerFieldToggle = true
+              }
+              if (event.url === '/room-settings' ){
+                  this.headerFieldToggle = false;
+                  this.showDropdownMenu = false;
+              }
+
+          }
+      });
+
+
+
+
   }
 
   ngOnInit() {
-      this.currentRoom.membership = {};
-    this.currentRoom.membership.member = 1;
-    this.currentRoom.is_admin = true;
-
+      this.headerFieldToggle = true;
+      this.showDropdownMenu = true;
+      !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
   }
 
   logOut(){
