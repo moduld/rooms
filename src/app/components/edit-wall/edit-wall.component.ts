@@ -43,4 +43,8 @@ export class EditWallComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  editeWall(): void {
+
+  }
+
 }
