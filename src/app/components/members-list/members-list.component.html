@@ -1,14 +1,23 @@
+<!--<div class="radio_wrapp">-->
+    <!--<input type="radio" name="member_type" [value]="'member'" id="member_types_1" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('member')" hidden>-->
+    <!--<label for="member_types_1" class="radio icon-checkmark">Members</label>-->
+    <!--<input type="radio" name="member_type" [value]="'requester'" id="member_types_2" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('requester')" hidden>-->
+    <!--<label for="member_types_2" class="radio icon-checkmark">Requesters</label>-->
+    <!--<input type="radio" name="member_type" [value]="'supermoderator'" id="member_types_3" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('supermoderator')" hidden>-->
+    <!--<label for="member_types_3" class="radio icon-checkmark">Supermoderators</label>-->
+    <!--<input type="radio" name="member_type" [value]="'moderator'" id="member_types_4" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('moderator')" hidden>-->
+    <!--<label for="member_types_4" class="radio icon-checkmark">Moderators</label>-->
+    <!--<input type="radio" name="member_type" [value]="'admin'" id="member_types_5" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('admin')" hidden>-->
+    <!--<label for="member_types_5" class="radio icon-checkmark">Admins</label>-->
+<!--</div>-->
 <div class="radio_wrapp">
-    <input type="radio" name="member_type" [value]="'member'" id="member_types_1" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('member')" hidden>
-    <label for="member_types_1" class="radio icon-checkmark">Members</label>
-    <input type="radio" name="member_type" [value]="'requester'" id="member_types_2" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('requester')" hidden>
-    <label for="member_types_2" class="radio icon-checkmark">Requesters</label>
-    <input type="radio" name="member_type" [value]="'supermoderator'" id="member_types_3" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('supermoderator')" hidden>
-    <label for="member_types_3" class="radio icon-checkmark">Supermoderators</label>
-    <input type="radio" name="member_type" [value]="'moderator'" id="member_types_4" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('moderator')" hidden>
-    <label for="member_types_4" class="radio icon-checkmark">Moderators</label>
-    <input type="radio" name="member_type" [value]="'admin'" id="member_types_5" [(ngModel)]="member_toggler" class="member_types_toggler" (change)="memberTypeChanged('admin')" hidden>
-    <label for="member_types_5" class="radio icon-checkmark">Admins</label>
+    <select name="member_type" class="select" [(ngModel)]="member_toggler" (change)="memberTypeChanged(member_toggler)">
+        <option value="member">Members</option>
+        <option value="requester">Requesters</option>
+        <option value="supermoderator">Supermoderators</option>
+        <option value="moderator">Moderators</option>
+        <option value="admin">Admins</option>
+    </select>
 </div>
 <div class="members" *ngFor="let user of users; let i = index">
     <span class="image" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }"></span>
