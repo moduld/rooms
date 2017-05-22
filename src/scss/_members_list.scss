@@ -1,0 +1,90 @@
+:host{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.radio_wrapp{
+  @extend .flex-center;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.radio{
+  @extend .flex-column;
+  align-items: center;
+  &:before{
+    height: 25px;
+    width: 25px;
+    background: white;
+    border: 1px solid $gray_text;
+    border-radius: 50%;
+    color: $blue;
+    @extend .flex-center;
+    content: '';
+  }
+}
+.member_types_toggler:checked + .radio{
+  &:before{
+    content: '\e90f';
+    border: 1px solid $blue;
+  }
+}
+.members{
+  @extend .flex-center;
+  flex-direction: column;
+  height: 175px;
+  width: 165px;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 0 10px;
+  background: white;
+  position: relative;
+  margin-bottom: 20px;
+}
+.image{
+  height: 80px;
+  width: 80px;
+  display: block;
+  border-radius: 50%;
+  @extend .backgr-center;
+  background-size: contain;
+}
+.user_name{
+  margin-top: 10px;
+}
+.close{
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  color: $gray_text;
+  &:hover{
+    color: $blue;
+  }
+}
+
+@media screen and (max-width: 768px){
+  :host{
+    justify-content: space-around;
+  }
+
+}
+
+@media screen and (max-width: 570px){
+.radio_wrapp{
+  flex-direction: column;
+  align-items: flex-start;
+}
+.radio{
+  font-size: 13px;
+  flex-direction: row;
+  margin-bottom: 10px;
+  &:before{
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+  }
+}
+}

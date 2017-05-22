@@ -66,6 +66,18 @@ export class RequestService  {
 
   }
 
+  getRoomMembers(member_type: string): Observable<any[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('room_id', this.roomId);
+    params.set('member_type', member_type);
+
+    return this.http.get(this.commonLink + 'room/member/list', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json();
+    }).catch((error: any)=> { return Observable.throw(error);});
+
+  }
+
   addRequiredDataToTheService(): void {
     let storedUserData = this.storeservice.getUserData();
     if (storedUserData){
@@ -369,6 +381,39 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'room/wall/remove'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  updateWall(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      wall_id: dataToServer.wall_id,
+      wall_name: dataToServer.wall_name,
+      allow_post_flag: dataToServer.allow_post_flag ? 1 : 0,
+      allow_comment_flag: dataToServer.allow_comment_flag ? 1 : 0
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/wall/update'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  changeWallOrder(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      walls_order: dataToServer.walls_order
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/wall/order'
     };
 
     return this.makePostRequest(data)

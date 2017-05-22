@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "libs/bootstrap.min.css",
+        "libs/dragula.css",
         "styles.css"
       ],
       "scripts": [],

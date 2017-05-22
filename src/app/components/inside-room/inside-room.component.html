@@ -10,8 +10,7 @@
 <div class="main_container" appIeHeight>
 
 
-
-    <div class="posts" *ngFor="let post of allPosts; let i = index" (click)="openPostDetailsModal(post)" >
+    <div class="posts" *ngFor="let post of allPosts; let i = index"  >
         <div class="post_info">
                  <span class="user_info">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
@@ -20,7 +19,7 @@
             <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
         </div>
         <i class="line"></i>
-        <div class="post_body">
+        <div class="post_body"     (click)="openPostDetailsModal(post)">
             <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
             <!--<p class="post_text" *ngIf="post.poll">{{post.poll.question}}</p>-->
 

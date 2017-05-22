@@ -17,13 +17,14 @@ export class EditWallComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   error: any;
-  wallName: string = '';
-  postFlag: boolean = true;
-  commentFlag: boolean = true;
+  wallName: string;
+  postFlag: boolean;
+  commentFlag: boolean;
   currentRoom: Wall;
   currentWall: any;
   dataToServer: any;
   wallId: any;
+  index: number;
 
   constructor(private activateRoute: ActivatedRoute,
                private requestService: RequestService,
@@ -34,17 +35,35 @@ export class EditWallComponent implements OnInit, OnDestroy {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
     this.subscription = this.activateRoute.params.subscribe(params=>{this.wallId = params.id});
     for (let i = 0; i < this.currentRoom.walls.length; i++){
-      this.currentRoom.walls[i].wall_id == this.wallId ? this.currentWall =  this.currentRoom.walls[i] : ''
+      if (this.currentRoom.walls[i].wall_id == this.wallId){
+        this.currentWall =  this.currentRoom.walls[i];
+        this.index = i
+      }
 
     }
     console.log(this.currentWall)
+    this.wallName = this.currentWall.wall_name;
+    this.commentFlag = this.currentWall.allow_comment_flag;
+    this.postFlag = this.currentWall.allow_post_flag
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  editeWall(): void {
+  updateWall(updateForm: NgForm): void {
 
+    this.dataToServer = updateForm.value;
+    this.dataToServer.room_id = this.currentWall.room_id;
+    this.dataToServer.wall_id = this.currentWall.wall_id;
+
+    this.requestService.updateWall(this.dataToServer).subscribe(
+        data=>{
+          this.currentRoom.walls[this.index] = data.wall;
+          this.storeservice.storeCurrentUserRooms(this.currentRoom);
+          this.router.navigateByUrl('/room-settings');
+        },
+        error => {this.error = error; console.log(error);}
+    );
   }
 
 }

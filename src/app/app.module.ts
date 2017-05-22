@@ -34,12 +34,16 @@ import { UpdateRoomComponent } from './components/update-room/update-room.compon
 import { AddWallComponent } from './components/add-wall/add-wall.component';
 import { WallsListComponent } from './components/walls-list/walls-list.component';
 import { EditWallComponent } from './components/edit-wall/edit-wall.component';
+import { DeleteRoomComponent } from './components/delete-room/delete-room.component';
+import { MembersListComponent } from './components/members-list/members-list.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
+  { path: 'delete-room', component: DeleteRoomComponent},
   { path: 'add-wall', component: AddWallComponent},
   { path: 'edit-wall/:id', component: EditWallComponent},
-  { path: 'walls-list', component: WallsListComponent}
+  { path: 'walls-list', component: WallsListComponent},
+  { path: 'members-list', component: MembersListComponent}
 ];
 
 let appRoutes: Routes =[
@@ -70,6 +74,8 @@ let appRoutes: Routes =[
     AddWallComponent,
     WallsListComponent,
     EditWallComponent,
+    DeleteRoomComponent,
+    MembersListComponent,
   ],
   imports: [
     BrowserModule,

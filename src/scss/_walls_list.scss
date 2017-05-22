@@ -1,14 +1,19 @@
 :host{
   width: 100%;
   max-width: 800px;
-  @extend .flex-column;
+  //@extend .flex-column;
   margin: 0 auto;
 }
+
 .title{
   color: $blue;
   font-family: $font_bold;
   text-transform: capitalize;
   font-size: 20px;
+}
+.walls{
+  width: 100%;
+  @extend .flex-column;
 }
 .form_button{
   border: none;
@@ -32,18 +37,22 @@
   @extend .flex-center;
   justify-content: space-between;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
-  padding: 10px 0 10px 10px;
-}
-.drop_down_container{
-  padding: 12px;
+  padding: 10px;
+  cursor: move;
   &:before{
     font-size: 25px;
+  }
+}
 
+.drop_down_title{
+  &:before{
+    left: 86%;
   }
 }
 .drop_down_menu{
-  top: 100%;
   z-index: 2;
+  left: -155px;
+  top: 25px;
 }
 .wall_name{
   color: $blue;

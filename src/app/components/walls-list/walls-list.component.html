@@ -1,23 +1,33 @@
     <p class="title">Walls</p>
-    <div class="wall" *ngFor="let wall of walls; let i = index" >
-        <span class="wall_name">{{wall.wall_name}}</span>
-        <div class="drop_down_container icon-menu" (mouseleave)="wall.showDeleteConfirm = false">
-            <ul class="drop_down_menu">
-                <li class="drop_down_item drop_down_title">
-                    Wall action:
-                </li>
-                <li class="drop_down_item" >
-                    <span class="drop_down_fill icon-pencil" [routerLink]="['/room-settings/edit-wall', wall.wall_id]" >Edit wall</span>
-                </li>
-                <li class="drop_down_item">
-                    <span class="drop_down_fill icon-cancel" (click)="wall.showDeleteConfirm = true">Delete wall</span>
-                    <div class="buttons_wrapp" *ngIf="wall.showDeleteConfirm">
-                        <button class="action_button" (click)="wall.showDeleteConfirm = false">Cancel</button>
-                        <button class="action_button" (click)="deleteWall(wall, i)">Confirm</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <div class="walls" [dragula]='"walls"' [dragulaModel]='walls'>
+        <div class="wall  icon-menu" *ngFor="let wall of walls; let i = index">
 
+            <span class="wall_name">{{wall.wall_name}}</span>
+
+            <div class="drop_down_container" (mouseleave)="wall.showDeleteConfirm = false">
+                <div class="dots_wrapp">
+                    <i class="dots"></i>
+                    <i class="dots"></i>
+                    <i class="dots"></i>
+                </div>
+                <ul class="drop_down_menu">
+                    <li class="drop_down_item drop_down_title">
+                        Wall action:
+                    </li>
+                    <li class="drop_down_item" >
+                        <span class="drop_down_fill icon-pencil" [routerLink]="['/room-settings/edit-wall', wall.wall_id]" >Edit wall</span>
+                    </li>
+                    <li class="drop_down_item">
+                        <span class="drop_down_fill icon-cancel" (click)="wall.showDeleteConfirm = true">Delete wall</span>
+                        <div class="buttons_wrapp" *ngIf="wall.showDeleteConfirm">
+                            <button class="action_button" (click)="wall.showDeleteConfirm = false">Cancel</button>
+                            <button class="action_button" (click)="deleteWall(wall, i)">Confirm</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
-    <button class="form_button">Save</button>
+
+    <button type="button" class="form_button" (click)="saveOrder()">Save</button>
