@@ -71,6 +71,38 @@
     color: $blue;
   }
 }
+.dropdown_wrapp{
+  position: absolute;
+
+  top: 0;
+  right: 0;
+}
+.drop_down_container{
+  padding: 10px;
+}
+.drop_down_menu{
+  top: 120%;
+  left: -111px;
+  width: 165px;
+}
+.drop_down_title{
+  padding: 8px;
+  font-size: 15px;
+  &:hover{
+    color: white!important;
+  }
+  &:before{
+    left: 84%;
+  }
+}
+.drop_down_item{
+  padding: 7px;
+  font-size: 12px;
+  transition: 0.3s;
+  &:hover{
+    color: $blue;
+  }
+}
 
 @media screen and (max-width: 768px){
   :host{

@@ -22,5 +22,22 @@
 <div class="members" *ngFor="let user of users; let i = index">
     <span class="image" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }"></span>
     <span class="user_name">{{user.user.user_name}}</span>
-    <span class="close icon-cancel"></span>
+    <span class="close icon-cancel" *ngIf="member_toggler !== 'member'"></span>
+    <div class="dropdown_wrapp" *ngIf="member_toggler === 'member'">
+        <div class="drop_down_container">
+            <div class="dots_wrapp">
+                <i class="dots"></i>
+                <i class="dots"></i>
+                <i class="dots"></i>
+            </div>
+            <ul class="drop_down_menu" >
+                <li class="drop_down_item drop_down_title">Menu</li>
+                <li class="drop_down_item">Add as Talker</li>
+                <li class="drop_down_item">Add as Moderator</li>
+                <li class="drop_down_item">Add as Super Moderator</li>
+                <li class="drop_down_item">Revoke membership</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
