@@ -19,11 +19,12 @@ export class HeaderComponent implements OnInit {
   currentRoom: Wall;
 
 
-
+  room_search: string;
   subheaderWall: any[] = [];
   subheaderRoomName: string = '';
   headerFieldToggle: boolean;
   showDropdownMenu: boolean;
+  timeoute: any;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -91,6 +92,15 @@ export class HeaderComponent implements OnInit {
               console.log(this.error);
           }
       )
+    }
+
+    // event go to all-rooms component, and request to server makes there
+    doRoomSearch(request: string): void {
+
+      clearTimeout(this.timeoute);
+      this.timeoute = setTimeout(()=>{
+          this.exchangeService.searchByHeaderSearchField(request)
+      }, 1000);
     }
 
 }

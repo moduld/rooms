@@ -10,14 +10,13 @@ export class EventsExchangeService {
 
   constructor() { }
 
-  allRoomsChached: Room[] = [];
-  currentRoomName: string;
-
   private emitChangeSource = new Subject<any>();
   private headerChangeSourse = new Subject<any>();
+  private headerRoomSearch = new Subject<any>();
 
   changeEmitted = this.emitChangeSource.asObservable();
   changeHeaderViewEmitted = this.headerChangeSourse.asObservable();
+  makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
 
   wallsToHeader(change: any):void {
     this.emitChangeSource.next(change);
@@ -25,6 +24,10 @@ export class EventsExchangeService {
 
   changeHeaderView(flag: boolean): void {
     this.headerChangeSourse.next(flag);
+  }
+
+  searchByHeaderSearchField(request: string): void {
+    this.headerRoomSearch.next(request);
   }
 
 

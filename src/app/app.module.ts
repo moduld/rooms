@@ -36,6 +36,7 @@ import { WallsListComponent } from './components/walls-list/walls-list.component
 import { EditWallComponent } from './components/edit-wall/edit-wall.component';
 import { DeleteRoomComponent } from './components/delete-room/delete-room.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
+import { NameFilterPipe } from './pipes/name-filter.pipe';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -76,6 +77,7 @@ let appRoutes: Routes =[
     EditWallComponent,
     DeleteRoomComponent,
     MembersListComponent,
+    NameFilterPipe,
   ],
   imports: [
     BrowserModule,

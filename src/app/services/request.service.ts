@@ -28,6 +28,7 @@ export class RequestService  {
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
   getAllRooms(): Observable<Room[]> {
+
     !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -35,6 +36,18 @@ export class RequestService  {
     return this.http.get(this.commonLink + 'room/list', {headers: this.headers, search: params}).map((resp:Response)=>{
           return resp.json().rooms;
         })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  getRoomsBySearch(search: string): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('search_term', search);
+
+    return this.http.get(this.commonLink + 'room/search', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().rooms;
+    })
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
@@ -414,6 +427,23 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'room/wall/order'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  updateMembership(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.room_id,
+      user_id_member: dataToServer.user_id_member,
+      member_type: dataToServer.membership_type,
+      member_type_val: dataToServer.member_type_val
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'room/member/update'
     };
 
     return this.makePostRequest(data)

@@ -3,7 +3,7 @@
     <div class="logo" [routerLink]="'/all-rooms'"></div>
 
     <div class="search" *ngIf="headerFieldToggle">
-      <input type="text" class="search_field" placeholder="Search">
+      <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" (input)="doRoomSearch(room_search)">
       <span class="icon-search"></span>
     </div>
     <div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle">
@@ -21,8 +21,7 @@
         <li class="drop_down_item" *ngIf="!currentRoom.membership.member">
           <span class="drop_down_fill icon-room-in" (click)="interractWithUser('join')" >Join Room</span>
         </li>
-        <!--*ngIf="currentRoom.membership.member && currentRoom.is_admin"-->
-        <li class="drop_down_item" >
+        <li class="drop_down_item" *ngIf="currentRoom.membership.member && currentRoom.is_admin">
           <span class="drop_down_fill icon-gear" [routerLink]="'/room-settings'" >Room Settings</span>
         </li>
         <li class="drop_down_item">

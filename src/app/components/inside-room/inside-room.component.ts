@@ -54,7 +54,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
-            if (data['message'] === undefined){
+            if (data && data['message'] === undefined){
                 this.currentWall = data;
                 this.wallId = data.walls[0].wall_id;
                 this.roomTags = data.walls;
