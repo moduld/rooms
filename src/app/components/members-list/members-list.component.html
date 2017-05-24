@@ -11,23 +11,24 @@
     <!--<label for="member_types_5" class="radio icon-checkmark">Admins</label>-->
 <!--</div>-->
 <div class="radio_wrapp">
-    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 1)">Reject all</button>
     <select name="member_type" class="select" [(ngModel)]="member_toggler" (change)="memberTypeChanged(member_toggler)">
         <option value="member">Members</option>
         <option value="requester">Requesters</option>
         <option value="supermoderator">Supermoderators</option>
         <option value="moderator">Moderators</option>
+        <option value="talker">Talkers</option>
         <option value="admin">Admins</option>
     </select>
     <input type="text" class="user_search_field" placeholder="Tap user name..." [(ngModel)]="search_model" *ngIf="member_toggler === 'member'">
-    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 0)">Accept all</button>
+    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 0)">Reject all</button>
+    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 1)">Accept all</button>
 </div>
 <div class="members" *ngFor="let user of users | nameFilter: search_model; let i = index ">
     <span class="image" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }"></span>
     <span class="user_name">{{user.user.user_name}}</span>
-    <span class="close icon-cancel" *ngIf="showUserMembershipMenu(user) === 'cross' || showUserMembershipMenu(user) === 'check'" (click)="updateMembers(user, member_toggler, false)"></span>
-    <span class="approve icon-circle-check" *ngIf="showUserMembershipMenu(user) === 'check'" ></span>
-    <div class="dropdown_wrapp" *ngIf="showUserMembershipMenu(user) === 'menu'">
+    <span class="close icon-cancel" *ngIf="showUserMembershipMenu() === 'cross' || showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, false, i)"></span>
+    <span class="approve icon-circle-check" *ngIf="showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, true, i)"></span>
+    <div class="dropdown_wrapp" *ngIf="showUserMembershipMenu() === 'menu'">
         <div class="drop_down_container">
             <div class="dots_wrapp">
                 <i class="dots"></i>
@@ -36,10 +37,10 @@
             </div>
             <ul class="drop_down_menu" >
                 <li class="drop_down_item drop_down_title">Menu</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'talker', true)">Add as Talker</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'moderator', true)">Add as Moderator</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'supermoderator', true)">Add as Super Moderator</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'member', true)">Revoke membership</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'talker', true, i)">Add as Talker</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'moderator', true, i)">Add as Moderator</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'supermoderator', true, i)">Add as Super Moderator</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'member', false, i)">Revoke membership</li>
             </ul>
         </div>
     </div>

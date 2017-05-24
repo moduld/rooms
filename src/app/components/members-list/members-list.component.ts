@@ -28,11 +28,10 @@ export class MembersListComponent implements OnInit {
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
-    this.member_toggler = 'member';
+    this.member_toggler = 'requester';
     this.users = [];
     this.getRoomUsers();
     this.isAdmin();
-    console.log(this.membership)
   }
 
   isAdmin():void {
@@ -58,23 +57,24 @@ export class MembersListComponent implements OnInit {
     );
   }
 
-  updateMembers(user: any, memb_type: string, flag: boolean): void {
+  updateMembers(user: any, memb_type: string, flag: boolean, index: number): void {
 
     let data = {};
     data['membership_type'] = memb_type;
+      memb_type === 'requester' ? data['membership_type'] = 'member' : '';
     data['room_id'] = user.room_id;
     data['user_id_member'] = user.user.user_id;
     data['member_type_val'] = flag ? 1 : 0;
-    this.makeRequest(data)
+    this.makeRequest(data, index)
 
   }
 
-  makeRequest(data: any): void {
+  makeRequest(data: any, index?: number): void {
 
     this.requestService.updateMembership(data).subscribe(
         data=>{
           console.log(data)
-
+           index ? this.users.splice(index, 1) : this.users = []
         },
         error => {this.error = error; console.log(error);}
     );
@@ -94,21 +94,27 @@ export class MembersListComponent implements OnInit {
       }
 
       if (this.member_toggler === 'moderator'){
-        if(user.supermoderator || user.admin){
+        if(this.membership.supermoderator || this.membership.admin){
           returned = 'cross'
         }
       }
 
       if (this.member_toggler === 'supermoderator'){
-        if(user.admin){
+        if(this.membership.admin){
           returned = 'cross'
         }
       }
 
       if (this.member_toggler === 'requester'){
-        if(user.admin || user.supermoderator || user.moderator){
+        if(this.membership.admin || this.membership.supermoderator || this.membership.moderator){
           returned = 'check'
         }
+      }
+
+      if (this.member_toggler === 'talker'){
+          if(this.membership.admin || this.membership.supermoderator || this.membership.moderator){
+              returned = 'cross'
+          }
       }
 
       return returned
@@ -118,7 +124,7 @@ export class MembersListComponent implements OnInit {
 
     let data = {};
     data['membership_type'] = flag;
-    data['room_id'] = this.currentRoom['room_id'];
+    data['room_id'] = this.currentRoom.room_details['room_id'];
     data['user_id_member'] = 0;
     data['member_type_val'] = value;
     this.makeRequest(data)

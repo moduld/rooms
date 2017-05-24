@@ -90,17 +90,4 @@ export class AllRoomsComponent implements OnInit {
         });
     }
 
-    // showSuggestionRooms(): void {
-    //
-    //     this.requestService.getSuggestionRooms().subscribe(
-    //         data=>{
-    //             for(let i = 0; i < data.length; i++){
-    //                 if (!data[i].room){
-    //                     data.splice(i, 1)
-    //                 }
-    //             }
-    //             this.allRooms = data;
-    //         }, error => {this.error = error; console.log(error);}
-    //     );
-    // }
 }
