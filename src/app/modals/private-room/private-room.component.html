@@ -1,0 +1,12 @@
+<div class="modal_wrapper">
+    <div class="info_wrapp icon-enter">
+        <h3 class="name">{{room_name}}</h3>
+        <p class="description">{{room_description}}</p>
+    </div>
+    <p class="message">This room is private, would you like to send join request?</p>
+    <i class="line"></i>
+    <div class="buttons_wrapp">
+        <button class="form_button" (click)="clickHandle(false)">Cancel</button>
+        <button class="form_button" (click)="clickHandle(true)">Ok</button>
+    </div>
+</div>

@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   headerFieldToggle: boolean;
   showDropdownMenu: boolean;
   timeoute: any;
+    showSuggestOrDefault: boolean;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -37,10 +38,6 @@ export class HeaderComponent implements OnInit {
             this.headerFieldToggle = false;
             this.showDropdownMenu = true;
         });
-    // exchangeService.changeHeaderViewEmitted.subscribe(
-    //     flag => {
-    //       this.headerFieldToggle = flag;
-    //     })
 
       router.events.forEach((event) => {
           if (event instanceof NavigationEnd ){
@@ -51,22 +48,20 @@ export class HeaderComponent implements OnInit {
                   this.headerFieldToggle = false;
                   this.showDropdownMenu = false;
               }
-
           }
       });
-
-
-
-
   }
 
   ngOnInit() {
+
       this.headerFieldToggle = true;
       this.showDropdownMenu = true;
+      this.showSuggestOrDefault = false;
       !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
   }
 
   logOut(){
+
     this.requestService.logOut().subscribe(
         data=>{
           console.log(data);
@@ -92,6 +87,15 @@ export class HeaderComponent implements OnInit {
               console.log(this.error);
           }
       )
+    }
+
+    showSuggestionsRoomsorDefault(): void {
+
+      this.showSuggestOrDefault = !this.showSuggestOrDefault;
+      if (!this.showSuggestOrDefault){
+          this.room_search = ''
+      }
+        this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault)
     }
 
     // event go to all-rooms component, and request to server makes there

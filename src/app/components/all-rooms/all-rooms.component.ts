@@ -31,10 +31,27 @@ export class AllRoomsComponent implements OnInit {
                       this.allRooms = this.addRequiredInfo.addInfo(data)
                   }, error => {this.error = error; console.log(error);}
               );
-          })
+          });
+
+        exchangeService.makeHeaderRoomSuggestRequest.subscribe(
+            (flag) => {
+                if (flag){
+                    this.requestService.getSuggestionRooms().subscribe(
+                        data=>{
+                            this.allRooms = this.addRequiredInfo.addInfo(data)
+                        }, error => {this.error = error; console.log(error);}
+                    );
+                } else {
+                    this.getUserRooms()
+                }
+            })
   }
 
   ngOnInit() {
+    this.getUserRooms()
+  }
+
+  getUserRooms(): void {
 
       this.requestService.getAllRooms().subscribe(
           data=>{
@@ -43,7 +60,7 @@ export class AllRoomsComponent implements OnInit {
                       data.splice(i, 1)
                   }
               }
-            this.allRooms = data;
+              this.allRooms = data;
           }, error => {this.error = error; console.log(error);}
       );
   }
@@ -52,8 +69,21 @@ export class AllRoomsComponent implements OnInit {
 
         const modalRef = this.modalService.open(CreateRoomComponent);
         modalRef.result.then((newRoom) => {
-            console.log(newRoom)
             this.allRooms.unshift(newRoom)
         });
+    }
+
+    showSuggestionRooms(): void {
+
+        this.requestService.getSuggestionRooms().subscribe(
+            data=>{
+                for(let i = 0; i < data.length; i++){
+                    if (!data[i].room){
+                        data.splice(i, 1)
+                    }
+                }
+                this.allRooms = data;
+            }, error => {this.error = error; console.log(error);}
+        );
     }
 }

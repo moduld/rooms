@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
 import { RequestService } from '../../services/request.service';
@@ -15,6 +15,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
+import {PrivateRoomComponent} from '../../modals/private-room/private-room.component';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
               private requestService: RequestService,
               // private exchangeService: EventsExchangeService,
               private storeservice: UserStoreService,
-              private modalService: NgbModal){
+              private modalService: NgbModal,
+              private router: Router){
   }
 
   ngOnDestroy(){
@@ -54,24 +56,32 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
+            console.log(data)
             if (data && data['message'] === undefined){
-                this.currentWall = data;
-                this.wallId = data.walls[0].wall_id;
-                this.roomTags = data.walls;
-                this.storeservice.storeCurrentUserRooms(data);
+                this.currentWall = data['room_walls'];
+                this.wallId = this.currentWall.walls[0].wall_id;
+                this.roomTags = this.currentWall.walls;
+                this.storeservice.storeCurrentUserRooms(this.currentWall);
                 this.isAdmin();
-                data['is_admin'] = this.userArmin;
-                // this.exchangeService.wallsToHeader(data);
+                this.currentWall['is_admin'] = this.userArmin;
                 this.getPosts(this.wallId);
                 this.wallsIds = this.wallId;
 
             }
 
-        },
-        error => {this.error = error; console.log(error);}
-    );
 
-      // this.exchangeService.changeHeaderView(false);
+
+        },
+        error => {
+            this.error = error;
+            console.log(error.json().room_detals);
+            if (error && error.json().room_detals ){
+                this.currentWall = [];
+                this.openPrivateRoomModal(error.json().room_detals)
+
+            }
+        }
+    );
 
   }
     isAdmin():void {
@@ -179,6 +189,16 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.allow_comment_flag = this.currentWall.walls[0].allow_comment_flag;
         modalRef.result.then((newPost) => {
             this.allPosts.unshift(newPost.post)
+        });
+    }
+
+    openPrivateRoomModal(data: any): void {
+        const modalRef = this.modalService.open(PrivateRoomComponent);
+        modalRef.componentInstance.room_details = data;
+        modalRef.result.then(() => {
+            this.router.navigateByUrl('/all-rooms');
+        }).catch(() => {
+            this.router.navigateByUrl('/all-rooms');
         });
     }
 

@@ -25,8 +25,15 @@
     background-size: contain;
   }
   .search{
-    min-width: 350px;
+
     position: relative;
+    max-width: 50px;
+    transition: 0.3s;
+    overflow: hidden;
+  }
+  .opened{
+    max-width: 350px;
+    width: 100%;
   }
   .search_field{
     display: block;

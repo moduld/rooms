@@ -38,6 +38,7 @@ import { EditWallComponent } from './components/edit-wall/edit-wall.component';
 import { DeleteRoomComponent } from './components/delete-room/delete-room.component';
 import { MembersListComponent } from './components/members-list/members-list.component';
 import { NameFilterPipe } from './pipes/name-filter.pipe';
+import { PrivateRoomComponent } from './modals/private-room/private-room.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -79,6 +80,7 @@ let appRoutes: Routes =[
     DeleteRoomComponent,
     MembersListComponent,
     NameFilterPipe,
+    PrivateRoomComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,8 @@ let appRoutes: Routes =[
     CreatePostComponent,
     PostEditeComponent,
     CreateRoomComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    PrivateRoomComponent
   ],
   bootstrap: [AppComponent]
 })

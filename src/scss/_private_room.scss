@@ -1,0 +1,61 @@
+.modal_wrapper{
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+.info_wrapp{
+  background: $blue;
+  width: 100%;
+  @extend .flex-column;
+  padding: 20px;
+  color: white;
+  align-items: center;
+  &:before{
+    font-size: 40px;
+  }
+}
+.name{
+  font-family: $font_bold;
+  font-size: 20px;
+  margin-top: 10px;
+}
+.description{
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+.message{
+  font-size: 12px;
+  color: $gray_text;
+  text-align: center;
+  padding: 20px;
+}
+.line{
+  background: white;
+  padding: 0 10px;
+  width: 100%;
+  display: block;
+  &:before{
+    content: '';
+    border-top: 1px solid $line;
+    display: block;
+  }
+}
+.buttons_wrapp{
+  @extend .flex-between;
+  padding: 10px;
+}
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  display: block;
+}

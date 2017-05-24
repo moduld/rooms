@@ -39,6 +39,17 @@ export class RequestService  {
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
+  getSuggestionRooms(): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+
+    return this.http.get(this.commonLink + 'room/suggest', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().rooms;
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
   getRoomsBySearch(search: string): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();
@@ -62,7 +73,7 @@ export class RequestService  {
 
     return this.http.get(this.commonLink + 'room/wall/list', {headers: this.headers, search: params}).map((resp:Response)=>{
 
-      return resp.json().room_walls;
+      return resp.json();
     })
       .catch((error: any)=> { return Observable.throw(error);});
 }
