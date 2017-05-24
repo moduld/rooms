@@ -93,8 +93,11 @@ export class HeaderComponent implements OnInit {
 
       this.showSuggestOrDefault = !this.showSuggestOrDefault;
       if (!this.showSuggestOrDefault){
-          this.room_search = ''
+          this.room_search = '';
+          this.storeservice.deleteSearchText();
       }
+        this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault);
+
         this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault)
     }
 
@@ -103,6 +106,7 @@ export class HeaderComponent implements OnInit {
 
       clearTimeout(this.timeoute);
       this.timeoute = setTimeout(()=>{
+          this.storeservice.saveSearchText(request);
           this.exchangeService.searchByHeaderSearchField(request)
       }, 1000);
     }

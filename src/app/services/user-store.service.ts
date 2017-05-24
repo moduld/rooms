@@ -10,6 +10,9 @@ import {Observable} from 'rxjs/Observable';
 export class UserStoreService {
 
   currentUserRooms: Wall;
+  searchRequest: string;
+  suggestedRoomsShow: boolean;
+
   private roomChanged = new Subject<any>();
   roomChangedAsObservable = this.roomChanged.asObservable();
 
@@ -34,6 +37,26 @@ export class UserStoreService {
 
   getStoredCurrentUserRooms(): Wall {
     return  this.currentUserRooms
+  }
+
+  saveSearchText(text: string): void {
+    this.searchRequest = text;
+  }
+
+  getSearchText(): string {
+    return this.searchRequest
+  }
+
+  deleteSearchText(): void {
+    this.searchRequest = ''
+  }
+
+  changeSuggestedOrDefault(flag: boolean): void {
+    this.suggestedRoomsShow = flag;
+  }
+
+  getSuggestedOrDefault(): boolean {
+    return this.suggestedRoomsShow
   }
 
 

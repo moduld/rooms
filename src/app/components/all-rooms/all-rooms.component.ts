@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { AddRequiredInfoService } from '../../services/add-required-info.service';
+import {UserStoreService} from '../../services/user-store.service';
 
 import { Room } from '../../commonClasses/room';
 
@@ -22,33 +23,31 @@ export class AllRoomsComponent implements OnInit {
     constructor(private requestService: RequestService,
                 private modalService: NgbModal,
                 private exchangeService: EventsExchangeService,
-                private addRequiredInfo: AddRequiredInfoService) {
+                private addRequiredInfo: AddRequiredInfoService,
+                private storeservice: UserStoreService) {
 
       exchangeService.makeHeaderRoomSearch.subscribe(
           search => {
-              this.requestService.getRoomsBySearch(search).subscribe(
-                  data=>{
-                      this.allRooms = this.addRequiredInfo.addInfo(data)
-                  }, error => {this.error = error; console.log(error);}
-              );
+              this.getSearchableRooms(search)
           });
 
         exchangeService.makeHeaderRoomSuggestRequest.subscribe(
             (flag) => {
-                if (flag){
-                    this.requestService.getSuggestionRooms().subscribe(
-                        data=>{
-                            this.allRooms = this.addRequiredInfo.addInfo(data)
-                        }, error => {this.error = error; console.log(error);}
-                    );
-                } else {
-                    this.getUserRooms()
-                }
+                    flag ? this.getSuggestedRooms() : this.getUserRooms()
             })
   }
 
   ngOnInit() {
-    this.getUserRooms()
+
+        if (this.storeservice.getSearchText()){
+            this.getSearchableRooms(this.storeservice.getSearchText())
+        } else {
+            if (this.storeservice.getSuggestedOrDefault()){
+                this.getSuggestedRooms()
+            } else {
+                this.getUserRooms()
+            }
+        }
   }
 
   getUserRooms(): void {
@@ -65,6 +64,24 @@ export class AllRoomsComponent implements OnInit {
       );
   }
 
+  getSearchableRooms(search: string): void {
+
+      this.requestService.getRoomsBySearch(search).subscribe(
+          data=>{
+              this.allRooms = this.addRequiredInfo.addInfo(data)
+          }, error => {this.error = error; console.log(error);}
+      );
+  }
+
+  getSuggestedRooms():void {
+
+      this.requestService.getSuggestionRooms().subscribe(
+          data=>{
+              this.allRooms = this.addRequiredInfo.addInfo(data)
+          }, error => {this.error = error; console.log(error);}
+      );
+  }
+
     openNewRoomModal():void {
 
         const modalRef = this.modalService.open(CreateRoomComponent);
@@ -73,17 +90,17 @@ export class AllRoomsComponent implements OnInit {
         });
     }
 
-    showSuggestionRooms(): void {
-
-        this.requestService.getSuggestionRooms().subscribe(
-            data=>{
-                for(let i = 0; i < data.length; i++){
-                    if (!data[i].room){
-                        data.splice(i, 1)
-                    }
-                }
-                this.allRooms = data;
-            }, error => {this.error = error; console.log(error);}
-        );
-    }
+    // showSuggestionRooms(): void {
+    //
+    //     this.requestService.getSuggestionRooms().subscribe(
+    //         data=>{
+    //             for(let i = 0; i < data.length; i++){
+    //                 if (!data[i].room){
+    //                     data.splice(i, 1)
+    //                 }
+    //             }
+    //             this.allRooms = data;
+    //         }, error => {this.error = error; console.log(error);}
+    //     );
+    // }
 }
