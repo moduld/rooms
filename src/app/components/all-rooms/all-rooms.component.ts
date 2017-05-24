@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import { AddRequiredInfoService } from '../../services/add-required-info.service';
 
 import { Room } from '../../commonClasses/room';
 
@@ -20,13 +21,14 @@ export class AllRoomsComponent implements OnInit {
     allRooms: Room[] = [];
     constructor(private requestService: RequestService,
                 private modalService: NgbModal,
-                private exchangeService: EventsExchangeService) {
+                private exchangeService: EventsExchangeService,
+                private addRequiredInfo: AddRequiredInfoService) {
 
       exchangeService.makeHeaderRoomSearch.subscribe(
           search => {
               this.requestService.getRoomsBySearch(search).subscribe(
                   data=>{
-                      this.allRooms = data;
+                      this.allRooms = this.addRequiredInfo.addInfo(data)
                   }, error => {this.error = error; console.log(error);}
               );
           })

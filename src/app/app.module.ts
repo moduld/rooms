@@ -23,6 +23,7 @@ import { EventsExchangeService } from './services/events-exchange.service';
 import { UserStoreService } from './services/user-store.service';
 import { ErrorShowService } from './services/error-show.service';
 import { FileInfoService } from './services/file-info.service';
+import { AddRequiredInfoService } from './services/add-required-info.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { LogInComponent } from './components/log-in/log-in.component';
@@ -94,7 +95,8 @@ let appRoutes: Routes =[
     UserStoreService,
     ErrorShowService,
     FileInfoService,
-    CanActivateComponent
+    CanActivateComponent,
+    AddRequiredInfoService
   ],
   entryComponents: [
     CreatePostComponent,

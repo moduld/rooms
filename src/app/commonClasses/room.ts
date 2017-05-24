@@ -17,13 +17,14 @@ interface RoomInfo{
 }
 
 export class Room {
-    admin: number;
-    member: number;
-    moderator: number;
-    pinned: number;
-    room_id: number;
-    talker: number;
-    user_id: string;
+    admin?: number;
+    member?: number;
+    moderator?: number;
+    pinned?: number;
+    room_id?: number;
+    talker?: number;
+    user_id?: string;
+    created_at: string;
     room: RoomInfo
 
 }
