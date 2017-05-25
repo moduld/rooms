@@ -36,6 +36,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   currentUserData: UserInfo;
   banDays: number = 0;
     wallsIds: number;
+    wallsArray: any;
     currentWall: any;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -53,17 +54,17 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
-
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
             console.log(data)
             if (data && data['message'] === undefined){
-                this.currentWall = data['room_walls'];
-                this.wallId = this.currentWall.walls[0].wall_id;
-                this.roomTags = this.currentWall.walls;
-                this.storeservice.storeCurrentUserRooms(this.currentWall);
+                this.wallsArray = data['room_walls'];
+                this.wallId = this.wallsArray.walls[0].wall_id;
+                this.currentWall = this.wallsArray.walls[0];
+                this.roomTags = this.wallsArray.walls;
+                this.storeservice.storeCurrentUserRooms(this.wallsArray);
                 this.isAdmin();
-                this.currentWall['is_admin'] = this.userArmin;
+                this.wallsArray['is_admin'] = this.userArmin;
                 this.getPosts(this.wallId);
                 this.wallsIds = this.wallId;
 
@@ -76,7 +77,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             this.error = error;
             console.log(error.json().room_detals);
             if (error && error.json().room_detals ){
-                this.currentWall = [];
+                this.wallsArray = [];
                 this.openPrivateRoomModal(error.json().room_detals)
 
             }
@@ -183,10 +184,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     openNewPostModal(): void {
+
+
         const modalRef = this.modalService.open(CreatePostComponent);
         modalRef.componentInstance.room_id = this.roomId;
         modalRef.componentInstance.wall_id = this.wallId;
-        modalRef.componentInstance.allow_comment_flag = this.currentWall.walls[0].allow_comment_flag;
+        modalRef.componentInstance.allow_comment_flag = this.wallsArray.walls[0].allow_comment_flag;
         modalRef.result.then((newPost) => {
             this.allPosts.unshift(newPost.post)
         });
@@ -212,6 +215,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     goToAnotherWall(tag: any, flag: boolean): void {
+
+      this.currentWall = tag;
       flag && this.getPosts(tag.wall_id)
     }
 

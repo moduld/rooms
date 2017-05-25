@@ -136,7 +136,8 @@
         </div>
     </div>
 
-    <span class="add_post icon-plus" (click)="openNewPostModal()"></span>
+    <span class="add_post icon-plus" (click)="openNewPostModal()" *ngIf="membership && currentWall"
+          [ngClass]="{'disabled': !currentWall.allow_post_flag && !membership.moderator && !membership.supermoderator && !membership.admin && !membership.talker || !membership.member}"></span>
 
 </div>
 
