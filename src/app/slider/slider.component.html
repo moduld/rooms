@@ -1,0 +1,5 @@
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let content of contentArray">
+    <a [href]="content.multimedia" target="_blank" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }"></a>
+  </ng-template>
+</ngb-carousel>

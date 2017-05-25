@@ -17,11 +17,20 @@ app-root{
     width: 100%;
     max-width: 800px!important;
 }
-.modal_hi_width{
+.post_details_modal_hi_width{
     max-width: 1175px!important;
+}
+.post_details_modal_low_width{
+    max-width: 600px!important;
 }
 .modal_low_width{
     max-width: 540px!important;
+}
+
+@media screen and (max-width: 1000px){
+    .post_details_modal_hi_width{
+        max-width: 600px!important;
+    }
 }
 
 @media screen and (max-width: 575px){

@@ -1,0 +1,24 @@
+:host{
+  display: block;
+  height: 100%;
+}
+.carousel {
+  height: 100%;
+}
+.carousel-inner{
+  height: 100%;
+}
+.carousel-item{
+  height: 100%;
+}
+.carousel-indicators{
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  margin: auto;
+  align-items: center;
+}
+.picture{
+  @extend .backgr-center;
+  //background-size: contain;
+  width: 100%;
+}

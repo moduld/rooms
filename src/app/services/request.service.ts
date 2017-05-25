@@ -20,7 +20,6 @@ export class RequestService  {
   constructor(private http: Http, private storeservice: UserStoreService, private location: Location)  {}
 
   commonLink: string = 'http://dev.tifos.net/';
-  // userId: any = '567';
   userId: any = '';
   token: string = '';
   roomId: any;
@@ -79,6 +78,18 @@ export class RequestService  {
 }
 
   getRoomPosts( wall_id: any ): Observable<Post[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('room_id', this.roomId);
+    params.set('wall_id', wall_id);
+
+    return this.http.get(this.commonLink + 'wall/post/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().posts;
+    }).catch((error: any)=> { return Observable.throw(error);});
+
+  }
+
+  getPostComments( wall_id: any ): Observable<Post[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
@@ -460,6 +471,23 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
+  createNewComment(dataToServer: any): Observable<any> {
+    let sendData = {
+      user_id: this.userId,
+      room_id: dataToServer.post.room_id,
+      wall_id: dataToServer.post.wall_id,
+      post_id: dataToServer.post.post_id,
+      text: dataToServer.text,
+      media: dataToServer.media
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/comment/new'
+    };
+
+    return this.makePostRequest(data)
+  }
 
   makePostRequest(data: any): Observable<any> {
 

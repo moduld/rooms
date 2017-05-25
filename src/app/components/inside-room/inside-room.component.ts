@@ -48,10 +48,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
+
     this.subscription.unsubscribe();
   }
 
   ngOnInit() {
+
     this.currentUserData = this.storeservice.getUserData();
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
     this.requestService.getWalls(this.roomId).subscribe(
@@ -67,30 +69,26 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.wallsArray['is_admin'] = this.userArmin;
                 this.getPosts(this.wallId);
                 this.wallsIds = this.wallId;
-
             }
-
-
-
         },
         error => {
-            this.error = error;
-            console.log(error.json().room_detals);
+            this.error = error.json();
             if (error && error.json().room_detals ){
                 this.wallsArray = [];
                 this.openPrivateRoomModal(error.json().room_detals)
-
             }
         }
     );
 
   }
     isAdmin():void {
+
         this.membership = this.storeservice.getStoredCurrentUserRooms().membership;
         this.membership['admin'] || this.membership['moderator'] || this.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
     }
 
   getPosts(wallId: number): void {
+
     this.requestService.getRoomPosts(wallId).subscribe(
         data=>{
           console.log(data);
@@ -102,6 +100,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   }
 
     postOwnerInterraction(int_key: string, owner_id: number, index: number): void {
+
         this.requestService.postInteractionUser(int_key, owner_id, int_key, 1).subscribe(
             data=>{
                 int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== owner_id}) : ''
@@ -138,6 +137,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     removePost(post: Post, index: number): void {
+
         this.requestService.postDelete(post.post_id, post.room_id).subscribe(
             data=>{
                 console.log(data);
@@ -148,6 +148,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     likeAndUnlikePost(post_id: number, flag: number, post: any): void{
+
         this.requestService.postLikeAndUnlike(post_id, flag).subscribe(
             data=>{
                 post.liked_by_user = flag ? 0 : 1;
@@ -158,6 +159,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     inappropriatePost(post: Post):void {
+
         this.requestService.postInappropriate(post.post_id).subscribe(
             data=>{
 
@@ -167,6 +169,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     userToBan(data: any): void {
+
         this.requestService.userToBan(data).subscribe(
             data=>{
             },
@@ -175,6 +178,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     movePost(data: any, index: number): void {
+
         this.requestService.movePost(data).subscribe(
             data=>{
                 this.allPosts.splice(index, 1)
@@ -184,7 +188,6 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     openNewPostModal(): void {
-
 
         const modalRef = this.modalService.open(CreatePostComponent);
         modalRef.componentInstance.room_id = this.roomId;
@@ -196,6 +199,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     openPrivateRoomModal(data: any): void {
+
         const modalRef = this.modalService.open(PrivateRoomComponent);
         modalRef.componentInstance.room_details = data;
         modalRef.result.then(() => {
@@ -238,6 +242,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     }
 
     openPostDetailsModal(post: Post):void {
+
         const modalRef = this.modalService.open(PostDetailsComponent);
         modalRef.componentInstance.post = post;
         modalRef.result.then((post) => {

@@ -75,7 +75,7 @@ export class CreatePostComponent implements OnInit {
 
     this.dataToServer.text = postForm.value.text;
     this.dataToServer.allow_comment_flag = this.allow_comment_flag;
-    console.log(this.allow_comment_flag);
+
     if (postForm.value.mod_type){
       this.dataToServer.media = [];
       for (let i = 0; i < this.mediaToAppServer.length; i++){

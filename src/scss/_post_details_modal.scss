@@ -6,6 +6,9 @@
   background: white;
   position: relative;
   padding: 30px;
+  display: flex;
+  color: $gray_text;
+  font-family: $font_medium;
 }
 .icon-cancel{
   position: absolute;
@@ -22,4 +25,182 @@
 }
 .slider_container{
   width: 545px;
+  padding-right: 30px;
+}
+.post_content{
+  flex: 1;
+  padding-right: 30px;
+  position: relative;
+}
+
+.post_info{
+  @extend .flex-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid $line;
+}
+.date{
+  font-size: 14px;
+}
+
+.post_body{
+  padding: 30px 0;
+}
+.post_text{
+  color: $dark_text;
+  font-family: $font_regular;
+}
+.dots_wrapp{
+  padding: 5px 0;
+}
+
+
+.post_footer{
+  width: 100%;
+  padding: 15px 0;
+  @extend .flex-between;
+  border-top: 1px solid $line;
+  border-bottom: 1px solid $line;
+}
+.sort_by{
+  font-size: 11px;
+}
+.sort_kind{
+  margin-left: 5px;
+  text-decoration: underline dotted;
+  font-family: $font_bold;
+}
+.icons_wrapper{
+  @extend .flex-center;
+}
+.icon-heart-o,
+.icon-bubble{
+  @extend .flex-center;
+  margin-right: 15px;
+  font-size: 13px;
+  &:last-child{
+    margin-right: 0;
+  }
+}
+.icon-heart-o{
+  &:before{
+    color: $gray_text;
+    margin-right: 5px;
+    font-size: 18px;
+  }
+}
+.icon-bubble{
+  &:before{
+    color: $blue;
+    margin-right: 5px;
+    font-size: 18px;
+  }
+}
+.icon-heart{
+  &:before{
+    color: $red;
+  }
+}
+.drop_down_title{
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+
+
+
+
+.new_comment_wrapp{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 30px);
+  height: 75px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.transparent{
+  display: block;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to top, white, transparent);
+}
+.text_field{
+  border: 1px solid $gray_text;
+  border-radius: 5px;
+  padding: 7px 55px 7px 10px;
+  width: calc(100% - 70px);
+  margin-right: 20px;
+}
+.add_button_wrapp{
+  position: absolute;
+  bottom: 0;
+  right: 70px;
+}
+.add_button{
+  color: $blue;
+  font-size: 24px;
+  @extend .flex-center;
+  padding: 13px;
+}
+.with_spinner > .add_button{
+  display: none;
+}
+
+.with_spinner{
+  &:before{
+    content: '';
+    background: center center no-repeat;
+    background-image: url('../../../img/spinner.gif');
+    display: block;
+    height: 50px;
+    width: 50px;
+    background-size: 60%;
+    z-index: 2;
+  }
+
+}
+.send_button{
+  display: block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  color: white;
+  background: $blue;
+  font-size: 24px;
+  text-align: center;
+  border: none;
+  &:before{
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 1260px){
+  .icon-cancel{
+    color: $gray_text;
+    top: 0;
+    right: 0;
+    padding: 6px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .modal_wrapper{
+    flex-direction: column;
+  }
+  .slider_container{
+    width: 100%;
+    height: 40vh;
+    padding: 0;
+  }
+  .post_content{
+    height: 45vh;
+    margin-top: 25px;
+  }
+  .post_info{
+    border-top: 1px solid $line;
+  }
 }
