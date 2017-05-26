@@ -22,6 +22,8 @@ export class PostDetailsComponent implements OnInit {
   dataToServer: any = {};
   textField: string = '';
   postComments: any[] = [];
+    config: any = {};
+    flagY: boolean = false;
 
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
@@ -29,11 +31,19 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.post)
+
+      document.addEventListener('ps-y-reach-end', function () {
+          console.log('scrolled!!')
+          this.flagY = true;
+      });
+
     setTimeout(()=>{
       let modaldialog = document.querySelector('.modal-dialog');
       this.post.media && this.post.media.length ? modaldialog.classList.add('post_details_modal_hi_width') : modaldialog.classList.add('post_details_modal_low_width')
-    })
+    });
 
+      this.config.suppressScrollX = true;
+      this.config.suppressScrollY = this.flagY;
   }
 
   likeAndUnlikePost(post_id: number, flag: number): void{
@@ -79,6 +89,7 @@ export class PostDetailsComponent implements OnInit {
 
   createNewComment(commentForm: NgForm):void {
 
+
     if (commentForm.value.text || this.mediaToAppServer){
       this.dataToServer.post = this.post;
       this.dataToServer.text = commentForm.value.text;
@@ -96,5 +107,6 @@ export class PostDetailsComponent implements OnInit {
         error => {this.error = error; console.log(error);}
     );
   }
+
 
 }

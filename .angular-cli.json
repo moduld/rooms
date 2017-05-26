@@ -21,6 +21,7 @@
       "styles": [
         "libs/bootstrap.min.css",
         "libs/dragula.css",
+        "libs/scroolbar.css",
         "styles.css"
       ],
       "scripts": [],

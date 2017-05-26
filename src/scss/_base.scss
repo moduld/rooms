@@ -172,7 +172,12 @@ $font_bold: Bold, sans-serif;
     margin-right: 10px;
   }
 }
-
+.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y{
+  background: $blue;
+}
+.ps-container:hover>.ps-scrollbar-y-rail:hover>.ps-scrollbar-y{
+  background: $blue;
+}
 
 
 @media screen and (max-width: 1190px){

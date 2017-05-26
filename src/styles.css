@@ -27,6 +27,8 @@ app-root{
     max-width: 540px!important;
 }
 
+
+
 @media screen and (max-width: 1000px){
     .post_details_modal_hi_width{
         max-width: 600px!important;

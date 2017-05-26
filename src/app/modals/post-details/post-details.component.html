@@ -5,55 +5,59 @@
 
   </div>
   <div class="post_content">
-    <div class="post_info">
+      <div class="scrollable_part" [perfect-scrollbar]="config"  >
+          <span ></span>
+          <div class="post_info">
                  <span class="user_info">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.user_name}}</span>
                 </span>
-      <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
-    </div>
-      <div class="post_body" >
-          <p class="post_text">{{post.text}}</p>
-
-
-      </div>
-      <div class="post_footer">
-          <div class="icons_wrapper">
-              <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user)">{{post.likes_count}}</span>
-              <span class="icon-bubble">{{post.comments_count}}</span>
-              <span class="sort_by">sort by <span class="sort_kind">Most liked first</span></span>
+              <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
           </div>
-          <div class="drop_down_container">
-              <div class="dots_wrapp">
-                  <i class="dots"></i>
-                  <i class="dots"></i>
-                  <i class="dots"></i>
+          <div class="post_body" >
+              <p class="post_text">{{post.text}}</p>
+
+
+          </div>
+          <div class="post_footer">
+              <div class="icons_wrapper">
+                  <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user)">{{post.likes_count}}</span>
+                  <span class="icon-bubble">{{post.comments_count}}</span>
+                  <!--<span class="sort_by">sort by <span class="sort_kind">Most liked first</span></span>-->
               </div>
-              <ul class="drop_down_menu" >
-                  <li class="drop_down_item drop_down_title">
-                      Post menu
-                  </li>
+              <!--<div class="drop_down_container">-->
+                  <!--<div class="dots_wrapp">-->
+                      <!--<i class="dots"></i>-->
+                      <!--<i class="dots"></i>-->
+                      <!--<i class="dots"></i>-->
+                  <!--</div>-->
+                  <!--<ul class="drop_down_menu" >-->
+                      <!--<li class="drop_down_item drop_down_title">-->
+                          <!--Post menu-->
+                      <!--</li>-->
 
-                  <li class="drop_down_item" >
-                      <span class="drop_down_fill">Most liked first</span>
-                  </li>
-                  <li class="drop_down_item" >
-                      <span class="drop_down_fill">Older first</span>
-                  </li>
-                  <li class="drop_down_item" >
-                      <span class="drop_down_fill">Newer first</span>
-                  </li>
-              </ul>
+                      <!--<li class="drop_down_item" >-->
+                          <!--<span class="drop_down_fill">Most liked first</span>-->
+                      <!--</li>-->
+                      <!--<li class="drop_down_item" >-->
+                          <!--<span class="drop_down_fill">Older first</span>-->
+                      <!--</li>-->
+                      <!--<li class="drop_down_item" >-->
+                          <!--<span class="drop_down_fill">Newer first</span>-->
+                      <!--</li>-->
+                  <!--</ul>-->
+              <!--</div>-->
+              <select name="" class="sort_select">
+                  <option value="1" selected>New to old</option>
+                  <option value="2">Old to new</option>
+                  <option value="3">Most liked</option>
+              </select>
+
           </div>
-
       </div>
-
-
-
 
 
       <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm)">
-          <span class="transparent"></span>
           <input type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="Enter your comment...">
           <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>
           <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">

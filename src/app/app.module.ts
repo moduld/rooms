@@ -7,6 +7,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
+import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
 
 import { AppComponent } from './app.component';
 import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
@@ -91,7 +92,8 @@ let appRoutes: Routes =[
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     FileDropModule,
-    DragulaModule
+    DragulaModule,
+    PerfectScrollbarModule
   ],
   providers: [
     RequestService,
