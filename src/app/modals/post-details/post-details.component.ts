@@ -21,9 +21,11 @@ export class PostDetailsComponent implements OnInit {
   inProcess: boolean;
   dataToServer: any = {};
   textField: string = '';
-  postComments: any[] = [];
     config: any = {};
-    flagY: boolean = false;
+    flagMoveY: boolean = true;
+    comments_sort_type: string;
+    comment_offset: number;
+    comments: any[] = [];
 
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
@@ -31,10 +33,26 @@ export class PostDetailsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.post)
+        this.comments_sort_type = 'date_newer';
+        this.comment_offset = 0;
+        this.comments = [];
+        this.getComments();
 
-      document.addEventListener('ps-y-reach-end', function () {
-          console.log('scrolled!!')
-          this.flagY = true;
+      document.addEventListener('ps-y-reach-end', ()=>{
+          console.log(this.comments_sort_type)
+
+          if (this.flagMoveY){
+              if (this.comments_sort_type === 'top'){
+                  this.comments_sort_type = 'date_newer';
+                  this.comment_offset = 0;
+                  this.getComments()
+              } else {
+                  this.comment_offset = this.comments[this.comments.length - 1].comment_id;
+                  this.getComments()
+              }
+              this.flagMoveY = false;
+          }
+
       });
 
     setTimeout(()=>{
@@ -43,7 +61,6 @@ export class PostDetailsComponent implements OnInit {
     });
 
       this.config.suppressScrollX = true;
-      this.config.suppressScrollY = this.flagY;
   }
 
   likeAndUnlikePost(post_id: number, flag: number): void{
@@ -93,20 +110,47 @@ export class PostDetailsComponent implements OnInit {
     if (commentForm.value.text || this.mediaToAppServer){
       this.dataToServer.post = this.post;
       this.dataToServer.text = commentForm.value.text;
-      this.dataToServer.media = {
-        type: this.mediaToAppServer['typeForApp'],
-        multimedia: this.mediaToAppServer['multimedia']
-      }
+        if (this.mediaToAppServer){
+
+            this.dataToServer.media = {
+                type: this.mediaToAppServer['typeForApp'],
+                multimedia: this.mediaToAppServer['multimedia']
+            }
+        } else {
+            this.dataToServer.media = []
+        }
+
+        this.requestService.createNewComment(this.dataToServer).subscribe(
+            data=>{
+                console.log(data)
+                // this.comments.unshift(data.comment)
+            },
+            error => {this.error = error; console.log(error);}
+        );
+
+        commentForm.resetForm();
+        this.mediaToAppServer = '';
     }
 
-    this.requestService.createNewComment(this.dataToServer).subscribe(
-        data=>{
-          console.log(data)
-          this.postComments.unshift(data.comment)
-        },
-        error => {this.error = error; console.log(error);}
-    );
+
+
+
   }
 
+  getComments(): void {
+
+      let dataToServer = this.post;
+      dataToServer.offset = this.comment_offset;
+      dataToServer.order_by = this.comments_sort_type;
+
+      this.requestService.getPostComments(dataToServer).subscribe(
+          data=>{
+              console.log(data)
+              this.comments = this.comments.concat(data);
+              this.flagMoveY = true;
+          },
+          error => {this.error = error; console.log(error);}
+      );
+  }
 
 }

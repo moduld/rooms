@@ -64,6 +64,7 @@
 .sort_select{
   background: white;
   border: none;
+  color: $gray_text;
 }
 .post_footer{
   width: 100%;
@@ -93,6 +94,7 @@
   }
 }
 .icon-heart-o{
+  margin-left: 1px;
   &:before{
     color: $gray_text;
     margin-right: 5px;
@@ -107,6 +109,7 @@
   }
 }
 .icon-heart{
+  margin-left: 1px;
   &:before{
     color: $red;
   }
@@ -186,6 +189,28 @@
   &:before{
     line-height: 50px;
   }
+}
+.comments{
+  .post_info{
+    border: none;
+  }
+  .avatar{
+    height: 25px;
+    width: 25px;
+  }
+}
+.comment_body{
+  margin-left: 46px;
+}
+.comment_text{
+  color: $dark_text;
+  font-size: 13px;
+}
+.picture{
+  display: block;
+  height: 100px;
+  background-size: contain;
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 1260px){

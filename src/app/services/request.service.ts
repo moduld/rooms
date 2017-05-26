@@ -89,14 +89,18 @@ export class RequestService  {
 
   }
 
-  getPostComments( wall_id: any ): Observable<Post[]> {
+  getPostComments( data: any ): Observable<Post[]> {
+
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('room_id', this.roomId);
-    params.set('wall_id', wall_id);
+    params.set('post_id', data.post_id);
+    params.set('offset_id', data.offset);
+    let direction = data.order_by === 'date_newer' ? 0 : 1
+    params.set('direction_flag', '1');
+    params.set('order_by', data.order_by);
 
-    return this.http.get(this.commonLink + 'wall/post/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().posts;
+    return this.http.get(this.commonLink + 'wall/comment/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().comments;
     }).catch((error: any)=> { return Observable.throw(error);});
 
   }

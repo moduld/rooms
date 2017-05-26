@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
 import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
@@ -84,6 +85,7 @@ let appRoutes: Routes =[
     NameFilterPipe,
     PrivateRoomComponent,
     SliderComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,

@@ -5,8 +5,7 @@
 
   </div>
   <div class="post_content">
-      <div class="scrollable_part" [perfect-scrollbar]="config"  >
-          <span ></span>
+      <div class="scrollable_part" [perfect-scrollbar]="config" >
           <div class="post_info">
                  <span class="user_info">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
@@ -23,38 +22,35 @@
               <div class="icons_wrapper">
                   <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user)">{{post.likes_count}}</span>
                   <span class="icon-bubble">{{post.comments_count}}</span>
-                  <!--<span class="sort_by">sort by <span class="sort_kind">Most liked first</span></span>-->
               </div>
-              <!--<div class="drop_down_container">-->
-                  <!--<div class="dots_wrapp">-->
-                      <!--<i class="dots"></i>-->
-                      <!--<i class="dots"></i>-->
-                      <!--<i class="dots"></i>-->
-                  <!--</div>-->
-                  <!--<ul class="drop_down_menu" >-->
-                      <!--<li class="drop_down_item drop_down_title">-->
-                          <!--Post menu-->
-                      <!--</li>-->
 
-                      <!--<li class="drop_down_item" >-->
-                          <!--<span class="drop_down_fill">Most liked first</span>-->
-                      <!--</li>-->
-                      <!--<li class="drop_down_item" >-->
-                          <!--<span class="drop_down_fill">Older first</span>-->
-                      <!--</li>-->
-                      <!--<li class="drop_down_item" >-->
-                          <!--<span class="drop_down_fill">Newer first</span>-->
-                      <!--</li>-->
-                  <!--</ul>-->
-              <!--</div>-->
-              <select name="" class="sort_select">
-                  <option value="1" selected>New to old</option>
-                  <option value="2">Old to new</option>
-                  <option value="3">Most liked</option>
+              <select  class="sort_select" [(ngModel)]="comments_sort_type" (change)="getComments()">
+                  <option value="date_newer">New to old</option>
+                  <option value="date_older">Old to new</option>
+                  <option value="top">Most liked</option>
               </select>
 
           </div>
+
+
+          <div class="comments" *ngFor="let comment of comments">
+              <div class="post_info">
+                  <span class="user_info">
+                    <span class="avatar" [ngStyle]="{'background-image':'url(' + comment.owner.thumbnail + ')' }" ></span>
+                    <span class="name">{{comment.owner.user_name}}</span>
+                </span>
+                  <span class="date">{{ comment.created_at * 1000 | timeAgo }}</span>
+              </div>
+              <div class="comment_body">
+                  <p class="comment_text">{{comment.text}}</p>
+                  <a [href]="comment.media.multimedia" target="_blank" class="picture" *ngIf="comment.has_media_flag" [ngStyle]="{'background-image':'url(' + comment.media.thumbnail + ')' }"></a>
+              </div>
+          </div>
+
+
       </div>
+
+
 
 
       <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm)">

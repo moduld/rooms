@@ -65,6 +65,7 @@ $font_bold: Bold, sans-serif;
     width: 32px;
     border-radius: 50%;
     @extend .backgr-center;
+    background-color: $gray_text;
     //background-image: url("./img/photos.png");
     margin-right: 10px;
   }
