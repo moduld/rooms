@@ -42,6 +42,7 @@ import { MembersListComponent } from './components/members-list/members-list.com
 import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PrivateRoomComponent } from './modals/private-room/private-room.component';
 import { SliderComponent } from './slider/slider.component';
+import { ScroolEndDirective } from './directives/scrool-end.directive';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -85,7 +86,8 @@ let appRoutes: Routes =[
     NameFilterPipe,
     PrivateRoomComponent,
     SliderComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    ScroolEndDirective
   ],
   imports: [
     BrowserModule,

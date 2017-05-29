@@ -99,11 +99,11 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     )
   }
 
-    postOwnerInterraction(int_key: string, owner_id: number, index: number): void {
+    postOwnerInterraction(int_key: string, block_owner_id: number): void {
 
-        this.requestService.postInteractionUser(int_key, owner_id, int_key, 1).subscribe(
+        this.requestService.blockOrMuteUser(int_key, block_owner_id, 1).subscribe(
             data=>{
-                int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== owner_id}) : ''
+                int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== block_owner_id}) : ''
             },
             error => {this.error = error; console.log(error);}
         )
@@ -245,6 +245,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
         const modalRef = this.modalService.open(PostDetailsComponent);
         modalRef.componentInstance.post = post;
+        modalRef.componentInstance.walls = this.membership;
+        modalRef.componentInstance.is_admin = this.userArmin;
         modalRef.result.then((post) => {
 
         });

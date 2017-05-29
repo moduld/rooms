@@ -161,13 +161,13 @@ export class RequestService  {
     });
   }
 
-  postInteractionUser(user_interract_key: string, user_interract_id: number, flag_key: string, flag: number): Observable<any> {
+  blockOrMuteUser(user_interract_key: string, user_interract_id: number, flag: number): Observable<any> {
 
     let sendData = {
       user_id: this.userId
     };
     sendData['user_id_' + user_interract_key] = user_interract_id;
-    sendData[flag_key] = flag;
+    sendData[user_interract_key] = flag;
 
     let data = {
       sendData: sendData,
@@ -219,12 +219,12 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
-  userToBan(post: any): Observable<any>{
+  userToBan(obj: any): Observable<any>{
     let sendData = {
       user_id: this.userId,
-      room_id: post.room_id,
-      user_id_member: post.owner.user_id,
-      ban_days: post.ban_days
+      room_id: obj.room_id,
+      user_id_member: obj.owner.user_id,
+      ban_days: obj.ban_days
     };
     let data = {
       sendData: sendData,
@@ -488,6 +488,54 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'wall/comment/new'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  commentLike(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      comment_id: dataToServer.comment_id,
+      like: dataToServer.like
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/comment/like'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  commentDelete(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      comment_id: dataToServer.comment_id,
+      post_id: dataToServer.post_id,
+      room_id: dataToServer.room_id
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/comment/remove'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  commentReport(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      comment_id: dataToServer.comment_id
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'wall/comment/report'
     };
 
     return this.makePostRequest(data)

@@ -67,13 +67,13 @@
                         </li>
                         <!--all done-->
                         <li class="drop_down_item"
-                            (click)="postOwnerInterraction('mute', post.owner.user_id, i)"
+                            (click)="postOwnerInterraction('mute', post.owner.user_id)"
                             *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
                             <span class="drop_down_fill icon-mute">Mute User</span>
                         </li>
                         <!--all done-->
                         <li class="drop_down_item"
-                            (click)="postOwnerInterraction('block', post.owner.user_id, i)"
+                            (click)="postOwnerInterraction('block', post.owner.user_id)"
                             *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
 
                             <span class="drop_down_fill icon-eye-blocked">Block User</span>

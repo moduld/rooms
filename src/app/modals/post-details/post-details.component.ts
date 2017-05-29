@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 import { NgForm} from '@angular/forms';
 
@@ -6,7 +6,10 @@ import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { FileInfoService } from '../../services/file-info.service';
 import { RequestService } from '../../services/request.service';
+import {UserStoreService} from '../../services/user-store.service';
 import { SliderComponent } from '../../slider/slider.component';
+
+import { UserInfo } from '../../commonClasses/userInfo';
 
 @Component({
   selector: 'app-post-details',
@@ -15,33 +18,43 @@ import { SliderComponent } from '../../slider/slider.component';
 })
 export class PostDetailsComponent implements OnInit {
 
-  @Input() post;
+    @Input() post;
+    @Input() walls;
+    @Input() is_admin;
+
   error: any;
   mediaToAppServer: any;
   inProcess: boolean;
   dataToServer: any = {};
   textField: string = '';
     config: any = {};
+    banDays: number = 0;
+    currentUserData: UserInfo;
     flagMoveY: boolean = true;
     comments_sort_type: string;
     comment_offset: number;
-    comments: any[] = [];
+    comments: any[];
+    show_loading: boolean;
 
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
-              private requestService: RequestService,) { }
+              private requestService: RequestService,
+              private storeservice: UserStoreService) { }
 
   ngOnInit() {
     console.log(this.post)
+    console.log(this.walls)
+      this.currentUserData = this.storeservice.getUserData();
         this.comments_sort_type = 'date_newer';
         this.comment_offset = 0;
         this.comments = [];
+        this.show_loading = false;
         this.getComments();
 
-      document.addEventListener('ps-y-reach-end', ()=>{
-          console.log(this.comments_sort_type)
 
-          if (this.flagMoveY){
+      document.addEventListener('ps-y-reach-end', ()=>{
+
+          if (this.flagMoveY && this.comments.length){
               if (this.comments_sort_type === 'top'){
                   this.comments_sort_type = 'date_newer';
                   this.comment_offset = 0;
@@ -61,6 +74,7 @@ export class PostDetailsComponent implements OnInit {
     });
 
       this.config.suppressScrollX = true;
+
   }
 
   likeAndUnlikePost(post_id: number, flag: number): void{
@@ -137,8 +151,16 @@ export class PostDetailsComponent implements OnInit {
 
   }
 
+  changeSorting(): void {
+
+      this.comment_offset = 0;
+      this.comments = [];
+      this.getComments()
+  }
+
   getComments(): void {
 
+      this.show_loading = true;
       let dataToServer = this.post;
       dataToServer.offset = this.comment_offset;
       dataToServer.order_by = this.comments_sort_type;
@@ -146,11 +168,102 @@ export class PostDetailsComponent implements OnInit {
       this.requestService.getPostComments(dataToServer).subscribe(
           data=>{
               console.log(data)
-              this.comments = this.comments.concat(data);
-              this.flagMoveY = true;
+              if (data.length){
+                  this.comments = this.comments.concat(data);
+                  this.flagMoveY = true;
+              }
+
+              this.show_loading = false;
           },
           error => {this.error = error; console.log(error);}
       );
   }
+
+    likeAndUnlikeComment(comment: any):void {
+
+      let dataToServer = {
+          comment_id: comment.comment_id,
+          like: comment.liked_by_user ? 0 : 1
+      };
+
+        this.requestService.commentLike(dataToServer).subscribe(
+            data=>{
+               comment.liked_by_user = comment.liked_by_user ? 0 : 1;
+               comment.liked_by_user ? comment.likes_count++ : comment.likes_count--
+            },
+            error => {this.error = error; console.log(error);}
+        );
+    }
+
+    commentOwnerInterraction(int_key: string, block_owner_id: number): void {
+
+        this.requestService.blockOrMuteUser(int_key, block_owner_id, 1).subscribe(
+            data=>{
+                int_key === 'mute' ||  int_key === 'block' ?  this.comments = this.comments.filter((comment)=>{return comment.owner.user_id !== block_owner_id}) : ''
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+
+    commentInterraction(int_key: string, comment: any, index?: number, data?: number): void {
+
+        if (int_key === 'remove'){
+            this.removeComment(comment, index)
+        }
+        if (int_key === 'inappropriate'){
+            this.inappropriatePost(comment)
+        }
+        if (int_key === 'ban'){
+            comment['bunned'] = !comment['bunned'];
+        }
+        if (int_key === 'do_ban'){
+            comment['ban_days'] = data;
+            this.userToBan(comment)
+        }
+    }
+
+    removeComment(comment: any, index: number): void {
+
+      let dataToServer = {
+          comment_id: comment.comment_id,
+          post_id: comment.post_id,
+          room_id: comment.room_id
+      };
+
+        this.requestService.commentDelete(dataToServer).subscribe(
+            data=>{
+                this.comments.splice(index, 1)
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    inappropriatePost(comment: any): void {
+
+        let dataToServer = {
+            comment_id: comment.comment_id
+        };
+
+        this.requestService.commentReport(dataToServer).subscribe(
+            ()=>{},
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    userToBan(data: any): void {
+
+        this.requestService.userToBan(data).subscribe(
+            data=>{
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    onMouseLeave(comment: any): void {
+
+        comment['bunned'] = false;
+        comment['movedTo'] = false;
+    }
 
 }
