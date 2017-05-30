@@ -33,7 +33,6 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "angular2-file-drop": "^0.2.0",
-    "angular2-perfect-scrollbar": "^2.0.6",
     "angular2-slimscroll": "^0.3.0",
     "codelyzer": "~2.0.0",
     "jasmine-core": "~2.5.2",

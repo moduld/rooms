@@ -245,7 +245,7 @@ margin-top: 5px;
   @extend .flex-center;
   cursor: pointer;
   width: 50px;
-  height: 50px;
+  height: 48px;
   @extend .backgr-center;
   background-size: contain;
 }
@@ -301,6 +301,8 @@ margin-top: 5px;
   height: 100px;
   background-size: contain;
   margin-top: 10px;
+  @extend .backgr-center;
+
 }
 .loading{
   padding: 30px;

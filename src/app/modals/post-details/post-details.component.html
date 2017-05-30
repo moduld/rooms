@@ -4,8 +4,9 @@
       <app-slider [contentArray]="post.media"></app-slider>
 
   </div>
+    <!--[perfect-scrollbar]="config"-->
   <div class="post_content">
-      <div class="scrollable_part" [perfect-scrollbar]="config" appScroolEnd>
+      <div class="scrollable_part"  appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
           <div class="post_info">
                  <span class="user_info">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>

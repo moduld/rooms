@@ -53,21 +53,7 @@ export class PostDetailsComponent implements OnInit {
         this.getComments();
 
 
-      document.addEventListener('ps-y-reach-end', ()=>{
 
-          if (this.flagMoveY && this.comments.length){
-              if (this.comments_sort_type === 'top'){
-                  this.comments_sort_type = 'date_newer';
-                  this.comment_offset = 0;
-                  this.getComments()
-              } else {
-                  this.comment_offset = this.comments[this.comments.length - 1].comment_id;
-                  this.getComments()
-              }
-              this.flagMoveY = false;
-          }
-
-      });
 
     setTimeout(()=>{
       let modaldialog = document.querySelector('.modal-dialog');
@@ -143,7 +129,8 @@ export class PostDetailsComponent implements OnInit {
                 this.comment_offset = 0;
                 this.comments_sort_type = 'date_newer';
                 this.comments = [];
-                this.getComments()
+                this.getComments();
+                this.loaded_image_url = ''
             },
             error => {this.error = error; console.log(error);}
         );
@@ -152,10 +139,23 @@ export class PostDetailsComponent implements OnInit {
         this.mediaToAppServer = '';
     }
 
-
-
-
   }
+
+    onScrollRichTheEnd(event): void {
+
+            if (this.flagMoveY && this.comments.length){
+                if (this.comments_sort_type === 'top'){
+                    this.comments_sort_type = 'date_newer';
+                    this.comment_offset = 0;
+                    this.getComments()
+                } else {
+                    this.comment_offset = this.comments[this.comments.length - 1].comment_id;
+                    this.getComments()
+                }
+                this.flagMoveY = false;
+            }
+
+    }
 
   changeSorting(): void {
 
