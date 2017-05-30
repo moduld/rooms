@@ -130,7 +130,7 @@
     </div>
 
     <span class="add_post icon-plus" (click)="openNewPostModal()" *ngIf="membership && currentWall"
-          [ngClass]="{'disabled': !currentWall.allow_post_flag && !membership.moderator && !membership.supermoderator && !membership.admin && !membership.talker || !membership.member}"></span>
+          [ngClass]="{'disabled': !currentWall.allow_post_flag && !membership.moderator && !membership.supermoderator && !membership.admin && !membership.talker || !membership.member || membership.banned}"></span>
 
 </div>
 

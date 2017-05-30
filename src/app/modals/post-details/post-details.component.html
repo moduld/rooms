@@ -28,21 +28,21 @@
                       <span class="vote_field" (click)="voteForPost(walls.member ? '2' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice2}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().second"
-                                       (click)="voteForPost(2)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 2}">{{post.poll.choice2}}</span></ngb-progressbar>
+                                        *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 2}">{{post.poll.choice2}}</span></ngb-progressbar>
                       <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().second}}%</span>
                   </div>
                   <div class="progress_wrapp" *ngIf="post.poll.choice3">
                       <span class="vote_field" (click)="voteForPost(walls.member ? '3' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice3}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().third"
-                                       (click)="voteForPost(3)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 3}">{{post.poll.choice3}}</span></ngb-progressbar>
+                                        *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 3}">{{post.poll.choice3}}</span></ngb-progressbar>
                       <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().third}}%</span>
                   </div>
                   <div class="progress_wrapp" *ngIf="post.poll.choice4">
                       <span class="vote_field" (click)="voteForPost(walls.member ? '4' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice4}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().forth"
-                                       (click)="voteForPost(4)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 4}">{{post.poll.choice4}}</span></ngb-progressbar>
+                                       *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 4}">{{post.poll.choice4}}</span></ngb-progressbar>
                       <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().forth}}%</span>
                   </div>
 
