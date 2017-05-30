@@ -35,6 +35,7 @@ export class PostDetailsComponent implements OnInit {
     comment_offset: number;
     comments: any[];
     show_loading: boolean;
+    loaded_image_url: string = '';
 
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
@@ -113,6 +114,9 @@ export class PostDetailsComponent implements OnInit {
         data=>{
           this.inProcess = false;
           console.log(data)
+            if (data.typeForApp === 'image'){
+                this.loaded_image_url = data.multimedia
+            }
         },
         error => {this.error = error; console.log(error);}
     );
@@ -136,8 +140,10 @@ export class PostDetailsComponent implements OnInit {
 
         this.requestService.createNewComment(this.dataToServer).subscribe(
             data=>{
-                console.log(data)
-                // this.comments.unshift(data.comment)
+                this.comment_offset = 0;
+                this.comments_sort_type = 'date_newer';
+                this.comments = [];
+                this.getComments()
             },
             error => {this.error = error; console.log(error);}
         );

@@ -67,7 +67,6 @@ $font_bold: Bold, sans-serif;
     border-radius: 50%;
     @extend .backgr-center;
     background-color: $gray_text;
-    //background-image: url("./img/photos.png");
     margin-right: 10px;
   }
   .name{
@@ -79,7 +78,7 @@ $font_bold: Bold, sans-serif;
 
 .dots_wrapp{
   @extend .flex-center;
-
+  padding: 5px 0;
   transition: 0.3s;
   .dots{
     background: transparent;
