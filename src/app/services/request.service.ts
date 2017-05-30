@@ -95,8 +95,8 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('post_id', data.post_id);
     params.set('offset_id', data.offset);
-    let direction = data.order_by === 'date_newer' ? 0 : 1
-    params.set('direction_flag', '1');
+    let direction = data.order_by === 'date_newer' ? '0' : '1';
+    params.set('direction_flag', direction);
     params.set('order_by', data.order_by);
 
     return this.http.get(this.commonLink + 'wall/comment/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{

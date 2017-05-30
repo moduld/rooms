@@ -230,16 +230,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
        post['movedTo'] = false;
     }
 
-    voteForPost(assessment: string, post: Post): void {
 
-        post['voted_data'] = assessment;
-        this.requestService.votePost(post).subscribe(
-            data=>{
-                post['poll'] = data.poll;
-            },
-            error => {this.error = error; console.log(error);}
-        )
-    }
 
     openPostDetailsModal(post: Post):void {
 

@@ -200,6 +200,7 @@ export class PostDetailsComponent implements OnInit {
         this.requestService.blockOrMuteUser(int_key, block_owner_id, 1).subscribe(
             data=>{
                 int_key === 'mute' ||  int_key === 'block' ?  this.comments = this.comments.filter((comment)=>{return comment.owner.user_id !== block_owner_id}) : ''
+                !this.comments.length && this.getComments()
             },
             error => {this.error = error; console.log(error);}
         )
@@ -264,6 +265,31 @@ export class PostDetailsComponent implements OnInit {
 
         comment['bunned'] = false;
         comment['movedTo'] = false;
+    }
+
+
+
+    voteForPost(assessment: string): void {
+
+        this.post['voted_data'] = assessment;
+        this.requestService.votePost(this.post).subscribe(
+            data=>{
+                this.post['poll'] = data.poll;
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
+
+    convertPollPercent(): any {
+
+      let result = {
+          first: this.post.poll.choice1total / (this.post.poll.choice1total + this.post.poll.choice2total + this.post.poll.choice3total + this.post.poll.choice4total) * 100 || 0,
+          second: this.post.poll.choice2total / (this.post.poll.choice1total + this.post.poll.choice2total + this.post.poll.choice3total + this.post.poll.choice4total) * 100 || 0,
+          third: this.post.poll.choice3total / (this.post.poll.choice1total + this.post.poll.choice2total + this.post.poll.choice3total + this.post.poll.choice4total) * 100 || 0,
+          forth: this.post.poll.choice4total / (this.post.poll.choice1total + this.post.poll.choice2total + this.post.poll.choice3total + this.post.poll.choice4total) *100 || 0
+      };
+
+      return result
     }
 
 }

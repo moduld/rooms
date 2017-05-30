@@ -15,6 +15,43 @@
           </div>
           <div class="post_body" >
               <p class="post_text">{{post.text}}</p>
+              <div class="poll_wrapp" *ngIf="post.has_poll_flag">
+                  <p class="post_text">{{post.poll.question}}</p>
+                  <div class="progress_wrapp">
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '1' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice1}}</span>
+                      <ngb-progressbar class="progress_bar"
+                                       [value]="convertPollPercent().first"
+                                        *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 1}">{{post.poll.choice1}}</span></ngb-progressbar>
+                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().first}}%</span>
+                  </div>
+                  <div class="progress_wrapp">
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '2' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice2}}</span>
+                      <ngb-progressbar class="progress_bar"
+                                       [value]="convertPollPercent().second"
+                                       (click)="voteForPost(2)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 2}">{{post.poll.choice2}}</span></ngb-progressbar>
+                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().second}}%</span>
+                  </div>
+                  <div class="progress_wrapp" *ngIf="post.poll.choice3">
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '3' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice3}}</span>
+                      <ngb-progressbar class="progress_bar"
+                                       [value]="convertPollPercent().third"
+                                       (click)="voteForPost(3)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 3}">{{post.poll.choice3}}</span></ngb-progressbar>
+                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().third}}%</span>
+                  </div>
+                  <div class="progress_wrapp" *ngIf="post.poll.choice4">
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '4' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice4}}</span>
+                      <ngb-progressbar class="progress_bar"
+                                       [value]="convertPollPercent().forth"
+                                       (click)="voteForPost(4)" *ngIf="post.poll.voted"><span class="inside_bar" [ngClass]="{'icon-circle-check': post.poll.voted === 4}">{{post.poll.choice4}}</span></ngb-progressbar>
+                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().forth}}%</span>
+                  </div>
+
+                  <div class="vote_info_wrapp"  *ngIf="post.poll">
+                      <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+                      <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+                  </div>
+
+              </div>
 
 
           </div>
@@ -119,15 +156,17 @@
 
 
 
-      <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm)" *ngIf="post.allow_comment_flag && walls.member">
-          <input type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="Enter your comment...">
-          <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>
-          <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
-              <label for="comment_file" class="add_button icon-clip"></label>
+      <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm)" *ngIf="post.allow_comment_flag && walls.member && !walls.banned">
+          <div class="alighn_wrapp">
+              <textarea type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="Enter your comment..."></textarea>
+              <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>
+              <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
+                  <label for="comment_file" class="add_button icon-clip"></label>
+              </div>
+              <button type="submit" class="send_button icon-plane"></button>
           </div>
-          <button type="submit" class="send_button icon-plane"></button>
       </form>
-      <p class="comments_not_allowed" *ngIf="!post.allow_comment_flag || !walls.member">{{!post.allow_comment_flag ? 'Comments are disabled' : 'Only members can to comment'}}</p>
+      <p class="comments_not_allowed" *ngIf="!post.allow_comment_flag || !walls.member || walls.banned">{{!post.allow_comment_flag ? 'Comments are disabled' : "You can't comment"}}</p>
 
 
 
