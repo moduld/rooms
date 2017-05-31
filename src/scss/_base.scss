@@ -63,6 +63,7 @@ $font_bold: Bold, sans-serif;
 
 .user_info{
   @extend .flex-center;
+  cursor: pointer;
   .avatar{
     height: 32px;
     width: 32px;

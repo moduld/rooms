@@ -42,6 +42,11 @@ import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PrivateRoomComponent } from './modals/private-room/private-room.component';
 import { SliderComponent } from './slider/slider.component';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AboutUserComponent } from './components/about-user/about-user.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -52,12 +57,21 @@ let settingsRoutes: Routes = [
   { path: 'members-list', component: MembersListComponent}
 ];
 
+let userSettingsRoutes : Routes = [
+  { path: 'edit-profile', component: EditProfileComponent},
+  { path: 'user-profile', component: ProfileComponent},
+  { path: 'change-password', component: ChangePasswordComponent},
+  { path: 'about-user/:id', component: AboutUserComponent}
+];
+
 let appRoutes: Routes =[
   { path: 'room/:id', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
   { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
   { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes},
+  { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes},
+  { path: 'about-user/:id', component: AboutUserComponent},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -86,7 +100,12 @@ let appRoutes: Routes =[
     PrivateRoomComponent,
     SliderComponent,
     TimeAgoPipe,
-    ScroolEndDirective
+    ScroolEndDirective,
+    ProfileComponent,
+    EditProfileComponent,
+    UserSettingsComponent,
+    ChangePasswordComponent,
+    AboutUserComponent
   ],
   imports: [
     BrowserModule,

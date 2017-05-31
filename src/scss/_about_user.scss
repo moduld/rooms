@@ -1,0 +1,31 @@
+:host {
+  flex: auto;
+  width: 100%;
+  background: $posts_background;
+  color: $gray_text;
+  position: relative;
+  margin-top: 60px;
+}
+.main_container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+
+
+
+@media screen and (max-width: 768px){
+  :host{
+    margin-top: 115px;
+  }
+}
+
+@media screen and (max-width: 550px){
+  :host{
+    margin-top: 143px;
+  }
+
+}

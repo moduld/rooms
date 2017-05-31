@@ -12,7 +12,7 @@
 
     <div class="posts" *ngFor="let post of allPosts; let i = index"  >
         <div class="post_info">
-                 <span class="user_info">
+                 <span class="user_info" [routerLink]="['/about-user', post.owner.user_id]">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.user_name}}</span>
                 </span>
@@ -21,8 +21,6 @@
         <i class="line"></i>
         <div class="post_body"     (click)="openPostDetailsModal(post)">
             <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
-            <!--<p class="post_text" *ngIf="post.poll">{{post.poll.question}}</p>-->
-
 
             <div class="post_images_wrapp " *ngIf="post.media.length"
                  [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">

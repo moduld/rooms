@@ -541,6 +541,25 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
+  editUserProfile(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      about: dataToServer.userData.about,
+      display_name: dataToServer.userData.display_name,
+      msg_from_anyone: dataToServer.userData.msg_from_anyone ? 1 : 0,
+      user_name: dataToServer.userData.user_name,
+      multimedia: dataToServer.multimedia
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'user/update/profile'
+    };
+
+    return this.makePostRequest(data)
+  }
+
   makePostRequest(data: any): Observable<any> {
 
     return this.http.post(this.commonLink + data.apiLink, JSON.stringify(data.sendData), this.options).map((resp:Response)=>{

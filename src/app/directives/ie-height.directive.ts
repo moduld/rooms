@@ -5,25 +5,41 @@ import { Directive, ElementRef, OnInit } from '@angular/core';
 })
 export class IeHeightDirective implements OnInit{
 
-  constructor(private elementRef: ElementRef) {
-  }
+
+  element: any = this.elementRef;
+  elementHeight: number;
+
+  constructor(private elementRef: ElementRef) {}
+
+
 
 ngOnInit() {
-    this.changeHeight();
-    window.addEventListener('resize',  this.changeHeight);
-}
-  changeHeight():void {
 
-    if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)){
-    if(this.elementRef.nativeElement.offsetHeight > document.body.offsetHeight){
-      document.body.style.height = 'auto';
-    } else {
-      document.body.style.height = '100%';
-    }
-    if (this.elementRef.nativeElement.offsetHeight > this.elementRef.nativeElement.parentNode.offsetHeight){
-      document.body.style.height = 'auto';
-    }
+  if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)){
+
+    this.setIEHeight();
+
+    setInterval(()=>{
+
+      this.element.nativeElement.offsetHeight !== this.elementHeight &&  this.setIEHeight();
+
+    }, 1000);
   }
+
 }
 
+  setIEHeight():void {
+
+      if(this.element.nativeElement.offsetHeight > document.body.offsetHeight){
+        document.body.style.height = 'auto';
+      } else {
+        document.body.style.height = '100%';
+      }
+      if (this.element.nativeElement.offsetHeight > this.element.nativeElement.parentNode.offsetHeight){
+        document.body.style.height = 'auto';
+      }
+
+      this.elementHeight = this.element.nativeElement.offsetHeight
+
+  }
 }

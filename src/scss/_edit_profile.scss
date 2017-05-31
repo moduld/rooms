@@ -1,0 +1,159 @@
+:host{
+  width: 100%;
+  max-width: 800px;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+}
+.form_wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.left_zone_wrapper{
+  flex: 1;
+  margin-right: 15px;
+  border-radius: 5px;
+  background-color: $gray_background;
+  @extend .flex-column;
+  justify-content: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 350px;
+}
+.add_photo_button{
+  padding: 10px 20px;
+  border-radius: 23px;
+  background: transparent;
+  @extend .flex-center;
+  color: white;
+  border: 1px solid white;
+  margin: auto auto 30px;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover{
+    color: $blue;
+    border: 1px solid $blue;
+  }
+}
+
+.right_zone_wrapper{
+  flex: 1;
+  margin-left: 15px;
+}
+.room_description{
+  resize: none;
+  height: 79px;
+}
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 35px auto 0;
+  cursor: pointer;
+  display: block;
+}
+.input_wrapp{
+  @extend .flex-column;
+  color: $blue;
+  font-weight: 600;
+}
+.with_margin{
+  margin-top: 22px;
+  .input_field{
+    margin-top: 10px;
+    &:first-child{
+      margin-top: 0;
+    }
+  }
+}
+.input_field{
+  border: 1px solid $gray_background;
+  border-radius: 5px;
+  padding: 7px 10px;
+  width: 100%;
+}
+.toggle_wrapper{
+  color: $dark_text;
+  @extend .flex-between;
+  align-items: center;
+  &:last-child{
+    margin-top: 10px;
+  }
+}
+.toggle_field{
+  width: 50px;
+  height: 25px;
+  background: $gray_background;
+  border-radius: 12px;
+  @extend .flex-center;
+  justify-content: flex-start;
+  &:before{
+    content: '';
+    height: 23px;
+    width: 23px;
+    border-radius: 50%;
+    background: white;
+    display: block;
+    margin: 1px;
+    transform: translate3d(0, 0, 0);
+    transition: 0.3s;
+  }
+}
+.toggle_input:checked + .toggle_field{
+  background: $blue;
+  &:before{
+    transform: translate3d(25px, 0, 0);
+  }
+}
+
+.mistake{
+  display: none;
+  width: 100%;
+  padding: 8px;
+  background: $red_dot;
+  font-family: sans-serif;
+  border-radius: 5px;
+  margin-top: 3px;
+  color: white;
+}
+
+
+.input_field.ng-touched.input_field.ng-invalid{
+  border: 1px solid $red_dot;
+}
+.input_field.ng-touched.input_field.ng-invalid ~ .mistake{
+  display: block;
+}
+
+@media screen and (max-width: 900px){
+  .form_wrapper{
+    flex-direction: column;
+  }
+  .left_zone_wrapper,
+  .right_zone_wrapper{
+    margin: 0;
+    width: 100%;
+  }
+  .right_zone_wrapper{
+    margin-top: 20px;
+  }
+}
+
+
+@media screen and (max-width: 550px){
+  :host{
+    padding: 10px 10px 20px;
+  }
+.add_photo_button{
+  font-size: 14px;
+}
+}

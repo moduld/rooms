@@ -1,10 +1,4 @@
 <div class="main_container" appIeHeight>
-    <!--<div class="rooms new_room" >-->
-        <!--<div class="image"></div>-->
-        <!--<div class="room_info">-->
-            <!--<h4 class="room_name">add room</h4>-->
-        <!--</div>-->
-    <!--</div>-->
 
     <div class="rooms"  *ngFor="let room of allRooms; let i = index"
          [routerLink]="['/room', room.room.room_id]" [ngStyle]="{'background-color': room.room.color}">
