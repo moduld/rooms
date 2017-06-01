@@ -1,25 +1,23 @@
+<div class="main_container" [ngClass]="{'non_child': !this.child_preficse}">
 
-  <div class="user_info_wrapp">
+  <div class="user_info_wrapp" *ngIf="currentUser">
     <div class="avatar_name_wrapp">
-      <span class="avatar"></span>
-      <span class="name">User Name<span class="displayed_name">Username</span></span>
+      <span class="avatar" [ngStyle]="{'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
+      <span class="name">{{currentUser.user_name}}<span class="displayed_name">{{currentUser.display_name}}</span></span>
     </div>
-    <p class="about_user">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      Alias atque dolores eos, ipsam, iusto, labore minus odit quae sit
-      sunt suscipit voluptas voluptates. A ab amet est ex facilis sed suscipit
-      unde. Fuga fugit itaque nobis perspiciatis quas tempore voluptatem. Corporis
-      ea eius error ex mollitia quos ratione, saepe vero.</p>
+    <p class="about_user">{{currentUser.about}}</p>
     <div class="buttons_wrapp">
-      <span class="button icon-star-empty"></span>
+      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave}" (click)="faveAndUnfave()"></span>
       <span class="button icon-comments"></span>
     </div>
   </div>
 
-  <div class="tags_wrapp">
-    <span class="tags">Rooms (29)</span>
-    <span class="tags">Posts (20)</span>
-    <span class="tags">Fans (23)</span>
-    <span class="tags">Favs (20)</span>
+  <div class="tags_wrapp" *ngIf="currentUser">
+    <span class="tags" [routerLink]="child_preficse + '/about-user/' + user_id + '/user-rooms'" routerLinkActive="active">Rooms ({{currentUser.rooms_count}})</span>
+    <span class="tags" [routerLink]="child_preficse + '/about-user/' + user_id + '/user-posts'" routerLinkActive="active">Posts ({{currentUser.posts_count}})</span>
+    <span class="tags" [routerLink]="child_preficse + '/about-user/' + user_id + '/user-fans'" routerLinkActive="active">Fans ({{currentUser.fans_count}})</span>
+    <span class="tags" [routerLink]="child_preficse + '/about-user/' + user_id + '/user-faves'" routerLinkActive="active">Favs ({{currentUser.faves_count}})</span>
   </div>
 
+</div>
   <router-outlet></router-outlet>

@@ -42,11 +42,14 @@ import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PrivateRoomComponent } from './modals/private-room/private-room.component';
 import { SliderComponent } from './slider/slider.component';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
-import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { AboutUserComponent } from './components/about-user/about-user.component';
+import { UsersRoomsInProfileComponent } from './components/users-rooms-in-profile/users-rooms-in-profile.component';
+import { UsersPostsInProfileComponent } from './components/users-posts-in-profile/users-posts-in-profile.component';
+import { UsersFansInProfileComponent } from './components/users-fans-in-profile/users-fans-in-profile.component';
+import { UsersFavesInProfileComponent } from './components/users-faves-in-profile/users-faves-in-profile.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -56,12 +59,18 @@ let settingsRoutes: Routes = [
   { path: 'walls-list', component: WallsListComponent},
   { path: 'members-list', component: MembersListComponent}
 ];
+let aboutUserChildRoutes = [
+  { path: 'user-rooms', component: UsersRoomsInProfileComponent},
+  { path: 'user-posts', component: UsersPostsInProfileComponent},
+  { path: 'user-fans', component: UsersFansInProfileComponent},
+  { path: 'user-faves', component: UsersFavesInProfileComponent},
+  { path: '',redirectTo: 'user-rooms', pathMatch:'full'}
+];
 
 let userSettingsRoutes : Routes = [
   { path: 'edit-profile', component: EditProfileComponent},
-  { path: 'user-profile', component: ProfileComponent},
   { path: 'change-password', component: ChangePasswordComponent},
-  { path: 'about-user/:id', component: AboutUserComponent}
+  { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes}
 ];
 
 let appRoutes: Routes =[
@@ -71,7 +80,7 @@ let appRoutes: Routes =[
   { path: 'login', component: LogInComponent},
   { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes},
   { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes},
-  { path: 'about-user/:id', component: AboutUserComponent},
+  { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -101,11 +110,14 @@ let appRoutes: Routes =[
     SliderComponent,
     TimeAgoPipe,
     ScroolEndDirective,
-    ProfileComponent,
     EditProfileComponent,
     UserSettingsComponent,
     ChangePasswordComponent,
-    AboutUserComponent
+    AboutUserComponent,
+    UsersRoomsInProfileComponent,
+    UsersPostsInProfileComponent,
+    UsersFansInProfileComponent,
+    UsersFavesInProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -45,6 +45,7 @@
   height: 100%;
   padding-top: 90px;
   padding-left: 20px;
+  z-index: 2;
 }
 #navigation_menu_toggle{
   &:checked + .aside{

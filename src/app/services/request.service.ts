@@ -38,6 +38,30 @@ export class RequestService  {
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
+  getOnlyUsersRooms(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_rooms', dataToServer);
+
+    return this.http.get(this.commonLink + 'room/user/list', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().rooms;
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  getUserDetails(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_details', dataToServer);
+
+    return this.http.get(this.commonLink + 'user/get/details', {headers: this.headers, search: params}).map((resp:Response)=>{
+      return resp.json().user;
+    })
+        .catch((error: any)=> { return Observable.throw(error);});
+  }
+
   getSuggestionRooms(): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();
@@ -555,6 +579,22 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'user/update/profile'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  faveUnfaveUser(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      user_id_fave: dataToServer.user_id_fave,
+      fave: dataToServer.is_fave ? 0 : 1
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'user/fave'
     };
 
     return this.makePostRequest(data)

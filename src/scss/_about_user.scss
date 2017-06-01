@@ -39,6 +39,7 @@
 .about_user{
   padding: 0 20px;
   color: $dark_text;
+  flex: auto;
 }
 .buttons_wrapp{
   @extend .flex-column;
@@ -63,7 +64,7 @@
 }
 .tags_wrapp{
   @extend .flex-center;
-  margin: 30px auto;
+  margin: 30px auto 5px;
 }
 .tags{
   width: 165px;
@@ -81,17 +82,65 @@
     background: $blue;
   }
 }
-
+.active{
+  background: $blue;
+  color: white;
+}
+.non_child{
+  margin-top: 90px;
+}
 
 @media screen and (max-width: 768px){
-  :host{
-    margin-top: 115px;
+  .non_child{
+    margin-top: 145px;
+  }
+  .user_info_wrapp{
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .avatar_name_wrapp{
+    min-width: inherit;
+  }
+  .about_user{
+    order: 1;
+    width: 100%;
+    padding: 20px 0 0;
+  }
+  .tags_wrapp{
+    flex-wrap: wrap;
+  }
+  .tags{
+    width: 25%;
+    margin: 0 12.5% 15px;
   }
 }
 
 @media screen and (max-width: 550px){
-  :host{
-    margin-top: 143px;
+  .non_child{
+    margin-top: 173px;
   }
-
+  .user_info_wrapp{
+    padding: 10px;
+  }
+  .avatar{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .name{
+    font-size: 16px;
+  }
+  .displayed_name{
+    font-size: 13px;
+  }
+  .button{
+    height: 30px;
+    width: 30px;
+  }
+  .tags_wrapp{
+    flex-direction: column;
+  }
+  .tags{
+    width: 165px;
+  }
 }

@@ -1,11 +1,12 @@
 <div class="room_settings_header">{{currentRoom.room_details.room_alias}}</div>
 <div class="main_container">
+    <input type="checkbox" id="navigation_menu_toggle" hidden>
     <aside class="aside">
+        <div class="label_wrapp">
+            <label for="navigation_menu_toggle" class="show_menu_label icon-menu"></label>
+        </div>
         <ul class="aside_content">
             <li class="aside_items aside_items_title">Members</li>
-            <li class="aside_items">Joiner requests</li>
-            <li class="aside_items">Add moderator</li>
-            <li class="aside_items">Add talker</li>
             <li class="aside_items" [routerLink]="'/room-settings/members-list'" routerLinkActive="active">Membership</li>
             <li class="aside_items aside_items_title">Walls</li>
             <li class="aside_items" [routerLink]="'/room-settings/add-wall'" routerLinkActive="active">Add wall</li>

@@ -75,11 +75,20 @@
   }
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 768px){
   .input_wrapp{
     max-width: 100%;
   }
   .toggle_wrapper {
     max-width: 100%;
   }
+}
+
+@media screen and (max-width: 400px){
+.modal_wrapper{
+  padding: 30px 10px;
+}
+.toggle_name{
+  font-size: 14px;
+}
 }
