@@ -1,5 +1,9 @@
 <div class="main_container" appIeHeight>
+  <input type="checkbox" id="navigation_menu_toggle" hidden>
   <aside class="aside">
+    <div class="label_wrapp">
+      <label for="navigation_menu_toggle" class="show_menu_label icon-menu"></label>
+    </div>
     <ul class="aside_content">
       <li class="aside_items aside_items_title">User Menu</li>
       <li class="aside_items"  [routerLink]="['/user-settings/about-user', currentUser.user_data.user_id]" routerLinkActive="active">User Page</li>
