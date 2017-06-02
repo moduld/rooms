@@ -1,4 +1,4 @@
-<div class="main_container">
+<div class="main_container" >
 
 <div class="rooms"  *ngFor="let room of allRooms; let i = index"
      [routerLink]="['/room', room.room.room_id]" [ngStyle]="{'background-color': room.room.color}">

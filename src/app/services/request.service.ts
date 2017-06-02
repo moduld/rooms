@@ -26,16 +26,30 @@ export class RequestService  {
   headers: Headers = new Headers({ 'Content-Type': 'application/json' });
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
+  addRequiredDataToTheService(): void {
+    let storedUserData = this.storeservice.getUserData();
+    if (storedUserData){
+      this.userId = storedUserData['user_data']['user_id'];
+      this.token = storedUserData['token'];
+      if (this.headers.get('Authorization') === null){
+        this.headers.append('Authorization', "Bearer " + this.token);
+        this.options = new RequestOptions({ headers: this.headers })
+      }
+    }
+  }
+
   getAllRooms(): Observable<Room[]> {
 
     !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
-    return this.http.get(this.commonLink + 'room/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-          return resp.json().rooms;
-        })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'room/list'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   getOnlyUsersRooms(dataToServer: any): Observable<Room[]> {
@@ -44,10 +58,12 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('user_id_rooms', dataToServer);
 
-    return this.http.get(this.commonLink + 'room/user/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().rooms;
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'room/user/list'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   getUserDetails(dataToServer: any): Observable<Room[]> {
@@ -56,10 +72,84 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('user_id_details', dataToServer);
 
-    return this.http.get(this.commonLink + 'user/get/details', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().user;
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'user/get/details'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getOnlyUsersPosts(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_post', dataToServer.user_id_post);
+    params.set('offset_id', dataToServer.offset_id);
+    params.set('direction_flag', dataToServer.direction_flag );
+
+    let data = {
+      params: params,
+      apiLink: 'wall/post/get/user'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getUsersFans(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id_profile', dataToServer.user_id);
+    params.set('user_id_last', dataToServer.user_id_last );
+
+    let data = {
+      params: params,
+      apiLink: 'user/get/fans'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getUsersFaves(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id_profile', dataToServer.user_id);
+    params.set('user_id_last', dataToServer.user_id_last );
+
+    let data = {
+      params: params,
+      apiLink: 'user/get/faves'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getMutedUsersList(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_last', dataToServer.user_id_last );
+
+    let data = {
+      params: params,
+      apiLink: 'user/get/mutes'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getBlockedUsersList(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_last', dataToServer.user_id_last );
+
+    let data = {
+      params: params,
+      apiLink: 'user/get/blocks'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   getSuggestionRooms(): Observable<Room[]> {
@@ -67,10 +157,12 @@ export class RequestService  {
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
-    return this.http.get(this.commonLink + 'room/suggest', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().rooms;
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'room/suggest'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   getRoomsBySearch(search: string): Observable<Room[]> {
@@ -79,13 +171,16 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('search_term', search);
 
-    return this.http.get(this.commonLink + 'room/search', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().rooms;
-    })
-        .catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'room/search'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   getWalls( room_id: any ): Observable<Wall> {
+
     !this.token && this.addRequiredDataToTheService();
     this.roomId = room_id;
 
@@ -93,12 +188,12 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
 
+    let data = {
+      params: params,
+      apiLink: 'room/wall/list'
+    };
 
-    return this.http.get(this.commonLink + 'room/wall/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-
-      return resp.json();
-    })
-      .catch((error: any)=> { return Observable.throw(error);});
+    return this.makeGetRequest(data)
 }
 
   getRoomPosts( wall_id: any ): Observable<Post[]> {
@@ -107,26 +202,30 @@ export class RequestService  {
     params.set('room_id', this.roomId);
     params.set('wall_id', wall_id);
 
-    return this.http.get(this.commonLink + 'wall/post/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().posts;
-    }).catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'wall/post/get/all'
+    };
 
+    return this.makeGetRequest(data)
   }
 
-  getPostComments( data: any ): Observable<Post[]> {
+  getPostComments( dataToServer: any ): Observable<Post[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('post_id', data.post_id);
-    params.set('offset_id', data.offset);
-    let direction = data.order_by === 'date_newer' ? '0' : '1';
+    params.set('post_id', dataToServer.post_id);
+    params.set('offset_id', dataToServer.offset);
+    let direction = dataToServer.order_by === 'date_newer' ? '0' : '1';
     params.set('direction_flag', direction);
-    params.set('order_by', data.order_by);
+    params.set('order_by', dataToServer.order_by);
 
-    return this.http.get(this.commonLink + 'wall/comment/get/all', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json().comments;
-    }).catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'wall/comment/get/all'
+    };
 
+    return this.makeGetRequest(data)
   }
 
   getRoomMembers(member_type: string): Observable<any[]> {
@@ -135,23 +234,12 @@ export class RequestService  {
     params.set('room_id', this.roomId);
     params.set('member_type', member_type);
 
-    return this.http.get(this.commonLink + 'room/member/list', {headers: this.headers, search: params}).map((resp:Response)=>{
-      return resp.json();
-    }).catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'room/member/list'
+    };
 
-  }
-
-  addRequiredDataToTheService(): void {
-    let storedUserData = this.storeservice.getUserData();
-    if (storedUserData){
-      console.log(storedUserData)
-      this.userId = storedUserData['user_data']['user_id'];
-      this.token = storedUserData['token'];
-      if (this.headers.get('Authorization') === null){
-        this.headers.append('Authorization', "Bearer " + this.token);
-        this.options = new RequestOptions({ headers: this.headers })
-      }
-    }
+    return this.makeGetRequest(data)
   }
 
   registration(user_data: any) : Observable<UserInfo> {
@@ -264,7 +352,6 @@ export class RequestService  {
       post_id: post.post_id,
       room_id: post.room_id,
       wall_id: post.move_to_wall_id
-
     };
 
     let data = {
@@ -284,9 +371,12 @@ export class RequestService  {
     params.set('ext', settings.ext);
     params.set('num_urls', '1');
 
-    return this.http.get(this.commonLink + 'getSignedURL', {search: params}).map((resp:Response)=>{
-      return resp.json();
-    }).catch((error: any)=> { return Observable.throw(error);});
+    let data = {
+      params: params,
+      apiLink: 'getSignedURL'
+    };
+
+    return this.makeGetRequest(data)
   }
 
   fileUpload(settings: any): Observable<any>{
@@ -607,5 +697,16 @@ export class RequestService  {
       return resp.json();
     })
         .catch((error: any)=> { return Observable.throw(error);});
+  }
+
+  makeGetRequest(data: any): Observable<any> {
+
+    return this.http.get(this.commonLink + data.apiLink, {headers: this.headers, search: data.params})
+        .map((resp:Response)=>{
+      return resp.json();
+    })
+        .catch((error: any)=>{
+      return Observable.throw(error);
+    });
   }
 }

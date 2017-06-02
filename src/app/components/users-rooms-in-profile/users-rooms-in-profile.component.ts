@@ -30,8 +30,7 @@ export class UsersRoomsInProfileComponent implements OnInit {
 
     this.requestService.getOnlyUsersRooms(this.user_id).subscribe(
         data=>{
-         console.log(data)
-          this.allRooms = data;
+          this.allRooms = data['rooms'];
         }, error => {this.error = error; console.log(error);}
     );
   }

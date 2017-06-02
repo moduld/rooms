@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
+import { EventsExchangeService } from '../../services/events-exchange.service';
+
 import { RequestService } from '../../services/request.service';
 
 
@@ -21,7 +23,8 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
-              private router: Router) { }
+              private router: Router,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit():void {
 
@@ -29,7 +32,12 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     this.tree = parses.root.children.primary.segments;
     this.tree.length > 3 ? this.child_preficse = '/user-settings' : this.child_preficse = '';
     this.subscription = this.activateRoute.params.subscribe(params=>{this.user_id = params.id; console.log(params)});
-    this.getUserInfo()
+    this.getUserInfo();
+
+    this.exchangeService.dataChangedFromUserSettings.subscribe(
+        search => {
+          this.changeTagsData(search)
+        });
   }
 
   ngOnDestroy():void {
@@ -40,8 +48,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
     this.requestService.getUserDetails(this.user_id).subscribe(
         data=>{
-          this.currentUser = data;
-          console.log(data)
+          this.currentUser = data['user'];
         },
         error => {this.error = error; console.log(error);}
     )
@@ -62,6 +69,13 @@ export class AboutUserComponent implements OnInit, OnDestroy {
         error => {this.error = error; console.log(error);}
     )
 
+  }
+
+  changeTagsData(flag: string):void {
+
+    flag === 'post' &&  this.currentUser.posts_count--;
+    this.child_preficse && flag === 'fave' && this.currentUser.faves_count++;
+    this.child_preficse && flag === 'unfave' && this.currentUser.faves_count--
   }
 
 }

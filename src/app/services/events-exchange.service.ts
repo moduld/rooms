@@ -14,11 +14,13 @@ export class EventsExchangeService {
   private headerChangeSourse = new Subject<any>();
   private headerRoomSearch = new Subject<any>();
   private headerRoomSuggetsRooms = new Subject<any>();
+  private dataChangedFromSettings = new Subject<any>();
 
   changeEmitted = this.emitChangeSource.asObservable();
   changeHeaderViewEmitted = this.headerChangeSourse.asObservable();
   makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
   makeHeaderRoomSuggestRequest = this.headerRoomSuggetsRooms.asObservable();
+  dataChangedFromUserSettings = this.dataChangedFromSettings.asObservable();
 
   wallsToHeader(change: any):void {
     this.emitChangeSource.next(change);
@@ -36,5 +38,8 @@ export class EventsExchangeService {
     this.headerRoomSuggetsRooms.next(flag);
   }
 
+  changeQuontityOfItemsInUserSettings(data: string): void {
+    this.dataChangedFromSettings.next(data);
+  }
 
 }

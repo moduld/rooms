@@ -183,7 +183,20 @@ $font_bold: Bold, sans-serif;
 .ps-container:hover>.ps-scrollbar-y-rail:hover>.ps-scrollbar-y{
   background: $blue;
 }
-
+.loading{
+  padding: 30px;
+  text-align: center;
+  animation: blink 1.5s linear infinite;
+  color: $dark_text;
+  font-size: 15px;
+  display: block;
+  width: 100%;
+}
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
 
 @media screen and (max-width: 1190px){
   .main_container{

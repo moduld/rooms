@@ -50,6 +50,7 @@ import { UsersRoomsInProfileComponent } from './components/users-rooms-in-profil
 import { UsersPostsInProfileComponent } from './components/users-posts-in-profile/users-posts-in-profile.component';
 import { UsersFansInProfileComponent } from './components/users-fans-in-profile/users-fans-in-profile.component';
 import { UsersFavesInProfileComponent } from './components/users-faves-in-profile/users-faves-in-profile.component';
+import { MutedBlockedComponent } from './components/muted-blocked/muted-blocked.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -70,6 +71,7 @@ let aboutUserChildRoutes = [
 let userSettingsRoutes : Routes = [
   { path: 'edit-profile', component: EditProfileComponent},
   { path: 'change-password', component: ChangePasswordComponent},
+  { path: 'muted-blocked', component: MutedBlockedComponent},
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes}
 ];
 
@@ -117,7 +119,8 @@ let appRoutes: Routes =[
     UsersRoomsInProfileComponent,
     UsersPostsInProfileComponent,
     UsersFansInProfileComponent,
-    UsersFavesInProfileComponent
+    UsersFavesInProfileComponent,
+    MutedBlockedComponent
   ],
   imports: [
     BrowserModule,

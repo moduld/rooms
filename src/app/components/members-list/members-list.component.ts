@@ -50,7 +50,6 @@ export class MembersListComponent implements OnInit {
 
     this.requestService.getRoomMembers(this.member_toggler).subscribe(
         data=>{
-          console.log(data)
           this.users = data['users'];
         },
         error => {this.error = error; console.log(error);}

@@ -27,7 +27,6 @@ export class PostDetailsComponent implements OnInit {
   inProcess: boolean;
   dataToServer: any = {};
   textField: string = '';
-    config: any = {};
     banDays: number = 0;
     currentUserData: UserInfo;
     flagMoveY: boolean = true;
@@ -43,8 +42,7 @@ export class PostDetailsComponent implements OnInit {
               private storeservice: UserStoreService) { }
 
   ngOnInit() {
-    console.log(this.post)
-    console.log(this.walls)
+
       this.currentUserData = this.storeservice.getUserData();
         this.comments_sort_type = 'date_newer';
         this.comment_offset = 0;
@@ -59,9 +57,6 @@ export class PostDetailsComponent implements OnInit {
       let modaldialog = document.querySelector('.modal-dialog');
       this.post.media && this.post.media.length ? modaldialog.classList.add('post_details_modal_hi_width') : modaldialog.classList.add('post_details_modal_low_width')
     });
-
-      this.config.suppressScrollX = true;
-
   }
 
   likeAndUnlikePost(post_id: number, flag: number): void{
@@ -173,9 +168,8 @@ export class PostDetailsComponent implements OnInit {
 
       this.requestService.getPostComments(dataToServer).subscribe(
           data=>{
-              console.log(data)
-              if (data.length){
-                  this.comments = this.comments.concat(data);
+              if (data['comments'].length){
+                  this.comments = this.comments.concat(data['comments']);
                   this.flagMoveY = true;
               }
 

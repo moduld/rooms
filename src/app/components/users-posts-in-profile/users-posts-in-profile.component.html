@@ -1,3 +1,61 @@
-<p>
-  users-posts-in-profile works!
-</p>
+<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
+  <div class="posts" *ngFor="let post of allPosts; let i = index"  >
+    <div class="post_info">
+                 <span class="user_info" [routerLink]="['/about-user', post.owner.user_id]">
+                    <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="name">{{post.owner.user_name}}</span>
+                </span>
+      <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+    </div>
+    <i class="line"></i>
+    <div class="post_body"     (click)="openPostDetailsModal(post)">
+      <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
+
+      <div class="post_images_wrapp " *ngIf="post.media.length"
+           [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
+
+        <div class="post_images" *ngFor="let img of post.media"
+             [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
+      </div>
+      <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
+        <div class="post_images poll_thumbnail"></div>
+      </div>
+
+      <div class="vote_info_wrapp"  *ngIf="post.poll">
+        <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+        <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+      </div>
+
+
+    </div>
+
+    <div class="post_footer">
+      <div class="icons_wrapper">
+                <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}"
+                      (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)">{{post.likes_count}}</span>
+        <span class="icon-bubble">{{post.comments_count}}</span>
+      </div>
+      <div class="drop_down_container">
+        <div class="dots_wrapp">
+          <i class="dots"></i>
+          <i class="dots"></i>
+          <i class="dots"></i>
+        </div>
+        <ul class="drop_down_menu"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
+          <li class="drop_down_item drop_down_title">
+            Post menu
+          </li>
+
+          <li class="drop_down_item" (click)="removePost(post, i)">
+            <span class="drop_down_fill icon-cancel">Delete Post</span>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+</div>

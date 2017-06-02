@@ -3,10 +3,8 @@ import { Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
 import { RequestService } from '../../services/request.service';
-// import { EventsExchangeService } from '../../services/events-exchange.service';
 import {UserStoreService} from '../../services/user-store.service';
 
-import { Wall } from '../../commonClasses/wall';
 import { Post } from '../../commonClasses/posts';
 import { UserInfo } from '../../commonClasses/userInfo';
 
@@ -91,8 +89,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     this.requestService.getRoomPosts(wallId).subscribe(
         data=>{
-          console.log(data);
-          this.allPosts = data;
+          this.allPosts = data['posts'];
           this.wallId = wallId
         },
         error => {this.error = error; console.log(error);}

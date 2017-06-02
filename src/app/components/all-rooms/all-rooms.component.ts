@@ -59,7 +59,7 @@ export class AllRoomsComponent implements OnInit {
                       data.splice(i, 1)
                   }
               }
-              this.allRooms = data;
+              this.allRooms = data['rooms'];
           }, error => {this.error = error; console.log(error);}
       );
   }
@@ -68,7 +68,7 @@ export class AllRoomsComponent implements OnInit {
 
       this.requestService.getRoomsBySearch(search).subscribe(
           data=>{
-              this.allRooms = this.addRequiredInfo.addInfo(data)
+              this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {this.error = error; console.log(error);}
       );
   }
@@ -77,7 +77,7 @@ export class AllRoomsComponent implements OnInit {
 
       this.requestService.getSuggestionRooms().subscribe(
           data=>{
-              this.allRooms = this.addRequiredInfo.addInfo(data)
+              this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {this.error = error; console.log(error);}
       );
   }

@@ -11,6 +11,7 @@
     align-items: flex-start;
     padding-bottom: 10px;
     flex-wrap: wrap;
+    margin-top: 30px;
   }
 
   .room_tags{
@@ -49,7 +50,7 @@
     height: 370px;
     max-width: 31%;
     width: 100%;
-    margin: 30px 10px 0;
+    margin: 0 10px 30px;
     border-radius: 5px;
     background: white;
     box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
@@ -257,7 +258,6 @@
 .poll_thumbnail{
   background: gray;
 }
-
 
 
 
