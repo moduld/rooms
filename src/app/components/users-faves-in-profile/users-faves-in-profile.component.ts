@@ -76,9 +76,15 @@ export class UsersFavesInProfileComponent implements OnInit {
           error => {this.error = error; console.log(error);}
       )
     }
+  }
 
+  onScrollRichTheEnd(event): void {
 
-
+    if (this.flagMoveY){
+      this.users_offset = this.allUsers[this.allUsers.length - 1].user_id;
+      this.flagMoveY = false;
+      this.getUserFaves()
+    }
 
   }
 

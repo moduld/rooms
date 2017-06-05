@@ -197,7 +197,13 @@ export class PostDetailsComponent implements OnInit {
 
     commentOwnerInterraction(int_key: string, block_owner_id: number): void {
 
-        this.requestService.blockOrMuteUser(int_key, block_owner_id, 1).subscribe(
+        let dataToServer = {
+            user_interract_key: int_key,
+            user_interract_id: block_owner_id,
+            flag: 1
+        };
+
+        this.requestService.blockOrMuteUser(dataToServer).subscribe(
             data=>{
                 int_key === 'mute' ||  int_key === 'block' ?  this.comments = this.comments.filter((comment)=>{return comment.owner.user_id !== block_owner_id}) : ''
                 !this.comments.length && this.getComments()

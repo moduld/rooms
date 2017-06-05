@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   width: 100%;
 }
+
 .radio_wrapp{
   @extend .flex-center;
   justify-content: center;
@@ -41,7 +42,7 @@
 .members{
   @extend .flex-center;
   flex-direction: column;
-  height: 175px;
+  height: 210px;
   width: 165px;
   border-radius: 5px;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
@@ -96,7 +97,7 @@
   padding: 10px;
 }
 .drop_down_menu{
-  top: 120%;
+  top: 95%;
   left: -111px;
   width: 165px;
 }

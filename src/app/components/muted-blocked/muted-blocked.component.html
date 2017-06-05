@@ -1,12 +1,18 @@
 <div class="radio_wrapp">
   <select name="member_type" class="select" [(ngModel)]="member_toggler" (change)="memberTypeChanged(member_toggler)">
     <option value="muted">Muted</option>
-    <option value="banned">Banned</option>
+    <option value="banned">Blocked</option>
   </select>
 </div>
+<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
-<!--<div class="members" *ngFor="let user of users; let i = index ">-->
-  <!--<span class="image" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }"></span>-->
-  <!--<span class="user_name">{{user.user.user_name}}</span>-->
-  <!--<span class="close icon-cancel" (click)="removeUserFromList(user, i)"></span>-->
-<!--</div>-->
+
+<div class="members" *ngFor="let user of users; let i = index ">
+  <span class="image" [ngStyle]="{'background-image':'url(' + user.thumbnail + ')' }"></span>
+  <span class="user_name">{{user.user_name}}</span>
+  <span class="close icon-cancel" (click)="removeUserFromList(user, i)"></span>
+</div>
+
+  <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
+</div>

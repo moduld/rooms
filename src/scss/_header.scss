@@ -181,7 +181,6 @@
      width: 100%;
    }
    .search{
-     min-width: 200px;
      width: 50%;
    }
    .icons_wrapper{
@@ -202,11 +201,14 @@
       text-align: center;
       max-width: 100%;
     }
+    .main_container{
+      flex-direction: column;
+    }
     .logo{
       margin: 10px auto;
     }
     .search{
-      min-width: 100%;
+      width: 100%;
     }
     .icons_wrapper{
       justify-content: center;

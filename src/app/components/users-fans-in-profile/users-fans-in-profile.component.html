@@ -1,13 +1,13 @@
 <div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
-  <div class="user_wrapp" *ngFor="let user of allUsers; let i = index">
+    <div class="user_wrapp" *ngFor="let user of allUsers; let i = index">
      <span class="user_info" [routerLink]="['/about-user', user.user_id]">
        <span class="avatar" [ngStyle]="{'background-image':'url(' + user.thumbnail + ')' }"></span>
        <span class="name">{{user.user_name}}</span>
      </span>
 
-    <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="faveUser(user)"></span>
-  </div>
+        <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="faveUser(user)"></span>
+    </div>
 
-  <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 </div>

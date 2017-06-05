@@ -1,2 +1,26 @@
 @import '../../../scss/base';
 @import '../../../scss/members_list';
+
+.main_container{
+  max-height: 70vh;
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px){
+  .main_container{
+    max-height: 65vh;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 550px){
+  .main_container{
+    max-height: 56vh;
+    justify-content: center;
+  }
+}

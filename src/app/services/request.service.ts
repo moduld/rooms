@@ -124,7 +124,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getMutedUsersList(dataToServer: any): Observable<Room[]> {
+  getMutedOrBlockedUsersList(dataToServer: any): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -132,21 +132,7 @@ export class RequestService  {
 
     let data = {
       params: params,
-      apiLink: 'user/get/mutes'
-    };
-
-    return this.makeGetRequest(data)
-  }
-
-  getBlockedUsersList(dataToServer: any): Observable<Room[]> {
-
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('user_id', this.userId);
-    params.set('user_id_last', dataToServer.user_id_last );
-
-    let data = {
-      params: params,
-      apiLink: 'user/get/blocks'
+      apiLink: dataToServer.flag === 'muted' ? 'user/get/mutes' : 'user/get/blocks'
     };
 
     return this.makeGetRequest(data)
@@ -228,11 +214,13 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getRoomMembers(member_type: string): Observable<any[]> {
+  getRoomMembers(dataToServer: any): Observable<any[]> {
+
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
-    params.set('member_type', member_type);
+    params.set('member_type', dataToServer.member_type);
+    params.set('user_id_last ', dataToServer.member_type);
 
     let data = {
       params: params,
@@ -273,17 +261,17 @@ export class RequestService  {
     });
   }
 
-  blockOrMuteUser(user_interract_key: string, user_interract_id: number, flag: number): Observable<any> {
+  blockOrMuteUser(dataToServer: any): Observable<any> {
 
     let sendData = {
       user_id: this.userId
     };
-    sendData['user_id_' + user_interract_key] = user_interract_id;
-    sendData[user_interract_key] = flag;
+    sendData['user_id_' + dataToServer.user_interract_key] = dataToServer.user_interract_id;
+    sendData[dataToServer.user_interract_key] = dataToServer.flag;
 
     let data = {
       sendData: sendData,
-      apiLink: 'user/' + user_interract_key
+      apiLink: 'user/' + dataToServer.user_interract_key
     };
 
     return this.makePostRequest(data)

@@ -12,6 +12,9 @@
     <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 0)">Reject all</button>
     <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 1)">Accept all</button>
 </div>
+
+<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
 <div class="members" *ngFor="let user of users | nameFilter: search_model; let i = index ">
     <span class="image" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }"></span>
     <span class="user_name">{{user.user.user_name}}</span>
@@ -33,5 +36,8 @@
             </ul>
         </div>
     </div>
+</div>
+
+    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 
 </div>
