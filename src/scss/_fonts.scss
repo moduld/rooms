@@ -152,21 +152,24 @@
 .icon-comments:before {
   content: "\e920";
 }
-.icon-chevron-left:before {
+.icon-chevron-right:before {
   content: "\e921";
 }
-.icon-menu:before {
+.icon-chevron-left:before {
   content: "\e922";
 }
-.icon-microphone:before {
+.icon-menu:before {
   content: "\e923";
 }
-.icon-circle-check:before {
+.icon-microphone:before {
   content: "\e924";
 }
-.icon-square-check:before {
+.icon-circle-check:before {
   content: "\e925";
 }
-.icon-head:before {
+.icon-square-check:before {
   content: "\e926";
+}
+.icon-head:before {
+  content: "\e927";
 }

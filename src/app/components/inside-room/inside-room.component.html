@@ -7,8 +7,7 @@
 </div>
 
 
-<div class="main_container" appIeHeight>
-
+<div class="main_container" appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
     <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
         <div class="post_info">
@@ -126,8 +125,6 @@
         </div>
 
 
-
-
         <ul class="drop_down_menu" (mouseleave)="onMouseLeave( post)" >
             <li class="drop_down_item drop_down_title">
                 Post menu
@@ -199,20 +196,19 @@
             </li>
             <li class="for_dots">
                 <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
-                    <i class="dots"></i>
-                    <i class="dots"></i>
-                    <i class="dots"></i>
+                    <i class="dots icon-chevron-right"></i>
+                    <i class="dots icon-chevron-right"></i>
+                    <i class="dots icon-chevron-right"></i>
                 </div>
             </li>
         </ul>
-
-
-
 
     </div>
 
     <span class="add_post icon-plus" (click)="openNewPostModal()" *ngIf="membership && currentWall"
           [ngClass]="{'disabled': !currentWall.allow_post_flag && !membership.moderator && !membership.supermoderator && !membership.admin && !membership.talker || !membership.member || membership.banned}"></span>
 
+
+    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 </div>
 

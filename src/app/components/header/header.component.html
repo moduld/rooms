@@ -2,11 +2,11 @@
   <div class="main_container">
     <div class="logo" [routerLink]="'/all-rooms'"></div>
 
-    <div class="search" *ngIf="headerFieldToggle" [ngClass]="{'opened': showSuggestOrDefault}">
+    <div class="search" *ngIf="headerFieldToggle && dontShowBoth" [ngClass]="{'opened': showSuggestOrDefault}">
       <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" (input)="doRoomSearch(room_search)">
       <span class="icon-search" (click)="showSuggestionsRoomsorDefault()"></span>
     </div>
-    <div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle">
+    <div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle && dontShowBoth">
       <div class="dots_wrapp" *ngIf="showDropdownMenu">
         <span class="dots"></span>
         <span class="dots"></span>

@@ -182,11 +182,13 @@ export class RequestService  {
     return this.makeGetRequest(data)
 }
 
-  getRoomPosts( wall_id: any ): Observable<Post[]> {
+  getRoomPosts( dataToServer: any ): Observable<Post[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
-    params.set('wall_id', wall_id);
+    params.set('wall_id', dataToServer.wall_id);
+    params.set('offset_id', dataToServer.offset_id);
+    params.set('direction_flag', '0');
 
     let data = {
       params: params,

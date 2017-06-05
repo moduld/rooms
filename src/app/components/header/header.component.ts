@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   showDropdownMenu: boolean;
   timeoute: any;
     showSuggestOrDefault: boolean;
+    dontShowBoth: boolean;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -42,18 +43,23 @@ export class HeaderComponent implements OnInit {
       router.events.forEach((event) => {
           if (event instanceof NavigationEnd ){
               if (event.url === '/' || event.url === '/all-rooms'){
-                  this.headerFieldToggle = true
+                  this.headerFieldToggle = true;
               }
               if (event.url === '/room-settings' ){
                   this.headerFieldToggle = false;
                   this.showDropdownMenu = false;
+
               }
+
+           event.url.indexOf('about-user') >= 0 ? this.dontShowBoth = false : this.dontShowBoth = true
+
           }
       });
   }
 
   ngOnInit() {
 
+      this.dontShowBoth = true;
       this.headerFieldToggle = true;
       this.showDropdownMenu = true;
       this.showSuggestOrDefault = false;

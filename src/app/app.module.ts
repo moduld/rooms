@@ -58,7 +58,8 @@ let settingsRoutes: Routes = [
   { path: 'add-wall', component: AddWallComponent},
   { path: 'edit-wall/:id', component: EditWallComponent},
   { path: 'walls-list', component: WallsListComponent},
-  { path: 'members-list', component: MembersListComponent}
+  { path: 'members-list', component: MembersListComponent},
+  { path: '',redirectTo: 'members-list', pathMatch:'full'}
 ];
 let aboutUserChildRoutes = [
   { path: 'user-rooms', component: UsersRoomsInProfileComponent},

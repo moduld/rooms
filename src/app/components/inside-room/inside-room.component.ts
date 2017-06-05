@@ -36,6 +36,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     wallsIds: number;
     wallsArray: any;
     currentWall: any;
+    offset: number;
+    flagMoveY: boolean = true;
+    show_loading: boolean;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -52,6 +55,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+      this.allPosts = [];
+      this.offset = 0;
+      this.show_loading = true;
     this.currentUserData = this.storeservice.getUserData();
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
     this.requestService.getWalls(this.roomId).subscribe(
@@ -65,7 +71,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.storeservice.storeCurrentUserRooms(this.wallsArray);
                 this.isAdmin();
                 this.wallsArray['is_admin'] = this.userArmin;
-                this.getPosts(this.wallId);
+                this.getPosts();
                 this.wallsIds = this.wallId;
             }
         },
@@ -85,12 +91,23 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         this.membership['admin'] || this.membership['moderator'] || this.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
     }
 
-  getPosts(wallId: number): void {
+  getPosts(): void {
 
-    this.requestService.getRoomPosts(wallId).subscribe(
+      let dataToServer = {
+          wall_id: this.wallId,
+          offset_id: this.offset
+      };
+
+      this.show_loading = true;
+
+    this.requestService.getRoomPosts(dataToServer).subscribe(
         data=>{
-          this.allPosts = data['posts'];
-          this.wallId = wallId
+            if (data['posts'].length){
+                this.allPosts = this.allPosts.concat(data['posts']);
+                this.flagMoveY = true;
+                this.wallId = dataToServer.wall_id
+            }
+            this.show_loading = false;
         },
         error => {this.error = error; console.log(error);}
     )
@@ -224,7 +241,11 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     goToAnotherWall(tag: any, flag: boolean): void {
 
       this.currentWall = tag;
-      flag && this.getPosts(tag.wall_id)
+        this.wallId = tag.wall_id;
+        this.allPosts = [];
+        this.offset = 0;
+        this.flagMoveY = false;
+      flag && this.getPosts()
     }
 
     onMouseLeave(post: Post): void {
@@ -244,5 +265,15 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.result.then((post) => {
 
         });
+    }
+
+    onScrollRichTheEnd(event): void {
+
+        if (this.flagMoveY){
+            this.offset = this.allPosts[this.allPosts.length - 1].post_id;
+            this.flagMoveY = false;
+            this.getPosts()
+        }
+
     }
 }
