@@ -87,9 +87,9 @@ export class HeaderComponent implements OnInit {
       this.room_search = '';
       this.storeservice.deleteSearchText();
 
-      this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault === 'suggested');
+      this.storeservice.changeSuggestedOrDefault(flag);
 
-      this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault === 'suggested')
+      this.exchangeService.getSuggestRoomsOrUserRooms(flag)
     }
 
     // event go to all-rooms component, and request to server makes there

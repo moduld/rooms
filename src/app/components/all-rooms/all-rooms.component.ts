@@ -33,7 +33,7 @@ export class AllRoomsComponent implements OnInit {
 
         exchangeService.makeHeaderRoomSuggestRequest.subscribe(
             (flag) => {
-                    flag ? this.getSuggestedRooms() : this.getUserRooms()
+                    flag === 'suggested' ? this.getSuggestedRooms() : this.getUserRooms()
             })
   }
 
@@ -42,11 +42,15 @@ export class AllRoomsComponent implements OnInit {
         if (this.storeservice.getSearchText()){
             this.getSearchableRooms(this.storeservice.getSearchText())
         } else {
-            if (this.storeservice.getSuggestedOrDefault()){
-                this.getUserRooms()
-            } else {
-                this.getSuggestedRooms()
-            }
+            this.storeservice.getSuggestedOrDefault() === 'suggested' && this.getSuggestedRooms();
+            this.storeservice.getSuggestedOrDefault() === 'default' && this.getUserRooms();
+            !this.storeservice.getSuggestedOrDefault() && this.getSuggestedRooms()
+
+            // if (this.storeservice.getSuggestedOrDefault()){
+            //     this.getUserRooms()
+            // } else {
+            //     this.getSuggestedRooms()
+            // }
         }
   }
 

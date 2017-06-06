@@ -34,7 +34,7 @@ export class EventsExchangeService {
     this.headerRoomSearch.next(request);
   }
 
-  getSuggestRoomsOrUserRooms(flag: boolean): void {
+  getSuggestRoomsOrUserRooms(flag: string): void {
     this.headerRoomSuggetsRooms.next(flag);
   }
 

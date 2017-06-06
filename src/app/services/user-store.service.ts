@@ -11,7 +11,7 @@ export class UserStoreService {
 
   currentUserRooms: Wall;
   searchRequest: string;
-  suggestedRoomsShow: boolean;
+  suggestedRoomsShow: string;
 
   private roomChanged = new Subject<any>();
   roomChangedAsObservable = this.roomChanged.asObservable();
@@ -51,11 +51,11 @@ export class UserStoreService {
     this.searchRequest = ''
   }
 
-  changeSuggestedOrDefault(flag: boolean): void {
+  changeSuggestedOrDefault(flag: string): void {
     this.suggestedRoomsShow = flag;
   }
 
-  getSuggestedOrDefault(): boolean {
+  getSuggestedOrDefault(): string {
     return this.suggestedRoomsShow
   }
 
