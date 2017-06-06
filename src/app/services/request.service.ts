@@ -140,6 +140,7 @@ export class RequestService  {
 
   getSuggestionRooms(): Observable<Room[]> {
 
+    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 

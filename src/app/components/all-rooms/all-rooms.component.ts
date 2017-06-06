@@ -43,9 +43,9 @@ export class AllRoomsComponent implements OnInit {
             this.getSearchableRooms(this.storeservice.getSearchText())
         } else {
             if (this.storeservice.getSuggestedOrDefault()){
-                this.getSuggestedRooms()
-            } else {
                 this.getUserRooms()
+            } else {
+                this.getSuggestedRooms()
             }
         }
   }

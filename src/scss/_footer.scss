@@ -21,9 +21,17 @@ font-family: $font_medium;
 
 @media screen and (max-width: 768px){
   .footer{
-    flex-direction: column;
     .link{
-      margin-bottom: 10px;
+      margin: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 550px){
+  .footer{
+    .link{
+      padding: 8px 0;
+      font-size: 11px;
     }
   }
 }

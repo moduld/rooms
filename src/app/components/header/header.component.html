@@ -1,8 +1,8 @@
 <header class="header">
   <div class="main_container">
     <div class="logo" >
-      <span class="header_link icon-home" [routerLink]="'/all-rooms'" (click)="showSuggestionsRoomsorDefault(false)">My Tifos</span>
-      <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" (click)="showSuggestionsRoomsorDefault(true)">Discover</span>
+      <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default'}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
+      <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested'}" (click)="showSuggestionsRoomsorDefault('suggested')">Discover</span>
     </div>
     <!--*ngIf="headerFieldToggle && dontShowBoth"-->
     <div class="search"  >

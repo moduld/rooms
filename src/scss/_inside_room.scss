@@ -12,7 +12,7 @@
   padding-bottom: 10px;
   flex-wrap: wrap;
   margin-top: 30px;
-  max-height: 80vh;
+  max-height: calc(100vh - 191px);
   overflow-y: auto;
 }
 .name_and_menu{
@@ -384,7 +384,7 @@
   }
   .main_container{
     padding: 0 10px;
-    max-height: 74.2vh;
+    max-height: calc(100vh - 245px);
   }
 
 }
@@ -401,7 +401,7 @@
     margin-top: 145px;
   }
   .main_container{
-    max-height: 69vh;
+    max-height: calc(100vh - 268px);
   }
   .posts_menu{
     justify-content: center;

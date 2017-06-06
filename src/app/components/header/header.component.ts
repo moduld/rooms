@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   room_search: string;
   headerFieldToggle: boolean;
   showDropdownMenu: boolean;
-    showSuggestOrDefault: boolean;
+    showSuggestOrDefault: string;
     dontShowBoth: boolean;
     currentUser: any;
 
@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
       // this.dontShowBoth = true;
       // this.headerFieldToggle = true;
       // this.showDropdownMenu = true;
-      this.showSuggestOrDefault = true;
+      this.showSuggestOrDefault = 'suggested';
       !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
       this.currentUser = this.storeservice.getUserData();
   }
@@ -81,20 +81,21 @@ export class HeaderComponent implements OnInit {
   }
 
 
-    showSuggestionsRoomsorDefault(flag: boolean): void {
+    showSuggestionsRoomsorDefault(flag: string): void {
 
       this.showSuggestOrDefault = flag;
       this.room_search = '';
       this.storeservice.deleteSearchText();
 
-      this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault);
+      this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault === 'suggested');
 
-      this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault)
+      this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault === 'suggested')
     }
 
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
+        this.showSuggestOrDefault = '';
         this.router.navigateByUrl('all-rooms');
        this.storeservice.saveSearchText(request);
        this.exchangeService.searchByHeaderSearchField(request)
