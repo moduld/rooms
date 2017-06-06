@@ -13,9 +13,12 @@ export class RoomSettingsComponent implements OnInit {
 
   error: any;
   currentRoom: Wall;
+  menu_show_toggle: boolean;
+
   constructor( private storeservice: UserStoreService) { }
 
   ngOnInit() {
+    this.menu_show_toggle = true;
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
   }
 

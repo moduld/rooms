@@ -50,6 +50,9 @@
 .room_tags{
   width: 100%;
   background: white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 .tags_container{
   @extend .flex-center;
@@ -57,9 +60,8 @@
   max-width: 1150px;
   margin: 0 auto;
   flex-wrap: wrap;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 1;
+
+
 }
 .room_tag{
   font-size: 15px;

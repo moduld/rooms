@@ -7,8 +7,8 @@
 }
 .room_settings_header{
   min-height: 60px;
-  background: $light_gray;
-  color: $blue;
+  background: $blue;
+  color: white;
   @extend .flex-center;
   font-size: 24px;
 }
@@ -50,7 +50,7 @@
   top: 0;
   background: white;
   height: 100%;
-  padding-top: 90px;
+  padding-top: 120px;
   padding-left: 20px;
   z-index: 2;
 }
@@ -86,6 +86,7 @@
   }
   &:first-child{
     margin-top: 0;
+    padding-top: 0;
   }
 }
 .active{
@@ -125,22 +126,22 @@
 
 @media screen and (max-width: 1000px){
   :host{
-    margin-top: 117px;
+    margin-top: 114px;
   }
   .main_container{
     flex-direction: column;
   }
   .aside{
-    padding-top: 145px;
+    padding-top: 174px;
   }
 
 }
 
 @media screen and (max-width: 550px){
   :host{
-    margin-top: 144px;
+    margin-top: 142px;
   }
   .aside{
-    padding-top: 172px;
+    padding-top: 202px;
   }
 }
