@@ -17,29 +17,46 @@
     flex-wrap: wrap;
   }
   .logo{
-    width: 89px;
+    //width: 89px;
     height: 32px;
-    @extend .backgr-center;
+    //@extend .backgr-center;
+    background: left center no-repeat;
     background-image: url("../../../img/Logo.png") ;
     margin: 14px 0;
     background-size: contain;
+    padding-left: 70px;
+    @extend .flex-center;
+    justify-content: flex-start;
+  }
+  .header_link{
+    font-size: 16px;
+    color: $gray_text;
+    font-family: $font_bold;
+    transition: 0.3s;
+   display: flex;
+    align-items: flex-end;
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 8px 10px;
+    line-height: 10px;
+    &:before{
+      font-size: 20px;
+      display: block;
+      margin-right: 8px;
+      line-height: 16px;
+    }
+    &:hover{
+      color: $blue;
+    }
   }
   .search{
     border-radius: 5px;
     position: relative;
-    max-width: 50px;
-    transition: 0.3s;
-    overflow: hidden;
-  }
-  .opened{
     max-width: 350px;
     width: 100%;
-    .icon-search{
-      &:before{
-        content: '\e913';
-      }
-    }
+    transition: 0.3s;
   }
+
   .search_field{
     display: block;
     width: 100%;
@@ -69,6 +86,7 @@
     color: $blue;
     @extend .flex-center;
     font-size: 25px;
+    cursor: pointer;
   }
   .icons_wrapper{
     @extend .flex-center;
@@ -84,6 +102,11 @@
     border-radius: 50%;
     margin-right: 20px;
   }
+  .icon-bell-o{
+    &:before{
+      font-size: 20px;
+    }
+  }
   .new_events{
     background: $light_blue;
     color: $blue;
@@ -98,26 +121,26 @@
       background: $red_dot;
     }
   }
-.name_and_settings{
-  @extend .flex-center;
-}
-  .room_name{
-    color: $blue;
-    font-size: 30px;
-    margin-left: 10px;
-    line-height: 35px;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .drop_down_menu{
-    left: 0;
-    z-index: 2;
-  }
-  .drop_down_title{
-    &:before{
-      left: 8%;
-    }
-  }
+//.name_and_settings{
+//  @extend .flex-center;
+//}
+//  .room_name{
+//    color: $blue;
+//    font-size: 30px;
+//    margin-left: 10px;
+//    line-height: 35px;
+//    white-space: nowrap;
+//    overflow: hidden;
+//  }
+//  .drop_down_menu{
+//    left: 0;
+//    z-index: 2;
+//  }
+//  .drop_down_title{
+//    &:before{
+//      left: 8%;
+//    }
+//  }
   .icons_wrapper{
     .drop_down_menu{
       width: 110px;
@@ -175,7 +198,7 @@
     }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1000px){
  .header{
    .logo{
      width: 100%;
@@ -188,24 +211,25 @@
      padding: 10px;
      justify-content: flex-end;
    }
-   .name_and_settings{
-     max-width: 50%;
-   }
+   //.name_and_settings{
+   //  max-width: 50%;
+   //}
  }
 }
 
 @media screen and (max-width: 550px){
   .header{
-    .name_and_settings{
-      width: 100%;
-      text-align: center;
-      max-width: 100%;
-    }
+    //.name_and_settings{
+    //  width: 100%;
+    //  text-align: center;
+    //  max-width: 100%;
+    //}
     .main_container{
       flex-direction: column;
     }
     .logo{
       margin: 10px auto;
+      width: auto;
     }
     .search{
       width: 100%;
@@ -217,13 +241,21 @@
         right: -38%;
       }
     }
-    .drop_down_menu{
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .drop_down_title{
+    //.drop_down_menu{
+    //  left: 50%;
+    //  transform: translateX(-50%);
+    //}
+    //.drop_down_title{
+    //  &:before{
+    //    left: 50%;
+    //  }
+    //}
+    .header_link{
+      font-size: 12px;
+      padding: 5px;
       &:before{
-        left: 50%;
+        line-height: 12px;
+        font-size: 15px;
       }
     }
   }

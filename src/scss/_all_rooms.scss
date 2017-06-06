@@ -108,6 +108,11 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 1000px){
+  :host{
+    margin-top: 115px;
+  }
+}
 @media screen and (max-width: 875px){
   .main_container{
     justify-content: center;
@@ -115,11 +120,6 @@
 }
 
 
-@media screen and (max-width: 768px){
-:host{
-  margin-top: 115px;
-}
-}
 
 @media screen and (max-width: 550px){
   :host{

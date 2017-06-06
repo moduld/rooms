@@ -1,3 +1,6 @@
+/**
+ * Created by User on 06.06.2017.
+ */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
@@ -17,22 +20,22 @@ import {PrivateRoomComponent} from '../../modals/private-room/private-room.compo
 
 
 @Component({
-  selector: 'app-inside-room',
-  templateUrl: 'inside-room.component.html',
-  styleUrls: ['inside-room.component.scss']
+    selector: 'app-inside-room',
+    templateUrl: 'inside-room.component.html',
+    styleUrls: ['inside-room.component.scss']
 })
 export class InsideRoomComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
-  error: any;
-  roomId: any;
-  wallId: any;
-  allPosts: Post[];
-  userArmin: boolean;
-  roomTags: any[];
-  membership: any;
-  currentUserData: UserInfo;
-  banDays: number = 0;
+    private subscription: Subscription;
+    error: any;
+    roomId: any;
+    wallId: any;
+    allPosts: Post[];
+    userArmin: boolean;
+    roomTags: any[];
+    membership: any;
+    currentUserData: UserInfo;
+    banDays: number = 0;
     wallsIds: number;
     wallsArray: any;
     currentWall: any;
@@ -40,86 +43,86 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     flagMoveY: boolean = true;
     show_loading: boolean;
 
-  constructor(private activateRoute: ActivatedRoute,
-              private requestService: RequestService,
-              // private exchangeService: EventsExchangeService,
-              private storeservice: UserStoreService,
-              private modalService: NgbModal,
-              private router: Router){
-  }
+    constructor(private activateRoute: ActivatedRoute,
+                private requestService: RequestService,
+                // private exchangeService: EventsExchangeService,
+                private storeservice: UserStoreService,
+                private modalService: NgbModal,
+                private router: Router){
+    }
 
-  ngOnDestroy(){
+    ngOnDestroy(){
 
-    this.subscription.unsubscribe();
-  }
+        this.subscription.unsubscribe();
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-      this.allPosts = [];
-      this.offset = 0;
-      this.show_loading = true;
-    this.currentUserData = this.storeservice.getUserData();
-    this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
-    this.requestService.getWalls(this.roomId).subscribe(
-        data=>{
-            console.log(data)
-            if (data && data['message'] === undefined){
-                this.wallsArray = data['room_walls'];
-                this.wallId = this.wallsArray.walls[0].wall_id;
-                this.currentWall = this.wallsArray.walls[0];
-                this.roomTags = this.wallsArray.walls;
-                this.storeservice.storeCurrentUserRooms(this.wallsArray);
-                this.isAdmin();
-                this.wallsArray['is_admin'] = this.userArmin;
-                this.getPosts();
-                this.wallsIds = this.wallId;
+        this.allPosts = [];
+        this.offset = 0;
+        this.show_loading = true;
+        this.currentUserData = this.storeservice.getUserData();
+        this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
+        this.requestService.getWalls(this.roomId).subscribe(
+            data=>{
+                console.log(data)
+                if (data && data['message'] === undefined){
+                    this.wallsArray = data['room_walls'];
+                    this.wallId = this.wallsArray.walls[0].wall_id;
+                    this.currentWall = this.wallsArray.walls[0];
+                    this.roomTags = this.wallsArray.walls;
+                    this.storeservice.storeCurrentUserRooms(this.wallsArray);
+                    this.isAdmin();
+                    this.wallsArray['is_admin'] = this.userArmin;
+                    this.getPosts();
+                    this.wallsIds = this.wallId;
+                }
+            },
+            error => {
+                this.error = error.json();
+                if (error && error.json().room_detals ){
+                    this.wallsArray = [];
+                    this.openPrivateRoomModal(error.json().room_detals)
+                }
             }
-        },
-        error => {
-            this.error = error.json();
-            if (error && error.json().room_detals ){
-                this.wallsArray = [];
-                this.openPrivateRoomModal(error.json().room_detals)
-            }
-        }
-    );
+        );
 
-  }
+    }
     isAdmin():void {
 
         this.membership = this.storeservice.getStoredCurrentUserRooms().membership;
         this.membership['admin'] || this.membership['moderator'] || this.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
     }
 
-  getPosts(): void {
+    getPosts(): void {
 
-      let dataToServer = {
-          wall_id: this.wallId,
-          offset_id: this.offset
-      };
+        let dataToServer = {
+            wall_id: this.wallId,
+            offset_id: this.offset
+        };
 
-      this.show_loading = true;
+        this.show_loading = true;
 
-    this.requestService.getRoomPosts(dataToServer).subscribe(
-        data=>{
-            if (data['posts'].length){
-                this.allPosts = this.allPosts.concat(data['posts']);
-                this.flagMoveY = true;
-                this.wallId = dataToServer.wall_id
-            }
-            this.show_loading = false;
-        },
-        error => {this.error = error; console.log(error);}
-    )
-  }
+        this.requestService.getRoomPosts(dataToServer).subscribe(
+            data=>{
+                if (data['posts'].length){
+                    this.allPosts = this.allPosts.concat(data['posts']);
+                    this.flagMoveY = true;
+                    this.wallId = dataToServer.wall_id
+                }
+                this.show_loading = false;
+            },
+            error => {this.error = error; console.log(error);}
+        )
+    }
 
     postOwnerInterraction(int_key: string, block_owner_id: number): void {
 
-      let dataToServer = {
-          user_interract_key: int_key,
-          user_interract_id: block_owner_id,
-          flag: 1
-      };
+        let dataToServer = {
+            user_interract_key: int_key,
+            user_interract_id: block_owner_id,
+            flag: 1
+        };
 
         this.requestService.blockOrMuteUser(dataToServer).subscribe(
             data=>{
@@ -131,15 +134,15 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     postInterraction(int_key: string, post: Post, index?: number, data?: number): void {
 
-      if (int_key === 'remove'){
-          this.removePost(post, index)
-      }
-      if (int_key === 'edite'){
-          this.openEditPOstModal(post, index)
-      }
-      if (int_key === 'inappropriate'){
-          this.inappropriatePost(post)
-      }
+        if (int_key === 'remove'){
+            this.removePost(post, index)
+        }
+        if (int_key === 'edite'){
+            this.openEditPOstModal(post, index)
+        }
+        if (int_key === 'inappropriate'){
+            this.inappropriatePost(post)
+        }
         if (int_key === 'ban'){
             post['bunned'] = !post['bunned'];
         }
@@ -240,32 +243,18 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     goToAnotherWall(tag: any, flag: boolean): void {
 
-      this.currentWall = tag;
+        this.currentWall = tag;
         this.wallId = tag.wall_id;
         this.allPosts = [];
         this.offset = 0;
         this.flagMoveY = false;
-      flag && this.getPosts()
-    }
-
-    interractWithUser(flag: string):void {
-
-        this.wallsArray.room_details.flag = flag;
-        this.requestService.joinAndLeaveRoom(this.wallsArray.room_details).subscribe(
-            data=>{
-                this.wallsArray.membership.member = this.wallsArray.membership.member === 1 ? 0 : 1;
-            },
-            error => {
-                this.error = error.json();
-                console.log(this.error);
-            }
-        )
+        flag && this.getPosts()
     }
 
     onMouseLeave(post: Post): void {
 
-       post['bunned'] = false;
-       post['movedTo'] = false;
+        post['bunned'] = false;
+        post['movedTo'] = false;
     }
 
 

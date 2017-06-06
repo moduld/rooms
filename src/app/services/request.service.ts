@@ -435,7 +435,7 @@ export class RequestService  {
   joinAndLeaveRoom(dataToServer: any): Observable<any> {
     let sendData = {
       user_id: this.userId,
-      room_id: dataToServer.room_details.room_id
+      room_id: dataToServer.room_id
     };
 
     let data = {

@@ -2,15 +2,16 @@
   @extend .flex-center;
 font-family: $font_medium;
   padding: 12px 0;
-  background: $posts_background;
+  background: $blue;
 
   .link{
     padding: 8px 15px;
     text-decoration: none;
-    color: $gray_text;
+    color: white;
     text-transform: uppercase;
     font-size: 14px;
     cursor: pointer;
+    transition: 0.3s;
     &:hover{
       color: $dark_text;
     }

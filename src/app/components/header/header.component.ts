@@ -20,50 +20,49 @@ export class HeaderComponent implements OnInit {
 
 
   room_search: string;
-  subheaderWall: any[] = [];
-  subheaderRoomName: string = '';
   headerFieldToggle: boolean;
   showDropdownMenu: boolean;
-  timeoute: any;
     showSuggestOrDefault: boolean;
     dontShowBoth: boolean;
+    currentUser: any;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
               private router: Router) {
 
-    storeservice.roomChangedAsObservable.subscribe(
-        room => {
-          this.currentRoom = room;
-            this.headerFieldToggle = false;
-            this.showDropdownMenu = true;
-        });
+    // storeservice.roomChangedAsObservable.subscribe(
+    //     room => {
+    //       this.currentRoom = room;
+    //         this.headerFieldToggle = false;
+    //         this.showDropdownMenu = true;
+    //     });
 
-      router.events.forEach((event) => {
-          if (event instanceof NavigationEnd ){
-              if (event.url === '/' || event.url === '/all-rooms'){
-                  this.headerFieldToggle = true;
-              }
-              if (event.url === '/room-settings' ){
-                  this.headerFieldToggle = false;
-                  this.showDropdownMenu = false;
-
-              }
-
-           event.url.indexOf('about-user') >= 0 ? this.dontShowBoth = false : this.dontShowBoth = true
-
-          }
-      });
+      // router.events.forEach((event) => {
+      //     if (event instanceof NavigationEnd ){
+      //         if (event.url === '/' || event.url === '/all-rooms'){
+      //             this.headerFieldToggle = true;
+      //         }
+      //         if (event.url === '/room-settings' ){
+      //             this.headerFieldToggle = false;
+      //             this.showDropdownMenu = false;
+      //
+      //         }
+      //
+      //      event.url.indexOf('about-user') >= 0 || event.url.indexOf('user-settings') >= 0 ? this.dontShowBoth = false : this.dontShowBoth = true
+      //
+      //     }
+      // });
   }
 
   ngOnInit() {
 
-      this.dontShowBoth = true;
-      this.headerFieldToggle = true;
-      this.showDropdownMenu = true;
-      this.showSuggestOrDefault = false;
+      // this.dontShowBoth = true;
+      // this.headerFieldToggle = true;
+      // this.showDropdownMenu = true;
+      this.showSuggestOrDefault = true;
       !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
+      this.currentUser = this.storeservice.getUserData();
   }
 
   logOut(){
@@ -81,40 +80,25 @@ export class HeaderComponent implements OnInit {
     )
   }
 
-    interractWithUser(flag: string):void {
 
-       this.currentRoom.flag = flag;
-          this.requestService.joinAndLeaveRoom(this.currentRoom).subscribe(
-          data=>{
-              this.currentRoom.membership.member = this.currentRoom.membership.member === 1 ? 0 : 1;
-          },
-          error => {
-              this.error = error.json();
-              console.log(this.error);
-          }
-      )
-    }
+    showSuggestionsRoomsorDefault(flag: boolean): void {
 
-    showSuggestionsRoomsorDefault(): void {
+      this.showSuggestOrDefault = flag;
+      this.room_search = '';
+      this.storeservice.deleteSearchText();
 
-      this.showSuggestOrDefault = !this.showSuggestOrDefault;
-      if (!this.showSuggestOrDefault){
-          this.room_search = '';
-          this.storeservice.deleteSearchText();
-      }
-        this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault);
+      this.storeservice.changeSuggestedOrDefault(this.showSuggestOrDefault);
 
-        this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault)
+      this.exchangeService.getSuggestRoomsOrUserRooms(this.showSuggestOrDefault)
     }
 
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
-      clearTimeout(this.timeoute);
-      this.timeoute = setTimeout(()=>{
-          this.storeservice.saveSearchText(request);
-          this.exchangeService.searchByHeaderSearchField(request)
-      }, 1000);
+        this.router.navigateByUrl('all-rooms');
+       this.storeservice.saveSearchText(request);
+       this.exchangeService.searchByHeaderSearchField(request)
+
     }
 
 }

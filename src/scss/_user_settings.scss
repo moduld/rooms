@@ -35,7 +35,7 @@
   }
 }
 .aside{
-  width: 190px;
+  width: 200px;
   position: fixed;
   transform: translate3d(-100%, 0, 0);
   left: 0;
@@ -91,9 +91,9 @@
   width: 100%;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1000px){
   :host{
-    margin-top: 115px;
+    margin-top: 117px;
   }
   .main_container{
     flex-direction: column;
@@ -101,24 +101,11 @@
 .aside{
   padding-top: 145px;
 }
-  //.aside_content{
-  //  display: flex;
-  //  flex-direction: column;
-  //  align-items: flex-start;
-  //}
-  //.aside_items_title{
-  //  width: 100%;
-  //  text-align: center;
-  //}
-  //.main_field{
-  //  width: 100%;
-  //  margin-top: 25px;
-  //}
 }
 
 @media screen and (max-width: 550px){
   :host{
-    margin-top: 142px;
+    margin-top: 144px;
   }
   .aside{
     padding-top: 172px;
