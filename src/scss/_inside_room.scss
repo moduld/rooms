@@ -11,8 +11,7 @@
   align-items: flex-start;
   padding-bottom: 10px;
   flex-wrap: wrap;
-  margin-top: 30px;
-  max-height: calc(100vh - 191px);
+  max-height: calc(100vh - 161px);
   overflow-y: auto;
 }
 .name_and_menu{
@@ -58,6 +57,9 @@
   max-width: 1150px;
   margin: 0 auto;
   flex-wrap: wrap;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 .room_tag{
   font-size: 15px;
@@ -83,7 +85,7 @@
   height: 370px;
   max-width: 31%;
   width: 100%;
-  margin: 0 10px 30px;
+  margin: 30px 10px 0;
   border-radius: 5px;
   background: white;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
@@ -384,7 +386,7 @@
   }
   .main_container{
     padding: 0 10px;
-    max-height: calc(100vh - 245px);
+    max-height: calc(100vh - 215px);
   }
 
 }
@@ -401,7 +403,7 @@
     margin-top: 142px;
   }
   .main_container{
-    max-height: calc(100vh - 268px);
+    max-height: calc(100vh - 238px);
   }
   .posts_menu{
     justify-content: center;
