@@ -17,9 +17,7 @@
     flex-wrap: wrap;
   }
   .logo{
-    //width: 89px;
     height: 32px;
-    //@extend .backgr-center;
     background: left center no-repeat;
     background-image: url("../../../img/Logo.png") ;
     margin: 14px 0;
@@ -124,32 +122,32 @@
   .active{
     color: $blue;
   }
-//.name_and_settings{
-//  @extend .flex-center;
-//}
-//  .room_name{
-//    color: $blue;
-//    font-size: 30px;
-//    margin-left: 10px;
-//    line-height: 35px;
-//    white-space: nowrap;
-//    overflow: hidden;
-//  }
-//  .drop_down_menu{
-//    left: 0;
-//    z-index: 2;
-//  }
-//  .drop_down_title{
-//    &:before{
-//      left: 8%;
-//    }
-//  }
-  .icons_wrapper{
+
+  .user_info{
     .drop_down_menu{
       width: 110px;
       right: 0;
       left: auto;
       border-radius: 5px;
+    }
+  }
+  .icon-mail{
+    .drop_down_menu{
+      width: 300px;
+      position: absolute;
+      top: 120%;
+      left: -150px;
+    }
+    .drop_down_title{
+      &:before{
+        top: -10px;
+        left: 50%;
+        transform: translateX(37%);
+      }
+      &:after{
+        height: 10px;
+        top: -10px;
+      }
     }
   }
 .drop_down_profile_item{
@@ -240,19 +238,24 @@
     .icons_wrapper{
       justify-content: center;
       width: 100%;
+    }
+    .user_info{
       .drop_down_menu{
         right: -38%;
       }
     }
-    //.drop_down_menu{
-    //  left: 50%;
-    //  transform: translateX(-50%);
-    //}
-    //.drop_down_title{
-    //  &:before{
-    //    left: 50%;
-    //  }
-    //}
+    .icon-mail{
+      .drop_down_menu{
+        width: 275px;
+        left: -62px;
+      }
+      .drop_down_title{
+        &:before{
+          left: 29%;
+          transform: translateX(-50%);
+        }
+      }
+    }
     .header_link{
       font-size: 12px;
       padding: 5px;

@@ -105,9 +105,9 @@
   .main_container{
     flex-direction: column;
   }
-.aside{
-  padding-top: 145px;
-}
+  .aside{
+    top: 152px;
+  }
 }
 
 @media screen and (max-width: 550px){
@@ -115,6 +115,6 @@
     margin-top: 144px;
   }
   .aside{
-    padding-top: 172px;
+    top: 179px;
   }
 }

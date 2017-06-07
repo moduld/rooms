@@ -77,4 +77,9 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     this.child_preficse && flag === 'unfave' && this.currentUser.faves_count--
   }
 
+  goToPrivateDialog():void {
+
+    this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id}]);
+  }
+
 }

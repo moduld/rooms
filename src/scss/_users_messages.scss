@@ -1,0 +1,126 @@
+:host{
+  flex: auto;
+  margin-bottom: 30px;
+
+}
+.chat_wrapp{
+  height: calc(100vh - 186px);
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 30px;
+  background: white;
+}
+.user_content_wrapp{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin: 25px 0;
+}
+.user_info_wrapp{
+  @extend .flex-column;
+  align-items: center;
+
+}
+.user_avatar{
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  @extend .backgr-center;
+  background-color: $gray_text;
+  margin-right: 20px;
+}
+.message_time{
+  color: $gray_text;
+  margin-top: 10px;
+}
+.messages_wrapp{
+  @extend .flex-column;
+  align-items: flex-start;
+}
+.message{
+  padding: 15px;
+  border-radius: 25px;
+  background: $line;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  color: $dark_text;
+  margin-bottom: 10px;
+  &:not(:last-child){
+    border-radius: 5px 25px 25px 5px;
+  }
+  &:first-child{
+    border-radius: 0 25px 25px 25px;
+    &:before{
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      border-right: 15px solid $line;
+      border-bottom: 10px solid transparent;
+      position: absolute;
+      top: 0;
+      left: -15px;
+    }
+  }
+
+
+}
+.message ~ .message{
+  border-radius: 5px 25px 25px 5px;
+  &:last-child{
+    border-radius: 5px 25px 25px 25px;
+  }
+}
+
+.my_messages{
+  flex-direction: row-reverse;
+  .user_avatar{
+    margin-right: 0;
+    margin-left: 20px;
+  }
+  .messages_wrapp{
+    order: 1;
+    align-items: flex-end;
+  }
+  .message{
+    background: $blue;
+    color: white;
+    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+    &:not(:last-child){
+      border-radius: 25px  5px 5px 25px;
+    }
+    &:first-child{
+      border-radius:  25px 0 25px 25px;
+      &:before{
+        border-right: none;
+        border-left: 15px solid $blue;
+        border-bottom: 10px solid transparent;
+        left: auto;
+        right: -15px;
+      }
+    }
+
+  }
+
+  .message ~ .message{
+    border-radius: 25px 5px 5px 25px;
+    &:last-child{
+      border-radius: 25px 5px 25px 25px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 1000px){
+  .chat_wrapp{
+    height: calc(100vh - 243px);
+  }
+
+}
+
+@media screen and (max-width: 550px){
+  .chat_wrapp{
+    height: calc(100vh - 265px);
+  }
+
+}

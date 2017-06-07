@@ -11,14 +11,35 @@
 
 
     <div class="icons_wrapper">
-      <span class="icon-mail"></span>
+      <div class="drop_down_container icon-mail">
+
+          <ul class="drop_down_menu" >
+            <li class="drop_down_item drop_down_title">
+              Messages
+            </li>
+            <!--done ?-->
+            <li class="drop_down_item">
+
+              <!--<div class="post_info">-->
+                  <!--<span class="user_info" [routerLink]="['/about-user', comment.owner.user_id]">-->
+                    <!--<span class="avatar" [ngStyle]="{'background-image':'url(' + comment.owner.thumbnail + ')' }" ></span>-->
+                    <!--<span class="name">{{comment.owner.user_name}}</span>-->
+                <!--</span>-->
+                <!--<span class="date">{{ comment.created_at * 1000 | timeAgo }}</span>-->
+              <!--</div>-->
+
+            </li>
+
+          </ul>
+
+      </div>
       <span class="icon-bell-o new_events"></span>
       <div class="user_info drop_down_container" >
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
         <ul class="drop_down_menu">
-          <li class="drop_down_profile_item" [routerLink]="['/about-user', currentUser.user_data.user_id]" >Profile</li>
-          <li class="drop_down_profile_item" [routerLink]="'/user-settings'" >Profile Settings & Privacy</li>
+          <li class="drop_down_profile_item" [routerLink]="['/about-user', currentUser.user_data.user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</li>
+          <li class="drop_down_profile_item" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile Settings & Privacy</li>
           <li class="drop_down_profile_item" (click)="logOut()">Logout</li>
         </ul>
       </div>

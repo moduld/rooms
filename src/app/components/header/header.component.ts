@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
     showSuggestOrDefault: string;
     dontShowBoth: boolean;
     currentUser: any;
+    message_notification_offset: number;
+    messages: any[];
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -60,9 +62,13 @@ export class HeaderComponent implements OnInit {
       // this.dontShowBoth = true;
       // this.headerFieldToggle = true;
       // this.showDropdownMenu = true;
+      this.message_notification_offset = 0;
+      this.messages = [];
       this.showSuggestOrDefault = 'suggested';
       !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
       this.currentUser = this.storeservice.getUserData();
+      console.log(this.currentUser)
+      this.getNewMessages()
   }
 
   logOut(){
@@ -100,6 +106,25 @@ export class HeaderComponent implements OnInit {
        this.storeservice.saveSearchText(request);
        this.exchangeService.searchByHeaderSearchField(request)
 
+    }
+
+    getNewMessages():void {
+
+      let dataToServer = {
+          type: 'MessageNotificaion',
+          offset_id: this.message_notification_offset,
+          direction_flag: 0
+      };
+// type: all - get all notifications
+        this.requestService.getUserNotifications(dataToServer).subscribe(
+            data=>{
+                console.log(data);
+                this.messages = data['notifications']
+            },
+            error => {
+                console.log(this.error);
+            }
+        )
     }
 
 }

@@ -117,7 +117,8 @@
   font-size: 12px;
   transition: 0.3s;
   &:hover{
-    color: $blue;
+    background: $blue;
+    color: white;
   }
 }
 .add_button{

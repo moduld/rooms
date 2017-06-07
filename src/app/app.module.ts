@@ -51,6 +51,8 @@ import { UsersPostsInProfileComponent } from './components/users-posts-in-profil
 import { UsersFansInProfileComponent } from './components/users-fans-in-profile/users-fans-in-profile.component';
 import { UsersFavesInProfileComponent } from './components/users-faves-in-profile/users-faves-in-profile.component';
 import { MutedBlockedComponent } from './components/muted-blocked/muted-blocked.component';
+import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
+import { UsersMessagesComponent } from './components/users-messages/users-messages.component';
 
 let settingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent},
@@ -74,7 +76,6 @@ let userSettingsRoutes : Routes = [
   { path: 'change-password', component: ChangePasswordComponent},
   { path: 'muted-blocked', component: MutedBlockedComponent},
   { path: '',redirectTo: 'edit-profile', pathMatch:'full'}
-  // { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes}
 ];
 
 let appRoutes: Routes =[
@@ -85,6 +86,7 @@ let appRoutes: Routes =[
   { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes},
   { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes},
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes},
+  { path: 'user-dialogs', component: UsersDialogComponent},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -122,7 +124,9 @@ let appRoutes: Routes =[
     UsersPostsInProfileComponent,
     UsersFansInProfileComponent,
     UsersFavesInProfileComponent,
-    MutedBlockedComponent
+    MutedBlockedComponent,
+    UsersDialogComponent,
+    UsersMessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -96,6 +96,23 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
+  getUserNotifications(dataToServer: any): Observable<Room[]> {
+
+    !this.token && this.addRequiredDataToTheService();
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('type', dataToServer.type);
+    params.set('offset_id', dataToServer.offset_id);
+    params.set('direction_flag', dataToServer.direction_flag );
+
+    let data = {
+      params: params,
+      apiLink: 'user/get/notifications'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
   getUsersFans(dataToServer: any): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();
