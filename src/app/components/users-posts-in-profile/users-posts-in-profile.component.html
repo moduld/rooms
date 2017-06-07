@@ -1,6 +1,6 @@
 <div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
-  <div class="posts" *ngFor="let post of allPosts; let i = index"  >
+  <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
     <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id]">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
@@ -36,25 +36,25 @@
                       (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)">{{post.likes_count}}</span>
         <span class="icon-bubble">{{post.comments_count}}</span>
       </div>
-      <div class="drop_down_container">
-        <div class="dots_wrapp">
-          <i class="dots"></i>
-          <i class="dots"></i>
-          <i class="dots"></i>
-        </div>
-        <ul class="drop_down_menu"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
-          <li class="drop_down_item drop_down_title">
-            Post menu
-          </li>
-
-          <li class="drop_down_item" (click)="removePost(post, i)">
-            <span class="drop_down_fill icon-cancel">Delete Post</span>
-          </li>
-
-        </ul>
-      </div>
 
     </div>
+
+    <ul class="drop_down_menu"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
+      <li class="drop_down_item drop_down_title">
+        Post menu
+      </li>
+
+      <li class="drop_down_item" (click)="removePost(post, i)">
+        <span class="drop_down_fill icon-cancel">Delete Post</span>
+      </li>
+      <li class="for_dots">
+        <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
+          <i class="dots icon-chevron-right"></i>
+          <i class="dots icon-chevron-right"></i>
+          <i class="dots icon-chevron-right"></i>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
