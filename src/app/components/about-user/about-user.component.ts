@@ -18,7 +18,6 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   error: any;
   user_id: any;
   currentUser: any;
-  tree: any;
   child_preficse: string;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -28,11 +27,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   ngOnInit():void {
 
-    let parses = this.router.parseUrl(this.router.url);
-    this.tree = parses.root.children.primary.segments;
-    this.tree.length > 3 ? this.child_preficse = '/user-settings' : this.child_preficse = '';
-    this.subscription = this.activateRoute.params.subscribe(params=>{this.user_id = params.id; console.log(params)});
-    this.getUserInfo();
+    this.subscription = this.activateRoute.params.subscribe(params=>{
+      this.user_id = params.id;
+      this.getUserInfo();
+    });
+
 
     this.exchangeService.dataChangedFromUserSettings.subscribe(
         search => {

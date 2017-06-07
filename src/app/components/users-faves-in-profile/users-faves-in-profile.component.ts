@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
 
-import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { RequestService } from '../../services/request.service';
 
@@ -26,14 +25,20 @@ export class UsersFavesInProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    let parses = this.router.parseUrl(this.router.url);
-    this.tree = parses.root.children.primary.segments;
-    this.tree.length > 3 ? this.user_id = this.tree[2].path : this.user_id = this.tree[1].path;
-
     this.users_offset = 0;
     this.allUsers = [];
     this.show_loading = true;
-    this.getUserFaves()
+
+    this.router.events.subscribe(event=>{
+
+      if (event instanceof NavigationEnd ){
+        let parses = this.router.parseUrl(this.router.url);
+        this.tree = parses.root.children.primary.segments;
+        this.user_id = this.tree[1].path;
+        this.getUserFaves()
+      }
+    })
+
   }
 
   getUserFaves():void {

@@ -1,12 +1,11 @@
 <div class="main_container" appIeHeight>
-  <input type="checkbox" id="navigation_menu_toggle" hidden>
+  <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_show_toggle" hidden>
   <aside class="aside">
     <div class="label_wrapp">
       <label for="navigation_menu_toggle" class="show_menu_label icon-menu"></label>
     </div>
     <ul class="aside_content">
       <li class="aside_items aside_items_title">User Menu</li>
-      <li class="aside_items"  [routerLink]="['/user-settings/about-user', currentUser.user_data.user_id]" routerLinkActive="active">User Profile</li>
       <li class="aside_items" [routerLink]="'/user-settings/edit-profile'" routerLinkActive="active">Edit Profile</li>
       <li class="aside_items" [routerLink]="'/user-settings/muted-blocked'" routerLinkActive="active">Muted/Blocked Users</li>
       <li class="aside_items" [routerLink]="'/user-settings/change-password'" routerLinkActive="active">Change Password</li>

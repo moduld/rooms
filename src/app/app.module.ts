@@ -73,7 +73,8 @@ let userSettingsRoutes : Routes = [
   { path: 'edit-profile', component: EditProfileComponent},
   { path: 'change-password', component: ChangePasswordComponent},
   { path: 'muted-blocked', component: MutedBlockedComponent},
-  { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes}
+  { path: '',redirectTo: 'edit-profile', pathMatch:'full'}
+  // { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes}
 ];
 
 let appRoutes: Routes =[

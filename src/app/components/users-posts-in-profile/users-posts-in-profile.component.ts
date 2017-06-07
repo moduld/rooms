@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestService } from '../../services/request.service';
@@ -39,11 +39,17 @@ export class UsersPostsInProfileComponent implements OnInit {
     this.post_offset = 0;
     this.show_loading = false;
 
-    let parses = this.router.parseUrl(this.router.url);
-    this.tree = parses.root.children.primary.segments;
-    this.tree.length > 3 ? this.user_id = this.tree[2].path : this.user_id = this.tree[1].path;
+      this.router.events.subscribe(event=>{
 
-    this.getUserPosts()
+          if (event instanceof NavigationEnd ){
+              let parses = this.router.parseUrl(this.router.url);
+              this.tree = parses.root.children.primary.segments;
+              this.user_id = this.tree[1].path;
+              this.getUserPosts()
+          }
+      })
+
+
   }
 
   getUserPosts():void {
@@ -74,7 +80,6 @@ export class UsersPostsInProfileComponent implements OnInit {
 
     this.requestService.getWalls(post.room_id).subscribe(
         data=>{
-          console.log(data)
           if (data && data['message'] === undefined){
             this.wallsArray = data['room_walls'];
             this.isAdmin();

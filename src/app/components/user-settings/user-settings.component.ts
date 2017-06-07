@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-
-import {UserStoreService} from '../../services/user-store.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -10,14 +7,13 @@ import {UserStoreService} from '../../services/user-store.service';
 })
 export class UserSettingsComponent implements OnInit {
 
-  currentUser: any;
+  menu_show_toggle: boolean;
 
-  constructor(private storeservice: UserStoreService, private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
+    this.menu_show_toggle = true;
 
-    this.currentUser = this.storeservice.getUserData();
-    this.router.navigateByUrl('user-settings/about-user/' + this.currentUser.user_data.user_id);
   }
 
 }

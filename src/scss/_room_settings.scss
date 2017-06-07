@@ -30,7 +30,7 @@
   height: 60px;
   width: 60px;
   border-radius: 0 5px 5px 0;
-  border: 2px solid rgba(128, 128, 128, 0.3);
+  border: 1px solid $border_menu;
   border-left: none;
   @extend .flex-center;
   font-size: 25px;
@@ -54,11 +54,12 @@
   padding-left: 20px;
   z-index: 2;
   border-radius: 0 5px 5px 0;
+  border: 1px solid transparent;
 }
 #navigation_menu_toggle{
   &:checked + .aside{
     transform: translate3d(0, 0, 0);
-    border: 2px solid rgba(128, 128, 128, 0.3);
+    border: 1px solid $border_menu;
     .show_menu_label{
       left: calc(100% - 60px);
       border-color: transparent;

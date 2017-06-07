@@ -4,6 +4,10 @@
   background: $posts_background;
   color: $gray_text;
   @extend .flex-column;
+  margin-top: 60px;
+}
+.main_container{
+  margin-top: 35px;
 }
 .user_info_wrapp{
   display: flex;
@@ -86,13 +90,12 @@
   background: $blue;
   color: white;
 }
-.non_child{
-  margin-top: 90px;
-}
+
 
 @media screen and (max-width: 1000px){
-  .non_child{
-    margin-top: 145px;
+
+  :host{
+    margin-top: 117px;
   }
   .user_info_wrapp{
     flex-wrap: wrap;
@@ -116,8 +119,8 @@
 }
 
 @media screen and (max-width: 550px){
-  .non_child{
-    margin-top: 173px;
+  :host{
+    margin-top: 144px;
   }
   .user_info_wrapp{
     padding: 10px;

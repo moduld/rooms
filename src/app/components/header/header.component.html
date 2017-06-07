@@ -4,40 +4,11 @@
       <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default'}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
       <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested'}" (click)="showSuggestionsRoomsorDefault('suggested')">Discover</span>
     </div>
-    <!--*ngIf="headerFieldToggle && dontShowBoth"-->
     <div class="search"  >
       <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" >
       <span class="icon-search" (click)="doRoomSearch(room_search)"></span>
     </div>
 
-
-    <!--<div class="name_and_settings drop_down_container" *ngIf="!headerFieldToggle && dontShowBoth">-->
-      <!--<div class="dots_wrapp" *ngIf="showDropdownMenu">-->
-        <!--<span class="dots"></span>-->
-        <!--<span class="dots"></span>-->
-        <!--<span class="dots"></span>-->
-      <!--</div>-->
-      <!--<span class="room_name">{{currentRoom.room_details.room_name}}</span>-->
-
-      <!--<ul class="drop_down_menu" *ngIf="showDropdownMenu">-->
-        <!--<li class="drop_down_item drop_down_title">-->
-          <!--Room menu-->
-        <!--</li>-->
-        <!--<li class="drop_down_item" *ngIf="!currentRoom.membership.member">-->
-          <!--<span class="drop_down_fill icon-room-in" (click)="interractWithUser('join')" >Join Room</span>-->
-        <!--</li>-->
-        <!--<li class="drop_down_item" *ngIf="currentRoom.membership.member && currentRoom.is_admin">-->
-          <!--<span class="drop_down_fill icon-gear" [routerLink]="'/room-settings'" >Room Settings</span>-->
-        <!--</li>-->
-        <!--<li class="drop_down_item">-->
-          <!--<span class="drop_down_fill icon-question" >About Room</span>-->
-        <!--</li>-->
-        <!--<li class="drop_down_item" *ngIf="currentRoom.membership.member">-->
-          <!--<span class="drop_down_fill icon-room-out" (click)="interractWithUser('leave')" >Leave Room</span>-->
-        <!--</li>-->
-
-      <!--</ul>-->
-    <!--</div>-->
 
     <div class="icons_wrapper">
       <span class="icon-mail"></span>
@@ -46,7 +17,8 @@
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
         <ul class="drop_down_menu">
-          <li class="drop_down_profile_item" [routerLink]="'/user-settings'">Profile</li>
+          <li class="drop_down_profile_item" [routerLink]="['/about-user', currentUser.user_data.user_id]" >Profile</li>
+          <li class="drop_down_profile_item" [routerLink]="'/user-settings'" >Profile Settings & Privacy</li>
           <li class="drop_down_profile_item" (click)="logOut()">Logout</li>
         </ul>
       </div>

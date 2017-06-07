@@ -9,6 +9,7 @@
   padding: 30px;
   @extend .flex-column;
   align-items: center;
+  border: 1px solid $border_menu;
 }
 
 .form_button{
