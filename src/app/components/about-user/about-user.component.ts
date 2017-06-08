@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 
 import { RequestService } from '../../services/request.service';
+import {UserStoreService} from '../../services/user-store.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   currentUser: any;
   child_preficse: string;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(private storeservice: UserStoreService,
+              private activateRoute: ActivatedRoute,
               private requestService: RequestService,
               private router: Router,
               private exchangeService: EventsExchangeService) { }
@@ -45,29 +47,33 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   getUserInfo(): void {
 
+    let loginnedUser = this.storeservice.getUserData();
     this.requestService.getUserDetails(this.user_id).subscribe(
         data=>{
           this.currentUser = data['user'];
+          this.currentUser.is_myne = this.currentUser.user_id == loginnedUser.user_data.user_id;
+          console.log(this.currentUser)
         },
         error => {this.error = error; console.log(error);}
     )
   }
 
-  faveAndUnfave(): void {
+  faveAndUnfave(flag: boolean): void {
 
-    let dataToServer = {
-      user_id_fave: this.currentUser.user_id,
-      is_fave: this.currentUser.is_fave
-    };
+    if (!flag){
+      let dataToServer = {
+        user_id_fave: this.currentUser.user_id,
+        is_fave: this.currentUser.is_fave
+      };
 
-    this.requestService.faveUnfaveUser(dataToServer).subscribe(
-        data=>{
-          this.currentUser.is_fave = !this.currentUser.is_fave;
-          this.currentUser.is_fave ? this.currentUser.fans_count++ : this.currentUser.fans_count--;
-        },
-        error => {this.error = error; console.log(error);}
-    )
-
+      this.requestService.faveUnfaveUser(dataToServer).subscribe(
+          data=>{
+            this.currentUser.is_fave = !this.currentUser.is_fave;
+            this.currentUser.is_fave ? this.currentUser.fans_count++ : this.currentUser.fans_count--;
+          },
+          error => {this.error = error; console.log(error);}
+      )
+    }
   }
 
   changeTagsData(flag: string):void {
@@ -77,9 +83,9 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     this.child_preficse && flag === 'unfave' && this.currentUser.faves_count--
   }
 
-  goToPrivateDialog():void {
+  goToPrivateDialog(flag: boolean):void {
 
-    this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id}]);
+    !flag && this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id}]);
   }
 
 }

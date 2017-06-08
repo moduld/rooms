@@ -33,6 +33,7 @@
   @extend .backgr-center;
   background-color: $gray_text;
   margin-right: 10px;
+  cursor: pointer;
 }
 .user_name_and_date{
   font-family: $font_regular;
@@ -57,8 +58,32 @@
   text-overflow: ellipsis;
 }
 
+.active{
+  background: $blue;
+  .name,
+  .date,
+  .text{
+    color: white;
+  }
+}
+.new_message{
+  .name{
+    color: $blue;
+  }
+  .text{
+    color: $dark_text;
+  }
 
+}
+.new_message.active{
+  .name{
+    color: white;
+  }
+  .text{
+    color: white;
+  }
 
+}
 
 
 

@@ -1,18 +1,30 @@
 <div class="main_container">
     <aside class="aside">
 
-        <div class="user_bar">
-            <!--[ngStyle]="{'background-image':'url(' + comment.owner.thumbnail + ')' }"-->
-            <span class="avatar" ></span>
-            <!--[routerLink]="['/about-user', comment.owner.user_id]"-->
+        <div class="user_bar"  *ngIf="virtual_user" [ngClass]="{'active':  virtual_user.user_id == dialog_user_id}" (click)="changeDialogUser(virtual_user.user_id)">
+            <span class="avatar" [ngStyle]="{'background-image':'url(' + virtual_user.thumbnail + ')' }"
+                  [routerLink]="['/about-user', virtual_user.user_id]"></span>
+
             <div class="user_name_and_date" >
                 <span class="top_wrapp">
-                    <span class="name">aefwef ergaer g</span>
-                    <span class="date">2423 dfg</span>
+                    <span class="name">{{virtual_user.user_name}}</span>
                 </span>
-                <p class="text"> aerg eg eg aerbetb egeg rstb w4btsdbsd </p>
+                <p class="text">Send first message ...</p>
+            </div>
+        </div>
+
+        <div class="user_bar" *ngFor="let user of all_users" [ngClass]="{'active':  user.user_id_to == dialog_user_id, 'new_message': user.new_flag}" (click)="changeDialogUser(user)">
+
+            <span class="avatar" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }" [routerLink]="['/about-user', user.user_id_to]"></span>
+
+            <div class="user_name_and_date" >
+                <span class="top_wrapp">
+                    <span class="name">{{user.user.user_name}}</span>
+                    <span class="date">{{user.updated_at * 1000 | timeAgo }}</span>
+                </span>
+                <p class="text">{{user.text}}</p>
             </div>
         </div>
     </aside>
-    <app-users-messages></app-users-messages>
+    <app-users-messages  [eventFromParent]="eventToChild"></app-users-messages>
 </div>

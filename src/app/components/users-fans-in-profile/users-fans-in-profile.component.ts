@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
 
 import { EventsExchangeService } from '../../services/events-exchange.service';
@@ -9,7 +9,7 @@ import { RequestService } from '../../services/request.service';
   templateUrl: 'users-fans-in-profile.component.html',
   styleUrls: ['users-fans-in-profile.component.scss']
 })
-export class UsersFansInProfileComponent implements OnInit {
+export class UsersFansInProfileComponent implements OnInit, OnDestroy {
 
   error: any;
   allUsers: any[];
@@ -18,6 +18,7 @@ export class UsersFansInProfileComponent implements OnInit {
   users_offset: number;
   flagMoveY: boolean = true;
   show_loading: boolean;
+    routerSubscription: any;
 
   constructor(private requestService: RequestService,
               private router: Router,
@@ -29,7 +30,7 @@ export class UsersFansInProfileComponent implements OnInit {
     this.allUsers = [];
     this.show_loading = true;
 
-      this.router.events.subscribe(event=>{
+      this.routerSubscription = this.router.events.subscribe(event=>{
 
           if (event instanceof NavigationEnd ){
               let parses = this.router.parseUrl(this.router.url);
@@ -40,6 +41,10 @@ export class UsersFansInProfileComponent implements OnInit {
       })
 
   }
+
+    ngOnDestroy(): void {
+        this.routerSubscription.unsubscribe();
+    }
 
   getUserFans():void {
 

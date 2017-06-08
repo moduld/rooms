@@ -1,10 +1,24 @@
 :host{
   flex: auto;
   margin-bottom: 30px;
-
+  @extend .flex-column;
+  background: white;
+}
+.chat_and_form_wrapp{
+  width: 100%;
+  flex: auto;
+  @extend .flex-column;
+}
+.position_container{
+  position: relative;
+  flex: auto;
 }
 .chat_wrapp{
-  height: calc(100vh - 186px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow-y: auto;
   border-radius: 5px;
   padding: 30px;
@@ -45,9 +59,7 @@
   position: relative;
   color: $dark_text;
   margin-bottom: 10px;
-  &:not(:last-child){
-    border-radius: 5px 25px 25px 5px;
-  }
+
   &:first-child{
     border-radius: 0 25px 25px 25px;
     &:before{
@@ -55,14 +67,16 @@
       display: block;
       height: 0;
       width: 0;
-      border-right: 15px solid $line;
+      border-right: 20px solid $line;
       border-bottom: 10px solid transparent;
       position: absolute;
       top: 0;
       left: -15px;
     }
   }
-
+  &:not(:last-child){
+    border-radius: 5px 25px 25px 5px;
+  }
 
 }
 .message ~ .message{
@@ -86,20 +100,20 @@
     background: $blue;
     color: white;
     box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
-    &:not(:last-child){
-      border-radius: 25px  5px 5px 25px;
-    }
+
     &:first-child{
       border-radius:  25px 0 25px 25px;
       &:before{
         border-right: none;
-        border-left: 15px solid $blue;
+        border-left: 20px solid $blue;
         border-bottom: 10px solid transparent;
         left: auto;
         right: -15px;
       }
     }
-
+    &:not(:last-child){
+      border-radius: 25px  5px 5px 25px;
+    }
   }
 
   .message ~ .message{
@@ -109,18 +123,70 @@
     }
   }
 }
-
+.image{
+  display: block;
+  width: 100%;
+  max-width: 415px;
+  height: 280px;
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+.form{
+  padding: 20px;
+  margin: 0 30px 20px;
+  border-radius: 5px;
+  background: $line;
+  @extend .flex-between;
+  align-items: center;
+  border: 1px solid $border_menu;
+}
+.input_field{
+  border: 1px solid $border_menu;
+  border-radius: 5px;
+  padding: 8px 10px 8px 30px;
+  flex: auto;
+  resize: none;
+  height: 45px;
+  transition: 0.5s;
+  &:focus{
+    height: 100px;
+  }
+}
+.add_button_wrapp{
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.add_button{
+  height: 100%;
+  width: 100%;
+  color: $blue;
+  font-size: 25px;
+  @extend .flex-center;
+  cursor: pointer;
+}
+.send_button{
+  height: 50px;
+  width: 50px;
+  color: $blue;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 20px;
+  background: none;
+  border: none;
+  text-align: center;
+  &:before{
+    line-height: 50px;
+  }
+}
 
 @media screen and (max-width: 1000px){
-  .chat_wrapp{
-    height: calc(100vh - 243px);
-  }
+
 
 }
 
 @media screen and (max-width: 550px){
-  .chat_wrapp{
-    height: calc(100vh - 265px);
-  }
+
 
 }

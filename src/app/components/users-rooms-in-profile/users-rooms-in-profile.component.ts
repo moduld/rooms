@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router,  NavigationEnd} from '@angular/router';
 
 import { RequestService } from '../../services/request.service';
@@ -8,12 +8,13 @@ import { RequestService } from '../../services/request.service';
   templateUrl: 'users-rooms-in-profile.component.html',
   styleUrls: ['users-rooms-in-profile.component.scss']
 })
-export class UsersRoomsInProfileComponent implements OnInit{
+export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   error: any;
   user_id: any;
   tree: any;
   allRooms: any[];
+  routerSubscription: any;
 
   constructor(
               private requestService: RequestService,
@@ -21,7 +22,7 @@ export class UsersRoomsInProfileComponent implements OnInit{
 
   ngOnInit() {
 
-    this.router.events.subscribe(event=>{
+    this.routerSubscription = this.router.events.subscribe(event=>{
 
       if (event instanceof NavigationEnd ){
         let parses = this.router.parseUrl(this.router.url);
@@ -33,6 +34,9 @@ export class UsersRoomsInProfileComponent implements OnInit{
 
   }
 
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
 
 
   getUserRooms(): void {

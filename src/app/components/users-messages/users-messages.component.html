@@ -1,61 +1,61 @@
-<div class="chat_wrapp">
+<div class="chat_and_form_wrapp">
 
-    <div class="user_content_wrapp">
-        <div class="user_info_wrapp">
-            <span class="user_avatar"></span>
-            <span class="message_time">12;23</span>
-        </div>
-        <div class="messages_wrapp">
-            <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
-            <p class="message">khefvuihe jerpf jeriovho erjiejv ouier</p>
-            <p class="message">khefvuiheruioh jieio jerpfjeriov hg  ugsc ui efvkugh hoerjiejvouier</p>
+    <div class="position_container">
+        <div class="chat_wrapp" (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
+            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index" [ngClass]="{'my_messages': message.user_id === message.user.user_id}">
+                <div class="user_info_wrapp">
+                    <!--[ngStyle]="{'background-image':'url(' + user.thumbnail + ')' }"-->
+                    <span class="user_avatar" ></span>
+                    <span class="message_time">12:23</span>
+                </div>
+                <div class="messages_wrapp">
+                    <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
+                    <p class="message">khefvuihe jerpf jeriovho erjiejv ouier</p>
+                    <p class="message">khefvuiheruioh jieio jerpfjeriov hg  ugsc ui efvkugh hoerjiejvouier</p>
+                </div>
+            </div>
+
+            <!--<div class="user_content_wrapp">-->
+                <!--<div class="user_info_wrapp">-->
+                    <!--<span class="user_avatar"></span>-->
+                    <!--<span class="message_time">12:23</span>-->
+                <!--</div>-->
+                <!--<div class="messages_wrapp">-->
+                    <!--<p class="message">-->
+                        <!--khefvuiheruioh jieio jerpfjeriovhoerjiejvouier-->
+                        <!--<a class="image"></a>-->
+                    <!--</p>-->
+
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="user_content_wrapp my_messages">-->
+                <!--<div class="user_info_wrapp">-->
+                    <!--<span class="user_avatar"></span>-->
+                    <!--<span class="message_time">12:23</span>-->
+                <!--</div>-->
+                <!--<div class="messages_wrapp">-->
+                    <!--<p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
         </div>
     </div>
 
-    <div class="user_content_wrapp">
-        <div class="user_info_wrapp">
-            <span class="user_avatar"></span>
-            <span class="message_time">12;23</span>
+    <form action="#" class="form" #messageForm="ngForm" (submit)="sendNewMessage(messageForm)">
+        <input type="file" id="message_file"  name="files" (change)="fileDropped($event)" hidden>
+        <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
+            <label for="message_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
         </div>
-        <div class="messages_wrapp">
-            <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
+        <textarea  class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your comment ..."></textarea>
+        <button type="submit" class="send_button icon-plane"></button>
 
-        </div>
-    </div>
+    </form>
 
-    <div class="user_content_wrapp my_messages">
-        <div class="user_info_wrapp">
-            <span class="user_avatar"></span>
-            <span class="message_time">12;23</span>
-        </div>
-        <div class="messages_wrapp">
-            <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
-
-        </div>
-    </div>
-
-    <div class="user_content_wrapp my_messages">
-        <div class="user_info_wrapp">
-            <span class="user_avatar"></span>
-            <span class="message_time">12;23</span>
-        </div>
-        <div class="messages_wrapp">
-            <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
-            <p class="message">khefvuihe jerpf jeriovho erjiejv ouier</p>
-            <p class="message">khefvuiheruioh jieio jerpfjeriov hg  ugsc ui efvkugh hoerjiejvouier</p>
-        </div>
-    </div>
-
-    <div class="user_content_wrapp my_messages">
-        <div class="user_info_wrapp">
-            <span class="user_avatar"></span>
-            <span class="message_time">12;23</span>
-        </div>
-        <div class="messages_wrapp">
-            <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
-            <p class="message">khefvuihe jerpf jeriovho erjiejv ouier</p>
-            <p class="message">khefvuiheruioh jieio jerpfjeriov hg  ugsc ui efvkugh hoerjiejvouier</p>
-        </div>
-    </div>
 
 </div>

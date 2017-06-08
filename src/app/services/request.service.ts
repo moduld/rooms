@@ -80,6 +80,22 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
+  getUserMessages(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('user_id_to', dataToServer.user_id_to);
+    params.set('offset_id', dataToServer.offset_id );
+    params.set('direction_flag ', dataToServer.direction_flag );
+
+    let data = {
+      params: params,
+      apiLink: 'message/user/msgs'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
   getOnlyUsersPosts(dataToServer: any): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();
@@ -108,6 +124,20 @@ export class RequestService  {
     let data = {
       params: params,
       apiLink: 'user/get/notifications'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getUserDialogUsersList(): Observable<Room[]> {
+
+    !this.token && this.addRequiredDataToTheService();
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+
+    let data = {
+      params: params,
+      apiLink: 'message/users'
     };
 
     return this.makeGetRequest(data)
@@ -693,6 +723,23 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'user/fave'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  sendNewMessage(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      user_id_to: dataToServer.user_id_to,
+      text: dataToServer.text,
+      media: dataToServer.media
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'message/new'
     };
 
     return this.makePostRequest(data)

@@ -7,8 +7,9 @@
     </div>
     <p class="about_user">{{currentUser.about}}</p>
     <div class="buttons_wrapp">
-      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave}" (click)="faveAndUnfave()"></span>
-      <span class="button icon-comments" (click)="goToPrivateDialog()"  ></span>
+      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave, 'disabled': currentUser.is_myne}" (click)="faveAndUnfave(currentUser.is_myne)"></span>
+      <span class="button icon-comments" (click)="goToPrivateDialog(currentUser.is_myne || !currentUser.msg_from_anyone && !currentUser.is_fan)"
+            [ngClass]="{'disabled': currentUser.is_myne || !currentUser.msg_from_anyone && !currentUser.is_fan}"></span>
     </div>
   </div>
 

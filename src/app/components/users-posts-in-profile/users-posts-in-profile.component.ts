@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,7 +14,7 @@ import { UserInfo } from '../../commonClasses/userInfo';
   templateUrl: 'users-posts-in-profile.component.html',
   styleUrls: ['users-posts-in-profile.component.scss']
 })
-export class UsersPostsInProfileComponent implements OnInit {
+export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
 
   error: any;
   allPosts: any[];
@@ -26,6 +26,7 @@ export class UsersPostsInProfileComponent implements OnInit {
   userArmin: boolean;
   flagMoveY: boolean = true;
   show_loading: boolean;
+    routerSubscription: any;
 
   constructor(private storeservice: UserStoreService,
               private requestService: RequestService,
@@ -39,7 +40,7 @@ export class UsersPostsInProfileComponent implements OnInit {
     this.post_offset = 0;
     this.show_loading = false;
 
-      this.router.events.subscribe(event=>{
+      this.routerSubscription = this.router.events.subscribe(event=>{
 
           if (event instanceof NavigationEnd ){
               let parses = this.router.parseUrl(this.router.url);
@@ -48,9 +49,11 @@ export class UsersPostsInProfileComponent implements OnInit {
               this.getUserPosts()
           }
       })
-
-
   }
+
+    ngOnDestroy(): void {
+        this.routerSubscription.unsubscribe();
+    }
 
   getUserPosts():void {
 
