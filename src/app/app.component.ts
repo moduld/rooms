@@ -1,10 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Router, NavigationEnd} from '@angular/router';
 
 import { EventsExchangeService } from './services/events-exchange.service';
 
-import { Wall } from './commonClasses/wall';
 
 @Component({
   selector: 'app-root',
@@ -12,20 +11,15 @@ import { Wall } from './commonClasses/wall';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
-  private subscription: Subscription;
-  hideSubheader: boolean;
-  subheaderWall: any[] = [];
-  subheaderRoomName: string = '';
-  showHeader: boolean = true;
-  showFooter: boolean = true;
+  showHeader: boolean;
+  showFooter: boolean;
 
   constructor( private router: Router, private exchangeService: EventsExchangeService){
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
-        event.url === '/' ? this.hideSubheader = false :  this.hideSubheader = true;
 
         if (event.url === '/registration' || event.url === '/login'){
           this.showHeader = false;
@@ -38,4 +32,9 @@ export class AppComponent {
     });
 
   }
+
+  ngOnInit():void {
+
+  }
+
 }

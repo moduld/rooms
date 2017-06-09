@@ -11,6 +11,9 @@
   display: flex;
   flex: 1;
 }
+.label_wrapp{
+  display: none;
+}
 .aside{
   width: 350px;
   @extend .flex-column;
@@ -24,6 +27,15 @@
   @extend .flex-center;
   padding: 0 20px;
   margin-bottom: 10px;
+  transition: 0.5s;
+  &:hover{
+    background: $blue;
+    .name,
+    .date,
+    .text{
+      color: white;
+    }
+  }
 }
 .avatar{
   display: block;
@@ -34,6 +46,7 @@
   background-color: $gray_text;
   margin-right: 10px;
   cursor: pointer;
+  background-size: contain;
 }
 .user_name_and_date{
   font-family: $font_regular;
@@ -72,6 +85,7 @@
   }
   .text{
     color: $dark_text;
+    font-family: $font_bold;
   }
 
 }
@@ -92,12 +106,78 @@
   :host{
     margin-top: 117px;
   }
-
+  .label_wrapp{
+    position: relative;
+    height: 0;
+    width: 100%;
+    display: block;
+    margin-bottom: 60px;
+  }
+  .show_menu_label{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 60px;
+    width: 60px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid $border_menu;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: $blue;
+    background: rgba(255, 255, 255, 0.51);
+    transition: 0.5s;
+    cursor: pointer;
+    &:hover{
+      background: white;
+    }
+  }
+  .aside{
+    width: 300px;
+    position: fixed;
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+    transition: 0.5s;
+    top: 151px;
+    background: white;
+    height: 550px;
+    z-index: 2;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid transparent;
+    margin-right: 0;
+  }
+  .users_wrapper{
+    height: 100%;
+    overflow-y: auto;
+  }
+  .text{
+    width: 215px;
+  }
+  #users_list_view_toggler{
+    &:checked + .aside{
+      transform: translate3d(0, 0, 0);
+      border: 1px solid $border_menu;
+      .show_menu_label{
+        left: calc(100% - 60px);
+        border-color: transparent;
+      }
+    }
+    &:checked + .aside > .label_wrapp > .show_menu_label{
+      background: white;
+      &:before{
+        content: "\e913";
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 550px){
   :host{
     margin-top: 144px;
   }
-
+  .aside{
+    top: 178px;
+  }
 }

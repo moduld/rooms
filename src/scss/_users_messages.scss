@@ -28,108 +28,118 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
-  margin: 25px 0;
+  margin-top: 20px;
 }
 .user_info_wrapp{
   @extend .flex-column;
   align-items: center;
-
+  margin-right: 20px;
 }
 .user_avatar{
-  height: 70px;
-  width: 70px;
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   @extend .backgr-center;
   background-color: $gray_text;
-  margin-right: 20px;
+  background-size: contain;
 }
 .message_time{
   color: $gray_text;
-  margin-top: 10px;
+  font-size: 11px;
 }
 .messages_wrapp{
   @extend .flex-column;
   align-items: flex-start;
-}
-.message{
-  padding: 15px;
-  border-radius: 25px;
+  padding: 16px 32px 16px 16px;
+  border-radius: 5px;
   background: $line;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
   position: relative;
+  &:after{
+    content: '';
+    display: block;
+    height: 0;
+    width: 0;
+    border-right: 20px solid $line;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -15px;
+  }
+}
+.message{
   color: $dark_text;
-  margin-bottom: 10px;
-
-  &:first-child{
-    border-radius: 0 25px 25px 25px;
-    &:before{
-      content: '';
-      display: block;
-      height: 0;
-      width: 0;
-      border-right: 20px solid $line;
-      border-bottom: 10px solid transparent;
-      position: absolute;
-      top: 0;
-      left: -15px;
-    }
-  }
-  &:not(:last-child){
-    border-radius: 5px 25px 25px 5px;
-  }
-
 }
-.message ~ .message{
-  border-radius: 5px 25px 25px 5px;
-  &:last-child{
-    border-radius: 5px 25px 25px 25px;
-  }
-}
+
 
 .my_messages{
   flex-direction: row-reverse;
-  .user_avatar{
+  .user_info_wrapp{
     margin-right: 0;
     margin-left: 20px;
+  }
+  .user_avatar{
+    margin-right: 0;
   }
   .messages_wrapp{
     order: 1;
     align-items: flex-end;
-  }
-  .message{
     background: $blue;
     color: white;
     box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
-
-    &:first-child{
-      border-radius:  25px 0 25px 25px;
-      &:before{
-        border-right: none;
-        border-left: 20px solid $blue;
-        border-bottom: 10px solid transparent;
-        left: auto;
-        right: -15px;
-      }
-    }
-    &:not(:last-child){
-      border-radius: 25px  5px 5px 25px;
+    padding: 16px 16px 16px 32px;
+    &:after{
+      border-right: none;
+      border-left: 20px solid $blue;
+      border-bottom: 10px solid transparent;
+      left: auto;
+      right: -15px;
     }
   }
-
-  .message ~ .message{
-    border-radius: 25px 5px 5px 25px;
-    &:last-child{
-      border-radius: 25px 5px 25px 25px;
+}
+.my_messages ~ .my_messages{
+  margin-top: 5px;
+  align-items: center;
+  .message_time{
+    display: block;
+    width: 40px;
+    text-align: center;
+  }
+  .user_avatar{
+    display: none;
+  }
+  .messages_wrapp{
+    &:after{
+      display: none;
+    }
+  }
+}
+.not_my_messages ~ .not_my_messages{
+  margin-top: 5px;
+  align-items: center;
+  .message_time{
+    display: block;
+    width: 40px;
+    text-align: center;
+  }
+  .user_avatar{
+    display: none;
+  }
+  .messages_wrapp{
+    &:after{
+      display: none;
     }
   }
 }
 .image{
   display: block;
   width: 100%;
-  max-width: 415px;
+  min-width: 350px;
   height: 280px;
-  margin: 10px auto 0;
+  margin: 10px auto 5px;
   border-radius: 5px;
+  @extend .backgr-center;
+  background-size: cover;
 }
 .form{
   padding: 20px;
@@ -143,10 +153,10 @@
 .input_field{
   border: 1px solid $border_menu;
   border-radius: 5px;
-  padding: 8px 10px 8px 30px;
+  padding: 10px;
   flex: auto;
   resize: none;
-  height: 45px;
+  height: 46px;
   transition: 0.5s;
   &:focus{
     height: 100px;
@@ -165,6 +175,7 @@
   font-size: 25px;
   @extend .flex-center;
   cursor: pointer;
+  background-size: cover;
 }
 .send_button{
   height: 50px;
@@ -180,6 +191,50 @@
     line-height: 50px;
   }
 }
+.with_spinner > .add_button{
+  display: none;
+}
+
+.with_spinner{
+  &:before{
+    content: '';
+    background: center center no-repeat;
+    background-image: url('../../../img/spinner.gif');
+    display: block;
+    height: 50px;
+    width: 50px;
+    background-size: 60%;
+    z-index: 2;
+  }
+
+}
+.icon-trashcan{
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  &:before{
+    transition: 0.5s;
+  }
+  &:hover{
+    &:before{
+      color: $blue;
+    }
+  }
+}
+.my_messages{
+  .icon-trashcan{
+    top: 0;
+    right: auto;
+    left: 0;
+    &:hover{
+      &:before{
+        color: $dark_text;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 1000px){
 
@@ -187,6 +242,39 @@
 }
 
 @media screen and (max-width: 550px){
-
-
+  .chat_wrapp{
+    padding: 10px;
+  }
+  .image{
+    height: 150px;
+    min-width: 150px;
+  }
+  .message{
+    font-size: 14px;
+  }
+  .form{
+    padding: 5px;
+    margin: 0 5px 5px;
+  }
+  .add_button_wrapp{
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+  }
+  .add_button{
+    font-size: 20px;
+  }
+  .input_field{
+    padding: 8px;
+    font-size: 14px;
+  }
+  .send_button{
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    margin-left: 5px;
+    &:before{
+      font-size: 20px;
+    }
+  }
 }

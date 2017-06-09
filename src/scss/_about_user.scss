@@ -28,6 +28,8 @@
   border-radius: 50%;
   background-color: $gray_text;
   margin-right: 20px;
+  @extend .backgr-center;
+  background-size: contain;
 }
 .name{
   @extend .flex-column;

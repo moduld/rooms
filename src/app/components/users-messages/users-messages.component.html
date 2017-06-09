@@ -1,46 +1,19 @@
-<div class="chat_and_form_wrapp">
+<div class="chat_and_form_wrapp" *ngIf="showComponentBody">
 
     <div class="position_container">
-        <div class="chat_wrapp" (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+        <div class="chat_wrapp" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
-            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index" [ngClass]="{'my_messages': message.user_id === message.user.user_id}">
+            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index" [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'not_my_messages': message.user_id !== loginnedUser.user_data.user_id}">
                 <div class="user_info_wrapp">
-                    <!--[ngStyle]="{'background-image':'url(' + user.thumbnail + ')' }"-->
-                    <span class="user_avatar" ></span>
-                    <span class="message_time">12:23</span>
+                    <span class="user_avatar" [ngStyle]="{'background-image':'url(' + message.avatar + ')' }"></span>
+                    <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
                 </div>
                 <div class="messages_wrapp">
-                    <p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>
-                    <p class="message">khefvuihe jerpf jeriovho erjiejv ouier</p>
-                    <p class="message">khefvuiheruioh jieio jerpfjeriov hg  ugsc ui efvkugh hoerjiejvouier</p>
+                    <span class="icon-trashcan" (click)="deleteMessage(message, i)"></span>
+                    <p class="message">{{message.text}}</p>
+                    <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
                 </div>
             </div>
-
-            <!--<div class="user_content_wrapp">-->
-                <!--<div class="user_info_wrapp">-->
-                    <!--<span class="user_avatar"></span>-->
-                    <!--<span class="message_time">12:23</span>-->
-                <!--</div>-->
-                <!--<div class="messages_wrapp">-->
-                    <!--<p class="message">-->
-                        <!--khefvuiheruioh jieio jerpfjeriovhoerjiejvouier-->
-                        <!--<a class="image"></a>-->
-                    <!--</p>-->
-
-
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="user_content_wrapp my_messages">-->
-                <!--<div class="user_info_wrapp">-->
-                    <!--<span class="user_avatar"></span>-->
-                    <!--<span class="message_time">12:23</span>-->
-                <!--</div>-->
-                <!--<div class="messages_wrapp">-->
-                    <!--<p class="message">khefvuiheruioh jieio jerpfjeriovhoerjiejvouier</p>-->
-
-                <!--</div>-->
-            <!--</div>-->
 
             <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 
@@ -52,7 +25,7 @@
         <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
             <label for="message_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
         </div>
-        <textarea  class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your comment ..."></textarea>
+        <textarea  class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your message ..."></textarea>
         <button type="submit" class="send_button icon-plane"></button>
 
     </form>

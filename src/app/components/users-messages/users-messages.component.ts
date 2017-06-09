@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
@@ -14,6 +14,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
 
   @Input() eventFromParent:Subject<any>;
+  @Output() firstMessageSent = new EventEmitter<boolean>();
   error: any;
   inProcess: boolean;
   loaded_image_url: string;
@@ -23,8 +24,9 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
   mediaToAppServer: any;
   flagMoveY: boolean = true;
   userWhoTalkToUs: any;
-  firstMessageFlag: boolean;
+  virtualUserFlag: boolean;
   loginnedUser: any;
+  showComponentBody: boolean;
 
   constructor( private requestService: RequestService,
                private fileService: FileInfoService,
@@ -37,7 +39,8 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
     this.eventFromParent.subscribe(event => {
 
-      this.firstMessageFlag = event.flag;
+      this.showComponentBody = true;
+      this.virtualUserFlag = event.flag;
       console.log(event)
       this.userWhoTalkToUs = event.user;
 
@@ -60,22 +63,30 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
     this.all_messages = [];
     this.offset = 0;
 
-    this.firstMessageFlag && this.getAllMessages()
+    this.virtualUserFlag && this.getAllMessages()
   }
 
   getAllMessages():void {
 
     let dataToServer = {
-      user_id_to: this.userWhoTalkToUs.user_id_to,
+      user_id_to: this.userWhoTalkToUs.user.user_id,
       offset_id: this.offset,
       direction_flag: 0
     };
+    this.show_loading = true;
 
     this.requestService.getUserMessages(dataToServer).subscribe(
         data=>{
           console.log(data)
           if (data['messages'].length){
-            this.all_messages = this.all_messages.concat(data['messages']);
+
+            let temp = data['messages'].map((message, i)=>{
+               message.user_id ===  this.userWhoTalkToUs.user.user_id ? message.avatar = this.userWhoTalkToUs.user.thumbnail : message.avatar = this.loginnedUser.user_data.thumbnail;
+
+              return message
+            });
+
+            this.all_messages = this.all_messages.concat(temp);
             this.flagMoveY = true;
           }
 
@@ -125,7 +136,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
     if (messageForm.value.text || this.mediaToAppServer){
       let dataToServer = {
-        user_id_to: this.userWhoTalkToUs.user_id_to,
+        user_id_to: this.virtualUserFlag ? this.userWhoTalkToUs.user.user_id : this.userWhoTalkToUs.user_id,
         text: messageForm.value.text
       };
 
@@ -140,12 +151,9 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
       this.requestService.sendNewMessage(dataToServer).subscribe(
           data=>{
-            this.all_messages.push(data['message']);
-            // this.comment_offset = 0;
-            // this.comments_sort_type = 'date_newer';
-            // this.comments = [];
-            // this.getComments();
-            // this.loaded_image_url = ''
+            this.all_messages.unshift(data['message']);
+            this.loaded_image_url = '';
+            !this.virtualUserFlag && this.firstMessageSent.emit(true)
           },
           error => {this.error = error; console.log(error);}
       );
@@ -162,9 +170,23 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
         this.offset = this.all_messages[this.all_messages.length - 1].msg_id;
         this.getAllMessages();
 
-      this.flagMoveY = false;
+        this.flagMoveY = false;
     }
 
+  }
+
+  deleteMessage(message: any, index:number):void {
+
+    let dataToServer = {
+      msg_id: message.msg_id
+    };
+
+    this.requestService.deleteMessage(dataToServer).subscribe(
+        data=>{
+          this.all_messages.splice(index, 1);
+        },
+        error => {this.error = error; console.log(error);}
+    );
   }
 
 }

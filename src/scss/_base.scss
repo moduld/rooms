@@ -71,6 +71,7 @@ $font_bold: Bold, sans-serif;
     @extend .backgr-center;
     background-color: $gray_text;
     margin-right: 10px;
+    background-size: contain;
   }
   .name{
     color: $gray_text;

@@ -86,7 +86,7 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('user_id_to', dataToServer.user_id_to);
     params.set('offset_id', dataToServer.offset_id );
-    params.set('direction_flag ', dataToServer.direction_flag );
+    params.set('direction_flag', dataToServer.direction_flag );
 
     let data = {
       params: params,
@@ -745,6 +745,21 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
+  deleteMessage(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      msg_id: dataToServer.msg_id
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'message/remove'
+    };
+
+    return this.makePostRequest(data)
+  }
+
   makePostRequest(data: any): Observable<any> {
 
     return this.http.post(this.commonLink + data.apiLink, JSON.stringify(data.sendData), this.options).map((resp:Response)=>{
@@ -764,4 +779,6 @@ export class RequestService  {
       return Observable.throw(error);
     });
   }
+
+
 }

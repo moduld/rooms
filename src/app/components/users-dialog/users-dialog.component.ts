@@ -24,24 +24,30 @@ export class UsersDialogComponent implements OnInit {
     this.dialog_user_id = this.route.snapshot.params['user'];
     this.all_users = [];
 
-    this.requestService.getUserDialogUsersList().subscribe(
-        data=>{
-          console.log(data['messages'])
-          this.all_users = data['messages'];
+    this.getUsersForDialog()
+  }
 
-          if (data['messages'].length && this.dialog_user_id){
-            this.findCurrentUser()
-          } else {
-            if (!this.dialog_user_id){
-              this.current_user = null
-            }
-            if (!data['messages'].length){
-              this.createUserVirtual()
-            }
-          }
-        },
-        error => {this.error = error; console.log(error);}
-    );
+
+  getUsersForDialog(): void {
+
+      this.requestService.getUserDialogUsersList().subscribe(
+          data=>{
+              console.log(data['messages'])
+              this.all_users = data['messages'];
+
+              if (data['messages'].length && this.dialog_user_id){
+                  this.findCurrentUser()
+              } else {
+                  if (!this.dialog_user_id){
+                      this.current_user = null
+                  }
+                  if (!data['messages'].length){
+                      this.dialog_user_id && this.createUserVirtual()
+                  }
+              }
+          },
+          error => {this.error = error; console.log(error);}
+      );
   }
 
   findCurrentUser(): void {
@@ -64,17 +70,24 @@ export class UsersDialogComponent implements OnInit {
     this.requestService.getUserDetails(this.dialog_user_id).subscribe(
         data=>{
           console.log(data)
-          this.virtual_user = data['user']
+          this.virtual_user = data['user'];
             this.eventToChild.next({flag: false, user: this.virtual_user});
         },
         error => {this.error = error; console.log(error);}
     );
   }
 
-    changeDialogUser(user: any): void {
+    changeDialogUser(flag: boolean, user: any): void {
 
+      flag ? this.dialog_user_id = user.user_id_to : this.dialog_user_id = user.user_id;
         this.current_user = user;
-        this.eventToChild.next({flag: true, user: this.current_user});
+        this.eventToChild.next({flag: flag, user: this.current_user});
+    }
+
+    refreshUsersList(): void {
+
+      this.virtual_user = null;
+      this.getUsersForDialog()
     }
 
 }
