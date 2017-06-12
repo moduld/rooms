@@ -111,10 +111,11 @@ export class HeaderComponent implements OnInit {
     getNewMessages():void {
 
       let dataToServer = {
-          type: 'MessageNotificaion',
+          type: 'all',
           offset_id: this.message_notification_offset,
           direction_flag: 0
       };
+      // type: MessageNotificaion - messages
 // type: all - get all notifications
         this.requestService.getUserNotifications(dataToServer).subscribe(
             data=>{

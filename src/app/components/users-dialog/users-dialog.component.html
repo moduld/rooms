@@ -17,8 +17,7 @@
                 </div>
             </div>
 
-            <div class="user_bar" *ngFor="let user of all_users" [ngClass]="{'active':  user.user_id_to == dialog_user_id, 'new_message': user.new_flag}" (click)="changeDialogUser(true, user)">
-
+            <div class="user_bar" *ngFor="let user of all_users" [ngClass]="{'active':  user.user.user_id == dialog_user_id, 'new_message': user.new_flag}" (click)="changeDialogUser(true, user)">
                 <span class="avatar" [ngStyle]="{'background-image':'url(' + user.user.thumbnail + ')' }" [routerLink]="['/about-user', user.user.user_id]"></span>
 
                 <div class="user_name_and_date" >
@@ -26,7 +25,7 @@
                     <span class="name">{{user.user.user_name}}</span>
                     <span class="date">{{user.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                    <p class="text">{{user.text || 'Media message...'}}</p>
+                    <p class="text">{{user.text || 'M'}}</p>
                 </div>
             </div>
         </div>

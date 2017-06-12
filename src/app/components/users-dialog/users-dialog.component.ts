@@ -79,7 +79,10 @@ export class UsersDialogComponent implements OnInit {
 
     changeDialogUser(flag: boolean, user: any): void {
 
-      flag ? this.dialog_user_id = user.user_id_to : this.dialog_user_id = user.user_id;
+      flag ? this.dialog_user_id = user.user.user_id : this.dialog_user_id = user.user_id;
+
+      console.log('this.dialog_user_id', this.dialog_user_id)
+      console.log('user', user)
         this.current_user = user;
         this.eventToChild.next({flag: flag, user: this.current_user});
     }

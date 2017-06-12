@@ -86,7 +86,6 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
     this.requestService.getUserMessages(dataToServer).subscribe(
         data=>{
-          console.log(data)
           if (data['messages'].length){
 
             let temp = data['messages'].map((message, i)=>{
@@ -96,7 +95,6 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
             });
 
             this.directionFlag ? this.all_messages = temp.concat(this.all_messages) : this.all_messages = this.all_messages.concat(temp);
-            console.log('this.all_messages', this.all_messages)
             this.flagMoveY = true;
           }
           this.autocheckNewMessages();
@@ -210,6 +208,15 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
       this.offset = this.all_messages[0].msg_id || 0;
       this.getAllMessages();
     }, 10000);
+
+  }
+
+  differentBetweenMessages(message: any): any {
+
+    let result = Math.floor((new Date().getTime() - message.created_at*1000)/86400000);
+
+    return result
+    // return Math.floor(message.poll.time_left*1000/86400000 + 'days left' : 'Voting closed';
 
   }
 

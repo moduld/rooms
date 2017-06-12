@@ -3,6 +3,8 @@
   margin-bottom: 30px;
   @extend .flex-column;
   background: white;
+  border: 1px solid $border_menu;
+
 }
 .chat_and_form_wrapp{
   width: 100%;
@@ -60,7 +62,9 @@
   padding: 16px 32px 16px 16px;
   border-radius: 5px;
   background: $line;
-  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+  //box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid $border_menu;
+  border-top: none;
   position: relative;
   &:after{
     content: '';
@@ -146,7 +150,7 @@
     align-items: flex-end;
     background: $blue;
     color: white;
-    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+    //box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
     padding: 16px 16px 16px 32px;
     &:after{
       border-right: none;
@@ -160,13 +164,12 @@
 
 .image{
   display: block;
-  width: 100%;
   min-width: 350px;
   height: 280px;
   margin: 10px auto 5px;
   border-radius: 5px;
   @extend .backgr-center;
-  background-size: cover;
+  background-size: contain;
 }
 .form{
   padding: 20px;

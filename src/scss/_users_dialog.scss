@@ -18,6 +18,15 @@
   width: 350px;
   @extend .flex-column;
   margin-right: 10px;
+  position: relative;
+}
+.users_wrapper{
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 30px;
+  right: 0;
 }
 .user_bar{
   height: 80px;
@@ -150,11 +159,11 @@
     margin-right: 0;
   }
   .users_wrapper{
-    height: 100%;
-    overflow-y: auto;
+    top: 60px;
+    bottom: 0;
   }
   .text{
-    width: 215px;
+    width: 197px;
   }
   #users_list_view_toggler{
     &:checked + .aside{
