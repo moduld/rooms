@@ -3,13 +3,14 @@
     <div class="position_container">
         <div class="chat_wrapp" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
-            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index" [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'not_my_messages': message.user_id !== loginnedUser.user_data.user_id}">
+            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index"
+                 [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'last': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
                 <div class="user_info_wrapp">
                     <span class="user_avatar" [ngStyle]="{'background-image':'url(' + message.avatar + ')' }"></span>
                     <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
                 </div>
                 <div class="messages_wrapp">
-                    <span class="icon-trashcan" (click)="deleteMessage(message, i)"></span>
+                    <span class="hidden icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
                     <p class="message">{{message.text}}</p>
                     <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
                 </div>

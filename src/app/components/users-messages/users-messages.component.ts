@@ -27,6 +27,8 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
   virtualUserFlag: boolean;
   loginnedUser: any;
   showComponentBody: boolean;
+  directionFlag: number;
+  interval: any;
 
   constructor( private requestService: RequestService,
                private fileService: FileInfoService,
@@ -36,12 +38,12 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
     this.loginnedUser = this.storeservice.getUserData();
     this.all_messages = [];
+    this.directionFlag = 0;
 
     this.eventFromParent.subscribe(event => {
 
       this.showComponentBody = true;
       this.virtualUserFlag = event.flag;
-      console.log(event)
       this.userWhoTalkToUs = event.user;
 
       this.userChangedOrStart()
@@ -51,19 +53,23 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
+    clearInterval(this.interval);
     this.eventFromParent.unsubscribe();
   }
 
 
   userChangedOrStart():void {
 
+    clearInterval(this.interval);
     this.inProcess = false;
     this.loaded_image_url = '';
     this.show_loading = false;
     this.all_messages = [];
     this.offset = 0;
+    this.directionFlag = 0;
 
-    this.virtualUserFlag && this.getAllMessages()
+    this.virtualUserFlag && this.getAllMessages();
+
   }
 
   getAllMessages():void {
@@ -71,9 +77,12 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
     let dataToServer = {
       user_id_to: this.userWhoTalkToUs.user.user_id,
       offset_id: this.offset,
-      direction_flag: 0
+      direction_flag: this.directionFlag
     };
-    this.show_loading = true;
+
+    !this.directionFlag ? this.show_loading = true : '';
+
+    clearInterval(this.interval);
 
     this.requestService.getUserMessages(dataToServer).subscribe(
         data=>{
@@ -86,10 +95,11 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
               return message
             });
 
-            this.all_messages = this.all_messages.concat(temp);
+            this.directionFlag ? this.all_messages = temp.concat(this.all_messages) : this.all_messages = this.all_messages.concat(temp);
+            console.log('this.all_messages', this.all_messages)
             this.flagMoveY = true;
           }
-
+          this.autocheckNewMessages();
           this.show_loading = false;
         },
         error => {this.error = error; console.log(error);}
@@ -167,6 +177,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
   onScrollRichTheEnd(event): void {
 
     if (this.flagMoveY && this.all_messages.length){
+        this.directionFlag = 0;
         this.offset = this.all_messages[this.all_messages.length - 1].msg_id;
         this.getAllMessages();
 
@@ -175,18 +186,31 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteMessage(message: any, index:number):void {
+  deleteMessage(message: any, index:number, myne: boolean):void {
 
-    let dataToServer = {
-      msg_id: message.msg_id
-    };
+    if (myne){
+      let dataToServer = {
+        msg_id: message.msg_id
+      };
 
-    this.requestService.deleteMessage(dataToServer).subscribe(
-        data=>{
-          this.all_messages.splice(index, 1);
-        },
-        error => {this.error = error; console.log(error);}
-    );
+      this.requestService.deleteMessage(dataToServer).subscribe(
+          data=>{
+            this.all_messages.splice(index, 1);
+          },
+          error => {this.error = error; console.log(error);}
+      );
+    }
+
+  }
+
+  autocheckNewMessages ():void {
+
+    this.interval = setInterval(()=>{
+      this.directionFlag = 1;
+      this.offset = this.all_messages[0].msg_id || 0;
+      this.getAllMessages();
+    }, 10000);
+
   }
 
 }

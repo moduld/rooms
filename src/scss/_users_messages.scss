@@ -23,12 +23,16 @@
   border-radius: 5px;
   padding: 30px;
   background: white;
+  transform: rotate(180deg);
+  direction: rtl;
 }
 .user_content_wrapp{
   width: 100%;
   display: flex;
   align-items: flex-start;
-  margin-top: 20px;
+  margin-top: 5px;
+  transform: rotate(180deg);
+  direction: ltr;
 }
 .user_info_wrapp{
   @extend .flex-column;
@@ -42,10 +46,13 @@
   @extend .backgr-center;
   background-color: $gray_text;
   background-size: contain;
+  display: none;
 }
 .message_time{
   color: $gray_text;
   font-size: 11px;
+  width: 40px;
+  text-align: center;
 }
 .messages_wrapp{
   @extend .flex-column;
@@ -57,7 +64,6 @@
   position: relative;
   &:after{
     content: '';
-    display: block;
     height: 0;
     width: 0;
     border-right: 20px solid $line;
@@ -65,6 +71,7 @@
     position: absolute;
     top: 0;
     left: -15px;
+    display: none;
   }
 }
 .message{
@@ -72,6 +79,59 @@
 }
 
 
+//.my_messages{
+//  flex-direction: row-reverse;
+//  .user_info_wrapp{
+//    margin-right: 0;
+//    margin-left: 20px;
+//  }
+//  .user_avatar{
+//    margin-right: 0;
+//  }
+//  .messages_wrapp{
+//    order: 1;
+//    align-items: flex-end;
+//    background: $blue;
+//    color: white;
+//    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+//    padding: 16px 16px 16px 32px;
+//    &:after{
+//      border-right: none;
+//      border-left: 20px solid $blue;
+//      border-bottom: 10px solid transparent;
+//      left: auto;
+//      right: -15px;
+//    }
+//  }
+//}
+//.my_messages ~ .my_messages{
+//  margin-top: 5px;
+//  align-items: center;
+//  .message_time{
+//    display: block;
+//    width: 40px;
+//    text-align: center;
+//  }
+//  .user_avatar{
+//    display: none;
+//  }
+//  .messages_wrapp{
+//    &:after{
+//      display: none;
+//    }
+//  }
+//}
+.last{
+  .user_avatar{
+    display: block;
+  }
+  .messages_wrapp{
+    &:after{
+      display: block;
+    }
+  }
+  margin-bottom: 20px;
+}
 .my_messages{
   flex-direction: row-reverse;
   .user_info_wrapp{
@@ -97,40 +157,7 @@
     }
   }
 }
-.my_messages ~ .my_messages{
-  margin-top: 5px;
-  align-items: center;
-  .message_time{
-    display: block;
-    width: 40px;
-    text-align: center;
-  }
-  .user_avatar{
-    display: none;
-  }
-  .messages_wrapp{
-    &:after{
-      display: none;
-    }
-  }
-}
-.not_my_messages ~ .not_my_messages{
-  margin-top: 5px;
-  align-items: center;
-  .message_time{
-    display: block;
-    width: 40px;
-    text-align: center;
-  }
-  .user_avatar{
-    display: none;
-  }
-  .messages_wrapp{
-    &:after{
-      display: none;
-    }
-  }
-}
+
 .image{
   display: block;
   width: 100%;
@@ -223,6 +250,9 @@
     }
   }
 }
+.hidden{
+  display: none;
+}
 .my_messages{
   .icon-trashcan{
     top: 0;
@@ -234,6 +264,12 @@
       }
     }
   }
+  .hidden{
+    display: block;
+  }
+}
+.loading{
+  transform: rotate(180deg);
 }
 
 @media screen and (max-width: 1000px){

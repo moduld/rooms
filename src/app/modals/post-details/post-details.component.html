@@ -18,45 +18,45 @@
               <div class="poll_wrapp" *ngIf="post.has_poll_flag">
                   <p class="post_text">{{post.poll.question}}</p>
                   <div class="progress_wrapp">
-                      <span class="vote_field" (click)="voteForPost(walls.member ? '1' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice1}}</span>
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '1' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice1}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().first"
-                                        *ngIf="post.poll.voted">
+                                        *ngIf="post.poll.voted || !post.poll.time_left">
                           <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 1}">{{post.poll.choice1}}</span>
                       </ngb-progressbar>
-                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().first}}%</span>
+                      <span class="curent_vote_value" *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().first}}%</span>
                   </div>
                   <div class="progress_wrapp">
-                      <span class="vote_field" (click)="voteForPost(walls.member ? '2' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice2}}</span>
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '2' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice2}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().second"
-                                        *ngIf="post.poll.voted">
+                                       *ngIf="post.poll.voted || !post.poll.time_left">
                           <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 2}">{{post.poll.choice2}}</span>
                       </ngb-progressbar>
-                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().second}}%</span>
+                      <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().second}}%</span>
                   </div>
                   <div class="progress_wrapp" *ngIf="post.poll.choice3">
-                      <span class="vote_field" (click)="voteForPost(walls.member ? '3' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice3}}</span>
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '3' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice3}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().third"
-                                        *ngIf="post.poll.voted">
+                                       *ngIf="post.poll.voted || !post.poll.time_left">
                           <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 3}">{{post.poll.choice3}}</span>
                       </ngb-progressbar>
-                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().third}}%</span>
+                      <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().third}}%</span>
                   </div>
                   <div class="progress_wrapp" *ngIf="post.poll.choice4">
-                      <span class="vote_field" (click)="voteForPost(walls.member ? '4' : '-1')" *ngIf="!post.poll.voted">{{post.poll.choice4}}</span>
+                      <span class="vote_field" (click)="voteForPost(walls.member ? '4' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice4}}</span>
                       <ngb-progressbar class="progress_bar"
                                        [value]="convertPollPercent().forth"
-                                       *ngIf="post.poll.voted">
+                                       *ngIf="post.poll.voted || !post.poll.time_left">
                           <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 4}">{{post.poll.choice4}}</span>
                       </ngb-progressbar>
-                      <span class="curent_vote_value" *ngIf="post.poll.voted">{{convertPollPercent().forth}}%</span>
+                      <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().forth}}%</span>
                   </div>
 
                   <div class="vote_info_wrapp"  *ngIf="post.poll">
                       <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
-                      <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+                      <span class="icon-calendar">{{daysLeftConvert(post)}}</span>
                   </div>
 
               </div>

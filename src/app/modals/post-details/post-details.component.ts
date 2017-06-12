@@ -298,4 +298,10 @@ export class PostDetailsComponent implements OnInit {
       return result
     }
 
+    daysLeftConvert(post: any): any {
+
+        return post.poll.time_left ? (Math.floor(post.poll.time_left*1000/86400000) + 1) + 'days left' : 'Voting closed';
+
+    }
+
 }

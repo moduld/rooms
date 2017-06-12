@@ -26,7 +26,7 @@
                     <span class="name">{{user.user.user_name}}</span>
                     <span class="date">{{user.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                    <p class="text">{{user.text}}</p>
+                    <p class="text">{{user.text || 'Media message...'}}</p>
                 </div>
             </div>
         </div>
