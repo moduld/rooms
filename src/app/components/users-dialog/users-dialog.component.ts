@@ -54,7 +54,7 @@ export class UsersDialogComponent implements OnInit {
 
     for (let i = 0; i < this.all_users.length; i++){
 
-      if (this.all_users[i].user_id_to == this.dialog_user_id){
+      if (this.all_users[i].user.user_id == this.dialog_user_id){
           this.current_user = this.all_users[i];
           this.eventToChild.next({flag: true, user: this.current_user});
         return
