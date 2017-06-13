@@ -64,7 +64,8 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
           this.show_loading = false;
         },
         error => {
-          console.log(error)
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get fans list'})
         }
     );
   }
@@ -83,13 +84,12 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
             user.is_fave = 1;
             this.exchangeService.changeQuontityOfItemsInUserSettings('fave')
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
       )
     }
-
-
-
-
   }
 
   onScrollRichTheEnd(event): void {

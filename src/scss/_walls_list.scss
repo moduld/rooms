@@ -68,15 +68,13 @@
   width: 100%;
   border: none;
   padding: 7px 15px;
-  color: white;
-  background: $blue;
+  color: $gray_text;
+  background: white;
   cursor: pointer;
   transition: 0.3s;
-  &:hover:first-child{
-    color: $green;
-  }
-  &:hover:last-child{
-    color: $red_dot;
+  &:hover{
+    color: white;
+    background: $blue;
   }
   &:last-child{
     margin-top: 5px;

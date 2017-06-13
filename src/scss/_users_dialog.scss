@@ -37,7 +37,8 @@
   padding: 0 20px;
   margin-bottom: 10px;
   transition: 0.5s;
-  border: 1px solid $border_menu;
+  border-top: 1px solid $border_menu;
+  border-bottom: 1px solid $border_menu;
   &:hover{
     background: $blue;
     .name,

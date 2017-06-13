@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router,  NavigationEnd} from '@angular/router';
 
 import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-users-rooms-in-profile',
@@ -18,7 +19,8 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   constructor(
               private requestService: RequestService,
-              private router: Router) { }
+              private router: Router,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -41,12 +43,13 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   getUserRooms(): void {
 
-
     this.requestService.getOnlyUsersRooms(this.user_id).subscribe(
         data=>{
-          // console.log(data)
           this.allRooms = data['rooms'];
-        }, error => {this.error = error; console.log(error);}
+        }, error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users rooms'})}
     );
   }
 }

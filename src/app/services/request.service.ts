@@ -26,21 +26,24 @@ export class RequestService  {
   headers: Headers = new Headers({ 'Content-Type': 'application/json' });
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
+  // this method runs from app.component onInit, and from logIn and registration methods in this service
   addRequiredDataToTheService(): void {
-    let storedUserData = this.storeservice.getUserData();
-    if (storedUserData){
-      this.userId = storedUserData['user_data']['user_id'];
-      this.token = storedUserData['token'];
-      if (this.headers.get('Authorization') === null){
-        this.headers.append('Authorization', "Bearer " + this.token);
-        this.options = new RequestOptions({ headers: this.headers })
+
+    if (!this.token){
+      let storedUserData = this.storeservice.getUserData();
+      if (storedUserData){
+        this.userId = storedUserData['user_data']['user_id'];
+        this.token = storedUserData['token'];
+        if (this.headers.get('Authorization') === null){
+          this.headers.append('Authorization', "Bearer " + this.token);
+          this.options = new RequestOptions({ headers: this.headers })
+        }
       }
     }
   }
 
   getAllRooms(): Observable<Room[]> {
 
-    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
@@ -114,7 +117,6 @@ export class RequestService  {
 
   getUserNotifications(dataToServer: any): Observable<Room[]> {
 
-    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
     params.set('type', dataToServer.type);
@@ -131,7 +133,6 @@ export class RequestService  {
 
   getUserDialogUsersList(): Observable<Room[]> {
 
-    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
@@ -187,7 +188,6 @@ export class RequestService  {
 
   getSuggestionRooms(): Observable<Room[]> {
 
-    !this.token && this.addRequiredDataToTheService();
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
 
@@ -215,7 +215,6 @@ export class RequestService  {
 
   getWalls( room_id: any ): Observable<Wall> {
 
-    !this.token && this.addRequiredDataToTheService();
     this.roomId = room_id;
 
     let params: URLSearchParams = new URLSearchParams();
@@ -304,6 +303,7 @@ export class RequestService  {
 
     return this.http.get(this.commonLink + 'user/logout', this.options).map((resp:Response)=>{
       this.headers.delete('Authorization');
+      this.token = '';
       return resp.json();
     })
         .catch((error: any)=> {

@@ -16,73 +16,47 @@ import { Wall } from '../../commonClasses/wall';
 export class HeaderComponent implements OnInit {
 
   error: any;
-  currentRoom: Wall;
-
 
   room_search: string;
-  headerFieldToggle: boolean;
-  showDropdownMenu: boolean;
     showSuggestOrDefault: string;
-    dontShowBoth: boolean;
     currentUser: any;
     message_notification_offset: number;
     messages: any[];
+    messages_quantity: number;
+    notifications: any;
+    notifications_quantity: number;
 
   constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
               private router: Router) {
-
-    // storeservice.roomChangedAsObservable.subscribe(
-    //     room => {
-    //       this.currentRoom = room;
-    //         this.headerFieldToggle = false;
-    //         this.showDropdownMenu = true;
-    //     });
-
-      // router.events.forEach((event) => {
-      //     if (event instanceof NavigationEnd ){
-      //         if (event.url === '/' || event.url === '/all-rooms'){
-      //             this.headerFieldToggle = true;
-      //         }
-      //         if (event.url === '/room-settings' ){
-      //             this.headerFieldToggle = false;
-      //             this.showDropdownMenu = false;
-      //
-      //         }
-      //
-      //      event.url.indexOf('about-user') >= 0 || event.url.indexOf('user-settings') >= 0 ? this.dontShowBoth = false : this.dontShowBoth = true
-      //
-      //     }
-      // });
   }
 
   ngOnInit() {
 
-      // this.dontShowBoth = true;
-      // this.headerFieldToggle = true;
-      // this.showDropdownMenu = true;
       this.message_notification_offset = 0;
       this.messages = [];
+      this.notifications = [];
       this.showSuggestOrDefault = 'suggested';
-      !this.storeservice.getStoredCurrentUserRooms() && this.router.navigateByUrl('/all-rooms');
+      this.messages_quantity = 0;
+      this.notifications_quantity = 0;
       this.currentUser = this.storeservice.getUserData();
       console.log(this.currentUser)
-      this.getNewMessages()
+      this.getNewMessages();
+      this.getNewNotifications()
   }
 
   logOut(){
 
     this.requestService.logOut().subscribe(
         data=>{
-          console.log(data);
             this.storeservice.deleteUserData();
             this.router.navigateByUrl('/login');
         },
         error => {
-          this.error = error.json();
+          this.error = error;
           console.log(this.error);
-        }
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t log out'})}
     )
   }
 
@@ -101,14 +75,16 @@ export class HeaderComponent implements OnInit {
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
-        this.showSuggestOrDefault = '';
-        this.router.navigateByUrl('all-rooms');
-       this.storeservice.saveSearchText(request);
-       this.exchangeService.searchByHeaderSearchField(request)
-
+        let trimmed = request.trim();
+        if (trimmed.length > 2 && trimmed !== this.storeservice.getSearchText()){
+          this.showSuggestOrDefault = '';
+          this.router.navigateByUrl('all-rooms');
+          this.storeservice.saveSearchText(trimmed);
+          this.exchangeService.searchByHeaderSearchField(trimmed)
+      }
     }
 
-    getNewMessages():void {
+    getNewNotifications():void {
 
       let dataToServer = {
           type: 'all',
@@ -120,12 +96,40 @@ export class HeaderComponent implements OnInit {
         this.requestService.getUserNotifications(dataToServer).subscribe(
             data=>{
                 console.log(data);
-                this.messages = data['notifications']
+                this.notifications = data['notifications'];
+                this.notifications_quantity = data['notifications_counts'].Total_all
             },
             error => {
-                console.log(this.error);
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new notifications from a server'})
             }
         )
+    }
+
+    getNewMessages(): void {
+
+        this.requestService.getUserDialogUsersList().subscribe(
+            data=>{
+                console.log(data)
+                if (data['messages'].length){
+                    data['messages'] = data['messages'].filter((message)=>{
+                        return message.new_flag
+                    });
+                    this.messages_quantity = data['messages'].length;
+                    data['messages'].length > 5 ? data['messages'].length = 5 : '';
+                    this.messages = data['messages'];
+                }
+            },
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new messages from a server'})}
+        );
+    }
+
+    goToDialogPage(user: any):void {
+
+        this.router.navigate( ['user-dialogs', {user: user.user.user_id}])
     }
 
 }

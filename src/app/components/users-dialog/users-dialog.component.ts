@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-users-dialog',
@@ -17,7 +18,10 @@ export class UsersDialogComponent implements OnInit {
   virtual_user: any;
   eventToChild:Subject<any> = new Subject();
 
-  constructor( private requestService: RequestService, private router: Router, private route: ActivatedRoute) { }
+  constructor( private requestService: RequestService,
+               private router: Router,
+               private route: ActivatedRoute,
+               private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -32,7 +36,6 @@ export class UsersDialogComponent implements OnInit {
 
       this.requestService.getUserDialogUsersList().subscribe(
           data=>{
-              console.log(data['messages'])
               this.all_users = data['messages'];
 
               if (data['messages'].length && this.dialog_user_id){
@@ -46,7 +49,10 @@ export class UsersDialogComponent implements OnInit {
                   }
               }
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users list from a server'})}
       );
   }
 
@@ -69,11 +75,13 @@ export class UsersDialogComponent implements OnInit {
 
     this.requestService.getUserDetails(this.dialog_user_id).subscribe(
         data=>{
-          console.log(data)
           this.virtual_user = data['user'];
             this.eventToChild.next({flag: false, user: this.virtual_user});
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get info about the user'})}
     );
   }
 
@@ -81,8 +89,6 @@ export class UsersDialogComponent implements OnInit {
 
       flag ? this.dialog_user_id = user.user.user_id : this.dialog_user_id = user.user_id;
 
-      console.log('this.dialog_user_id', this.dialog_user_id)
-      console.log('user', user)
         this.current_user = user;
         this.eventToChild.next({flag: flag, user: this.current_user});
     }

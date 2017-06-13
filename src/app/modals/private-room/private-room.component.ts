@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import { EventsExchangeService } from '../../services/events-exchange.service';
 import {RequestService} from '../../services/request.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class PrivateRoomComponent implements OnInit, Input {
   room_description: string;
 
   constructor(public activeModal: NgbActiveModal,
-              private requestService : RequestService) { }
+              private requestService : RequestService,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -40,9 +42,9 @@ export class PrivateRoomComponent implements OnInit, Input {
            this.closeModal()
           },
           error => {
-            this.error = error.json();
+            this.error = error;
             console.log(this.error);
-          }
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
       )
     } else {
       this.closeModal()

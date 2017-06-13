@@ -5,6 +5,7 @@ import { NgForm} from '@angular/forms';
 import {UserStoreService} from '../../services/user-store.service';
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 import { Wall } from '../../commonClasses/wall';
 
@@ -28,7 +29,8 @@ export class UpdateRoomComponent implements OnInit {
   constructor( private fileService: FileInfoService,
                private requestService: RequestService,
                private storeservice: UserStoreService,
-               private router: Router) { }
+               private router: Router,
+               private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
@@ -49,7 +51,10 @@ export class UpdateRoomComponent implements OnInit {
             settings.link = data.urls[0];
             this.putFileToServer(settings)
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -61,7 +66,10 @@ export class UpdateRoomComponent implements OnInit {
           this.imagePreview = settings.multimedia;
           this.dataToServer['multimedia'] = settings.multimedia;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -74,8 +82,12 @@ export class UpdateRoomComponent implements OnInit {
           this.currentRoom.room_details =  data.room;
           this.storeservice.storeCurrentUserRooms(this.currentRoom);
           this.router.navigateByUrl('/room-settings');
+            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
     );
   }
 

@@ -38,10 +38,9 @@ export class LogInComponent implements OnInit {
   }
 
   sendLogInData(regForm: NgForm): void {
-    console.log(regForm)
+
     this.requestService.logIn(regForm.value).subscribe(
         data=>{
-          console.log(data);
           this.router.navigateByUrl('/all-rooms');
         },
         error => {

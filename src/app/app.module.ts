@@ -53,14 +53,16 @@ import { UsersFavesInProfileComponent } from './components/users-faves-in-profil
 import { MutedBlockedComponent } from './components/muted-blocked/muted-blocked.component';
 import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
 import { UsersMessagesComponent } from './components/users-messages/users-messages.component';
+import { ShowVisualMessagesComponent } from './components/show-visual-messages/show-visual-messages.component';
+import { CanActivateRoomSettingsChildsComponent } from './components/can-activate-room-settings-childs/can-activate-room-settings-childs.component';
 
 let settingsRoutes: Routes = [
-  { path: 'edit-room', component: UpdateRoomComponent},
-  { path: 'delete-room', component: DeleteRoomComponent},
-  { path: 'add-wall', component: AddWallComponent},
-  { path: 'edit-wall/:id', component: EditWallComponent},
-  { path: 'walls-list', component: WallsListComponent},
-  { path: 'members-list', component: MembersListComponent},
+  { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'delete-room', component: DeleteRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'add-wall', component: AddWallComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'edit-wall/:id', component: EditWallComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'walls-list', component: WallsListComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'members-list', component: MembersListComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: '',redirectTo: 'members-list', pathMatch:'full'}
 ];
 let aboutUserChildRoutes = [
@@ -83,10 +85,10 @@ let appRoutes: Routes =[
   { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
-  { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes},
-  { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes},
-  { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes},
-  { path: 'user-dialogs', component: UsersDialogComponent},
+  { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes, canActivate: [CanActivateComponent]},
+  { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes, canActivate: [CanActivateComponent]},
+  { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes, canActivate: [CanActivateComponent]},
+  { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -126,7 +128,9 @@ let appRoutes: Routes =[
     UsersFavesInProfileComponent,
     MutedBlockedComponent,
     UsersDialogComponent,
-    UsersMessagesComponent
+    UsersMessagesComponent,
+    ShowVisualMessagesComponent,
+    CanActivateRoomSettingsChildsComponent
   ],
   imports: [
     BrowserModule,
@@ -144,7 +148,8 @@ let appRoutes: Routes =[
     ErrorShowService,
     FileInfoService,
     CanActivateComponent,
-    AddRequiredInfoService
+    AddRequiredInfoService,
+    CanActivateRoomSettingsChildsComponent
   ],
   entryComponents: [
     CreatePostComponent,

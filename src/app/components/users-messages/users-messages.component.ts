@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
 import {UserStoreService} from '../../services/user-store.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-users-messages',
@@ -32,7 +33,8 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   constructor( private requestService: RequestService,
                private fileService: FileInfoService,
-               private storeservice: UserStoreService) { }
+               private storeservice: UserStoreService,
+               private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -100,7 +102,10 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           this.autocheckNewMessages();
           this.show_loading = false;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get messages from a server'})}
     );
   }
 
@@ -118,7 +123,10 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
             this.mediaToAppServer.link = data.urls[0];
             this.putFileToServer(this.mediaToAppServer)
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -133,7 +141,10 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
             this.loaded_image_url = data.multimedia
           }
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -163,7 +174,10 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
             this.loaded_image_url = '';
             !this.virtualUserFlag && this.firstMessageSent.emit(true)
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the message'})}
       );
 
       messageForm.resetForm();
@@ -195,7 +209,10 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           data=>{
             this.all_messages.splice(index, 1);
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t delete the message'})}
       );
     }
 
@@ -211,13 +228,12 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
-  differentBetweenMessages(message: any): any {
-
-    let result = Math.floor((new Date().getTime() - message.created_at*1000)/86400000);
-
-    return result
-    // return Math.floor(message.poll.time_left*1000/86400000 + 'days left' : 'Voting closed';
-
-  }
+  // differentBetweenMessages(message: any): any {
+  //
+  //   let result = Math.floor((new Date().getTime() - message.created_at*1000)/86400000);
+  //
+  //   return result
+  //
+  // }
 
 }

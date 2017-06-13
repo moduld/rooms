@@ -45,12 +45,6 @@ export class AllRoomsComponent implements OnInit {
             this.storeservice.getSuggestedOrDefault() === 'suggested' && this.getSuggestedRooms();
             this.storeservice.getSuggestedOrDefault() === 'default' && this.getUserRooms();
             !this.storeservice.getSuggestedOrDefault() && this.getSuggestedRooms()
-
-            // if (this.storeservice.getSuggestedOrDefault()){
-            //     this.getUserRooms()
-            // } else {
-            //     this.getSuggestedRooms()
-            // }
         }
   }
 
@@ -64,7 +58,10 @@ export class AllRoomsComponent implements OnInit {
                   }
               }
               this.allRooms = data['rooms'];
-          }, error => {this.error = error; console.log(error);}
+          }, error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get rooms your from a server'})}
       );
   }
 
@@ -73,7 +70,10 @@ export class AllRoomsComponent implements OnInit {
       this.requestService.getRoomsBySearch(search).subscribe(
           data=>{
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
-          }, error => {this.error = error; console.log(error);}
+          }, error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get searchable rooms from a server'})}
       );
   }
 
@@ -82,7 +82,10 @@ export class AllRoomsComponent implements OnInit {
       this.requestService.getSuggestionRooms().subscribe(
           data=>{
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
-          }, error => {this.error = error; console.log(error);}
+          }, error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get suggested rooms from a server'})}
       );
   }
 

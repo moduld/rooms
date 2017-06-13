@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
 
 import {UserStoreService} from '../../services/user-store.service';
-
+import { EventsExchangeService } from '../../services/events-exchange.service';
 import { UserInfo } from '../../commonClasses/userInfo';
 import { Wall } from '../../commonClasses/wall';
 
@@ -26,7 +26,8 @@ export class MembersListComponent implements OnInit {
   show_loading: boolean;
 
   constructor(private requestService: RequestService,
-              private storeservice: UserStoreService) { }
+              private storeservice: UserStoreService,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
@@ -71,7 +72,10 @@ export class MembersListComponent implements OnInit {
             }
             this.show_loading = false;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users list from a server'})}
     );
   }
 
@@ -93,7 +97,10 @@ export class MembersListComponent implements OnInit {
         data=>{
            index != undefined ? this.users.splice(index, 1) : this.users = []
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     );
   }
 

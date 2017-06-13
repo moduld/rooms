@@ -5,6 +5,7 @@ import { NgForm} from '@angular/forms';
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { FileInfoService } from '../../services/file-info.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +23,10 @@ export class EditProfileComponent implements OnInit {
   aboutUser: string;
   currentUser: any;
 
-  constructor(private requestService: RequestService, private storeservice: UserStoreService, private fileService: FileInfoService) { }
+  constructor(private requestService: RequestService,
+              private storeservice: UserStoreService,
+              private fileService: FileInfoService,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -44,7 +48,10 @@ export class EditProfileComponent implements OnInit {
             settings.link = data.urls[0];
             this.putFileToServer(settings)
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -56,7 +63,10 @@ export class EditProfileComponent implements OnInit {
           this.imagePreview = settings.multimedia;
           this.dataToServer['multimedia'] = settings.multimedia;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -70,8 +80,12 @@ export class EditProfileComponent implements OnInit {
             user_data: data.user
           };
           this.currentUser = this.storeservice.saveUserData(newUser);
+            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User information changed successful'})
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
     );
   }
 

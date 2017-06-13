@@ -6,6 +6,7 @@ import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { FileInfoService } from '../../services/file-info.service';
 import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-post-edite',
@@ -22,7 +23,10 @@ export class PostEditeComponent implements OnInit{
 
   @Input() post;
 
-  constructor(public activeModal: NgbActiveModal, private fileService: FileInfoService, private requestService: RequestService,) { }
+  constructor(public activeModal: NgbActiveModal,
+              private fileService: FileInfoService,
+              private requestService: RequestService,
+              private exchangeService: EventsExchangeService) { }
 
   @Output() public options = {
     readAs: 'ArrayBuffer'
@@ -61,7 +65,10 @@ export class PostEditeComponent implements OnInit{
           settings.link = data.urls[0];
           this.putFileToServer(settings)
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
     );
 
   }
@@ -73,7 +80,10 @@ export class PostEditeComponent implements OnInit{
           settings.uploaded = true;
           data.typeForApp === 'image' ? settings.img_src = settings.multimedia : ''
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -89,9 +99,13 @@ export class PostEditeComponent implements OnInit{
 
     this.requestService.editePost(this.dataToServer).subscribe(
         data=>{
-          this.activeModal.close(data)
+          this.activeModal.close(data);
+          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Post information changed successful'})
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
     );
   }
 

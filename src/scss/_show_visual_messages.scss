@@ -1,0 +1,26 @@
+:host{
+
+}
+.mistakes_wrapp{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  @extend .flex-center;
+  transform: translate3d(0, 100%, 0);
+  transition: 0.5s;
+  background: rgba(255, 76, 75, 0.8);
+  z-index: 5;
+}
+.show_message{
+  transform: translate3d(0,0,0);
+}
+.success_message{
+  background: rgba(0, 128, 0, 0.8);
+}
+.mistake{
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+}

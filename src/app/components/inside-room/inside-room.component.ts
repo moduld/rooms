@@ -10,6 +10,7 @@ import { UserInfo } from '../../commonClasses/userInfo';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import { EventsExchangeService } from '../../services/events-exchange.service';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
@@ -42,7 +43,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
-              // private exchangeService: EventsExchangeService,
+              private exchangeService: EventsExchangeService,
               private storeservice: UserStoreService,
               private modalService: NgbModal,
               private router: Router){
@@ -62,7 +63,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
-            console.log(data)
+            // console.log(data)
             if (data && data['message'] === undefined){
                 this.wallsArray = data['room_walls'];
                 this.wallId = this.wallsArray.walls[0].wall_id;
@@ -80,7 +81,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             if (error && error.json().room_detals ){
                 this.wallsArray = [];
                 this.openPrivateRoomModal(error.json().room_detals)
+            }else {
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get walls of the room'})
             }
+
         }
     );
 
@@ -109,7 +113,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             }
             this.show_loading = false;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get posts of the room'})}
     )
   }
 
@@ -125,7 +132,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             data=>{
                 int_key === 'mute' ||  int_key === 'block' ?  this.allPosts = this.allPosts.filter((post)=>{return post.owner.user_id !== block_owner_id}) : ''
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -160,10 +170,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
         this.requestService.postDelete(post.post_id, post.room_id).subscribe(
             data=>{
-                console.log(data);
                 this.allPosts.splice(index, 1)
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t remove this post'})}
         )
     }
 
@@ -174,7 +186,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 post.liked_by_user = flag ? 0 : 1;
                 post.liked_by_user ? post.likes_count++ : post.likes_count--
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -182,9 +197,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
         this.requestService.postInappropriate(post.post_id).subscribe(
             data=>{
-
+                this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Post marked as inappropriate'})
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -192,8 +210,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
         this.requestService.userToBan(data).subscribe(
             data=>{
+                this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User banned successful'})
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -203,7 +225,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             data=>{
                 this.allPosts.splice(index, 1)
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t move the post'})}
         )
     }
 
@@ -256,9 +281,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.wallsArray.membership.member = this.wallsArray.membership.member === 1 ? 0 : 1;
             },
             error => {
-                this.error = error.json();
+                this.error = error;
                 console.log(this.error);
-            }
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 

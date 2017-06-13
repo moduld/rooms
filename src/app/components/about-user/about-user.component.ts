@@ -53,7 +53,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
           this.currentUser = data['user'];
           this.currentUser.is_myne = this.currentUser.user_id == loginnedUser.user_data.user_id;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get user info'})
+        }
     )
   }
 
@@ -70,8 +74,13 @@ export class AboutUserComponent implements OnInit, OnDestroy {
             this.currentUser.is_fave = !this.currentUser.is_fave;
             this.currentUser.is_fave ? this.currentUser.fans_count++ : this.currentUser.fans_count--;
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
       )
+    } else {
+      this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t fave  oneself'})
     }
   }
 
@@ -84,6 +93,8 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   goToPrivateDialog(flag: boolean):void {
 
+    this.currentUser.is_myne && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t speak to oneself'});
+    !this.currentUser.msg_from_anyone && !this.currentUser.is_fan && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t speak to this user'});
     !flag && this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id}]);
   }
 

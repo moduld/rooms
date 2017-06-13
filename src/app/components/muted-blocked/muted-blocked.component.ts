@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../../services/request.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-muted-blocked',
@@ -15,7 +16,8 @@ export class MutedBlockedComponent implements OnInit {
   flagMoveY: boolean = true;
   show_loading: boolean;
 
-  constructor( private requestService: RequestService) { }
+  constructor( private requestService: RequestService,
+               private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
     this.member_toggler = 'muted';
@@ -52,7 +54,10 @@ export class MutedBlockedComponent implements OnInit {
           }
           this.show_loading = false;
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users list from a server'})}
     )
   }
 
@@ -68,7 +73,10 @@ export class MutedBlockedComponent implements OnInit {
         data=>{
           this.users.splice(index, 1)
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     )
   }
 

@@ -7,6 +7,7 @@ import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FileInfoService } from '../../services/file-info.service';
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 import { SliderComponent } from '../../slider/slider.component';
 
 import { UserInfo } from '../../commonClasses/userInfo';
@@ -39,7 +40,8 @@ export class PostDetailsComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
               private requestService: RequestService,
-              private storeservice: UserStoreService) { }
+              private storeservice: UserStoreService,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
 
@@ -49,9 +51,6 @@ export class PostDetailsComponent implements OnInit {
         this.comments = [];
         this.show_loading = false;
         this.getComments();
-
-
-
 
     setTimeout(()=>{
       let modaldialog = document.querySelector('.modal-dialog');
@@ -66,7 +65,10 @@ export class PostDetailsComponent implements OnInit {
           this.post.liked_by_user = flag ? 0 : 1;
           this.post.liked_by_user ? this.post.likes_count++ : this.post.likes_count--
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     )
   }
 
@@ -84,7 +86,10 @@ export class PostDetailsComponent implements OnInit {
             this.mediaToAppServer.link = data.urls[0];
             this.putFileToServer(this.mediaToAppServer)
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -94,12 +99,14 @@ export class PostDetailsComponent implements OnInit {
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           this.inProcess = false;
-          console.log(data)
             if (data.typeForApp === 'image'){
                 this.loaded_image_url = data.multimedia
             }
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -127,7 +134,10 @@ export class PostDetailsComponent implements OnInit {
                 this.getComments();
                 this.loaded_image_url = ''
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new comment'})}
         );
 
         commentForm.resetForm();
@@ -172,10 +182,12 @@ export class PostDetailsComponent implements OnInit {
                   this.comments = this.comments.concat(data['comments']);
                   this.flagMoveY = true;
               }
-
               this.show_loading = false;
           },
-          error => {this.error = error; console.log(error);}
+          error => {
+              this.error = error;
+              console.log(error);
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get comments list'})}
       );
   }
 
@@ -191,7 +203,10 @@ export class PostDetailsComponent implements OnInit {
                comment.liked_by_user = comment.liked_by_user ? 0 : 1;
                comment.liked_by_user ? comment.likes_count++ : comment.likes_count--
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         );
     }
 
@@ -205,10 +220,13 @@ export class PostDetailsComponent implements OnInit {
 
         this.requestService.blockOrMuteUser(dataToServer).subscribe(
             data=>{
-                int_key === 'mute' ||  int_key === 'block' ?  this.comments = this.comments.filter((comment)=>{return comment.owner.user_id !== block_owner_id}) : ''
+                int_key === 'mute' ||  int_key === 'block' ?  this.comments = this.comments.filter((comment)=>{return comment.owner.user_id !== block_owner_id}) : '';
                 !this.comments.length && this.getComments()
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -242,7 +260,10 @@ export class PostDetailsComponent implements OnInit {
             data=>{
                 this.comments.splice(index, 1)
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -253,8 +274,13 @@ export class PostDetailsComponent implements OnInit {
         };
 
         this.requestService.commentReport(dataToServer).subscribe(
-            ()=>{},
-            error => {this.error = error; console.log(error);}
+            ()=>{
+                this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Post marked as inappropriate'})
+            },
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -262,8 +288,12 @@ export class PostDetailsComponent implements OnInit {
 
         this.requestService.userToBan(data).subscribe(
             data=>{
+                this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User banned successful'})
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -282,7 +312,10 @@ export class PostDetailsComponent implements OnInit {
             data=>{
                 this.post['poll'] = data.poll;
             },
-            error => {this.error = error; console.log(error);}
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
         )
     }
 

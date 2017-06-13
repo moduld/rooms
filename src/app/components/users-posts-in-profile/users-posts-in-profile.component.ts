@@ -74,7 +74,8 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
           this.show_loading = false;
         },
         error => {
-          console.log(error)
+          console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get posts from a server'})
         }
     );
   }
@@ -91,8 +92,9 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
           }
         },
         error => {
-          this.error = error.json();
-        }
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get walls list'})}
     );
   }
 
@@ -119,7 +121,10 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
           post.liked_by_user = flag ? 0 : 1;
           post.liked_by_user ? post.likes_count++ : post.likes_count--
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     )
   }
 
@@ -127,10 +132,13 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
 
     this.requestService.postDelete(post.post_id, post.room_id).subscribe(
         data=>{
-          this.allPosts.splice(index, 1)
+          this.allPosts.splice(index, 1);
           this.exchangeService.changeQuontityOfItemsInUserSettings('post')
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     )
   }
 

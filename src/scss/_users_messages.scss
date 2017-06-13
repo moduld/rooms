@@ -273,6 +273,7 @@
 }
 .loading{
   transform: rotate(180deg);
+  direction: ltr;
 }
 
 @media screen and (max-width: 1000px){

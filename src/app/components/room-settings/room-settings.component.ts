@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router} from '@angular/router';
 import {UserStoreService} from '../../services/user-store.service';
 
 import { Wall } from '../../commonClasses/wall';
@@ -13,13 +13,13 @@ export class RoomSettingsComponent implements OnInit {
 
   error: any;
   currentRoom: Wall;
-  menu_show_toggle: boolean;
 
-  constructor( private storeservice: UserStoreService) { }
+  constructor( private storeservice: UserStoreService,
+               private router: Router) { }
 
   ngOnInit() {
-    this.menu_show_toggle = true;
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
+    !this.currentRoom && this.router.navigateByUrl('/all-rooms');
   }
 
 }

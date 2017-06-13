@@ -5,7 +5,7 @@ import { NgForm} from '@angular/forms';
 
 import {UserStoreService} from '../../services/user-store.service';
 import { RequestService } from '../../services/request.service';
-
+import { EventsExchangeService } from '../../services/events-exchange.service';
 import { Wall } from '../../commonClasses/wall';
 
 @Component({
@@ -29,7 +29,8 @@ export class EditWallComponent implements OnInit, OnDestroy {
   constructor(private activateRoute: ActivatedRoute,
                private requestService: RequestService,
               private storeservice: UserStoreService,
-              private router: Router) { }
+              private router: Router,
+              private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
@@ -61,8 +62,12 @@ export class EditWallComponent implements OnInit, OnDestroy {
           this.currentRoom.walls[this.index] = data.wall;
           this.storeservice.storeCurrentUserRooms(this.currentRoom);
           this.router.navigateByUrl('/room-settings');
+          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall changed successful'})
         },
-        error => {this.error = error; console.log(error);}
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
     );
   }
 
