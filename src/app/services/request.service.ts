@@ -279,6 +279,19 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
+  getNotificationSettings(): Observable<any[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+
+    let data = {
+      params: params,
+      apiLink: 'user/notification/settings/get'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
   registration(user_data: any) : Observable<UserInfo> {
 
     return this.http.post(this.commonLink + 'user/register', JSON.stringify(user_data) , this.options).map((resp:Response)=>{

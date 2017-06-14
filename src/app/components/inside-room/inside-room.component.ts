@@ -240,7 +240,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.allow_comment_flag = this.wallsArray.walls[0].allow_comment_flag;
         modalRef.result.then((newPost) => {
             this.allPosts.unshift(newPost.post)
-        });
+        }).catch(()=>{});
     }
 
     openPrivateRoomModal(data: any): void {
@@ -260,7 +260,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.post = post;
         modalRef.result.then((editedPost) => {
             this.allPosts.splice(index, 1, editedPost.post)
-        });
+        }).catch(()=>{});
     }
 
     goToAnotherWall(tag: any, flag: boolean): void {
@@ -303,7 +303,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         modalRef.componentInstance.is_admin = this.userArmin;
         modalRef.result.then((post) => {
 
-        });
+        }).catch(()=>{});
     }
 
     onScrollRichTheEnd(event): void {

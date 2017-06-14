@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class AddRequiredInfoService {
 
   constructor() { }
-
+  //used in allRooms.component to bring data from server to same format
   addInfo(data): any {
 
     if (Array.isArray(data)){

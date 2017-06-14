@@ -19,7 +19,13 @@ export class PrivateRoomComponent implements OnInit, Input {
 
   constructor(public activeModal: NgbActiveModal,
               private requestService : RequestService,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+    exchangeService.urlChangedEvent.subscribe(
+        () => {
+          this.activeModal.dismiss()
+        });
+  }
 
   ngOnInit() {
 

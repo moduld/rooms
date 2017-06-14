@@ -41,7 +41,13 @@ export class PostDetailsComponent implements OnInit {
               private fileService: FileInfoService,
               private requestService: RequestService,
               private storeservice: UserStoreService,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+      exchangeService.urlChangedEvent.subscribe(
+          () => {
+              this.activeModal.dismiss()
+          });
+  }
 
   ngOnInit() {
 
@@ -112,10 +118,10 @@ export class PostDetailsComponent implements OnInit {
 
   createNewComment(commentForm: NgForm):void {
 
-
-    if (commentForm.value.text || this.mediaToAppServer){
+    let text = commentForm.value.text.trim();
+    if (text || this.mediaToAppServer){
       this.dataToServer.post = this.post;
-      this.dataToServer.text = commentForm.value.text;
+      this.dataToServer.text = text;
         if (this.mediaToAppServer){
 
             this.dataToServer.media = {
@@ -164,9 +170,11 @@ export class PostDetailsComponent implements OnInit {
 
   changeSorting(): void {
 
-      this.comment_offset = 0;
-      this.comments = [];
-      this.getComments()
+      if (this.comments.length){
+          this.comment_offset = 0;
+          this.comments = [];
+          this.getComments()
+      }
   }
 
   getComments(): void {

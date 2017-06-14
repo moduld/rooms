@@ -148,13 +148,13 @@
   .messages_wrapp{
     order: 1;
     align-items: flex-end;
-    background: $blue;
+    background: $my_message;
     color: white;
     //box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
     padding: 16px 16px 16px 32px;
     &:after{
       border-right: none;
-      border-left: 20px solid $blue;
+      border-left: 20px solid $my_message;
       border-bottom: 10px solid transparent;
       left: auto;
       right: -15px;
@@ -241,11 +241,14 @@
 .icon-trashcan{
   position: absolute;
   padding: 5px;
-  top: 0;
-  right: 0;
   cursor: pointer;
+  top: 0;
+  right: auto;
+  left: 0;
+  display: none;
   &:before{
     transition: 0.5s;
+    color: $dark_text;
   }
   &:hover{
     &:before{
@@ -253,23 +256,12 @@
     }
   }
 }
-.hidden{
-  display: none;
+
+.messages_wrapp{
+  &:hover  .icon-trashcan{
+  display: block;
 }
-.my_messages{
-  .icon-trashcan{
-    top: 0;
-    right: auto;
-    left: 0;
-    &:hover{
-      &:before{
-        color: $dark_text;
-      }
-    }
-  }
-  .hidden{
-    display: block;
-  }
+
 }
 .loading{
   transform: rotate(180deg);

@@ -29,7 +29,13 @@ export class CreatePostComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
               private requestService: RequestService,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+    exchangeService.urlChangedEvent.subscribe(
+        () => {
+          this.activeModal.dismiss()
+        });
+  }
 
   @Output() public options = {
     readAs: 'ArrayBuffer'
@@ -100,6 +106,7 @@ export class CreatePostComponent implements OnInit {
       postForm.value.choice4 ? this.dataToServer.poll['choice4'] =  postForm.value.choice4 : '';
       this.dataToServer.poll['duration'] = postForm.value.duration;
     }
+
     this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
         data=>{
           this.activeModal.close(data)

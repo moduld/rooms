@@ -5,6 +5,7 @@ export class FileInfoService {
 
   constructor() { }
 
+  //used in components where need to attach some files to upload
   toNowFileInfo (file: any): any {
 
     if (file.type){

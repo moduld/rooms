@@ -114,10 +114,10 @@
     color: $red;
   }
 }
-.drop_down_title{
-  padding: 10px;
-  font-size: 16px;
-}
+//.drop_down_title{
+//  padding: 10px;
+//  font-size: 16px;
+//}
 .ban-days{
   width: 100%;
   height: 30px;
@@ -324,6 +324,14 @@ margin-top: 5px;
   border-bottom: 1px solid $line;
   display: flex;
   justify-content: space-between;
+}
+.drop_down_menu{
+  top: 29px;
+}
+.triangle{
+  &:before{
+    left: 84%;
+  }
 }
 
 @media screen and (max-width: 1260px){

@@ -2,11 +2,10 @@
   margin-top: 0;
 }
 .main_container{
-  max-height: 58vh;
+  max-height: 63vh;
   overflow-y: auto;
   @extend .flex-between;
   flex-wrap: wrap;
-  margin-top: 30px;
 }
 .user_wrapp{
   height: 80px;
@@ -15,7 +14,7 @@
   background: white;
   border-radius: 5px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
-  margin: 5px;
+  margin: 30px 5px 0;
   padding: 0 20px;
   align-items: center;
 }

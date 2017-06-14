@@ -26,7 +26,13 @@ export class PostEditeComponent implements OnInit{
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
               private requestService: RequestService,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+    exchangeService.urlChangedEvent.subscribe(
+        () => {
+          this.activeModal.dismiss()
+        });
+  }
 
   @Output() public options = {
     readAs: 'ArrayBuffer'

@@ -106,29 +106,30 @@
     }
   }
   .new_events{
-    background: $light_blue;
-    color: $blue;
-    position: relative;
-    &:after{
-      content: '';
-      position: absolute;
-      top: 1px;
-      right: 5px;
-      padding: 3px;
-      border-radius: 50%;
-      background: $red_dot;
-    }
+    background: $blue;
+    color: white;
+    //position: relative;
+    //&:after{
+    //  content: '';
+    //  position: absolute;
+    //  top: 1px;
+    //  right: 5px;
+    //  padding: 3px;
+    //  border-radius: 50%;
+    //  background: $red_dot;
+    //}
   }
   .active{
     color: $blue;
   }
 
+
   .user_info{
     .drop_down_menu{
       width: 110px;
       right: 0;
+      top: 46px;
       left: auto;
-      border-radius: 5px;
     }
   }
 
@@ -138,18 +139,13 @@
     .drop_down_menu{
       width: 300px;
       position: absolute;
-      top: 120%;
+      top: 47px;
       left: -150px;
     }
-    .drop_down_title{
+    .triangle{
       &:before{
-        top: -10px;
-        left: 50%;
-        transform: translateX(37%);
-      }
-      &:after{
-        height: 10px;
-        top: -10px;
+
+        left: 56%;
       }
     }
   }
@@ -179,42 +175,42 @@
     text-align: center;
     list-style: none;
   }
-.drop_down_profile_item{
-  padding: 10px;
-  background: $blue;
-  color: white;
-  font-family: $font_medium;
-  transition: 0.3s;
-  list-style: none;
-  &:hover{
-    color: $dark_text;
-  }
-  &:first-child{
-    border-radius: 5px 5px 0 0;
-  }
-  &:last-child{
-    border-radius: 0 0 5px 5px;
-  }
-  &:first-child:before{
-      content: '';
-      border-bottom: 10px solid $blue;
-      border-right: 10px solid transparent;
-      border-left: 10px solid transparent;
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  &:first-child:after{
-      content: '';
-      height: 25px;
-      width: 100%;
-      background: transparent;
-      position: absolute;
-      top: -25px;
-      left: 0;
-    }
-  }
+//.drop_down_profile_item{
+//  padding: 10px;
+//  background: $blue;
+//  color: white;
+//  font-family: $font_medium;
+//  transition: 0.3s;
+//  list-style: none;
+//  &:hover{
+//    color: $dark_text;
+//  }
+//  &:first-child{
+//    border-radius: 5px 5px 0 0;
+//  }
+//  &:last-child{
+//    border-radius: 0 0 5px 5px;
+//  }
+//  &:first-child:before{
+//      content: '';
+//      border-bottom: 10px solid $blue;
+//      border-right: 10px solid transparent;
+//      border-left: 10px solid transparent;
+//      position: absolute;
+//      top: -10px;
+//      left: 50%;
+//      transform: translateX(-50%);
+//    }
+//  &:first-child:after{
+//      content: '';
+//      height: 25px;
+//      width: 100%;
+//      background: transparent;
+//      position: absolute;
+//      top: -25px;
+//      left: 0;
+//    }
+//  }
   .user_bar{
     height: 64px;
     width: 100%;
@@ -265,7 +261,21 @@
     text-overflow: ellipsis;
     font-family: $font_bold;
   }
-
+.notification_data{
+  padding: 5px 0;
+  .name{
+    color: $blue;
+    line-height: 14px;
+    &:before{
+      margin-right: 10px;
+      display: inline-block;
+      line-height: 14px;
+    }
+  }
+  .text{
+    line-height: 16px;
+  }
+}
 
 }
 
@@ -290,6 +300,17 @@
      width: 50%;
      padding: 10px;
      justify-content: flex-end;
+   }
+   .new_notifications,
+   .new_messages{
+     .drop_down_menu{
+       top: 44px;
+     }
+   }
+   .user_info{
+     .drop_down_menu{
+       top: 43px;
+     }
    }
    //.name_and_settings{
    //  max-width: 50%;
@@ -328,12 +349,11 @@
     .new_messages{
       .drop_down_menu{
         width: 275px;
-        left: -45px;
+        left: -28px;
       }
-      .drop_down_title{
+      .triangle{
         &:before{
-          left: 23%;
-          transform: translateX(-50%);
+          left: 16%;
         }
       }
       .text{
@@ -345,7 +365,7 @@
       .drop_down_menu{
         left: -85px;
       }
-      .drop_down_title{
+      .triangle{
         &:before{
           left: 37%;
         }

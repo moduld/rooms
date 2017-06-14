@@ -38,7 +38,8 @@ export class AllRoomsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+        //if default rooms output was changed to search or my rooms, and then user went to another page
+        //when he comes to all-rooms page, this check returns previous state(search or my rooms)
         if (this.storeservice.getSearchText()){
             this.getSearchableRooms(this.storeservice.getSearchText())
         } else {
@@ -52,6 +53,7 @@ export class AllRoomsComponent implements OnInit {
 
       this.requestService.getAllRooms().subscribe(
           data=>{
+              //this cycle need to remove broken items which can come from server
               for(let i = 0; i < data.length; i++){
                   if (!data[i].room){
                       data.splice(i, 1)
@@ -69,6 +71,8 @@ export class AllRoomsComponent implements OnInit {
 
       this.requestService.getRoomsBySearch(search).subscribe(
           data=>{
+              //server output items by search and suggest, have different structure from user rooms.
+              // addRequiredInfo service used to bring structure to same format
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {
               this.error = error;
@@ -81,6 +85,8 @@ export class AllRoomsComponent implements OnInit {
 
       this.requestService.getSuggestionRooms().subscribe(
           data=>{
+              //server output items by search and suggest, have different structure from user rooms.
+              // addRequiredInfo service used to bring structure to same format
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {
               this.error = error;
@@ -94,7 +100,7 @@ export class AllRoomsComponent implements OnInit {
         const modalRef = this.modalService.open(CreateRoomComponent);
         modalRef.result.then((newRoom) => {
             this.allRooms.unshift(newRoom)
-        });
+        }).catch(()=>{});
     }
 
 }

@@ -33,20 +33,25 @@ export class AddWallComponent implements OnInit {
 
   createNewWall(wallForm: NgForm):void {
 
-    this.dataToServer = wallForm.value;
-    this.dataToServer.room_id = this.currentRoom.room_details.room_id;
-    this.requestService.newWall(this.dataToServer).subscribe(
-        data=>{
-          this.currentRoom.walls.push(data.wall);
-          this.storeservice.storeCurrentUserRooms(this.currentRoom);
-          this.router.navigateByUrl('/room-settings');
-          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall added successful'})
-        },
-        error => {
-          this.error = error;
-          console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new wall'})}
-    );
+    let name = wallForm.value.wall_name.trim();
+    if (name){
+      wallForm.value.wall_name = name;
+      this.dataToServer = wallForm.value;
+      this.dataToServer.room_id = this.currentRoom.room_details.room_id;
+      this.requestService.newWall(this.dataToServer).subscribe(
+          data=>{
+            this.currentRoom.walls.push(data.wall);
+            this.storeservice.storeCurrentUserRooms(this.currentRoom);
+            this.router.navigateByUrl('/room-settings');
+            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall added successful'})
+          },
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new wall'})}
+      );
+    }
+
   }
 
 }

@@ -53,22 +53,27 @@ export class EditWallComponent implements OnInit, OnDestroy {
 
   updateWall(updateForm: NgForm): void {
 
-    this.dataToServer = updateForm.value;
-    this.dataToServer.room_id = this.currentWall.room_id;
-    this.dataToServer.wall_id = this.currentWall.wall_id;
+    let name = updateForm.value.wall_name.trim();
+    if(name){
+      updateForm.value.wall_name = name;
+      this.dataToServer = updateForm.value;
+      this.dataToServer.room_id = this.currentWall.room_id;
+      this.dataToServer.wall_id = this.currentWall.wall_id;
 
-    this.requestService.updateWall(this.dataToServer).subscribe(
-        data=>{
-          this.currentRoom.walls[this.index] = data.wall;
-          this.storeservice.storeCurrentUserRooms(this.currentRoom);
-          this.router.navigateByUrl('/room-settings');
-          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall changed successful'})
-        },
-        error => {
-          this.error = error;
-          console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
-    );
+      this.requestService.updateWall(this.dataToServer).subscribe(
+          data=>{
+            this.currentRoom.walls[this.index] = data.wall;
+            this.storeservice.storeCurrentUserRooms(this.currentRoom);
+            this.router.navigateByUrl('/room-settings');
+            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall changed successful'})
+          },
+          error => {
+            this.error = error;
+            console.log(error);
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
+      );
+    }
+
   }
 
 }

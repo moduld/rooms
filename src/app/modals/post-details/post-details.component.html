@@ -101,10 +101,8 @@
                           <i class="dots"></i>
                       </div>
                       <ul class="drop_down_menu" (mouseleave)="onMouseLeave( comment)">
-                          <li class="drop_down_item drop_down_title">
-                              Comment
-                          </li>
                           <!--done ?-->
+                          <li class="triangle"></li>
                           <li class="drop_down_item"
                               (click)="commentOwnerInterraction('mute', comment.owner.user_id)"
                               *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id">

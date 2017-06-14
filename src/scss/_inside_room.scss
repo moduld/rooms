@@ -11,7 +11,7 @@
   align-items: flex-start;
   padding-bottom: 10px;
   flex-wrap: wrap;
-  max-height: calc(100vh - 161px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 .name_and_menu{
@@ -107,6 +107,7 @@
     opacity: 0;
     transform: translate3d(-100%, 0, 0);
     transition: 0.5s;
+    border-radius: 5px;
   }
 }
 .post_info{
@@ -388,7 +389,7 @@
   }
   .main_container{
     padding: 0 10px;
-    max-height: calc(100vh - 215px);
+    max-height: calc(100vh - 154px);
   }
 
 }
@@ -405,7 +406,7 @@
     margin-top: 142px;
   }
   .main_container{
-    max-height: calc(100vh - 238px);
+    max-height: calc(100vh - 182px);
   }
   .posts_menu{
     justify-content: center;

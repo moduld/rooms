@@ -72,6 +72,7 @@ export class EditProfileComponent implements OnInit {
 
   editUserProfile(editProfileForm: NgForm):void {
 
+      console.log(editProfileForm)
     this.dataToServer['userData'] = editProfileForm.value;
     this.requestService.editUserProfile(this.dataToServer).subscribe(
         data=>{
@@ -79,8 +80,9 @@ export class EditProfileComponent implements OnInit {
             token: this.currentUser.token,
             user_data: data.user
           };
-          this.currentUser = this.storeservice.saveUserData(newUser);
-            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User information changed successful'})
+          this.storeservice.saveUserData(newUser);
+          this.currentUser = this.storeservice.getUserData();
+          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User information changed successful'})
         },
         error => {
             this.error = error;

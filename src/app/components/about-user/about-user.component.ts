@@ -34,7 +34,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
       this.getUserInfo();
     });
 
-
+    //to increase or decrease value inside buttons (switchers between user rooms, posts, favs, fans)
     this.exchangeService.dataChangedFromUserSettings.subscribe(
         search => {
           this.changeTagsData(search)
@@ -83,7 +83,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
       this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t fave  oneself'})
     }
   }
-
+  //when user delete or add post or user e.t.c. this method change value in according button
   changeTagsData(flag: string):void {
 
     flag === 'post' &&  this.currentUser.posts_count--;

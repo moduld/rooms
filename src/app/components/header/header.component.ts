@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
       this.currentUser = this.storeservice.getUserData();
       console.log(this.currentUser)
       this.getNewMessages();
-      this.getNewNotifications()
+      this.getNewNotifications();
   }
 
   logOut(){
@@ -87,17 +87,21 @@ export class HeaderComponent implements OnInit {
     getNewNotifications():void {
 
       let dataToServer = {
-          type: 'all',
+          type: 'All',
           offset_id: this.message_notification_offset,
           direction_flag: 0
       };
       // type: MessageNotificaion - messages
-// type: all - get all notifications
+// type: All - get all notifications
         this.requestService.getUserNotifications(dataToServer).subscribe(
             data=>{
                 console.log(data);
-                this.notifications = data['notifications'];
-                this.notifications_quantity = data['notifications_counts'].Total_all
+                if (data['notifications'].length){
+
+                    data['notifications'].length > 5 ? data['notifications'].length = 5 : '';
+                    this.notifications = data['notifications'];
+                }
+                this.notifications_quantity = data['notifications_counts'].Total_All
             },
             error => {
                 console.log(error);
@@ -125,11 +129,27 @@ export class HeaderComponent implements OnInit {
                 console.log(error);
                 this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new messages from a server'})}
         );
+
+        this.requestService.getNotificationSettings().subscribe(
+            data=>{
+                console.log(data)
+
+            },
+            error => {
+                this.error = error;
+                console.log(error);
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new messages from a server'})}
+        );
     }
 
     goToDialogPage(user: any):void {
 
         this.router.navigate( ['user-dialogs', {user: user.user.user_id}])
+    }
+
+    goToNotificationsPage(notification: any):void {
+
+
     }
 
 }

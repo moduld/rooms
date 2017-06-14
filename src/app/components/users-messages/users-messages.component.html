@@ -11,7 +11,7 @@
                     <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
                 </div>
                 <div class="messages_wrapp">
-                    <span class="hidden icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
+                    <span class="icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
                     <p class="message">{{message.text}}</p>
                     <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
                 </div>

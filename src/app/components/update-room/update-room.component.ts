@@ -75,20 +75,25 @@ export class UpdateRoomComponent implements OnInit {
 
   updateTheRoom(roomForm: NgForm):void {
 
-    this.dataToServer['roomData'] = roomForm.value;
-    this.dataToServer.room_id = this.currentRoom.room_details.room_id;
-    this.requestService.updateRoom(this.dataToServer).subscribe(
-        data=>{
-          this.currentRoom.room_details =  data.room;
-          this.storeservice.storeCurrentUserRooms(this.currentRoom);
-          this.router.navigateByUrl('/room-settings');
-            this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
-        },
-        error => {
-            this.error = error;
-            console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
-    );
+      let name = roomForm.value.room_name.trim();
+      if (name){
+          roomForm.value.room_name = name;
+          this.dataToServer['roomData'] = roomForm.value;
+          this.dataToServer.room_id = this.currentRoom.room_details.room_id;
+          this.requestService.updateRoom(this.dataToServer).subscribe(
+              data=>{
+                  this.currentRoom.room_details =  data.room;
+                  this.storeservice.storeCurrentUserRooms(this.currentRoom);
+                  this.router.navigateByUrl('/room-settings');
+                  this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
+              },
+              error => {
+                  this.error = error;
+                  console.log(error);
+                  this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
+          );
+      }
+
   }
 
 }

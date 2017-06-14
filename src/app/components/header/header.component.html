@@ -15,9 +15,10 @@
         <span class="icon-mail" [ngClass]="{'new_events': messages_quantity}" [routerLink]="'/user-dialogs'"></span>
 
           <ul class="drop_down_menu" >
-            <li class="drop_down_item drop_down_title messages_title">
-              Messages <span class="messages_quantity" *ngIf=" messages_quantity">{{1  + ' - ' + messages.length + ' of ' + messages_quantity}}</span>
-            </li>
+            <!--<li class="drop_down_item drop_down_title messages_title">-->
+              <!--Messages <span class="messages_quantity" *ngIf=" messages_quantity">{{1  + ' - ' + messages.length + ' of ' + messages_quantity}}</span>-->
+            <!--</li>-->
+            <li class="triangle"></li>
             <li class="drop_down_item user_bar" *ngFor="let message of messages" (click)="goToDialogPage(message)">
 
                 <span class="avatar" [ngStyle]="{'background-image':'url(' + message.user.thumbnail + ')' }"></span>
@@ -44,20 +45,32 @@
         <span class="icon-bell-o" [ngClass]="{'new_events': notifications_quantity}" [routerLink]="'/user-notifications'"></span>
 
         <ul class="drop_down_menu" >
-          <li class="drop_down_item drop_down_title messages_title">
-            Notifications <span class="messages_quantity" *ngIf=" notifications_quantity">{{1  + ' - ' + notifications.length + ' of ' + notifications_quantity}}</span>
-          </li>
-
+          <!--<li class="drop_down_item drop_down_title messages_title">-->
+            <!--Notifications <span class="messages_quantity" *ngIf=" notifications_quantity">{{1  + ' - ' + notifications.length + ' of ' + notifications_quantity}}</span>-->
+          <!--</li>-->
+          <li class="triangle"></li>
           <li class="drop_down_item user_bar" *ngFor="let notification of notifications" (click)="goToNotificationsPage(notification)">
 
-            <span class="name" [ngClass]="{'icon-comments': notification.type === 'CommentNotification', 'icon-bubble': notification.type === 'PostInRoomNotification', 'icon-mail': notification.type === 'MessageNotification'}">{{notification.user.user_name}}</span>
+            <span class="avatar" [ngStyle]="{'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"></span>
+            <div class="notification_data">
+              <span class="name" [ngClass]="{'icon-heart-o': notification.type === 'PostLikeNotification', 'icon-comment-o':
+                notification.type === 'CommentNotification', 'icon-star-empty': notification.type === 'FavedNotification', 'icon-envelope-o':
+                notification.type === 'MessageNotification', 'icon-enter': notification.type === 'RoomJoinRequestNotification', 'icon-user-o':
+                notification.type === 'JoinedRoomNotification', 'icon-gear': notification.type === 'AddedModeratorNotification', 'icon-bullhorn':
+                notification.type === 'AddedTalkerNotification', 'icon-edit': notification.type === 'PostInRoomNotification'}">{{notification.data.details.user.display_name}}</span>
 
-            <span class="date">{{notification.created_at |  date: 'dd MMM y'}}</span>
-            <p class="text">{{notification.data.details.alert}}</p>
+              <p class="text">{{notification.type === 'PostLikeNotification' && 'Liked your post' ||
+                notification.type === 'CommentNotification' && 'Made new comment' || notification.type === 'FavedNotification' && 'Became your fan' ||
+                notification.type === 'MessageNotification' && 'Sent you a message' || notification.type === 'RoomJoinRequestNotification' && 'Want join to your room' ||
+                notification.type === 'JoinedRoomNotification' && 'Joined your room' || notification.type === 'AddedModeratorNotification' && 'Added as moderator' ||
+                notification.type === 'AddedTalkerNotification' && 'Added as talker' || notification.type === 'PostInRoomNotification' && 'Made new post'}}</p>
+                <span class="date">{{notification.created_at * 1000 |  date: 'dd MMM y'}}</span>
+            </div>
+
 
           </li>
           <li class="see_all_messages" *ngIf="!notifications_quantity" >No new notifications</li>
-          <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/user-notifications'">See all messages</li>
+          <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/user-notifications'">See all activity</li>
 
         </ul>
 
@@ -68,11 +81,20 @@
       <div class="user_info drop_down_container" >
                 <span class="avatar" [ngStyle]="{'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
+
         <ul class="drop_down_menu">
-          <li class="drop_down_profile_item" [routerLink]="['/about-user', currentUser.user_data.user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</li>
-          <li class="drop_down_profile_item" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile Settings & Privacy</li>
-          <li class="drop_down_profile_item" (click)="logOut()">Logout</li>
+          <li class="triangle"></li>
+          <li class="drop_down_item" >
+            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</span>
+          </li>
+          <li class="drop_down_item">
+            <span class="drop_down_fill" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Settings</span>
+          </li>
+          <li class="drop_down_item">
+            <span class="drop_down_fill" (click)="logOut()">Logout</span>
+          </li>
         </ul>
+
       </div>
     </div>
   </div>

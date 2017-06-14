@@ -102,12 +102,17 @@
   left: -111px;
   width: 165px;
 }
-.drop_down_title{
-  padding: 8px;
-  font-size: 15px;
-  &:hover{
-    color: white!important;
-  }
+//.drop_down_title{
+//  padding: 8px;
+//  font-size: 15px;
+//  &:hover{
+//    color: white!important;
+//  }
+//  &:before{
+//    left: 84%;
+//  }
+//}
+.triangle{
   &:before{
     left: 84%;
   }

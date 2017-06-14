@@ -22,14 +22,14 @@ export class AppComponent implements OnInit{
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
-
+        //registration and log-in pages have their oun footer and do not have header
         if (event.url === '/registration' || event.url === '/login'){
           this.showHeader = false;
-          this.showFooter = false;
         } else {
           this.showHeader = true;
-          this.showFooter = true;
         }
+// need to close opened modals when url changed by click "back" button or else
+        this.exchangeService.pushEventUrlChanged()
       }
     });
 
