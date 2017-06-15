@@ -1,0 +1,115 @@
+:host {
+  flex: auto;
+  width: 100%;
+  background: $posts_background;
+  color: $gray_text;
+  @extend .flex-column;
+}
+.settings_wrapp{
+  width: 100%;
+  max-width: 550px;
+  padding: 35px;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  background: white;
+  margin: 0 auto;
+}
+.switch_wrapp{
+  width: 100%;
+}
+
+.toggle_wrapp{
+  @extend .flex-between;
+  align-items: center;
+  width: 400px;
+  height: 36px;
+  background: $gray_background;
+  border-radius: 18px;
+  margin: 0 auto;
+}
+.toggle_item{
+  color: $gray_text;
+  height: 30px;
+  width: 190px;
+  margin: 0 4px;
+  border-radius: 15px;
+  @extend .flex-center;
+  transition: 0.3s;
+}
+.toggler:checked ~ .in_app{
+  background: white;
+  box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
+  color: $blue;
+}
+.toggler:not(:checked) ~ .push{
+  background: white;
+  box-shadow: 3px 2px 3px 0 rgba(0, 0, 0, 0.3);
+  color: $blue;
+}
+
+
+
+
+.title{
+  display: block;
+  margin-top: 20px;
+}
+.toggle_wrapper{
+  color: $dark_text;
+  @extend .flex-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.toggle_field{
+  width: 50px;
+  height: 25px;
+  background: $gray_background;
+  border-radius: 12px;
+  @extend .flex-center;
+  justify-content: flex-start;
+  &:before{
+    content: '';
+    height: 23px;
+    width: 23px;
+    border-radius: 50%;
+    background: white;
+    display: block;
+    margin: 1px;
+    transform: translate3d(0, 0, 0);
+    transition: 0.3s;
+  }
+}
+.toggle_input:checked + .toggle_field{
+  background: $blue;
+  &:before{
+    transform: translate3d(25px, 0, 0);
+  }
+}
+
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 35px auto 0;
+  cursor: pointer;
+  display: block;
+}
+
+@media screen and (max-width: 550px){
+
+  .settings_wrapp{
+    padding: 10px;
+  }
+  .toggle_wrapp{
+    width: 260px;
+  }
+  .toggle_item{
+    width: 120px;
+    font-size: 11px;
+  }
+}

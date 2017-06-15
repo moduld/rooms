@@ -122,10 +122,24 @@ export class RequestService  {
     params.set('type', dataToServer.type);
     params.set('offset_id', dataToServer.offset_id);
     params.set('direction_flag', dataToServer.direction_flag );
+    params.set('new', dataToServer.new );
 
     let data = {
       params: params,
       apiLink: 'user/get/notifications'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getUserNotificationsSettings(): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+
+    let data = {
+      params: params,
+      apiLink: 'user/notification/settings/get'
     };
 
     return this.makeGetRequest(data)
@@ -753,6 +767,21 @@ export class RequestService  {
     let data = {
       sendData: sendData,
       apiLink: 'message/new'
+    };
+
+    return this.makePostRequest(data)
+  }
+
+  saveNotificationsSettings(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      notification_settings: dataToServer.notification_settings
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'user/notification/settings/update'
     };
 
     return this.makePostRequest(data)

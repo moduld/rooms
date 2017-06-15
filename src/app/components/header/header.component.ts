@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     message_notification_offset: number;
     messages: any[];
     messages_quantity: number;
-    notifications: any;
+    notifications: any[];
     notifications_quantity: number;
 
   constructor(private requestService : RequestService,
@@ -89,10 +89,10 @@ export class HeaderComponent implements OnInit {
       let dataToServer = {
           type: 'All',
           offset_id: this.message_notification_offset,
-          direction_flag: 0
+          direction_flag: 0,
+          'new': 1
       };
-      // type: MessageNotificaion - messages
-// type: All - get all notifications
+
         this.requestService.getUserNotifications(dataToServer).subscribe(
             data=>{
                 console.log(data);

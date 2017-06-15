@@ -1,0 +1,107 @@
+<div class="settings_wrapp">
+    <div class="switch_wrapp">
+        <label class="toggle_wrapp">
+            <input type="checkbox" class="toggler" name="mod_type" id="mod_type"  [ngModel]="states_switcher" (change)="states_switcher = !states_switcher" hidden>
+            <i class="toggle_item in_app">In app notifications</i>
+            <i class="toggle_item push">Push notifications</i>
+        </label>
+    </div>
+
+    <div class="settings">
+        <span class="title">User</span>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Post liked</span>
+            <input type="checkbox" id="post_liked" class="toggle_input"
+                   [ngModel]="switchers.post_like_notification_app"
+                   (change)="changeValue('post_like_notification_app')" *ngIf="states_switcher"  hidden>
+            <input type="checkbox" id="post_liked" class="toggle_input"
+                   [ngModel]="switchers.post_like_notification_push"
+                   (change)="changeValue('post_like_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="post_liked" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Comment received</span>
+            <input type="checkbox" id="comment_received" class="toggle_input"
+                   [ngModel]="switchers.comment_notification_app"
+                   (change)="changeValue('comment_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="comment_received" class="toggle_input"
+                   [ngModel]="switchers.comment_notification_push"
+                   (change)="changeValue('comment_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="comment_received" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Fan received</span>
+            <input type="checkbox" id="fan_received" class="toggle_input"
+                   [ngModel]="switchers.faved_notification_app"
+                   (change)="changeValue('faved_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="fan_received" class="toggle_input"
+                   [ngModel]="switchers.faved_notification_push"
+                   (change)="changeValue('faved_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="fan_received" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Message received</span>
+            <input type="checkbox" id="message_received" class="toggle_input"
+                   [ngModel]="switchers.message_notification_app"
+                   (change)="changeValue('message_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="message_received" class="toggle_input"
+                   [ngModel]="switchers.message_notification_push"
+                   (change)="changeValue('message_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="message_received" class="toggle_field"></label>
+        </div>
+
+        <span class="title">Moderator</span>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Room join request</span>
+            <input type="checkbox" id="room_join_request" class="toggle_input"
+                   [ngModel]="switchers.room_join_request_notification_app"
+                   (change)="changeValue('room_join_request_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="room_join_request" class="toggle_input"
+                   [ngModel]="switchers.room_join_request_notification_push"
+                   (change)="changeValue('room_join_request_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="room_join_request" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">New member</span>
+            <input type="checkbox" id="new_member" class="toggle_input"
+                   [ngModel]="switchers.joined_room_notification_app"
+                   (change)="changeValue('joined_room_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="new_member" class="toggle_input"
+                   [ngModel]="switchers.joined_room_notification_push"
+                   (change)="changeValue('joined_room_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="new_member" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Moderator added</span>
+            <input type="checkbox" id="moderator_added" class="toggle_input"
+                   [ngModel]="switchers.added_moderator_notification_app"
+                   (change)="changeValue('added_moderator_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="moderator_added" class="toggle_input"
+                   [ngModel]="switchers.added_moderator_notification_push"
+                   (change)="changeValue('added_moderator_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="moderator_added" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Talker added</span>
+            <input type="checkbox" id="talker_added" class="toggle_input"
+                   [ngModel]="switchers.added_talker_notification_app"
+                   (change)="changeValue('added_talker_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="talker_added" class="toggle_input"
+                   [ngModel]="switchers.added_talker_notification_push"
+                   (change)="changeValue('added_talker_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="talker_added" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+            <span class="toggle_name">Post in room</span>
+            <input type="checkbox" id="post_in_room" class="toggle_input"
+                   [ngModel]="switchers.post_in_room_notification_app"
+                   (change)="changeValue('post_in_room_notification_app')" *ngIf="states_switcher" hidden>
+            <input type="checkbox" id="post_in_room" class="toggle_input"
+                   [ngModel]="switchers.post_in_room_notification_push"
+                   (change)="changeValue('post_in_room_notification_push')" *ngIf="!states_switcher" hidden>
+            <label for="post_in_room" class="toggle_field"></label>
+        </div>
+
+        <button type="button" class="form_button" (click)="saveSettings()">Save</button>
+    </div>
+</div>

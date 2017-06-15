@@ -102,7 +102,7 @@
                       </div>
                       <ul class="drop_down_menu" (mouseleave)="onMouseLeave( comment)">
                           <!--done ?-->
-                          <li class="triangle"></li>
+                          <li class="triangle"><i class="trans_bar"></i></li>
                           <li class="drop_down_item"
                               (click)="commentOwnerInterraction('mute', comment.owner.user_id)"
                               *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id">

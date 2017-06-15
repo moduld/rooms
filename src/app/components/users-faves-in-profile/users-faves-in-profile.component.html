@@ -6,7 +6,7 @@
        <span class="name">{{user.user_name}}</span>
      </span>
 
-    <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="unfaveUser(user, i)"></span>
+    <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="unfaveUser(user, i)" *ngIf="user.user_id != currentUser.user_data.user_id"></span>
   </div>
 
   <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>

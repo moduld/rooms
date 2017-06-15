@@ -197,6 +197,16 @@ $font_bold: Bold, sans-serif;
   }
   &:after{
     content: '';
+    border-bottom: 10px solid white;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .trans_bar{
+    content: '';
     height: 15px;
     width: 100%;
     background: transparent;

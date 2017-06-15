@@ -144,7 +144,9 @@
     }
     .triangle{
       &:before{
-
+        left: 56%;
+      }
+      &:after{
         left: 56%;
       }
     }
@@ -152,6 +154,24 @@
   .new_notifications{
     .text{
       font-family: $font_regular;
+    }
+    .avatar{
+      cursor: default;
+    }
+    .user_bar{
+     cursor: default;
+      &:hover{
+        background: white;
+        .name{
+          color: $blue;
+        }
+        .text{
+          color: $dark_text;
+        }
+        .date{
+          color: $gray_text;
+        }
+      }
     }
   }
 
@@ -355,6 +375,9 @@
         &:before{
           left: 16%;
         }
+        &:after{
+          left: 16%;
+        }
       }
       .text{
         width: 190px;
@@ -367,6 +390,9 @@
       }
       .triangle{
         &:before{
+          left: 37%;
+        }
+        &:after{
           left: 37%;
         }
       }

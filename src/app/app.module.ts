@@ -55,8 +55,10 @@ import { UsersDialogComponent } from './components/users-dialog/users-dialog.com
 import { UsersMessagesComponent } from './components/users-messages/users-messages.component';
 import { ShowVisualMessagesComponent } from './components/show-visual-messages/show-visual-messages.component';
 import { CanActivateRoomSettingsChildsComponent } from './components/can-activate-room-settings-childs/can-activate-room-settings-childs.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationsSettingsComponent } from './components/notifications-settings/notifications-settings.component';
 
-let settingsRoutes: Routes = [
+let roomSettingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: 'delete-room', component: DeleteRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: 'add-wall', component: AddWallComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
@@ -77,6 +79,7 @@ let userSettingsRoutes : Routes = [
   { path: 'edit-profile', component: EditProfileComponent},
   { path: 'change-password', component: ChangePasswordComponent},
   { path: 'muted-blocked', component: MutedBlockedComponent},
+  { path: 'notifications-settings', component: NotificationsSettingsComponent},
   { path: '',redirectTo: 'edit-profile', pathMatch:'full'}
 ];
 
@@ -85,10 +88,11 @@ let appRoutes: Routes =[
   { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
-  { path: 'room-settings', component: RoomSettingsComponent, children: settingsRoutes, canActivate: [CanActivateComponent]},
+  { path: 'room-settings', component: RoomSettingsComponent, children: roomSettingsRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes, canActivate: [CanActivateComponent]},
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},
+  { path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateComponent]},
   { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
 ];
 
@@ -130,7 +134,9 @@ let appRoutes: Routes =[
     UsersDialogComponent,
     UsersMessagesComponent,
     ShowVisualMessagesComponent,
-    CanActivateRoomSettingsChildsComponent
+    CanActivateRoomSettingsChildsComponent,
+    NotificationsComponent,
+    NotificationsSettingsComponent
   ],
   imports: [
     BrowserModule,

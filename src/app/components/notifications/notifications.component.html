@@ -1,0 +1,35 @@
+<div class="tags_wrapp">
+    <span class="tags" [ngClass]="{'active': notifications_type === 'Personal'}" (click)="changeNotificationsType('Personal')">User</span>
+    <span class="tags" [ngClass]="{'active': notifications_type === 'Moderator'}" (click)="changeNotificationsType('Moderator')">Moderator</span>
+</div>
+<div class="notifications_wrapp" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
+    <div class="notification_bar" *ngFor="let notification of notifications">
+        <span class="avatar" [ngStyle]="{'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"
+              [routerLink]="['/about-user', notification.data.details.user.user_id]"></span>
+        <div class="notification_data">
+            <div class="string" [routerLink]="notification.type === 'PostLikeNotification' && '/room/' + notification.data.details.post.room_id || notification.type === 'CommentNotification' && '/room/' + notification.data.details.comment.room_id ||
+                notification.type === 'FavedNotification' && ['/about-user', notification.data.details.user.user_id] ||  notification.type === 'MessageNotification' && '/user-dialogs' ||
+                notification.type === 'RoomJoinRequestNotification' && '/room/' + notification.data.details.room.room_id || notification.type === 'JoinedRoomNotification' && '/room/' + notification.data.details.room.room_id ||
+                notification.type === 'AddedModeratorNotification' && '/room/' + notification.data.details.room.room_id ||  notification.type === 'AddedTalkerNotification' && '/room/' + notification.data.details.room.room_id ||
+                notification.type === 'PostInRoomNotification' && '/room/' + notification.data.details.post.room_id">
+
+              <span class="name" [ngClass]="{'icon-heart-o': notification.type === 'PostLikeNotification', 'icon-comment-o':
+                notification.type === 'CommentNotification', 'icon-star-empty': notification.type === 'FavedNotification', 'icon-envelope-o':
+                notification.type === 'MessageNotification', 'icon-enter': notification.type === 'RoomJoinRequestNotification', 'icon-user-o':
+                notification.type === 'JoinedRoomNotification', 'icon-gear': notification.type === 'AddedModeratorNotification', 'icon-bullhorn':
+                notification.type === 'AddedTalkerNotification', 'icon-edit': notification.type === 'PostInRoomNotification'}">{{notification.data.details.user.display_name}}</span>
+
+                <p class="text"> {{notification.type === 'PostLikeNotification' && 'has just liked your post' ||
+                    notification.type === 'CommentNotification' && 'commented on your post' || notification.type === 'FavedNotification' && 'has become a fan of you' ||
+                    notification.type === 'MessageNotification' && 'sent you private message' || notification.type === 'RoomJoinRequestNotification' && 'has requested to join your room' ||
+                    notification.type === 'JoinedRoomNotification' && 'joined your room' || notification.type === 'AddedModeratorNotification' && 'has been added as moderator to your room' ||
+                    notification.type === 'AddedTalkerNotification' && ' has been added as talker to your room' || notification.type === 'PostInRoomNotification' && 'made a new post at your room'}}</p>
+
+            </div>
+            <span class="date">{{notification.created_at * 1000 |  timeAgo}}</span>
+        </div>
+    </div>
+    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
+</div>

@@ -3,6 +3,7 @@ import { Router, NavigationEnd} from '@angular/router';
 
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { RequestService } from '../../services/request.service';
+import {UserStoreService} from '../../services/user-store.service';
 
 @Component({
   selector: 'app-users-fans-in-profile',
@@ -19,16 +20,19 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
   flagMoveY: boolean = true;
   show_loading: boolean;
     routerSubscription: any;
+    currentUser: any;
 
   constructor(private requestService: RequestService,
               private router: Router,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService,
+              private storeservice: UserStoreService) { }
 
   ngOnInit() {
 
    this.users_offset = 0;
     this.allUsers = [];
     this.show_loading = true;
+      this.currentUser = this.storeservice.getUserData();
 
       this.routerSubscription = this.router.events.subscribe(event=>{
 
