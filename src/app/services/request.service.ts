@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, URLSearchParams, Headers, RequestOptions, Request} from '@angular/http';
-import {Location} from '@angular/common';
+import {Http, URLSearchParams, Headers, RequestOptions} from '@angular/http';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -17,7 +16,8 @@ import { UserInfo } from '../commonClasses/userInfo';
 @Injectable()
 export class RequestService  {
 
-  constructor(private http: Http, private storeservice: UserStoreService, private location: Location)  {}
+  constructor(private http: Http,
+              private storeservice: UserStoreService)  {}
 
   commonLink: string = 'http://dev.tifos.net/';
   userId: any = '';
@@ -103,13 +103,34 @@ export class RequestService  {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('user_id_post', dataToServer.user_id_post);
+    dataToServer.user_id_post && params.set('user_id_post', dataToServer.user_id_post);
     params.set('offset_id', dataToServer.offset_id);
-    params.set('direction_flag', dataToServer.direction_flag );
+    params.set('direction_flag', dataToServer.direction_flag);
+    dataToServer.user_name_post && params.set('user_name_post', dataToServer.user_name_post);
+    dataToServer.wall_id && params.set('wall_id', dataToServer.wall_id);
+    dataToServer.room_id  && params.set('room_id', dataToServer.room_id);
 
     let data = {
       params: params,
       apiLink: 'wall/post/get/user'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getPostsBySearchText(dataToServer: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('offset_id', dataToServer.offset_id);
+    params.set('direction_flag', dataToServer.direction_flag );
+    params.set('search_term', dataToServer.user_name_post);
+    params.set('wall_id', dataToServer.wall_id);
+    params.set('room_id', dataToServer.room_id);
+
+    let data = {
+      params: params,
+      apiLink: 'wall/post/search'
     };
 
     return this.makeGetRequest(data)
@@ -254,6 +275,22 @@ export class RequestService  {
     let data = {
       params: params,
       apiLink: 'wall/post/get/all'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
+  getFavedRoomsPosts( dataToServer: any ): Observable<Post[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('room_id', this.roomId);
+    params.set('wall_id', dataToServer.wall_id);
+    params.set('offset_id', dataToServer.offset_id);
+    params.set('direction_flag', '0');
+
+    let data = {
+      params: params,
+      apiLink: 'wall/post/get/faves'
     };
 
     return this.makeGetRequest(data)

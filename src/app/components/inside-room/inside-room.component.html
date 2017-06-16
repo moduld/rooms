@@ -1,10 +1,32 @@
 <div class="name_and_menu" *ngIf="wallsArray">
-    <ul class="posts_menu" >
-        <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/room-settings'">Room Settings</li>
-        <li class="posts_menu_items icon-question">About Room</li>
-        <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">Join Room</li>
-        <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">Leave Room</li>
-    </ul>
+    <div class="string_wrapp">
+        <div class="left_position">
+
+            <label for="show_hide_filter" class="icon-filter"></label>
+            <input type="checkbox" id="show_hide_filter" hidden>
+            <div class="filter_wrapp">
+
+
+                <select class="filter_switcher"  [(ngModel)]="filter_switcher" (change)="doFilteringResults(filter_switcher)">
+                    <option value="show_all">Show all posts</option>
+                    <option value="faves">My faves users</option>
+                    <option value="search_term">Search by text</option>
+                    <option value="user_name_post">Search by name</option>
+                </select>
+                <div class="search_wrapp" *ngIf="filter_switcher === 'search_term' || filter_switcher === 'user_name_post'">
+                    <input type="text" class="posts_search" [(ngModel)]="posts_search">
+                    <i class="icon-search" (click)="doSearch(posts_search)"></i>
+                </div>
+            </div>
+        </div>
+
+        <ul class="posts_menu" >
+            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/room-settings'">Room Settings</li>
+            <li class="posts_menu_items icon-question">About Room</li>
+            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">Join Room</li>
+            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">Leave Room</li>
+        </ul>
+    </div>
 
     <span class="room_name">{{wallsArray.room_details.room_name}}</span>
 </div>

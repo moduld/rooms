@@ -34,12 +34,14 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   membership: any;
   currentUserData: UserInfo;
   banDays: number = 0;
-    wallsIds: number;
-    wallsArray: any;
-    currentWall: any;
-    offset: number;
-    flagMoveY: boolean = true;
-    show_loading: boolean;
+  wallsIds: number;
+  wallsArray: any;
+  currentWall: any;
+  offset: number;
+  flagMoveY: boolean = true;
+  show_loading: boolean;
+    filter_switcher: string;
+    posts_search: string;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -56,9 +58,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-      this.allPosts = [];
-      this.offset = 0;
-      this.show_loading = true;
+    this.allPosts = [];
+    this.offset = 0;
+    this.show_loading = true;
+    this.filter_switcher = 'show_all';
     this.currentUserData = this.storeservice.getUserData();
     this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
     this.requestService.getWalls(this.roomId).subscribe(
@@ -99,25 +102,63 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
       let dataToServer = {
           wall_id: this.wallId,
-          offset_id: this.offset
+          offset_id: this.offset,
+          direction_flag: 0,
+          user_name_post: this.posts_search,
+          room_id: this.roomId
       };
 
       this.show_loading = true;
 
-    this.requestService.getRoomPosts(dataToServer).subscribe(
+      this.filter_switcher === 'show_all' && this.requestService.getRoomPosts(dataToServer).subscribe(
         data=>{
-            if (data['posts'].length){
-                this.allPosts = this.allPosts.concat(data['posts']);
-                this.flagMoveY = true;
-                this.wallId = dataToServer.wall_id
-            }
-            this.show_loading = false;
+           this.handleSuccessRequest(data, dataToServer)
         },
         error => {
-            this.error = error;
-            console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get posts of the room'})}
-    )
+            this.handleErrorRequest(error)
+    });
+
+      this.filter_switcher === 'faves' && this.requestService.getFavedRoomsPosts(dataToServer).subscribe(
+          data=>{
+              this.handleSuccessRequest(data, dataToServer)
+          },
+          error => {
+              this.handleErrorRequest(error)
+          });
+
+      this.filter_switcher === 'user_name_post' && this.requestService.getOnlyUsersPosts(dataToServer).subscribe(
+          data=>{
+              this.handleSuccessRequest(data, dataToServer)
+          },
+          error => {
+              this.handleErrorRequest(error)
+          });
+
+      this.filter_switcher === 'search_term' && this.requestService.getPostsBySearchText(dataToServer).subscribe(
+          data=>{
+              this.handleSuccessRequest(data, dataToServer)
+          },
+          error => {
+              this.handleErrorRequest(error)
+          })
+
+  }
+
+  handleSuccessRequest(data: any, dataToServer: any): void {
+
+      if (data['posts'].length){
+          this.allPosts = this.allPosts.concat(data['posts']);
+          this.flagMoveY = true;
+          this.wallId = dataToServer.wall_id
+      }
+      this.show_loading = false;
+  }
+
+  handleErrorRequest(error: any):void {
+
+      this.error = error;
+      console.log(error);
+      this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get posts of the room'})
   }
 
     postOwnerInterraction(int_key: string, block_owner_id: number): void {
@@ -319,6 +360,28 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     daysLeftConvert(post: any): any {
 
     return post.poll.time_left ? (Math.floor(post.poll.time_left*1000/86400000) + 1) + 'days left' : 'Voting closed';
+    }
 
+    doFilteringResults(value: string):void {
+
+      this.filter_switcher = value;
+        this.posts_search = '';
+       if(value === 'show_all' || value === 'faves'){
+           this.allPosts = [];
+           this.offset = 0;
+           this.flagMoveY = false;
+           this.getPosts()
+       }
+    }
+
+    doSearch(value: string):void {
+
+        this.posts_search = value.trim();
+        if (this.posts_search){
+            this.allPosts = [];
+            this.offset = 0;
+            this.flagMoveY = false;
+            this.getPosts()
+        }
     }
 }
