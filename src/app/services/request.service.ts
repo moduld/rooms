@@ -320,7 +320,7 @@ export class RequestService  {
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
     params.set('member_type', dataToServer.member_type);
-    params.set('user_id_last ', dataToServer.member_type);
+    params.set('user_id_last', dataToServer.user_id_last);
 
     let data = {
       params: params,

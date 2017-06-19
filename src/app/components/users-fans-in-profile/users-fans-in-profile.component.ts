@@ -86,7 +86,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
       this.requestService.faveUnfaveUser(dataToServer).subscribe(
           data=>{
             user.is_fave = 1;
-            this.exchangeService.changeQuontityOfItemsInUserSettings('fave')
+            this.user_id == this.currentUser.user_data.user_id && this.exchangeService.changeQuontityOfItemsInUserSettings('fave')
           },
           error => {
               this.error = error;

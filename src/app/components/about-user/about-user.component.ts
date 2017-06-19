@@ -19,7 +19,6 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   error: any;
   user_id: any;
   currentUser: any;
-  child_preficse: string;
 
   constructor(private storeservice: UserStoreService,
               private activateRoute: ActivatedRoute,
@@ -87,8 +86,8 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   changeTagsData(flag: string):void {
 
     flag === 'post' &&  this.currentUser.posts_count--;
-    this.child_preficse && flag === 'fave' && this.currentUser.faves_count++;
-    this.child_preficse && flag === 'unfave' && this.currentUser.faves_count--
+    flag === 'fave' && this.currentUser.faves_count++;
+    flag === 'unfave' && this.currentUser.faves_count--
   }
 
   goToPrivateDialog(flag: boolean):void {

@@ -42,6 +42,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   show_loading: boolean;
     filter_switcher: string;
     posts_search: string;
+    show_hide_toggle:boolean;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -370,7 +371,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
            this.allPosts = [];
            this.offset = 0;
            this.flagMoveY = false;
-           this.getPosts()
+           value === 'show_all' ? this.show_hide_toggle = false : '';
+           this.getPosts();
        }
     }
 

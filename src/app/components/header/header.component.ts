@@ -25,12 +25,14 @@ export class HeaderComponent implements OnInit {
     messages_quantity: number;
     notifications: any[];
     notifications_quantity: number;
+    routerSubscription: any;
+    tree: any;
+    for_active_class: boolean;
 
-  constructor(private requestService : RequestService,
+    constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   ngOnInit() {
 
@@ -44,6 +46,16 @@ export class HeaderComponent implements OnInit {
       console.log(this.currentUser)
       this.getNewMessages();
       this.getNewNotifications();
+        this.for_active_class = true;
+
+      this.routerSubscription = this.router.events.subscribe(event=>{
+
+          if (event instanceof NavigationEnd ){
+              let parses = this.router.parseUrl(this.router.url);
+              this.tree = parses.root.children.primary.segments;
+              this.changeLinkState(this.tree[0].path)
+          }
+      })
   }
 
   logOut(){
@@ -95,8 +107,7 @@ export class HeaderComponent implements OnInit {
 
         this.requestService.getUserNotifications(dataToServer).subscribe(
             data=>{
-                console.log(data);
-                if (data['notifications'].length){
+                if (data && data['notifications'].length){
 
                     data['notifications'].length > 5 ? data['notifications'].length = 5 : '';
                     this.notifications = data['notifications'];
@@ -114,8 +125,7 @@ export class HeaderComponent implements OnInit {
 
         this.requestService.getUserDialogUsersList().subscribe(
             data=>{
-                console.log(data)
-                if (data['messages'].length){
+                if (data && data['messages'].length){
                     data['messages'] = data['messages'].filter((message)=>{
                         return message.new_flag
                     });
@@ -132,7 +142,6 @@ export class HeaderComponent implements OnInit {
 
         this.requestService.getNotificationSettings().subscribe(
             data=>{
-                console.log(data)
 
             },
             error => {
@@ -147,9 +156,9 @@ export class HeaderComponent implements OnInit {
         this.router.navigate( ['user-dialogs', {user: user.user.user_id}])
     }
 
-    goToNotificationsPage(notification: any):void {
+    changeLinkState(path: any):void {
 
-
+        path === 'all-rooms' || path === 'room' ? this.for_active_class = true : this.for_active_class = false;
     }
 
 }

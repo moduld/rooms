@@ -41,7 +41,6 @@ export class NotificationsComponent implements OnInit {
 
     this.requestService.getUserNotifications(dataToServer).subscribe(
         data=>{
-          console.log(data);
           if (data['notifications'].length){
             this.notifications = this.notifications.concat(data['notifications']);
             this.flagMoveY = true;

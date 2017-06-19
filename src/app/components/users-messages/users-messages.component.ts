@@ -198,7 +198,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
-  deleteMessage(message: any, index:number, myne: boolean):void {
+  deleteMessage( message: any, index:number, myne: boolean):void {
 
     if (myne){
       let dataToServer = {
@@ -218,6 +218,8 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
+
+
   autocheckNewMessages ():void {
 
     this.interval = setInterval(()=>{
@@ -228,12 +230,6 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
-  // differentBetweenMessages(message: any): any {
-  //
-  //   let result = Math.floor((new Date().getTime() - message.created_at*1000)/86400000);
-  //
-  //   return result
-  //
-  // }
+
 
 }

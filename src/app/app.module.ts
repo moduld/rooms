@@ -10,14 +10,43 @@ import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
-import { AllRoomsComponent } from './components/all-rooms/all-rooms.component';
-import { InsideRoomComponent } from './components/inside-room/inside-room.component';
-import { HeaderComponent } from './components/header/header.component';
-import { RegistrationComponent } from './components/registration/registration.component';
 
-import { CreatePostComponent } from './modals/create-post/create-post.component';
-import { PostEditeComponent } from './modals/post-edite/post-edite.component';
+import {
+  AllRoomsComponent,
+  InsideRoomComponent,
+  HeaderComponent,
+  RegistrationComponent,
+  LogInComponent,
+  CanActivateComponent,
+  RoomSettingsComponent,
+  UpdateRoomComponent,
+  AddWallComponent,
+  WallsListComponent,
+  EditWallComponent,
+  DeleteRoomComponent,
+  MembersListComponent,
+  EditProfileComponent,
+  UserSettingsComponent,
+  ChangePasswordComponent,
+  AboutUserComponent,
+  UsersRoomsInProfileComponent,
+  UsersPostsInProfileComponent,
+  UsersFansInProfileComponent,
+  UsersFavesInProfileComponent,
+  MutedBlockedComponent,
+  UsersDialogComponent,
+  UsersMessagesComponent,
+  ShowVisualMessagesComponent,
+  CanActivateRoomSettingsChildsComponent,
+  NotificationsComponent,
+  NotificationsSettingsComponent} from './components/index';
 
+import {
+  CreatePostComponent,
+  PostEditeComponent,
+  CreateRoomComponent,
+  PostDetailsComponent,
+  PrivateRoomComponent} from './modals/index'
 
 import { RequestService } from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
@@ -27,36 +56,10 @@ import { FileInfoService } from './services/file-info.service';
 import { AddRequiredInfoService } from './services/add-required-info.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { CreateRoomComponent } from './modals/create-room/create-room.component';
-import { CanActivateComponent } from './components/can-activate/can-activate.component';
-import { PostDetailsComponent } from './modals/post-details/post-details.component';
-import { RoomSettingsComponent } from './components/room-settings/room-settings.component';
-import { UpdateRoomComponent } from './components/update-room/update-room.component';
-import { AddWallComponent } from './components/add-wall/add-wall.component';
-import { WallsListComponent } from './components/walls-list/walls-list.component';
-import { EditWallComponent } from './components/edit-wall/edit-wall.component';
-import { DeleteRoomComponent } from './components/delete-room/delete-room.component';
-import { MembersListComponent } from './components/members-list/members-list.component';
-import { NameFilterPipe } from './pipes/name-filter.pipe';
-import { PrivateRoomComponent } from './modals/private-room/private-room.component';
-import { SliderComponent } from './slider/slider.component';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { AboutUserComponent } from './components/about-user/about-user.component';
-import { UsersRoomsInProfileComponent } from './components/users-rooms-in-profile/users-rooms-in-profile.component';
-import { UsersPostsInProfileComponent } from './components/users-posts-in-profile/users-posts-in-profile.component';
-import { UsersFansInProfileComponent } from './components/users-fans-in-profile/users-fans-in-profile.component';
-import { UsersFavesInProfileComponent } from './components/users-faves-in-profile/users-faves-in-profile.component';
-import { MutedBlockedComponent } from './components/muted-blocked/muted-blocked.component';
-import { UsersDialogComponent } from './components/users-dialog/users-dialog.component';
-import { UsersMessagesComponent } from './components/users-messages/users-messages.component';
-import { ShowVisualMessagesComponent } from './components/show-visual-messages/show-visual-messages.component';
-import { CanActivateRoomSettingsChildsComponent } from './components/can-activate-room-settings-childs/can-activate-room-settings-childs.component';
-import { NotificationsComponent } from './components/notifications/notifications.component';
-import { NotificationsSettingsComponent } from './components/notifications-settings/notifications-settings.component';
+
+import { NameFilterPipe } from './pipes/name-filter.pipe';
+import { SliderComponent } from './slider/slider.component';
 
 let roomSettingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},

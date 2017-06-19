@@ -42,7 +42,6 @@ export class EditWallComponent implements OnInit, OnDestroy {
       }
 
     }
-    console.log(this.currentWall)
     this.wallName = this.currentWall.wall_name;
     this.commentFlag = this.currentWall.allow_comment_flag;
     this.postFlag = this.currentWall.allow_post_flag

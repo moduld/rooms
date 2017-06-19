@@ -37,6 +37,7 @@
     cursor: pointer;
     padding: 8px 10px;
     line-height: 10px;
+    border-bottom: 2px solid transparent;
     &:before{
       font-size: 20px;
       display: block;
@@ -121,6 +122,7 @@
   }
   .active{
     color: $blue;
+    border-bottom: 2px solid $blue;
   }
 
 

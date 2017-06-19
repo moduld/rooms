@@ -1,8 +1,8 @@
 <header class="header">
   <div class="main_container">
     <div class="logo" >
-      <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default'}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
-      <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested'}" (click)="showSuggestionsRoomsorDefault('suggested')">Discover</span>
+      <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
+      <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}" (click)="showSuggestionsRoomsorDefault('suggested')">Discover</span>
     </div>
     <div class="search"  >
       <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" >
@@ -49,7 +49,7 @@
             <!--Notifications <span class="messages_quantity" *ngIf=" notifications_quantity">{{1  + ' - ' + notifications.length + ' of ' + notifications_quantity}}</span>-->
           <!--</li>-->
           <li class="triangle"><i class="trans_bar"></i></li>
-          <li class="drop_down_item user_bar" *ngFor="let notification of notifications" (click)="goToNotificationsPage(notification)">
+          <li class="drop_down_item user_bar" *ngFor="let notification of notifications">
 
             <span class="avatar" [ngStyle]="{'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"></span>
             <div class="notification_data">

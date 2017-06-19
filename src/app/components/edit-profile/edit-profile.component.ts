@@ -72,7 +72,6 @@ export class EditProfileComponent implements OnInit {
 
   editUserProfile(editProfileForm: NgForm):void {
 
-      console.log(editProfileForm)
     this.dataToServer['userData'] = editProfileForm.value;
     this.requestService.editUserProfile(this.dataToServer).subscribe(
         data=>{
