@@ -63,7 +63,7 @@
   }
 }
 .main_wrapper{
-  display: flex;
+  @extend .flex-default;
   width: 100%;
   min-height: 300px;
   margin-top: 10px;
@@ -119,7 +119,7 @@
 .preview_wrapp{
   height: 75px;
   margin-top: 15px;
-  display: flex;
+  @extend .flex-default;
 }
 .images{
   display: block;

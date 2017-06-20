@@ -62,16 +62,6 @@
             <label for="room_join_request" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">New member</span>
-            <input type="checkbox" id="new_member" class="toggle_input"
-                   [ngModel]="switchers.joined_room_notification_app"
-                   (change)="changeValue('joined_room_notification_app')" *ngIf="states_switcher" hidden>
-            <input type="checkbox" id="new_member" class="toggle_input"
-                   [ngModel]="switchers.joined_room_notification_push"
-                   (change)="changeValue('joined_room_notification_push')" *ngIf="!states_switcher" hidden>
-            <label for="new_member" class="toggle_field"></label>
-        </div>
-        <div class="toggle_wrapper">
             <span class="toggle_name">Moderator added</span>
             <input type="checkbox" id="moderator_added" class="toggle_input"
                    [ngModel]="switchers.added_moderator_notification_app"

@@ -64,7 +64,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     this.show_loading = true;
     this.filter_switcher = 'show_all';
     this.currentUserData = this.storeservice.getUserData();
-    this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id});
+    this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id / 22});
     this.requestService.getWalls(this.roomId).subscribe(
         data=>{
             // console.log(data)
@@ -307,12 +307,15 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     goToAnotherWall(tag: any, flag: boolean): void {
 
-      this.currentWall = tag;
-        this.wallId = tag.wall_id;
-        this.allPosts = [];
-        this.offset = 0;
-        this.flagMoveY = false;
-      flag && this.getPosts()
+      if (flag){
+          this.currentWall = tag;
+          this.wallId = tag.wall_id;
+          this.allPosts = [];
+          this.offset = 0;
+          this.flagMoveY = false;
+          this.getPosts()
+      }
+
     }
 
     interractWithUser(flag: string):void {

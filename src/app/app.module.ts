@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 
 import { AppComponent } from './app.component';
 
@@ -139,7 +140,8 @@ let appRoutes: Routes =[
     ShowVisualMessagesComponent,
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
-    NotificationsSettingsComponent
+    NotificationsSettingsComponent,
+    PdfViewerComponent
   ],
   imports: [
     BrowserModule,

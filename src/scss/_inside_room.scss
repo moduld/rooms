@@ -138,8 +138,7 @@
   border-radius: 5px;
   background: white;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
+  @extend .flex-column;
   position: relative;
   overflow: hidden;
   &:before{
@@ -205,7 +204,7 @@
   }
 }
 .post_images_wrapp{
-  display: flex;
+  @extend .flex-default;
   flex: auto;
   flex-wrap: wrap;
 }
@@ -354,23 +353,23 @@
 .poll_thumbnail{
   background: gray;
 }
-
-.drop_down_menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate3d(100%, 0, 0);
-  height: 100%;
-  width: 80%;
-  background: white;
-  left: auto;
-  transition: 0.5s;
-  display: flex;
-  flex-direction: column;
-  max-width: 230px;
-  z-index: 2;
-
+:host{
+  .drop_down_menu{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate3d(100%, 0, 0);
+    height: 100%;
+    width: 80%;
+    background: white;
+    left: auto;
+    transition: 0.5s;
+    @extend .flex-column;
+    max-width: 230px;
+    z-index: 2;
+  }
 }
+
 .for_dots{
   position: relative;
   width: 100%;
@@ -391,7 +390,7 @@
   .dots{
     transition: 0.5s;
     @extend .flex-center;
-    display: flex!important;
+    //display: flex!important;
     &:before{
       transition: 0.5s;
       font-size: 0;
@@ -408,10 +407,12 @@
       transform: translate3d(0, 0, 0);
     }
     .dots{
-      border-color: transparent;
-      &:before{
-        font-size: 20px;
-      }
+      transform: rotate(45deg);
+      border-radius: 0;
+      border: 2px solid $gray_text;
+      background: white;
+      border-bottom: none;
+      border-left: none;
     }
     &:before{
       opacity: 0.5;

@@ -52,6 +52,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .icon-enter:before {
   content: "\e900";
 }
@@ -72,9 +73,6 @@
 }
 .icon-users:before {
   content: "\e906";
-}
-.icon-search:before {
-  content: "\e907";
 }
 .icon-gear:before {
   content: "\e908";
@@ -114,6 +112,9 @@
 }
 .icon-calendar:before {
   content: "\e914";
+}
+.icon-search:before {
+  content: "\e907";
 }
 .icon-eye:before {
   content: "\e915";

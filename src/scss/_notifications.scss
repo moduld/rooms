@@ -78,7 +78,7 @@
   @extend .flex-column;
 }
 .string{
-  display: flex;
+  @extend .flex-default;
 }
 .name{
   font-size: 16px;

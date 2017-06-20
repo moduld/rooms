@@ -7,14 +7,13 @@
   margin-top: 60px;
 }
   .main_container{
-    display: flex;
+    @extend .flex-between;
     align-items: flex-start;
-    justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 10px;
   }
   .rooms{
-    height: 410px;
+    height: 385px;
     width: 100%;
     max-width: 255px;
     border-radius: 5px;
@@ -39,6 +38,8 @@
   .room_name{
     font-size: 20px;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .views,
   .members{
@@ -96,10 +97,10 @@
 .add_post{
   position: fixed;
   bottom: 30px;
-  right: 100px;
+  right: 10px;
   height: 66px;
   width: 66px;
-  border-radius: 50%;
+  border-radius: 5px;
   background: $blue;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   color: white;

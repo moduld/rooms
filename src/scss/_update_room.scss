@@ -22,7 +22,7 @@
   font-size: 20px;
 }
 .main_wrapper{
-  display: flex;
+  @extend .flex-default;
   width: 100%;
   min-height: 350px;
   margin-top: 10px;
@@ -79,7 +79,7 @@
   font-weight: 600;
 }
 .with_margin{
-  margin-top: 22px;
+  margin-top: 10px;
   .input_field{
     margin-top: 10px;
     &:first-child{

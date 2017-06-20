@@ -8,7 +8,7 @@
 }
 .main_container{
   margin-top: 35px;
-  display: flex;
+  @extend .flex-default;
   flex: 1;
 }
 .label_wrapp{
@@ -143,6 +143,12 @@
     cursor: pointer;
     &:hover{
       background: white;
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    /* Safari 5+ ONLY */
+    ::i-block-chrome, .show_menu_label {
+      display: -webkit-box;
     }
   }
   .aside{

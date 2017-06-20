@@ -13,8 +13,8 @@
   font-size: 24px;
 }
 .main_container{
-  display: flex;
-  align-items: flex-start;
+  @extend .flex-start;
+
   margin-top: 35px;
 }
 

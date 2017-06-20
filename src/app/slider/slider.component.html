@@ -1,5 +1,10 @@
 <ngb-carousel>
   <ng-template ngbSlide *ngFor="let content of contentArray">
-    <a [href]="content.multimedia" target="_blank" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }"></a>
+    <span class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'image'"></span>
+    <video [src]="content.multimedia" controls type="video/*" class="picture video" [poster]="content.thumbnail" *ngIf="content.type === 'video'"></video>
+    <div class="picture audio" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'audio'">
+      <audio [src]="content.multimedia" controls type="audio/*" class="picture audio"  ></audio>
+    </div>
+    <pdf-viewer [src]="content.multimedia" [original-size]="true" [show-all]="true"  *ngIf="content.type === 'pdf'"></pdf-viewer>
   </ng-template>
 </ngb-carousel>

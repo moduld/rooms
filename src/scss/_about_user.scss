@@ -10,14 +10,14 @@
   margin-top: 35px;
 }
 .user_info_wrapp{
-  display: flex;
+  @extend .flex-default;
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   background: white;
 }
 .avatar_name_wrapp{
-  display: flex;
+  @extend .flex-default;
   min-width: 250px;
   align-items: center;
 }

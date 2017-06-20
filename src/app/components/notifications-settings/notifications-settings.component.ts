@@ -21,8 +21,6 @@ export class NotificationsSettingsComponent implements OnInit {
     message_notification_push: 0,
     room_join_request_notification_app: 0,
     room_join_request_notification_push: 0,
-    joined_room_notification_app: 0,
-    joined_room_notification_push: 0,
     added_moderator_notification_app: 0,
     added_moderator_notification_push: 0,
     added_talker_notification_app: 0,

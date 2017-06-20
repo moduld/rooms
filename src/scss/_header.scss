@@ -31,7 +31,7 @@
     color: $gray_text;
     font-family: $font_bold;
     transition: 0.3s;
-   display: flex;
+   @extend .flex-default;
     align-items: flex-end;
     margin-left: 10px;
     cursor: pointer;
@@ -84,7 +84,7 @@
     width: 45px;
     color: $blue;
     @extend .flex-center;
-    font-size: 25px;
+    font-size: 30px;
     cursor: pointer;
   }
   .icons_wrapper{

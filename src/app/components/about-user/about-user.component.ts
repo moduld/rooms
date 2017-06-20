@@ -29,7 +29,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   ngOnInit():void {
 
     this.subscription = this.activateRoute.params.subscribe(params=>{
-      this.user_id = params.id;
+      this.user_id = params.id / 22;
       this.getUserInfo();
     });
 
@@ -94,7 +94,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
     this.currentUser.is_myne && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t speak to oneself'});
     !this.currentUser.msg_from_anyone && !this.currentUser.is_fan && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t speak to this user'});
-    !flag && this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id}]);
+    !flag && this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id*22}]);
   }
 
 }

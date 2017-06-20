@@ -42,6 +42,17 @@ app-root{
     transition: 0.3s;
 }
 
+.carousel-control-next,
+.carousel-control-prev{
+    height: 50px;
+    width: 50px;
+    transform: translateY(-50%);
+    top: 50%;
+    background: rgba(0, 0, 0, 0.31);
+}
+.carousel-indicators{
+    bottom: 0;
+}
 @media screen and (max-width: 1000px){
     .post_details_modal_hi_width{
         max-width: 600px!important;

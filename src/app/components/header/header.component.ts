@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
@@ -28,6 +28,11 @@ export class HeaderComponent implements OnInit {
     routerSubscription: any;
     tree: any;
     for_active_class: boolean;
+
+    @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
+
+        event.keyCode === 13 && this.doRoomSearch(this.room_search)
+    }
 
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -153,7 +158,7 @@ export class HeaderComponent implements OnInit {
 
     goToDialogPage(user: any):void {
 
-        this.router.navigate( ['user-dialogs', {user: user.user.user_id}])
+        this.router.navigate( ['user-dialogs', {user: user.user.user_id*22}])
     }
 
     changeLinkState(path: any):void {

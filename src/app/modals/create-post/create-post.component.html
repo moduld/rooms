@@ -12,8 +12,7 @@
     <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="Type here ..."></textarea>
 
     <div class="right_zone_wrapper" *ngIf="viewToggle">
-      <div class="dropzone icon-clip" fileDrop (onFileDrop)="onFileDrop($event)">
-        <span class="drag_zone_text">Drag & Drop to Upload <br> or <br></span>
+      <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
         <label for="input_file" class="file_button">
           Click to upload the file
           <input type="file" id="input_file" name="files" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>

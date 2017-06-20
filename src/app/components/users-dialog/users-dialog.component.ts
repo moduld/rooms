@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
@@ -17,6 +17,7 @@ export class UsersDialogComponent implements OnInit {
   current_user: any;
   virtual_user: any;
   eventToChild:Subject<any> = new Subject();
+    routerSubscription: any;
 
   constructor( private requestService: RequestService,
                private router: Router,
@@ -25,8 +26,16 @@ export class UsersDialogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dialog_user_id = this.route.snapshot.params['user'];
+    this.dialog_user_id = this.route.snapshot.params['user'] / 22;
     this.all_users = [];
+
+      this.routerSubscription = this.router.events.subscribe(event=>{
+
+          if (event instanceof NavigationEnd ){
+              this.dialog_user_id = this.route.snapshot.params['user'] / 22;
+              this.getUsersForDialog();
+          }
+      });
 
     this.getUsersForDialog()
   }

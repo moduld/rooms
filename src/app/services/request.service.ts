@@ -23,7 +23,7 @@ export class RequestService  {
   userId: any = '';
   token: string = '';
   roomId: any;
-  headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+  headers: Headers = new Headers({ 'Content-Type': 'application/json'});
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
   // this method runs from app.component onInit, and from logIn and registration methods in this service
@@ -565,6 +565,7 @@ export class RequestService  {
       user_id: this.userId,
       room_id: dataToServer.room_id,
       room_name: dataToServer.roomData.room_name,
+      room_alias: dataToServer.roomData.room_alias,
       room_desc: dataToServer.roomData.room_desc,
       searchable_flag: dataToServer.roomData.searchable_flag ? 1 : 0,
       multimedia: dataToServer.multimedia

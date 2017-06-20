@@ -85,7 +85,7 @@
         <ul class="drop_down_menu">
           <li class="triangle"><i class="trans_bar"></i></li>
           <li class="drop_down_item" >
-            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</span>
+            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id * 22]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</span>
           </li>
           <li class="drop_down_item">
             <span class="drop_down_fill" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Settings</span>

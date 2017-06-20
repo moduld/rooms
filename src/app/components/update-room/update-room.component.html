@@ -14,6 +14,12 @@
         <span class="mistake">Wrong room name format</span>
       </span>
 
+      <span class="input_wrapp with_margin">
+        Alias:
+        <input type="text" class="input_field" placeholder="Enter room alias" name="room_alias" [(ngModel)]="roomAlias"  minlength="3" maxlength="34" pattern="[a-zA-Z0-9- ]+" required>
+        <span class="mistake">Wrong room name format</span>
+      </span>
+
       <div class="input_wrapp with_margin">
         Description:
         <textarea  class="input_field room_description" placeholder="Enter room description (optional)" name="room_desc" [(ngModel)]="roomDeskription"  minlength="0" maxlength="233" pattern="[a-zA-Z0-9- ]+"></textarea>

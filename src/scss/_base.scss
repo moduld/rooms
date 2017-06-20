@@ -46,6 +46,16 @@ $font_bold: Bold, sans-serif;
   display: flex;
   flex-direction: column;
 }
+.flex-start{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.flex-default{
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
 .backgr-center{
   background: center center no-repeat;
 }
@@ -59,6 +69,14 @@ $font_bold: Bold, sans-serif;
   background: $gray_text!important;
   pointer-events: none;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* Safari 5+ ONLY */
+  ::i-block-chrome, .flex-center, .flex-between, .flex-around, .flex-column, .flex-start, .flex-default {
+    display: -webkit-box;
+  }
+}
+
 
 
 
@@ -86,9 +104,10 @@ $font_bold: Bold, sans-serif;
   padding: 5px 0;
   transition: 0.3s;
   .dots{
-    background: transparent;
+    //background: transparent;
     height: 8px;
     width: 8px;
+    background: $gray_text;
     border: 2px solid $gray_text;
     border-radius: 50%;
     display: block;
@@ -105,9 +124,9 @@ $font_bold: Bold, sans-serif;
   &:hover > .drop_down_menu{
     display: block;
   }
-  &:hover  .dots{
-    border-color: $blue;
-  }
+  //&:hover  .dots{
+  //  border-color: $blue;
+  //}
 }
 .drop_down_menu{
   position: absolute;
@@ -248,3 +267,5 @@ $font_bold: Bold, sans-serif;
     height: 100%;
   }
 }
+
+

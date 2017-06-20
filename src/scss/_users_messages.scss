@@ -30,8 +30,7 @@
 }
 .user_content_wrapp{
   width: 100%;
-  display: flex;
-  align-items: flex-start;
+  @extend .flex-start;
   margin-top: 5px;
   transform: rotate(180deg);
   direction: ltr;

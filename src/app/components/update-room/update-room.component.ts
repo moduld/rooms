@@ -24,6 +24,7 @@ export class UpdateRoomComponent implements OnInit {
   imagePreview: string = '';
   roomName: string = '';
   roomDeskription: string = '';
+    roomAlias: string = '';
 
 
   constructor( private fileService: FileInfoService,
@@ -35,6 +36,7 @@ export class UpdateRoomComponent implements OnInit {
   ngOnInit() {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
     this.roomName = this.currentRoom.room_details.room_name;
+    this.roomAlias = this.currentRoom.room_details.room_alias;
     this.imagePreview = this.currentRoom.room_details.thumbnail || '';
     this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
     this.roomDeskription = this.currentRoom.room_details.room_desc;

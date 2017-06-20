@@ -56,7 +56,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
     clearInterval(this.interval);
-    this.eventFromParent.unsubscribe();
+    // this.eventFromParent.unsubscribe();
   }
 
 

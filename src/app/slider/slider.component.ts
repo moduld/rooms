@@ -17,7 +17,7 @@ export class SliderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+  console.log(this.contentArray)
   }
 
 }

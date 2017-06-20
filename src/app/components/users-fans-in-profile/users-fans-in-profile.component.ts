@@ -39,7 +39,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
           if (event instanceof NavigationEnd ){
               let parses = this.router.parseUrl(this.router.url);
               this.tree = parses.root.children.primary.segments;
-              this.user_id = this.tree[1].path;
+              this.user_id = this.tree[1].path / 22;
               this.getUserFans()
           }
       })

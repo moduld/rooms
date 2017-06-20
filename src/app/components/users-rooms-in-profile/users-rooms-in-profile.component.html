@@ -1,7 +1,7 @@
 <div class="main_container" >
 
 <div class="rooms"  *ngFor="let room of allRooms; let i = index"
-     [routerLink]="['/room', room.room.room_id]" [ngStyle]="{'background-color': room.room.color}">
+     [routerLink]="['/room', room.room.room_id*22]" [ngStyle]="{'background-color': room.room.color}">
 
   <div class="image" [ngStyle]="{'background-image':'url(' + room.room.thumbnail + ')'}"></div>
   <div class="room_info">

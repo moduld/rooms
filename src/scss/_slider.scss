@@ -21,4 +21,16 @@
   @extend .backgr-center;
   //background-size: contain;
   width: 100%;
+  background-repeat: no-repeat;
+}
+.video{
+  margin-bottom: 30px;
+}
+.audio{
+  @extend .flex-default;
+  flex-direction: column-reverse;
+  height: 92%;
+}
+.pdf-viewer{
+  overflow: auto;
 }

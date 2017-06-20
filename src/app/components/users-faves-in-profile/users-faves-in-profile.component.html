@@ -1,7 +1,7 @@
 <div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
   <div class="user_wrapp" *ngFor="let user of allUsers; let i = index">
-     <span class="user_info" [routerLink]="['/about-user', user.user_id]">
+     <span class="user_info" [routerLink]="['/about-user', user.user_id*22]">
        <span class="avatar" [ngStyle]="{'background-image':'url(' + user.thumbnail + ')' }"></span>
        <span class="name">{{user.user_name}}</span>
      </span>
