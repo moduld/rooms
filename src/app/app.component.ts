@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {Router, NavigationEnd} from '@angular/router';
 import {RequestService} from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
+import { SafariErrorsFixService } from './services/safari-errors-fix.service';
+
 
 
 @Component({
@@ -18,7 +20,8 @@ export class AppComponent implements OnInit{
 
   constructor( private router: Router,
                private exchangeService: EventsExchangeService,
-               private requestService : RequestService){
+               private requestService : RequestService,
+                private safariService: SafariErrorsFixService){
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
@@ -37,7 +40,10 @@ export class AppComponent implements OnInit{
 
   ngOnInit():void {
 
-    this.requestService.addRequiredDataToTheService()
+    this.requestService.addRequiredDataToTheService();
+    this.safariService.addSafariClass()
   }
+
+
 
 }

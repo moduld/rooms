@@ -75,7 +75,7 @@
 .tags{
   width: 165px;
   height: 35px;
-  border-radius: 17px;
+  border-radius: 5px;
   background: white;
   @extend .flex-center;
   color: $gray_text;
@@ -126,7 +126,8 @@
 
 @media screen and (max-width: 550px){
   :host{
-    margin-top: 144px;
+    //margin-top: 144px;
+    margin-top: 29px;
   }
   .user_info_wrapp{
     padding: 10px;

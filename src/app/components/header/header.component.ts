@@ -28,6 +28,9 @@ export class HeaderComponent implements OnInit {
     routerSubscription: any;
     tree: any;
     for_active_class: boolean;
+    hide_header: boolean;
+    attendeds_links: string[];
+    back_link: string;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
@@ -41,6 +44,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+        this.attendeds_links = ['all-rooms'];
       this.message_notification_offset = 0;
       this.messages = [];
       this.notifications = [];
@@ -48,19 +52,24 @@ export class HeaderComponent implements OnInit {
       this.messages_quantity = 0;
       this.notifications_quantity = 0;
       this.currentUser = this.storeservice.getUserData();
-      console.log(this.currentUser)
       this.getNewMessages();
       this.getNewNotifications();
-        this.for_active_class = true;
+      this.for_active_class = true;
+      this.parseUrl();
 
       this.routerSubscription = this.router.events.subscribe(event=>{
 
           if (event instanceof NavigationEnd ){
-              let parses = this.router.parseUrl(this.router.url);
-              this.tree = parses.root.children.primary.segments;
-              this.changeLinkState(this.tree[0].path)
+              this.parseUrl()
           }
       })
+  }
+
+  parseUrl():void {
+
+      let parses = this.router.parseUrl(this.router.url);
+      this.tree = parses.root.children.primary.segments;
+      this.changeLinkState(this.tree[0].path)
   }
 
   logOut(){
@@ -163,7 +172,22 @@ export class HeaderComponent implements OnInit {
 
     changeLinkState(path: any):void {
 
-        path === 'all-rooms' || path === 'room' ? this.for_active_class = true : this.for_active_class = false;
+        path != this.attendeds_links[this.attendeds_links.length - 1] && this.attendeds_links.push(path);
+
+        path === 'all-rooms'  ? this.for_active_class = true : this.for_active_class = false;
+
+        if(path === 'room' || path === 'about-user' || path === 'user-settings'){
+            this.hide_header = true;
+            this.back_link = this.attendeds_links[this.attendeds_links.length - 2] || 'all-rooms';
+
+        }else {
+            this.hide_header = false;
+        }
+    }
+
+    goBack():void {
+
+        this.router.navigateByUrl(this.back_link);
     }
 
 }

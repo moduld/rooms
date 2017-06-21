@@ -32,6 +32,7 @@
   padding-right: 30px;
   height: calc(100% - 50px);
   padding-bottom: 20px;
+  word-wrap: break-word;
 }
 .post_content{
   flex: 1;
@@ -204,6 +205,7 @@ margin-top: 5px;
   width: 100%;
   @extend .flex-default;
   flex-wrap: wrap;
+  background: -webkit-linear-gradient(top, white, white, white, transparent);
   background: linear-gradient(to top, white, white, white, transparent);
   &:before{
     content: '';
@@ -211,6 +213,7 @@ margin-top: 5px;
     width: 100%;
     height: 25px;
     background: transparent;
+    opacity: 0;
   }
 }
 .alighn_wrapp{
@@ -363,4 +366,11 @@ margin-top: 5px;
   .post_info{
     border-top: 1px solid $line;
   }
+}
+
+@media screen and (max-width: 550px){
+  .modal_wrapper{
+    padding: 40px 10px 10px;
+  }
+
 }

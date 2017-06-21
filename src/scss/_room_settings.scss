@@ -97,6 +97,7 @@
 }
 .active{
   color: $blue;
+  font-family: $font_bold;
 }
 .main_field{
   @extend .flex-column;

@@ -304,8 +304,9 @@
     width: 30px;
     font-size: 20px;
     margin-left: 5px;
+    display: block;
     &:before{
-      font-size: 20px;
+      line-height: 20px;
     }
   }
 }

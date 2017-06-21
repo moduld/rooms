@@ -4,18 +4,21 @@
   background: $posts_background;
   color: $gray_text;
   position: relative;
-  margin-top: 60px;
+  //margin-top: 60px;
 }
   .main_container{
     @extend .flex-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding-bottom: 20px;
   }
   .rooms{
     height: 385px;
-    width: 100%;
-    max-width: 255px;
+    width: 255px;
     border-radius: 5px;
     margin: 30px 10px 0;
     box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
@@ -112,7 +115,11 @@
 
 @media screen and (max-width: 1000px){
   :host{
-    margin-top: 115px;
+    //margin-top: 115px;
+  }
+  .main_container{
+    margin-top: 114px;
+    height: calc(100vh - 114px);
   }
 }
 @media screen and (max-width: 875px){
@@ -125,7 +132,10 @@
 
 @media screen and (max-width: 550px){
   :host{
-    margin-top: 143px;
+    //margin-top: 143px;
   }
-
+  .main_container{
+    margin-top: 143px;
+    height: calc(100vh - 143px);
+  }
 }

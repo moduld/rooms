@@ -40,6 +40,7 @@ export class CreateRoomComponent implements OnInit {
 
   fileDropped(event: any): void {
     let settings = this.fileService.toNowFileInfo(event.srcElement.files[0]);
+    console.log(event.srcElement.files[0])
     if (settings && settings['typeForApp'] === 'image') {
 
       this.requestService.getLinkForFileUpload(settings).subscribe(

@@ -1,3 +1,6 @@
+<div class="component_wrapp" appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
+
 <div class="name_and_menu" *ngIf="wallsArray">
     <div class="string_wrapp">
         <div class="left_position">
@@ -42,7 +45,7 @@
 </div>
 
 
-<div class="main_container" appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+<div class="main_container" >
 
     <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
         <div class="post_info">
@@ -60,7 +63,7 @@
                  [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
 
                 <div class="post_images" *ngFor="let img of post.media"
-                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
+                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-play-circle': img.type === 'video' || img.type === 'audio'}"></div>
             </div>
             <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
                 <div class="post_images poll_thumbnail"></div>
@@ -167,3 +170,4 @@
     <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 </div>
 
+</div>

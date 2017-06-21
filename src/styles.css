@@ -13,6 +13,14 @@ app-root{
     flex-direction: column;
 }
 
+body.safari_browser{
+    display: -webkit-box;
+}
+.safari_browser app-root{
+        display:-webkit-box;
+}
+
+
 .modal-dialog{
     width: 100%;
     max-width: 800px!important;
@@ -64,3 +72,4 @@ app-root{
         margin: 10px auto 0;
     }
 }
+

@@ -5,6 +5,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
 
 import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
 import { UserInfo } from '../../commonClasses/userInfo';
@@ -32,7 +33,8 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
               private requestService: RequestService,
               private router: Router,
               private modalService: NgbModal,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService,
+              private safariService: SafariErrorsFixService) { }
 
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
@@ -72,6 +74,7 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
             this.flagMoveY = true;
           }
           this.show_loading = false;
+            this.safariService.addSafariClass()
         },
         error => {
           console.log(error);

@@ -11,6 +11,7 @@ import { UserInfo } from '../../commonClasses/userInfo';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
@@ -49,7 +50,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
               private exchangeService: EventsExchangeService,
               private storeservice: UserStoreService,
               private modalService: NgbModal,
-              private router: Router){
+              private router: Router,
+                private safariService: SafariErrorsFixService){
   }
 
   ngOnDestroy(){
@@ -114,6 +116,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
       this.filter_switcher === 'show_all' && this.requestService.getRoomPosts(dataToServer).subscribe(
         data=>{
            this.handleSuccessRequest(data, dataToServer)
+
         },
         error => {
             this.handleErrorRequest(error)
@@ -151,6 +154,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
           this.allPosts = this.allPosts.concat(data['posts']);
           this.flagMoveY = true;
           this.wallId = dataToServer.wall_id
+          this.safariService.addSafariClass()
       }
       this.show_loading = false;
   }

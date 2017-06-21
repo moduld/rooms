@@ -5,7 +5,7 @@
         <p class="subtitle">Sign up to meet photos and videos from your friends.</p>
         <label class="input_wrapp icon-head">
             Username
-            <input type="text" class="input_field"  name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="34" pattern="[a-zA-Z0-9-]+" required>
+            <input type="text" class="input_field"  name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="34" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
             <span class="mistake">{{userNameMistake}}</span>
         </label>
         <label class="input_wrapp icon-mail">

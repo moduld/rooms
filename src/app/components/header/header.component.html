@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" [ngClass]="{'hide_header': hide_header}">
   <div class="main_container">
     <div class="logo" >
       <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
@@ -98,4 +98,5 @@
       </div>
     </div>
   </div>
+  <div class="back_wrapp" ><span class="button_back icon-chevron-left" (click)="goBack()"></span></div>
 </header>

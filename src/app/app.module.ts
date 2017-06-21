@@ -9,6 +9,7 @@ import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 
 import { AppComponent } from './app.component';
 
@@ -55,6 +56,7 @@ import { UserStoreService } from './services/user-store.service';
 import { ErrorShowService } from './services/error-show.service';
 import { FileInfoService } from './services/file-info.service';
 import { AddRequiredInfoService } from './services/add-required-info.service';
+import { SafariErrorsFixService } from './services/safari-errors-fix.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
@@ -150,7 +152,8 @@ let appRoutes: Routes =[
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     FileDropModule,
-    DragulaModule
+    DragulaModule,
+    Ng2DeviceDetectorModule.forRoot()
   ],
   providers: [
     RequestService,
@@ -160,7 +163,8 @@ let appRoutes: Routes =[
     FileInfoService,
     CanActivateComponent,
     AddRequiredInfoService,
-    CanActivateRoomSettingsChildsComponent
+    CanActivateRoomSettingsChildsComponent,
+    SafariErrorsFixService
   ],
   entryComponents: [
     CreatePostComponent,

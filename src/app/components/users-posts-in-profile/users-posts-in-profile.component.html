@@ -16,7 +16,7 @@
            [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
 
         <div class="post_images" *ngFor="let img of post.media"
-             [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}"></div>
+             [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-play-circle': img.type === 'video' || img.type === 'audio'}"></div>
       </div>
       <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
         <div class="post_images poll_thumbnail"></div>

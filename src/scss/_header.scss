@@ -1,9 +1,5 @@
 :host{
-  position: fixed;
-  width: 100%;
-  z-index: 3;
-  left: 0;
-  top: 0;
+
 
 }
 .header{
@@ -11,10 +7,19 @@
   color: $gray_text;
   background: white;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
   .main_container{
     @extend .flex-between;
     align-items: center;
     flex-wrap: wrap;
+  }
+  .main_container.safari_browser{
+    @extend .flex-between;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
   }
   .logo{
     height: 32px;
@@ -52,7 +57,7 @@
     border-radius: 5px;
     position: relative;
     max-width: 350px;
-    width: 100%;
+    flex: 1;
     transition: 0.3s;
   }
 
@@ -298,6 +303,9 @@
     line-height: 16px;
   }
 }
+  .back_wrapp{
+    display: none;
+  }
 
 }
 
@@ -314,6 +322,9 @@
  .header{
    .logo{
      width: 100%;
+     &.safari_browser{
+       width: 1000px;
+     }
    }
    .search{
      width: 50%;
@@ -341,18 +352,37 @@
 }
 
 @media screen and (max-width: 550px){
+  .hide_header{
+    transform: translateY(-83%);
+    .back_wrapp{
+      display: block;
+      text-align: left;
+      padding: 0 10px;
+    }
+    .button_back{
+      font-size: 20px;
+      color: $gray_text;
+      &:before{
+        padding: 8px;
+      }
+    }
+  }
   .header{
     //.name_and_settings{
     //  width: 100%;
     //  text-align: center;
     //  max-width: 100%;
     //}
+
     .main_container{
       flex-direction: column;
     }
     .logo{
       margin: 10px auto;
       width: auto;
+      &.safari_browser{
+        width: auto;
+      }
     }
     .search{
       width: 100%;
