@@ -10,6 +10,7 @@ import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
+import {ImageCropperComponent} from 'ng2-img-cropper';
 
 import { AppComponent } from './app.component';
 
@@ -57,6 +58,7 @@ import { ErrorShowService } from './services/error-show.service';
 import { FileInfoService } from './services/file-info.service';
 import { AddRequiredInfoService } from './services/add-required-info.service';
 import { SafariErrorsFixService } from './services/safari-errors-fix.service';
+import { UploadFilesService } from './services/upload-files.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
@@ -143,7 +145,8 @@ let appRoutes: Routes =[
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
     NotificationsSettingsComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -164,7 +167,8 @@ let appRoutes: Routes =[
     CanActivateComponent,
     AddRequiredInfoService,
     CanActivateRoomSettingsChildsComponent,
-    SafariErrorsFixService
+    SafariErrorsFixService,
+    UploadFilesService
   ],
   entryComponents: [
     CreatePostComponent,

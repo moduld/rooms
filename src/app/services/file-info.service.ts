@@ -6,11 +6,12 @@ export class FileInfoService {
   constructor() { }
 
   //used in components where need to attach some files to upload
-  toNowFileInfo (file: any): any {
+  toNowFileInfo (file: any, place?:string): any {
 
     if (file.type){
       let resultObject = new Object;
       if (file.type === "application/pdf"){
+
         resultObject['folder'] = 'posts/pdfs/';
         resultObject['content_type'] = "application/pdf";
         resultObject['typeForApp'] = 'pdf';
@@ -34,9 +35,10 @@ export class FileInfoService {
       }
       if (file.type === "image/jpeg"){
         resultObject['folder'] = 'posts/images/';
+        place === 'rooms' ? resultObject['folder'] = 'rooms/images/' : '';
         resultObject['content_type'] = "image/jpeg";
         resultObject['typeForApp'] = 'image';
-        resultObject['ext'] = 'jpg';
+        resultObject['ext'] = 'jpeg';
         resultObject['img_src'] = 'assets/img/img-default.png';
       }
       if (file.type === "video/mp4"){
