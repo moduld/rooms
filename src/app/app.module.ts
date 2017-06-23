@@ -10,7 +10,7 @@ import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
-import {ImageCropperComponent} from 'ng2-img-cropper';
+import {ImageCropperModule} from 'ng2-img-cropper/index';
 
 import { AppComponent } from './app.component';
 
@@ -145,8 +145,7 @@ let appRoutes: Routes =[
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
     NotificationsSettingsComponent,
-    PdfViewerComponent,
-    ImageCropperComponent
+    PdfViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -156,7 +155,8 @@ let appRoutes: Routes =[
     NgbModule.forRoot(),
     FileDropModule,
     DragulaModule,
-    Ng2DeviceDetectorModule.forRoot()
+    Ng2DeviceDetectorModule.forRoot(),
+    ImageCropperModule
   ],
   providers: [
     RequestService,

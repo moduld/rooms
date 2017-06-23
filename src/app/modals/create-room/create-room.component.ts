@@ -94,6 +94,7 @@ export class CreateRoomComponent implements OnInit {
 
               this.dataToServer['multimedia'] = result.multimedia;
               this.sendTextData(roomForm);
+              this.subscription.unsubscribe();
           });
           this.fileUpload.uploadFiles(this.previewed, 'rooms')
       } else {
