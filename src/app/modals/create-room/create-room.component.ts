@@ -5,7 +5,6 @@ import { NgForm} from '@angular/forms';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestService } from '../../services/request.service';
-import { FileInfoService } from '../../services/file-info.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { UploadFilesService } from '../../services/upload-files.service';
 
@@ -22,7 +21,6 @@ export class CreateRoomComponent implements OnInit {
   publicFlag: boolean = true;
   searchableFlag: boolean = true;
   dataToServer: any = {};
-  imagePreview: string = '';
   roomName: string = '';
   roomDeskription: string = '';
   subscription: any;
@@ -37,7 +35,6 @@ export class CreateRoomComponent implements OnInit {
     @ViewChild('previewImg') previewed:ElementRef;
 
   constructor(public activeModal: NgbActiveModal,
-              private fileService: FileInfoService,
               private fileUpload: UploadFilesService,
               private requestService: RequestService,
               private exchangeService: EventsExchangeService) {
@@ -85,9 +82,7 @@ export class CreateRoomComponent implements OnInit {
         myReader.readAsDataURL(file);
   }
 
-
-
-  createNewRoom(roomForm: NgForm):void {
+  createNewRoom(roomForm: NgForm, event: any):void {
 
       if (this.image_dropped){
           this.subscription = this.fileUpload.pushResolve.subscribe(result=>{

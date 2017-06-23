@@ -1,4 +1,4 @@
-<form action="#" class="modal_wrapper" #newRoomForm="ngForm" (submit)="createNewRoom(newRoomForm)">
+<form action="#" class="modal_wrapper" #newRoomForm="ngForm" (submit)="createNewRoom(newRoomForm, $event)">
   <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
   <div class="top_wrapper">
     <h3 class="title">New Room</h3>

@@ -20,6 +20,13 @@ export class SliderComponent implements OnInit {
 
   ngOnInit() {
     this.zoom_value = 1;
+    //hack to hide slider arrows when only one media. Plugin don't have native settings to hide it.
+    if (this.contentArray.length < 2){
+      let leftArr = document.getElementsByClassName('carousel-control-prev');
+      leftArr && leftArr[0].setAttribute('hidden', 'hidden');
+      let rightArr = document.getElementsByClassName('carousel-control-next');
+      rightArr && rightArr[0].setAttribute('hidden', 'hidden')
+    }
   }
 
   changeZoom(flag:boolean):void {

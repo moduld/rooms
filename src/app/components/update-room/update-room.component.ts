@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { NgForm} from '@angular/forms';
 
@@ -6,6 +6,9 @@ import {UserStoreService} from '../../services/user-store.service';
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import { UploadFilesService } from '../../services/upload-files.service';
+
+import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 
 import { Wall } from '../../commonClasses/wall';
 
@@ -25,78 +28,112 @@ export class UpdateRoomComponent implements OnInit {
   roomName: string = '';
   roomDeskription: string = '';
     roomAlias: string = '';
+    subscription: any;
+    added_image: any;
+    image_dropped:boolean;
 
+    cropperSettings: CropperSettings;
+
+    @ViewChild('cropper', undefined)
+    cropper:ImageCropperComponent;
+
+    @ViewChild('previewImg') previewed:ElementRef;
 
   constructor( private fileService: FileInfoService,
                private requestService: RequestService,
                private storeservice: UserStoreService,
                private router: Router,
-               private exchangeService: EventsExchangeService) { }
+               private fileUpload: UploadFilesService,
+               private exchangeService: EventsExchangeService) {
+
+      this.cropperSettings = new CropperSettings();
+      this.cropperSettings.noFileInput = true;
+      this.cropperSettings.width = 255;
+      this.cropperSettings.height = 255;
+      this.cropperSettings.minWidth = 255;
+      this.cropperSettings.minHeight = 255;
+      this.cropperSettings.minWithRelativeToResolution = true;
+      this.cropperSettings.fileType = 'image/jpeg';
+      this.cropperSettings.preserveSize = true;
+      this.cropperSettings.dynamicSizing = true;
+      this.cropperSettings.cropperClass = 'cropper_field';
+
+      this.added_image = {};
+  }
 
   ngOnInit() {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
     this.roomName = this.currentRoom.room_details.room_name;
     this.roomAlias = this.currentRoom.room_details.room_alias;
-    this.imagePreview = this.currentRoom.room_details.thumbnail || '';
+    this.currentRoom.room_details.thumbnail && this.fileDropped(false);
     this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
     this.roomDeskription = this.currentRoom.room_details.room_desc;
     this.publicFlag = !!this.currentRoom.room_details.public;
     this.searchableFlag = !!this.currentRoom.room_details.searchable_flag;
   }
 
-  fileDropped(event: any): void {
-    let settings = this.fileService.toNowFileInfo(event.srcElement.files[0]);
-    console.log(event.srcElement.files[0])
-    if (settings && settings['typeForApp'] === 'image') {
+    fileDropped(event: any): void {
 
-      this.requestService.getLinkForFileUpload(settings).subscribe(
-          data=>{
-            settings.link = data.urls[0];
-            this.putFileToServer(settings)
-          },
-          error => {
-              this.error = error;
-              console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
-      );
+        this.image_dropped = true;
+
+        let image:any = new Image();
+        let that = this;
+        let myReader:FileReader = new FileReader();
+        if (event){
+
+            let file:File = event.target.files[0];
+            myReader.onloadend = function (loadEvent:any) {
+                image.src = loadEvent.target.result;
+                that.cropper.setImage(image);
+            };
+            myReader.readAsDataURL(file);
+
+      } else {
+            image.crossOrigin="anonymous";
+            image.src = this.currentRoom.room_details.thumbnail;
+            image.onload = function (loadEvent:any) {
+                that.cropper.setImage(image);
+            };
+        }
     }
-  }
 
-  putFileToServer(settings: any): void {
+    updateTheRoom(roomForm: NgForm):void {
 
-    this.requestService.fileUpload(settings).subscribe(
-        data=>{
-          this.imagePreview = settings.multimedia;
-          this.dataToServer['multimedia'] = settings.multimedia;
-        },
-        error => {
-            this.error = error;
-            console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
-    );
-  }
+        if (this.image_dropped){
+            this.subscription = this.fileUpload.pushResolve.subscribe(result=>{
 
-  updateTheRoom(roomForm: NgForm):void {
+                this.dataToServer['multimedia'] = result.multimedia;
+                this.sendTextData(roomForm);
+                this.subscription.unsubscribe();
+            });
+            this.fileUpload.uploadFiles(this.previewed, 'rooms')
+        } else {
+            this.sendTextData(roomForm)
+        }
+    }
 
-      let name = roomForm.value.room_name.trim();
-      if (name){
-          roomForm.value.room_name = name;
-          this.dataToServer['roomData'] = roomForm.value;
-          this.dataToServer.room_id = this.currentRoom.room_details.room_id;
-          this.requestService.updateRoom(this.dataToServer).subscribe(
-              data=>{
-                  this.currentRoom.room_details =  data.room;
-                  this.storeservice.storeCurrentUserRooms(this.currentRoom);
-                  this.router.navigateByUrl('/room-settings');
-                  this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
-              },
-              error => {
-                  this.error = error;
-                  console.log(error);
-                  this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
-          );
-      }
+    sendTextData(roomForm: NgForm):void {
 
-  }
+        let name = roomForm.value.room_name.trim();
+        if (name){
+            roomForm.value.room_name = name;
+            this.dataToServer['roomData'] = roomForm.value;
+            this.dataToServer.room_id = this.currentRoom.room_details.room_id;
+            this.requestService.updateRoom(this.dataToServer).subscribe(
+                data=>{
+                    this.currentRoom.room_details =  data.room;
+                    this.storeservice.storeCurrentUserRooms(this.currentRoom);
+                    this.router.navigateByUrl('/room-settings');
+                    this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
+                },
+                error => {
+                    this.error = error;
+                    console.log(error);
+                    this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
+            );
+        }
+
+    }
+
 
 }

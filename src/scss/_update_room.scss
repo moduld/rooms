@@ -27,16 +27,34 @@
   min-height: 350px;
   margin-top: 10px;
 }
-.room_thumbnail{
+.image_cropper_wrapp{
+  position: relative;
   flex: 1;
   margin-right: 15px;
-  border-radius: 5px;
   background: $gray_background;
+  border-radius: 5px;
+  //@extend .flex-column;
+  //justify-content: center;
+  //align-items: center;
+}
+.image_preview{
+  position: absolute;
+  border: 3px solid white;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+}
+.room_thumbnail{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
   @extend .flex-column;
   justify-content: center;
   align-items: center;
-  @extend .backgr-center;
-  background-size: cover;
+  transition: 0.5s;
+  white-space: nowrap;
   &:before{
     font-size: 60px;
     color: $blue;
@@ -47,6 +65,18 @@
     color: $gray_text;
     margin-top: 20px;
     font-family: $font_medium!important;
+  }
+}
+.image_dropped{
+  top: 0;
+  left: 0;
+  transform: translate3d(0,0,0);
+  padding: 5px;
+  &:before{
+    font-size: 30px;
+  }
+  &:after{
+    display: none;
   }
 }
 .right_zone_wrapper{
@@ -154,9 +184,11 @@
   .main_wrapper{
     flex-direction: column;
   }
-  .room_thumbnail{
+  .image_cropper_wrapp{
     height: 200px;
     margin-right: 0;
+  }
+  .room_thumbnail{
     &:before{
       font-size: 40px;
     }

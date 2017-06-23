@@ -22,6 +22,7 @@
   //background-size: contain;
   width: 100%;
   background-repeat: no-repeat;
+  min-height: 509px;
 }
 .video{
   margin-bottom: 30px;
@@ -34,7 +35,6 @@
 .pdf{
   margin-bottom: 30px;
   position: relative;
-  overflow: auto;
 }
 
 .zoom_control{
@@ -42,9 +42,21 @@
   top: 0;
   left: 0;
   background: white;
-  opacity: 0.5;
+  opacity: 0.9;
   z-index: 5;
   user-select: none;
+  animation: zoom_ctrl_fade 5s linear forwards;
+  &:hover{
+    animation: zoom_ctrl 0.5s linear forwards;
+  }
+}
+@keyframes zoom_ctrl_fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes zoom_ctrl_show {
+  0% { opacity: 0; }
+  100% { opacity: 0.9; }
 }
 .zoom_items{
   padding: 5px;
@@ -54,5 +66,45 @@
   cursor: pointer;
   &:hover{
     color: $dark_text;
+  }
+}
+.download_link{
+  position: absolute;
+  top: 0;
+  right: 20%;
+  font-size: 20px;
+  color: $gray_text;
+  animation: zoom_ctrl_fade 5s linear forwards;
+  z-index: 5;
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  &:hover{
+    animation: zoom_ctrl 0.5s linear forwards;
+    text-decoration: none;
+    color: $dark_text;
+  }
+}
+.pdf_wrapp{
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  max-height: 509px;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,.3);
+}
+
+@media screen and (max-width: 1000px) {
+  .pdf_wrapp{
+
+    max-height: 350px;
+  }
+  .picture{
+    min-height: 350px;
   }
 }

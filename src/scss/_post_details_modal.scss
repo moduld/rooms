@@ -205,17 +205,21 @@ margin-top: 5px;
   width: 100%;
   @extend .flex-default;
   flex-wrap: wrap;
-  background: -webkit-linear-gradient(top, white, white, white, transparent);
-  background: linear-gradient(to top, white, white, white, transparent);
+  //background: -webkit-linear-gradient(top, white, white, white, transparent);
+  //background: linear-gradient(to top, white, white, white, transparent);
   &:before{
     content: '';
     display: block;
     width: 100%;
     height: 25px;
-    background: transparent;
-    opacity: 0;
+    //background: white;
+    //opacity: 0.3;
+    //background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 0%);
+    //background: -webkit-linear-gradient(bottom,  rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(rgba(255,255,255,0), white);
   }
 }
+
 .alighn_wrapp{
   @extend .flex-center;
   position: relative;

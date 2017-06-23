@@ -145,12 +145,7 @@
       background: white;
     }
   }
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-    /* Safari 5+ ONLY */
-    ::i-block-chrome, .show_menu_label {
-      display: -webkit-box;
-    }
-  }
+
   .aside{
     width: 300px;
     position: fixed;
@@ -158,8 +153,9 @@
     left: 0;
     transition: 0.5s;
     top: 151px;
+    bottom: 30px;
     background: white;
-    height: 550px;
+    max-height: 550px;
     z-index: 2;
     border-radius: 0 5px 5px 0;
     border: 1px solid transparent;

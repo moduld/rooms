@@ -81,49 +81,6 @@
   color: $dark_text;
 }
 
-
-//.my_messages{
-//  flex-direction: row-reverse;
-//  .user_info_wrapp{
-//    margin-right: 0;
-//    margin-left: 20px;
-//  }
-//  .user_avatar{
-//    margin-right: 0;
-//  }
-//  .messages_wrapp{
-//    order: 1;
-//    align-items: flex-end;
-//    background: $blue;
-//    color: white;
-//    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.2);
-//    padding: 16px 16px 16px 32px;
-//    &:after{
-//      border-right: none;
-//      border-left: 20px solid $blue;
-//      border-bottom: 10px solid transparent;
-//      left: auto;
-//      right: -15px;
-//    }
-//  }
-//}
-//.my_messages ~ .my_messages{
-//  margin-top: 5px;
-//  align-items: center;
-//  .message_time{
-//    display: block;
-//    width: 40px;
-//    text-align: center;
-//  }
-//  .user_avatar{
-//    display: none;
-//  }
-//  .messages_wrapp{
-//    &:after{
-//      display: none;
-//    }
-//  }
-//}
 .last{
   .user_avatar{
     display: block;
