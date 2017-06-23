@@ -1,5 +1,7 @@
 <div class="main_container" appIeHeight>
 
+    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
     <div class="rooms"  *ngFor="let room of allRooms; let i = index"
          [routerLink]="['/room', room.room.room_id*22]" [ngStyle]="{'background-color': room.room.color}">
 

@@ -20,6 +20,8 @@ export class AllRoomsComponent implements OnInit {
 
     error: any;
     allRooms: Room[] = [];
+    show_loading:boolean;
+
     constructor(private requestService: RequestService,
                 private modalService: NgbModal,
                 private exchangeService: EventsExchangeService,
@@ -51,6 +53,9 @@ export class AllRoomsComponent implements OnInit {
 
   getUserRooms(): void {
 
+        this.show_loading = true;
+        this.allRooms = [];
+
       this.requestService.getAllRooms().subscribe(
           data=>{
               for(let i = 0; i < data['rooms'].length; i++){
@@ -59,6 +64,7 @@ export class AllRoomsComponent implements OnInit {
                       data['rooms'].splice(i, 1)
                   }
               }
+              this.show_loading = false;
               this.allRooms = data['rooms'];
           }, error => {
               this.error = error;
@@ -69,10 +75,14 @@ export class AllRoomsComponent implements OnInit {
 
   getSearchableRooms(search: string): void {
 
+      this.show_loading = true;
+      this.allRooms = [];
+
       this.requestService.getRoomsBySearch(search).subscribe(
           data=>{
               //server output items by search and suggest, have different structure from user rooms.
               // addRequiredInfo service used to bring structure to same format
+              this.show_loading = false;
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {
               this.error = error;
@@ -83,10 +93,14 @@ export class AllRoomsComponent implements OnInit {
 
   getSuggestedRooms():void {
 
+      this.show_loading = true;
+      this.allRooms = [];
+
       this.requestService.getSuggestionRooms().subscribe(
           data=>{
               //server output items by search and suggest, have different structure from user rooms.
               // addRequiredInfo service used to bring structure to same format
+              this.show_loading = false;
               this.allRooms = this.addRequiredInfo.addInfo(data['rooms'])
           }, error => {
               this.error = error;

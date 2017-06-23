@@ -91,13 +91,7 @@
   width: 100%;
   max-height: 509px;
 }
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,.3);
-}
+
 
 @media screen and (max-width: 1000px) {
   .pdf_wrapp{
