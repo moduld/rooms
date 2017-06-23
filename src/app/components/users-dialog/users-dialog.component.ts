@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
@@ -9,7 +9,7 @@ import { EventsExchangeService } from '../../services/events-exchange.service';
   templateUrl: './users-dialog.component.html',
   styleUrls: ['./users-dialog.component.scss']
 })
-export class UsersDialogComponent implements OnInit {
+export class UsersDialogComponent implements OnInit, OnDestroy {
 
   error: any;
   dialog_user_id: any;
@@ -38,6 +38,11 @@ export class UsersDialogComponent implements OnInit {
       });
 
     this.getUsersForDialog()
+  }
+
+  ngOnDestroy() {
+
+      this.routerSubscription.unsubscribe()
   }
 
 
