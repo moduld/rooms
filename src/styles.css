@@ -78,3 +78,12 @@ body.safari_browser{
     height: 100%;
     border-radius: 5px;
 }
+@media screen and (max-width: 550px){
+    .opened{
+        margin-top: 143px;
+        transition: 0.5s;
+    }
+    .opened ~ app-all-rooms > .main_container{
+        height: calc(100vh - 143px);
+    }
+}

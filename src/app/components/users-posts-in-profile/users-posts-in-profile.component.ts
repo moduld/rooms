@@ -42,6 +42,15 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
     this.post_offset = 0;
     this.show_loading = false;
 
+    this.exchangeService.srcrooReachEndEvent.subscribe(()=>{
+
+        if (this.flagMoveY){
+            this.post_offset = this.allPosts[this.allPosts.length - 1].post_id;
+            this.flagMoveY = false;
+            this.getUserPosts()
+        }
+    });
+
       this.routerSubscription = this.router.events.subscribe(event=>{
 
           if (event instanceof NavigationEnd ){
@@ -143,16 +152,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
             console.log(error);
             this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
     )
-  }
-
-  onScrollRichTheEnd(event): void {
-
-    if (this.flagMoveY){
-        this.post_offset = this.allPosts[this.allPosts.length - 1].post_id;
-        this.flagMoveY = false;
-        this.getUserPosts()
-    }
-
   }
 
 }

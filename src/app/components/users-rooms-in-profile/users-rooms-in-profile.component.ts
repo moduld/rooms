@@ -16,6 +16,7 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
   tree: any;
   allRooms: any[];
   routerSubscription: any;
+  show_loading: boolean;
 
   constructor(
               private requestService: RequestService,
@@ -24,6 +25,7 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
 
+    this.show_loading = false;
     this.routerSubscription = this.router.events.subscribe(event=>{
 
       if (event instanceof NavigationEnd ){
@@ -43,8 +45,10 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   getUserRooms(): void {
 
+    this.show_loading = true;
     this.requestService.getOnlyUsersRooms(this.user_id).subscribe(
         data=>{
+          this.show_loading = false;
           this.allRooms = data['rooms'];
         }, error => {
           this.error = error;

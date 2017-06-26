@@ -34,6 +34,15 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
     this.show_loading = true;
     this.currentUser = this.storeservice.getUserData();
 
+    this.exchangeService.srcrooReachEndEvent.subscribe(()=>{
+
+      if (this.flagMoveY){
+        this.users_offset = this.allUsers[this.allUsers.length - 1].user_id;
+        this.flagMoveY = false;
+        this.getUserFaves()
+      }
+    });
+
     this.routerSubscription = this.router.events.subscribe(event=>{
 
       if (event instanceof NavigationEnd ){
@@ -94,16 +103,6 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
             this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t this action'})}
       )
     }
-  }
-
-  onScrollRichTheEnd(event): void {
-
-    if (this.flagMoveY){
-      this.users_offset = this.allUsers[this.allUsers.length - 1].user_id;
-      this.flagMoveY = false;
-      this.getUserFaves()
-    }
-
   }
 
 }

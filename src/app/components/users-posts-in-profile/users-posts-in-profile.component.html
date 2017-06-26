@@ -1,4 +1,4 @@
-<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+<div class="main_container" >
 
   <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
     <div class="post_info">

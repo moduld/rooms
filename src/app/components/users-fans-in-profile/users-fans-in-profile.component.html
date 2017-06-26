@@ -1,4 +1,4 @@
-<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+<div class="main_container" >
 
     <div class="user_wrapp" *ngFor="let user of allUsers; let i = index">
      <span class="user_info" [routerLink]="['/about-user', user.user_id*22]">

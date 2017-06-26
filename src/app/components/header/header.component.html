@@ -1,4 +1,6 @@
-<header class="header" [ngClass]="{'hide_header': hide_header}">
+<input type="checkbox" id="header_opener" [(ngModel)]="header_opener_mod" (change)="addHeaderClass(header_opener_mod)" hidden>
+<!--[ngClass]="{'hide_header': hide_header}"-->
+<header class="header">
   <div class="main_container">
     <div class="logo" >
       <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
@@ -11,6 +13,7 @@
 
 
     <div class="icons_wrapper">
+      <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
       <div class="drop_down_container new_messages">
         <span class="icon-mail" [ngClass]="{'new_events': messages_quantity}" [routerLink]="'/user-dialogs'"></span>
 
@@ -98,5 +101,5 @@
       </div>
     </div>
   </div>
-  <div class="back_wrapp" ><span class="button_back icon-chevron-left" (click)="goBack()"></span></div>
+  <!--<div class="back_wrapp" ><span class="button_back icon-chevron-left" (click)="goBack()"></span></div>-->
 </header>

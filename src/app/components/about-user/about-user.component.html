@@ -1,6 +1,6 @@
 
 
-<div class="main_container">
+<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
 
   <div class="user_info_wrapp" *ngIf="currentUser">
     <div class="avatar_name_wrapp">
@@ -22,5 +22,5 @@
     <span class="tags" [routerLink]="'/about-user/' + user_id*22 + '/user-faves'" routerLinkActive="active">Favs ({{currentUser.faves_count}})</span>
   </div>
 
-</div>
   <router-outlet></router-outlet>
+</div>

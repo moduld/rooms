@@ -4,10 +4,11 @@
   background: $posts_background;
   color: $gray_text;
   @extend .flex-column;
-  margin-top: 60px;
 }
 .main_container{
-  margin-top: 35px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  margin-top: 60px;
 }
 .user_info_wrapp{
   @extend .flex-default;
@@ -15,6 +16,7 @@
   border-radius: 5px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   background: white;
+  margin-top: 35px;
 }
 .avatar_name_wrapp{
   @extend .flex-default;
@@ -100,8 +102,10 @@
 
 @media screen and (max-width: 1000px){
 
-  :host{
+  .main_container{
     margin-top: 117px;
+    height: calc(100vh - 117px);
+    overflow-y: auto;
   }
   .user_info_wrapp{
     flex-wrap: wrap;
@@ -125,9 +129,9 @@
 }
 
 @media screen and (max-width: 550px){
-  :host{
-    //margin-top: 144px;
+  .main_container{
     margin-top: 29px;
+    height: calc(100vh - 29px);
   }
   .user_info_wrapp{
     padding: 10px;

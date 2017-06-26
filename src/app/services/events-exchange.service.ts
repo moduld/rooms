@@ -12,6 +12,7 @@ export class EventsExchangeService {
   private dataChangedFromSettings = new Subject<any>();
   private showVisualMessageForUser = new Subject<any>();
   private urlChanged = new Subject<any>();
+  private srcrooReachEnd = new Subject<any>();
 
 
   makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
@@ -19,6 +20,7 @@ export class EventsExchangeService {
   dataChangedFromUserSettings = this.dataChangedFromSettings.asObservable();
   showMessageForUser = this.showVisualMessageForUser.asObservable();
   urlChangedEvent = this.urlChanged.asObservable();
+  srcrooReachEndEvent = this.srcrooReachEnd.asObservable();
 
 
   //event when user clicks search icon in search field in the header.
@@ -44,6 +46,10 @@ export class EventsExchangeService {
   //calls from app.component when url changed. need to close modals. used in all modals components
   pushEventUrlChanged(): void {
     this.urlChanged.next();
+  }
+  // to push event from parent component to component which output by router-outlet
+  pushEventUrlReachEnd(): void {
+    this.srcrooReachEnd.next();
   }
 
 }

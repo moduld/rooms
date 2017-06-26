@@ -2,8 +2,6 @@
   margin-top: 0;
 }
 .main_container{
-  max-height: 63vh;
-  overflow-y: auto;
   @extend .flex-between;
   flex-wrap: wrap;
 }

@@ -97,4 +97,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     !flag && this.router.navigate( ['user-dialogs', {user: this.currentUser.user_id*22}]);
   }
 
+  onScrollRichTheEnd(event): void {
+
+    console.log(event)
+    this.exchangeService.pushEventUrlReachEnd()
+
+  }
+
 }

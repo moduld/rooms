@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
@@ -31,11 +31,14 @@ export class HeaderComponent implements OnInit {
     hide_header: boolean;
     attendeds_links: string[];
     back_link: string;
+    header_opener_mod: boolean;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
         event.keyCode === 13 && this.doRoomSearch(this.room_search)
     }
+
+    @HostBinding('class') marginClass = '';
 
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
@@ -64,6 +67,7 @@ export class HeaderComponent implements OnInit {
           }
       })
   }
+
 
   parseUrl():void {
 
@@ -172,22 +176,27 @@ export class HeaderComponent implements OnInit {
 
     changeLinkState(path: any):void {
 
-        path != this.attendeds_links[this.attendeds_links.length - 1] && this.attendeds_links.push(path);
+        // path != this.attendeds_links[this.attendeds_links.length - 1] && this.attendeds_links.push(path);
 
         path === 'all-rooms'  ? this.for_active_class = true : this.for_active_class = false;
 
-        if(path === 'room' || path === 'about-user' || path === 'user-settings'){
-            this.hide_header = true;
-            this.back_link = this.attendeds_links[this.attendeds_links.length - 2] || 'all-rooms';
-
-        }else {
-            this.hide_header = false;
-        }
+        // if(path === 'room' || path === 'about-user' || path === 'user-settings'){
+        //     this.hide_header = true;
+        //     this.back_link = this.attendeds_links[this.attendeds_links.length - 2] || 'all-rooms';
+        //
+        // }else {
+        //     this.hide_header = false;
+        // }
     }
 
-    goBack():void {
+    // goBack():void {
+    //
+    //     this.router.navigateByUrl(this.back_link);
+    // }
 
-        this.router.navigateByUrl(this.back_link);
+    addHeaderClass(flag: boolean):void {
+
+      this.marginClass = flag ? 'opened': ''
     }
 
 }
