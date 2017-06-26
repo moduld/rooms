@@ -8,7 +8,7 @@
 .main_container{
   height: calc(100vh - 60px);
   overflow-y: auto;
-  margin-top: 60px;
+  transition: 0.5s;
 }
 .user_info_wrapp{
   @extend .flex-default;
@@ -103,7 +103,6 @@
 @media screen and (max-width: 1000px){
 
   .main_container{
-    margin-top: 117px;
     height: calc(100vh - 117px);
     overflow-y: auto;
   }
@@ -130,8 +129,8 @@
 
 @media screen and (max-width: 550px){
   .main_container{
-    margin-top: 29px;
-    height: calc(100vh - 29px);
+    margin-top: 0;
+    height: 100vh;
   }
   .user_info_wrapp{
     padding: 10px;

@@ -10,7 +10,7 @@
 }
 .component_wrapp{
   height: calc(100vh - 60px);
-  margin-top: 60px;
+  //margin-top: 60px;
   overflow-y: auto;
 }
 .main_container{
@@ -468,7 +468,7 @@
   }
   .component_wrapp{
     height: calc(100vh - 114px);
-    margin-top: 114px;
+    //margin-top: 114px;
   }
   .main_container{
     padding: 0 10px;
@@ -501,8 +501,11 @@
   .component_wrapp{
     //height: calc(100vh - 142px);
     //margin-top: 142px;
-    margin-top: 29px;
-    height: 100%;
+    //margin-top: 29px;
+    height:100vh;
+    //height: 100%;
+    margin-top: 0;
+    transition: 0.5s;
   }
   .filter_switcher{
     font-size: 12px;

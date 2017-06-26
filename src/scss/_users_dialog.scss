@@ -1,7 +1,6 @@
 :host{
   flex: 1;
   background: $line;
-  margin-top: 60px;
   font-family: $font_medium;
   width: 100%;
   @extend .flex-column;
@@ -114,9 +113,7 @@
 
 
 @media screen and (max-width: 1000px){
-  :host{
-    margin-top: 117px;
-  }
+
   .label_wrapp{
     position: relative;
     height: 0;
@@ -187,9 +184,7 @@
 }
 
 @media screen and (max-width: 550px){
-  :host{
-    margin-top: 144px;
-  }
+
   .aside{
     top: 178px;
   }

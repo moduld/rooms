@@ -385,7 +385,7 @@ margin-bottom: 60px;
 
     }
 .icon-menu{
-  transform: translateY(44px);
+  transform: translate3d(-75%, 44px, 0);
   background: white;
   border-radius: 0 0 5px 5px;
   border: 1px solid $border_menu;

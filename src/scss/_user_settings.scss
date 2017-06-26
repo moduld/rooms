@@ -1,7 +1,6 @@
 :host{
   flex: 1;
   background: $line;
-  margin-top: 60px;
   font-family: $font_medium;
   width: 100%;
 }
@@ -93,16 +92,12 @@
   font-family: $font_bold;
 }
 .main_field{
-  //flex: 1;
   @extend .flex-column;
   align-items: center;
   width: 100%;
 }
 
 @media screen and (max-width: 1000px){
-  :host{
-    margin-top: 117px;
-  }
   .main_container{
     flex-direction: column;
   }
@@ -112,9 +107,6 @@
 }
 
 @media screen and (max-width: 550px){
-  :host{
-    margin-top: 29px;
-  }
   .aside{
     top: 179px;
   }

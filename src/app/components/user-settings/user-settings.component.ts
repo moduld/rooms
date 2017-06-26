@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-user-settings',
@@ -7,11 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserSettingsComponent implements OnInit {
 
+  menu_state_toggle: boolean;
 
-  constructor() { }
+  constructor( private exchangeService: EventsExchangeService) {
+
+    exchangeService.urlChangedEvent.subscribe(
+        () => {
+          this.menu_state_toggle = false
+        });
+  }
 
   ngOnInit() {
 
+    window.innerWidth > 550 ? this.menu_state_toggle = true : false;
   }
 
 }

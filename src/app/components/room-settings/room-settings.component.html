@@ -1,6 +1,6 @@
 <div class="room_settings_header" *ngIf="currentRoom">{{currentRoom.room_details.room_name}}</div>
 <div class="main_container">
-    <input type="checkbox" id="navigation_menu_toggle" checked hidden>
+    <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
     <aside class="aside">
         <div class="label_wrapp">
             <label for="navigation_menu_toggle" class="show_menu_label icon-menu"></label>

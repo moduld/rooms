@@ -1,7 +1,6 @@
 :host{
   flex: 1;
   background: $line;
-  margin-top: 60px;
   font-family: $font_medium;
   width: 100%;
 }
@@ -132,19 +131,8 @@
 }
 
 @media screen and (max-width: 1000px){
-  :host{
-    margin-top: 114px;
-  }
   .main_container{
     flex-direction: column;
   }
-
-
 }
 
-@media screen and (max-width: 550px){
-  :host{
-    margin-top: 142px;
-  }
-
-}

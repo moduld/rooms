@@ -79,11 +79,25 @@ body.safari_browser{
     border-radius: 5px;
 }
 @media screen and (max-width: 550px){
+    app-header{
+        transition: 0.5s;
+
+    }
     .opened{
         margin-top: 143px;
-        transition: 0.5s;
     }
     .opened ~ app-all-rooms > .main_container{
         height: calc(100vh - 143px);
+    }
+
+    .opened ~ app-inside-room > .component_wrapp{
+        height: calc(100vh - 143px);
+    }
+
+    .opened ~ app-about-user > .main_container{
+        height: calc(100vh - 143px);
+    }
+    .opened ~ app-notifications > .notifications_wrapp{
+        height: calc(100vh - 213px);
     }
 }
