@@ -5,7 +5,8 @@
     <div class="rooms"  *ngFor="let room of allRooms; let i = index"
          [routerLink]="['/room', room.room.room_id*22]" [ngStyle]="{'background-color': room.room.color}">
 
-        <div class="image" [ngStyle]="{'background-image':'url(' + room.room.thumbnail + ')'}"></div>
+        <!--<div class="image" [ngStyle]="{'background-image':'url(' + room.room.thumbnail + ')'}"></div>-->
+        <img [src]="room.room.thumbnail || 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='" class="image" >
         <div class="room_info">
             <h4 class="room_name">{{room.room.room_name}}</h4>
             <span class="members icon-users">{{room.room.members_count}}</span>

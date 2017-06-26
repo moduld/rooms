@@ -7,12 +7,12 @@
     <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="Type here ..."></textarea>
 
     <div class="right_zone_wrapper" >
-      <div class="dropzone icon-clip" fileDrop (onFileDrop)="onFileDrop($event)">
-        <span class="drag_zone_text">Drag & Drop to Upload <br> or <br></span>
+      <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
         <label for="newpost_file" class="file_button">
           Click to upload the file
           <input type="file" name="files" id="newpost_file" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>
         </label>
+        <span class="drag_zone_text">Allowed file types: png, bmp, gif, jpg, jpeg, pdf, mp4, mp3, m4a, wav</span>
       </div>
       <div class="preview_wrapp">
        <span class="images" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}" [ngStyle]="{'background-image':'url(' + imgObj.img_src + ')'}">
@@ -22,5 +22,5 @@
     </div>
 
   </div>
-  <button type="submit" class="form_button" [disabled]="postEditForm.invalid">Edit post</button>
+  <button type="submit" class="form_button" [disabled]="postEditForm.invalid || disable_while_upload">Edit post</button>
 </form>

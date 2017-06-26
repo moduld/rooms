@@ -20,6 +20,7 @@ export class CreatePostComponent implements OnInit {
   dataToServer: any = {};
   textField: string;
   duration_model: number;
+  disable_while_upload: boolean;
   private file: File;
 
   @Input() wall_id;
@@ -58,7 +59,11 @@ export class CreatePostComponent implements OnInit {
 
     let settings = this.fileService.toNowFileInfo(data);
 
+    !settings && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'File format is not allowed'});
+
       settings && this.mediaToAppServer.push(settings);
+
+      settings ? this.disable_while_upload = true : '';
 
       settings && this.requestService.getLinkForFileUpload(settings).subscribe(
         data=>{
@@ -78,7 +83,8 @@ export class CreatePostComponent implements OnInit {
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           settings.uploaded = true;
-          data.typeForApp === 'image' ? settings.img_src = settings.multimedia : ''
+          data.typeForApp === 'image' ? settings.img_src = settings.multimedia : '';
+          this.disable_while_upload = false
         },
         error => {
           this.error = error;
@@ -89,13 +95,17 @@ export class CreatePostComponent implements OnInit {
 
   createNewPost(postForm: NgForm):void {
 
-    this.dataToServer.text = postForm.value.text;
+    this.dataToServer.text = postForm.value.text.trim();
     this.dataToServer.allow_comment_flag = this.allow_comment_flag;
 
     if (postForm.value.mod_type){
-      this.dataToServer.media = [];
-      for (let i = 0; i < this.mediaToAppServer.length; i++){
-        this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
+      if (this.dataToServer.text || this.mediaToAppServer.length){
+        this.dataToServer.media = [];
+        for (let i = 0; i < this.mediaToAppServer.length; i++){
+          this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
+        }
+      } else {
+        return
       }
     } else {
       this.dataToServer.poll = {};
@@ -106,6 +116,8 @@ export class CreatePostComponent implements OnInit {
       postForm.value.choice4 ? this.dataToServer.poll['choice4'] =  postForm.value.choice4 : '';
       this.dataToServer.poll['duration'] = postForm.value.duration;
     }
+
+    this.disable_while_upload = true;
 
     this.requestService.createNewPost(this.wall_id, this.room_id, this.dataToServer).subscribe(
         data=>{

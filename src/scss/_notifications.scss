@@ -18,18 +18,22 @@
   background: white;
   @extend .flex-center;
   color: $gray_text;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   margin: 0 10px;
   transition: 0.3s;
   cursor: pointer;
   &:hover{
     color: white;
     background: $blue;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+  &:active{
+    box-shadow: none;
   }
 }
 .active{
   background: $blue;
   color: white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .notifications_wrapp{
   width: 100%;
@@ -54,14 +58,7 @@
   &:first-child{
     margin-top: 30px;
   }
-  //&:hover{
-  //  background: $blue;
-  //  .name,
-  //  .date,
-  //  .text{
-  //    color: white;
-  //  }
-  //}
+
 }
 .avatar{
   display: block;

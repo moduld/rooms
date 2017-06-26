@@ -335,12 +335,17 @@
   width: 66px;
   border-radius: 50%;
   background: $blue;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   color: white;
   font-size: 30px;
   @extend .flex-center;
   cursor: pointer;
   z-index: 3;
+  &:hover{
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:active{
+    box-shadow: none;
+  }
 }
 .vote_items{
   display: block;

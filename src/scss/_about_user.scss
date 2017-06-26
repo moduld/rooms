@@ -60,9 +60,14 @@
   color: white;
   @extend .flex-center;
   font-size: 20px;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   background: $blue;
   cursor: pointer;
+  &:hover{
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+  &:active{
+    box-shadow: none;
+  }
   &:first-child{
     margin-bottom: 10px;
   }
@@ -81,18 +86,23 @@
   background: white;
   @extend .flex-center;
   color: $gray_text;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
   margin: 0 10px;
   transition: 0.3s;
   cursor: pointer;
   &:hover{
     color: white;
     background: $blue;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+
+  }
+  &:active{
+    box-shadow: none;
   }
 }
 .active{
   background: $blue;
   color: white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .disabled{
   background: $gray_text;

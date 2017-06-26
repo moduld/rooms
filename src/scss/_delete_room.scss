@@ -52,10 +52,15 @@
   text-align: center;
   padding: 10px 45px;
   border-radius: 27px;
-  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
   margin: 0 5px;
   cursor: pointer;
   display: block;
+  &:hover{
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:active{
+    box-shadow: none;
+  }
 }
 
 .input_wrapp{

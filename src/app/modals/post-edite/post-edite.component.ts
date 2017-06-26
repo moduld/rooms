@@ -19,6 +19,7 @@ export class PostEditeComponent implements OnInit{
   mediaToAppServer: any[] = [];
   dataToServer: any = {};
   textField: string;
+  disable_while_upload: boolean;
   private file: File;
 
   @Input() post;
@@ -64,7 +65,11 @@ export class PostEditeComponent implements OnInit{
 
     let settings = this.fileService.toNowFileInfo(data);
 
+    !settings && this.exchangeService.doShowVisualMessageForUser({success:false, message: 'File format is not allowed'});
+
     settings && this.mediaToAppServer.push(settings);
+
+    settings ? this.disable_while_upload = true : '';
 
     settings && this.requestService.getLinkForFileUpload(settings).subscribe(
         data=>{
@@ -84,7 +89,8 @@ export class PostEditeComponent implements OnInit{
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           settings.uploaded = true;
-          data.typeForApp === 'image' ? settings.img_src = settings.multimedia : ''
+          data.typeForApp === 'image' ? settings.img_src = settings.multimedia : '';
+          this.disable_while_upload = false
         },
         error => {
           this.error = error;
@@ -95,12 +101,17 @@ export class PostEditeComponent implements OnInit{
 
   editThisPost(postForm: NgForm):void {
 
-    this.dataToServer.text = postForm.value.text;
-    this.dataToServer.media = [];
+    this.dataToServer.text = postForm.value.text.trim();
 
-    for (let i = 0; i < this.mediaToAppServer.length; i++){
-      this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
+    if (this.dataToServer.text || this.mediaToAppServer.length){
+      this.dataToServer.media = [];
+      for (let i = 0; i < this.mediaToAppServer.length; i++){
+        this.dataToServer.media.push({type: this.mediaToAppServer[i]['typeForApp'], multimedia: this.mediaToAppServer[i]['multimedia']})
+      }
+    } else {
+      return
     }
+
     this.dataToServer.post_id = this.post.post_id;
 
     this.requestService.editePost(this.dataToServer).subscribe(
