@@ -9,9 +9,9 @@
           <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
-                    <span class="name">{{post.owner.user_name}}</span>
+                    <span class="name">{{post.owner.user_name}} <br><span>@{{post.owner.display_name}}</span></span>
                 </span>
-              <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+              <span class="date">{{post.created_at * 1000 | date: 'h:mm a - dd MMM y'}}</span>
           </div>
           <div class="post_body" >
               <p class="post_text">{{post.text}}</p>

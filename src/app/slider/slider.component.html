@@ -5,16 +5,17 @@
     <div class="picture audio" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'audio'">
       <audio [src]="content.multimedia" controls type="audio/*" class="picture audio"  ></audio>
     </div>
-    <div class="picture pdf"  *ngIf="content.type === 'pdf'">
-      <div class="zoom_control">
-        <span class="zoom_items controls" (click)="changeZoom(true)">+</span>
-        <span class="zoom_items">{{zoom_value}}</span>
-        <span class="zoom_items controls" (click)="changeZoom(false)">-</span>
-      </div>
-      <a [href]="content.multimedia" class="download_link icon-download" download></a>
-      <div class="pdf_wrapp">
-        <pdf-viewer [src]="content.multimedia" class="pdf_viewer" [zoom]="zoom_value" [original-size]="true" [show-all]="true" ></pdf-viewer>
-      </div>
-    </div>
+    <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'pdf'"></span>
+    <!--<div class="picture pdf"  *ngIf="content.type === 'pdf'">-->
+      <!--<div class="zoom_control">-->
+        <!--<span class="zoom_items controls" (click)="changeZoom(true)">+</span>-->
+        <!--<span class="zoom_items">{{zoom_value}}</span>-->
+        <!--<span class="zoom_items controls" (click)="changeZoom(false)">-</span>-->
+      <!--</div>-->
+      <!--<a [href]="content.multimedia" class="download_link icon-download" download></a>-->
+      <!--<div class="pdf_wrapp">-->
+        <!--<pdf-viewer [src]="content.multimedia" class="pdf_viewer" [zoom]="zoom_value" [original-size]="true" [show-all]="true" ></pdf-viewer>-->
+      <!--</div>-->
+    <!--</div>-->
   </ng-template>
 </ngb-carousel>

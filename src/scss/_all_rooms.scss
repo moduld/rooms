@@ -14,26 +14,32 @@
     padding-bottom: 20px;
   }
   .rooms{
-    height: 385px;
+    height: 255px;
     width: 255px;
     border-radius: 5px;
     margin: 30px 10px 0;
     box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    @extend .flex-column;
+      background-color: transparent;
+      background-size: cover;
   }
-  .image{
-    height: 255px;
-    width: 100%;
-    border-radius: 5px 5px 0 0;
-    @extend .backgr-center;
-    background-color: transparent;
-    background-size: cover;
-  }
+  //.image{
+  //  height: 255px;
+  //  width: 100%;
+  //  border-radius: 5px 5px 0 0;
+  //  @extend .backgr-center;
+  //  background-color: transparent;
+  //  background-size: cover;
+  //}
   .room_info{
     padding: 15px;
     color: white;
-    @extend .flex-column;
+    //@extend .flex-column;
     font-size: 14px;
+    background: black;
+    @extend .flex-default;
+    border-radius: 0 0 5px 5px;
   }
   .room_name{
     font-size: 20px;
@@ -41,60 +47,29 @@
     white-space: nowrap;
     overflow: hidden;
     font-family: $font_lato;
+    padding: 10px 8px;
+    width: 100%;
+    margin-top: auto;
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
   }
   .views,
   .members{
-    margin-top: 18px;
     @extend .flex-center;
     justify-content: flex-start;
     &:before{
       color: $gray_text;
-      margin-right: 8px;
+      margin-right: 5px;
       font-size: 16px;
     }
   }
 .views{
+  margin-left: 15px;
   &:before{
     font-size: 20px;
 }
 }
-  .line{
-    padding: 0 15px;
-    width: 100%;
-    display: block;
-    &:before{
-      content: '';
-      border-top: 1px solid white;
-      display: block;
-    }
-  }
-  .room_footer{
-    height: 40px;
-    @extend .flex-center;
-  }
-  .dots{
-    border-color: white;
-  }
-  
-  .new_room{
-    background: white;
-    @extend .flex-column;
-    .image{
-      height: 236px;
-      width: 225px;
-      margin: 15px;
-      border-radius: 5px;
 
-    }
-    .room_info{
-      flex: auto;
-      @extend .flex-center;
-    }
-    .room_name{
-      color: $blue;
-      text-transform: uppercase;
-    }
-  }
 .add_post{
   position: fixed;
   bottom: 30px;

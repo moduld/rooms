@@ -1,14 +1,13 @@
 <div class="main_container" >
 
-<div class="rooms"  *ngFor="let room of allRooms; let i = index"
-     [routerLink]="['/room', room.room.room_id*22]" [ngStyle]="{'background-color': room.room.color}">
+  <div class="rooms"  *ngFor="let room of allRooms; let i = index"
+       [routerLink]="['/room', room.room.room_id*22]" [ngStyle]="{'background-color': room.room.color, 'background-image':'url(' + room.room.thumbnail + ')'}">
 
-  <div class="image" [ngStyle]="{'background-image':'url(' + room.room.thumbnail + ')'}"></div>
-  <div class="room_info">
     <h4 class="room_name">{{room.room.room_name}}</h4>
-    <span class="members icon-users">{{room.room.members_count}} members</span>
-    <span class="views icon-eye">{{room.room.visits_count}} views</span>
+    <div class="room_info">
+      <span class="members icon-users">{{room.room.members_count}}</span>
+      <span class="views icon-eye">{{room.room.visits_count}}</span>
+    </div>
   </div>
-</div>
   <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
 </div>

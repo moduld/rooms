@@ -14,13 +14,13 @@ $gray_background: #dee2e6;
 $green: green;
 $poll_background: #c5e1e6;
 $border_menu: #e6ecf0;
-$my_message: #b1f0ff;
+$my_message: #d3f7ff;
 
 $font_regular: Regular, sans-serif;
 $font_medium: Medium, sans-serif;
 $font_bold: Bold, sans-serif;
 $font_lato: LatoRegular, sans-serif;
-$font_lora: LoraRegular, sans-serif;
+$font_lora: LoraRegular, serif;
 
 *{
   margin: 0;
@@ -216,13 +216,7 @@ $font_lora: LoraRegular, sans-serif;
   100% { opacity: 0; }
 }
 
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,.3);
-}
+
 
 @media screen and (max-width: 1190px){
   .main_container{

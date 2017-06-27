@@ -8,7 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
-import { PdfViewerComponent } from 'ng2-pdf-viewer';
+// import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import {ImageCropperModule} from 'ng2-img-cropper/index';
 
@@ -58,6 +58,7 @@ import { ErrorShowService } from './services/error-show.service';
 import { FileInfoService } from './services/file-info.service';
 import { AddRequiredInfoService } from './services/add-required-info.service';
 import { SafariErrorsFixService } from './services/safari-errors-fix.service';
+import { ScrollToTopService } from './services/scroll-to-top.service';
 import { UploadFilesService } from './services/upload-files.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
@@ -146,7 +147,7 @@ let appRoutes: Routes =[
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
     NotificationsSettingsComponent,
-    PdfViewerComponent,
+    // PdfViewerComponent,
     PollTimeLeftPipe
   ],
   imports: [
@@ -170,7 +171,9 @@ let appRoutes: Routes =[
     AddRequiredInfoService,
     CanActivateRoomSettingsChildsComponent,
     SafariErrorsFixService,
-    UploadFilesService
+    UploadFilesService,
+    ScrollToTopService
+
   ],
   entryComponents: [
     CreatePostComponent,

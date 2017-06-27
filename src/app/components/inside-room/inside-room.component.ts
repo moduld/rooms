@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+
 import { Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -12,6 +13,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
+import { ScrollToTopService } from '../../services/scroll-to-top.service';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
 import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
@@ -44,6 +46,8 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     filter_switcher: string;
     posts_search: string;
     show_hide_toggle:boolean;
+    show_to_top:boolean;
+    @ViewChild('scrollArea') scrollArea;
 
   constructor(private activateRoute: ActivatedRoute,
               private requestService: RequestService,
@@ -51,7 +55,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
               private storeservice: UserStoreService,
               private modalService: NgbModal,
               private router: Router,
-                private safariService: SafariErrorsFixService){
+                private safariService: SafariErrorsFixService,
+                 private scrollToTop: ScrollToTopService){
+
+
   }
 
   ngOnDestroy(){
@@ -387,5 +394,16 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             this.flagMoveY = false;
             this.getPosts()
         }
+    }
+
+    onScrollAction(event:any):void {
+
+        this.show_to_top = event
+    }
+
+    scrollToTopFunction():void {
+
+        this.scrollToTop.scrollMethod(this.scrollArea.nativeElement, 0, 100);
+        this.show_to_top = false;
     }
 }

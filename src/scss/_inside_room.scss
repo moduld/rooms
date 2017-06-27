@@ -12,6 +12,7 @@
   height: calc(100vh - 60px);
   //margin-top: 60px;
   overflow-y: auto;
+  transition: 0.5s;
 }
 .main_container{
   @extend .flex-between;
@@ -173,8 +174,10 @@
   width: 100%;
   padding: 10px;
 }
+.name,
 .date{
   font-size: 14px;
+  font-family: $font_regular;
 }
 .post_body{
   width: 100%;
@@ -196,11 +199,15 @@
 .post_text{
   background: white;
   color: $dark_text;
-  font-family: $font_regular;
-  font-size: 16px;
+  font-family: $font_lora;
+  font-size: 18px;
   line-height: 21px;
   overflow: hidden;
   max-height: 82px;
+  text-overflow: ellipsis;
+}
+.no_media_in_post{
+  max-height: none;
 }
 
 .line{
@@ -229,6 +236,7 @@
   flex: auto;
   background: 50% no-repeat;
   background-size: cover;
+  border: 1px solid $border_menu;
   &:first-child{
     margin-left: 0;
   }
@@ -327,6 +335,7 @@
     color: $red;
   }
 }
+.to_top,
 .add_post{
   position: fixed;
   bottom: 65px;
@@ -345,6 +354,22 @@
   }
   &:active{
     box-shadow: none;
+  }
+}
+.to_top{
+  right: auto;
+  left: 25px;
+  height: 40px;
+  width: 40px;
+  &:before{
+    content: '';
+    width: 15px;
+    height: 15px;
+    display: block;
+    transform: rotate(45deg);
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    margin-bottom: -5px;
   }
 }
 .vote_items{
@@ -502,6 +527,13 @@
   }
   .main_container{
     //max-height: calc(100vh - 182px);
+    .name,
+    .date{
+      font-size: 12px;
+    }
+    .date{
+      max-width: 75px;
+    }
   }
   .component_wrapp{
     //height: calc(100vh - 142px);

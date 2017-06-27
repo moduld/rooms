@@ -23,7 +23,7 @@ export class RequestService  {
   userId: any = '';
   token: string = '';
   roomId: any;
-  headers: Headers = new Headers({ 'Content-Type': 'application/json'});
+  headers: Headers = new Headers({ 'Content-Type': 'application/json', 'AppKey': 'abcd1234', 'AppVersion': 'Tifo 1.0', 'x-public': 'Angular', 'OS': 'NodeJs'});
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
   // this method runs from app.component onInit, and from logIn and registration methods in this service
@@ -345,6 +345,8 @@ export class RequestService  {
 
   registration(user_data: any) : Observable<UserInfo> {
 
+    this.addTimeToHeaders();
+
     return this.http.post(this.commonLink + 'user/register', JSON.stringify(user_data) , this.options).map((resp:Response)=>{
       this.storeservice.saveUserData(resp.json());
       this.addRequiredDataToTheService();
@@ -355,6 +357,8 @@ export class RequestService  {
 
   logIn(user_data: any) : Observable<UserInfo> {
 
+    this.addTimeToHeaders();
+
     return this.http.post(this.commonLink + 'user/login', JSON.stringify(user_data) , this.options).map((resp:Response)=>{
       this.storeservice.saveUserData(resp.json());
       this.addRequiredDataToTheService();
@@ -364,6 +368,8 @@ export class RequestService  {
   }
 
   logOut() : Observable<any> {
+
+    this.addTimeToHeaders();
 
     return this.http.get(this.commonLink + 'user/logout', this.options).map((resp:Response)=>{
       this.headers.delete('Authorization');
@@ -842,6 +848,8 @@ export class RequestService  {
 
   makePostRequest(data: any): Observable<any> {
 
+    this.addTimeToHeaders();
+
     return this.http.post(this.commonLink + data.apiLink, JSON.stringify(data.sendData), this.options).map((resp:Response)=>{
 
       return resp.json();
@@ -851,6 +859,8 @@ export class RequestService  {
 
   makeGetRequest(data: any): Observable<any> {
 
+    this.addTimeToHeaders();
+
     return this.http.get(this.commonLink + data.apiLink, {headers: this.headers, search: data.params})
         .map((resp:Response)=>{
       return resp.json();
@@ -858,6 +868,13 @@ export class RequestService  {
         .catch((error: any)=>{
       return Observable.throw(error);
     });
+  }
+
+  addTimeToHeaders(): void {
+
+    this.headers.delete('x-time');
+    let time = (new Date().getTime()/1000).toFixed(0);
+    this.headers.append('x-time', time);
   }
 
 

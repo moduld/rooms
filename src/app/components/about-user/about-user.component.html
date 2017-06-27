@@ -9,9 +9,10 @@
     </div>
     <p class="about_user">{{currentUser.about}}</p>
     <div class="buttons_wrapp">
-      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave, 'disabled': currentUser.is_myne}" (click)="faveAndUnfave(currentUser.is_myne)"></span>
+      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave}" (click)="faveAndUnfave(currentUser.is_myne)" *ngIf="!currentUser.is_myne"></span>
+      <span class="button icon-gear" [routerLink]="'/user-settings'"   *ngIf="currentUser.is_myne"></span>
       <span class="button icon-comments" (click)="goToPrivateDialog(currentUser.is_myne || !currentUser.msg_from_anyone && !currentUser.is_fan)"
-            [ngClass]="{'disabled': currentUser.is_myne || !currentUser.msg_from_anyone && !currentUser.is_fan}"></span>
+            [ngClass]="{'disabled': !currentUser.msg_from_anyone && !currentUser.is_fan}" *ngIf="!currentUser.is_myne"></span>
     </div>
   </div>
 
