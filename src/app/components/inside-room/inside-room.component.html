@@ -71,7 +71,7 @@
 
             <div class="vote_info_wrapp"  *ngIf="post.poll">
                 <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
-                <span class="icon-calendar">{{daysLeftConvert(post)}}</span>
+                <span class="icon-calendar">{{post | pollTimeLeft}}</span>
             </div>
 
 

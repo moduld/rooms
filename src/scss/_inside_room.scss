@@ -97,9 +97,9 @@
   display: block;
   text-align: center;
   width: 100%;
-  font-size: 25px;
+  font-size: 20px;
   color: white;
-  font-family: $font_bold;
+  font-family: $font_lato;
 }
 .room_tags{
   width: 100%;
@@ -118,15 +118,15 @@
 
 }
 .room_tag{
-  font-size: 15px;
   color: $gray_text;
-  font-family: $font_bold;
+  font-family: $font_lato;
   padding: 8px 0;
   margin:0 10px;
   cursor: pointer;
   transition: 0.3s;
   border-bottom: 2px solid transparent;
   text-transform: uppercase;
+  font-size: 15px;
   &:hover{
     color: $blue;
     border-bottom: 2px solid $blue;

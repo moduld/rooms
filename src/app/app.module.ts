@@ -64,6 +64,7 @@ import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
 
 import { NameFilterPipe } from './pipes/name-filter.pipe';
+import { PollTimeLeftPipe } from './pipes/poll-time-left.pipe';
 import { SliderComponent } from './slider/slider.component';
 
 let roomSettingsRoutes: Routes = [
@@ -145,7 +146,8 @@ let appRoutes: Routes =[
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
     NotificationsSettingsComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    PollTimeLeftPipe
   ],
   imports: [
     BrowserModule,

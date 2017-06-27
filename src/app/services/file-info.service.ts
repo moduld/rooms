@@ -8,6 +8,7 @@ export class FileInfoService {
   //used in components where need to attach some files to upload
   toNowFileInfo (file: any, place?:string): any {
 
+    console.log(file)
     if (file.type){
       let resultObject = new Object;
       if (file.type === "application/pdf"){

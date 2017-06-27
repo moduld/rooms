@@ -365,11 +365,6 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     }
 
-    daysLeftConvert(post: any): any {
-
-    return post.poll.time_left ? (Math.floor(post.poll.time_left*1000/86400000) + 1) + 'days left' : 'Voting closed';
-    }
-
     doFilteringResults(value: string):void {
 
       this.filter_switcher = value;

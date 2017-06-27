@@ -1,6 +1,6 @@
 <ngb-carousel #carousel>
   <ng-template ngbSlide *ngFor="let content of contentArray">
-    <span class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'image'"></span>
+    <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'image'"></span>
     <video [src]="content.multimedia" controls type="video/*" class="picture video" [poster]="content.thumbnail" *ngIf="content.type === 'video'"></video>
     <div class="picture audio" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'audio'">
       <audio [src]="content.multimedia" controls type="audio/*" class="picture audio"  ></audio>
