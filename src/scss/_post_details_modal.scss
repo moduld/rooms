@@ -5,7 +5,7 @@
   border-radius: 5px;
   background: white;
   position: relative;
-  padding: 30px 0 30px 22px;
+  padding: 30px 40px 30px 55px;
   @extend .flex-default;
   color: $gray_text;
   font-family: $font_medium;
@@ -33,11 +33,13 @@
   height: calc(100% - 50px);
   padding-bottom: 20px;
   word-wrap: break-word;
+  padding-right: 15px;
 }
 .post_content{
   flex: 1;
   position: relative;
   height: 100%;
+  margin-right: -15px;
 }
 .name{
   color: $dark_text;
