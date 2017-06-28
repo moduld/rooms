@@ -36,6 +36,7 @@ export class PostDetailsComponent implements OnInit {
     comments: any[];
     show_loading: boolean;
     loaded_image_url: string = '';
+    disable_submit_button:boolean;
 
   constructor(public activeModal: NgbActiveModal,
               private fileService: FileInfoService,
@@ -82,6 +83,7 @@ export class PostDetailsComponent implements OnInit {
 
   fileDropped(event: any): void {
 
+      this.disable_submit_button = true;
     this.mediaToAppServer = this.fileService.toNowFileInfo(event.srcElement.files[0]);
 
     if (this.mediaToAppServer.typeForApp === 'image' || this.mediaToAppServer.typeForApp === 'audio'){
@@ -95,6 +97,7 @@ export class PostDetailsComponent implements OnInit {
           error => {
               this.error = error;
               console.log(error);
+              this.disable_submit_button = false;
               this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
       );
     }
@@ -105,6 +108,7 @@ export class PostDetailsComponent implements OnInit {
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           this.inProcess = false;
+            this.disable_submit_button = false;
             if (data.typeForApp === 'image'){
                 this.loaded_image_url = data.multimedia
             }
@@ -112,6 +116,7 @@ export class PostDetailsComponent implements OnInit {
         error => {
             this.error = error;
             console.log(error);
+            this.disable_submit_button = false;
             this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
     );
   }
@@ -120,6 +125,7 @@ export class PostDetailsComponent implements OnInit {
 
     let text = commentForm.value.text.trim();
     if (text || this.mediaToAppServer){
+        this.disable_submit_button = true;
       this.dataToServer.post = this.post;
       this.dataToServer.text = text;
         if (this.mediaToAppServer){
@@ -138,11 +144,13 @@ export class PostDetailsComponent implements OnInit {
                 this.comments_sort_type = 'date_newer';
                 this.comments = [];
                 this.getComments();
-                this.loaded_image_url = ''
+                this.loaded_image_url = '';
+                this.disable_submit_button = false;
             },
             error => {
                 this.error = error;
                 console.log(error);
+                this.disable_submit_button = false;
                 this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new comment'})}
         );
 
@@ -339,10 +347,14 @@ export class PostDetailsComponent implements OnInit {
       return result
     }
 
-    daysLeftConvert(post: any): any {
+    openImageLink(content: any):void {
 
-        return post.poll.time_left ? (Math.floor(post.poll.time_left*1000/86400000) + 1) + 'days left' : 'Voting closed';
-
+        let newWidth = Math.round(window.innerWidth * 0.75);
+        let newHeight = Math.round(window.innerHeight * 0.75);
+        let leftPosition = Math.round(window.innerHeight * 0.125);
+        let topPosition = Math.round(window.innerHeight * 0.125);
+        let concat = 'width=' + newWidth + ',' + 'height=' + newHeight + ',' + 'left=' + leftPosition + ',' + 'top=' + topPosition;
+        window.open(content.multimedia, "fullscreen=no",  concat)
     }
 
 }

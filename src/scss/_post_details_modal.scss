@@ -31,15 +31,16 @@
 .scrollable_part{
   overflow-y: auto;
   //padding-right: 30px;
-  height: calc(100% - 50px);
+  height: calc(100% - 125px);
   padding-bottom: 20px;
   word-wrap: break-word;
   padding-right: 95px;
 }
 .post_content{
-  flex: 1;
+  flex: 1.2;
   position: relative;
   height: 100%;
+  width: 100%;
 }
 .post_info{
   flex-wrap: wrap;
@@ -66,6 +67,7 @@
 .date{
   font-size: 14px;
   font-family: $font_regular;
+  text-align: right;
 }
 
 .post_body{
@@ -317,6 +319,7 @@ margin-top: 5px;
 .comment_text{
   color: $dark_text;
   font-size: 13px;
+  white-space: pre-line;
 }
 .picture{
   display: block;
@@ -324,7 +327,7 @@ margin-top: 5px;
   background-size: contain;
   margin-top: 10px;
   @extend .backgr-center;
-
+  border: 1px solid $border_menu;
 }
 .loading{
   padding: 30px;
@@ -389,6 +392,9 @@ margin-top: 5px;
   .post_info{
     border-top: 1px solid $line;
   }
+  .comments_not_allowed{
+    padding-right: 0;
+  }
 }
 
 @media screen and (max-width: 550px){
@@ -398,9 +404,7 @@ margin-top: 5px;
     .date{
       font-size: 12px;
     }
-    .date{
-      max-width: 75px;
-    }
+
   }
 
 

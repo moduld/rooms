@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
-        event.keyCode === 13 && this.doRoomSearch(this.room_search)
+        event.keyCode === 13 && this.room_search && this.doRoomSearch(this.room_search)
     }
 
     @HostBinding('class') marginClass = '';

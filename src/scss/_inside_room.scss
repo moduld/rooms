@@ -179,6 +179,9 @@
   font-size: 14px;
   font-family: $font_regular;
 }
+.date{
+  text-align: right;
+}
 .post_body{
   width: 100%;
   padding: 10px;
@@ -532,9 +535,6 @@
     .name,
     .date{
       font-size: 12px;
-    }
-    .date{
-      max-width: 75px;
     }
   }
   .component_wrapp{

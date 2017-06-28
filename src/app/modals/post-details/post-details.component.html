@@ -8,9 +8,9 @@
       <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
-                    <span class="name">{{post.owner.user_name}} <br><span>@{{post.owner.display_name}}</span></span>
+                    <span class="name">{{post.owner.display_name}} <br><span>@{{post.owner.user_name}}</span></span>
                 </span>
-          <span class="date">{{post.created_at * 1000 | date: 'h:mm a - dd MMM y'}}</span>
+          <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | date: 'h:mm a'}}</span></span>
       </div>
       <div class="scrollable_part"  appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
           <div class="post_body" >
@@ -88,7 +88,7 @@
               </div>
               <div class="comment_body">
                   <p class="comment_text">{{comment.text}}</p>
-                  <a [href]="comment.media.multimedia" target="_blank" class="picture" *ngIf="comment.has_media_flag" [ngStyle]="{'background-image':'url(' + comment.media.thumbnail + ')' }"></a>
+                  <span (click)="openImageLink(comment.media)"  class="picture" *ngIf="comment.has_media_flag" [ngStyle]="{'background-image':'url(' + comment.media.thumbnail + ')' }"></span>
               </div>
               <div class="comment_footer">
                   <div class="icons_wrapper">
@@ -169,7 +169,7 @@
               <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
                   <label for="comment_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
               </div>
-              <button type="submit" class="send_button icon-plane"></button>
+              <button type="submit" [disabled]="disable_submit_button" class="send_button icon-plane"></button>
           </div>
       </form>
       <p class="comments_not_allowed" *ngIf="!post.allow_comment_flag || !walls.member || walls.banned">{{!post.allow_comment_flag ? 'Comments are disabled' : "You can't comment"}}</p>

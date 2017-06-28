@@ -44,8 +44,9 @@ export class SliderComponent implements OnInit {
 
     let newWidth = Math.round(window.innerWidth * 0.75);
     let newHeight = Math.round(window.innerHeight * 0.75);
-    let concat = 'width=' + newWidth + ',' + 'height=' + newHeight;
-    console.log(concat)
+    let leftPosition = Math.round(window.innerHeight * 0.125);
+    let topPosition = Math.round(window.innerHeight * 0.125);
+    let concat = 'width=' + newWidth + ',' + 'height=' + newHeight + ',' + 'left=' + leftPosition + ',' + 'top=' + topPosition;
     window.open(content.multimedia, "fullscreen=no",  concat)
   }
 
