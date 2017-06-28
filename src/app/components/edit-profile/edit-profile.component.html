@@ -1,9 +1,19 @@
 <form action="#" class="form_wrapper" #editProfileForm="ngForm" (submit)="editUserProfile(editProfileForm)">
 
-  <div class="left_zone_wrapper" [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">
-    <label for="input_file" class="add_photo_button">Click to change photo</label>
-    <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
+  <div class="image_cropper_wrapp">
+    <img-cropper #cropper [image]="added_image" [settings]="cropperSettings"></img-cropper>
+    <img [src]="added_image.image" #previewImg class="image_preview"  *ngIf="added_image.image" >
+    <label for="input_file" class="room_thumbnail icon-image" [ngClass]="{'image_dropped': image_dropped}">
+      <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
+    </label>
   </div>
+
+
+
+  <!--<div class="left_zone_wrapper" [ngStyle]="{'background-image': 'url(' + imagePreview + ')'}">-->
+    <!--<label for="input_file" class="add_photo_button">Click to change photo</label>-->
+    <!--<input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>-->
+  <!--</div>-->
 
 
     <div class="right_zone_wrapper">
@@ -14,13 +24,13 @@
       </span>
       <span class="input_wrapp with_margin">
         Displayed Username:
-        <input type="text" class="input_field" placeholder="Enter your nick name" name="display_name" [ngModel]="userDisplayedName"  minlength="3" maxlength="250" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
+        <input type="text" class="input_field" placeholder="Enter your nick name" name="display_name" [ngModel]="userDisplayedName"  minlength="0" maxlength="20">
         <span class="mistake">Wrong name format</span>
       </span>
 
       <div class="input_wrapp with_margin">
         About me:
-        <textarea  class="input_field room_description" placeholder="Enter some info about yourself" [ngModel]="aboutUser" name="about" ></textarea>
+        <textarea  class="input_field room_description" placeholder="Enter some info about yourself" [ngModel]="aboutUser" name="about" maxlength="250"></textarea>
       </div>
 
       <div class="input_wrapp with_margin">
@@ -32,7 +42,7 @@
         </div>
       </div>
 
-      <button type="submit" class="form_button" [disabled]="editProfileForm.invalid">Save</button>
+      <button type="submit" class="form_button" [disabled]="editProfileForm.invalid || button_disabled">Save</button>
 
     </div>
 

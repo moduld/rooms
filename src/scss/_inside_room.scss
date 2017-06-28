@@ -186,6 +186,7 @@
   border-radius: 10px 10px 0 0;
   flex: auto;
   @extend .flex-column;
+  height: 100%;
 }
 .post_img{
   max-height: 250px;
@@ -205,6 +206,7 @@
   overflow: hidden;
   max-height: 82px;
   text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 .no_media_in_post{
   max-height: none;

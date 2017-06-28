@@ -5,7 +5,7 @@
   border-radius: 5px;
   background: white;
   position: relative;
-  padding: 30px 40px 30px 55px;
+  padding: 30px 30px 30px 110px;
   @extend .flex-default;
   color: $gray_text;
   font-family: $font_medium;
@@ -26,6 +26,7 @@
 .slider_container{
   width: 545px;
   padding-right: 30px;
+  flex: 1;
 }
 .scrollable_part{
   overflow-y: auto;
@@ -33,14 +34,24 @@
   height: calc(100% - 50px);
   padding-bottom: 20px;
   word-wrap: break-word;
-  padding-right: 15px;
+  padding-right: 95px;
 }
 .post_content{
   flex: 1;
   position: relative;
   height: 100%;
-  margin-right: -15px;
 }
+.post_info{
+  flex-wrap: wrap;
+
+}
+.user_info{
+  .avatar{
+    width: 45px;
+    height: 45px;
+  }
+}
+
 .name{
   color: $dark_text;
   font-family: $font_regular;
@@ -205,6 +216,7 @@ margin-top: 5px;
   color: $dark_text;
   font-size: 18px;
   @extend .flex-center;
+  padding-right: 95px;
 }
 .new_comment_wrapp{
   position: absolute;
@@ -213,6 +225,7 @@ margin-top: 5px;
   width: 100%;
   @extend .flex-default;
   flex-wrap: wrap;
+  padding-right: 17px;
   &:before{
     content: '';
     display: block;
@@ -359,6 +372,10 @@ margin-top: 5px;
   .modal_wrapper{
     flex-direction: column;
     height: auto;
+    padding: 30px;
+  }
+  .scrollable_part{
+    padding-right: 15px;
   }
   .slider_container{
     width: 100%;

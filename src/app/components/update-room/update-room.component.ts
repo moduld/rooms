@@ -50,8 +50,8 @@ export class UpdateRoomComponent implements OnInit {
       this.cropperSettings.noFileInput = true;
       this.cropperSettings.width = 255;
       this.cropperSettings.height = 255;
-      this.cropperSettings.minWidth = 255;
-      this.cropperSettings.minHeight = 255;
+      // this.cropperSettings.minWidth = 255;
+      // this.cropperSettings.minHeight = 255;
       this.cropperSettings.minWithRelativeToResolution = true;
       this.cropperSettings.fileType = 'image/jpeg';
       this.cropperSettings.preserveSize = true;
