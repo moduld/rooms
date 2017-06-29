@@ -2,4 +2,36 @@
 @import '../scss/base';
 @import '../scss/footer';
 
+.avatar{
+  background-image: url("../img/avatar.png");
+}
+.icon-image-not-font{
+  &:before{
+    content: '';
+    display: block;
+    background-image: url("../img/tifos_audio_icon.png");
+  }
+}
+.icon-pdf-not-font{
+  &:before{
+    content: '';
+    display: block;
+    background-image: url("../img/tifos_pdf_icon.png");
+  }
+}
+.icon-audio-not-font{
+  &:before{
+    content: '';
+    display: block;
+    background-image: url("../img/tifos_audio_icon.png");
+  }
+}
+.icon-video-not-font{
+  &:before{
+    content: '';
+    display: block;
+    background-image: url("../img/tifos_video_icon.png");
+  }
+}
+
 

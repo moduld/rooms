@@ -97,7 +97,9 @@ export class UpdateRoomComponent implements OnInit {
         }
     }
 
-    updateTheRoom(roomForm: NgForm):void {
+    updateTheRoom(roomForm: NgForm, event: Event):void {
+
+      event.preventDefault();
 
         if (this.image_dropped){
             this.subscription = this.fileUpload.pushResolve.subscribe(result=>{

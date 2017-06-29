@@ -82,7 +82,9 @@ export class CreateRoomComponent implements OnInit {
         myReader.readAsDataURL(file);
   }
 
-  createNewRoom(roomForm: NgForm, event: any):void {
+  createNewRoom(roomForm: NgForm, event: Event):void {
+
+      event.preventDefault();
 
       if (this.image_dropped){
           this.subscription = this.fileUpload.pushResolve.subscribe(result=>{

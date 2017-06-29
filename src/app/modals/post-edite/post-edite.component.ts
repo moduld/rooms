@@ -99,7 +99,9 @@ export class PostEditeComponent implements OnInit{
     );
   }
 
-  editThisPost(postForm: NgForm):void {
+  editThisPost(postForm: NgForm, event:Event):void {
+
+    event.preventDefault();
 
     this.dataToServer.text = postForm.value.text.trim();
 

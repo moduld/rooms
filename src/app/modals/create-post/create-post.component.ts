@@ -53,7 +53,6 @@ export class CreatePostComponent implements OnInit {
 
   fileDropped (event: any): void {
 
-    console.log(event)
     this.makeRequestSettings(event.srcElement.files[0])
   }
 
@@ -95,7 +94,9 @@ export class CreatePostComponent implements OnInit {
     );
   }
 
-  createNewPost(postForm: NgForm):void {
+  createNewPost(postForm: NgForm, event:Event):void {
+
+    event.preventDefault();
 
     this.dataToServer.text = postForm.value.text.trim();
     this.dataToServer.allow_comment_flag = this.allow_comment_flag;

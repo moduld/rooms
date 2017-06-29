@@ -8,7 +8,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
 import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
-// import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import {ImageCropperModule} from 'ng2-img-cropper/index';
 
@@ -42,6 +41,7 @@ import {
   ShowVisualMessagesComponent,
   CanActivateRoomSettingsChildsComponent,
   NotificationsComponent,
+  SliderComponent,
   NotificationsSettingsComponent} from './components/index';
 
 import {
@@ -67,7 +67,6 @@ import { ScroolEndDirective } from './directives/scrool-end.directive';
 
 import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PollTimeLeftPipe } from './pipes/poll-time-left.pipe';
-import { SliderComponent } from './slider/slider.component';
 import { DatexPipe } from './pipes/datex.pipe';
 
 let roomSettingsRoutes: Routes = [

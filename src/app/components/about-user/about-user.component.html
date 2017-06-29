@@ -4,7 +4,7 @@
 
   <div class="user_info_wrapp" *ngIf="currentUser">
     <div class="avatar_name_wrapp">
-      <span class="avatar" [ngStyle]="{'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
+      <span class="avatar" [ngStyle]="currentUser.thumbnail && {'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
       <span class="name">{{currentUser.user_name}}<span class="displayed_name">{{currentUser.display_name}}</span></span>
     </div>
     <p class="about_user">{{currentUser.about}}</p>

@@ -8,7 +8,6 @@ export class FileInfoService {
   //used in components where need to attach some files to upload
   toNowFileInfo (file: any, place?:string): any {
 
-    console.log(file)
     if (file.type){
       let resultObject = new Object;
       if (file.type === "application/pdf"){
@@ -17,7 +16,7 @@ export class FileInfoService {
         resultObject['content_type'] = "application/pdf";
         resultObject['typeForApp'] = 'pdf';
         resultObject['ext'] = 'pdf';
-        resultObject['img_src'] = 'assets/img/pdf-default.png';
+        resultObject['img_src'] = 'assets/img/tifos_pdf_icon.png';
       }
       if (file.type === "image/png"){
         resultObject['folder'] = 'posts/images/';
@@ -47,7 +46,7 @@ export class FileInfoService {
         resultObject['content_type'] = "video/mp4";
         resultObject['typeForApp'] = 'video';
         resultObject['ext'] = 'mp4';
-        resultObject['img_src'] =  'assets/img/video-default.png';
+        resultObject['img_src'] =  'assets/img/tifos_video_icon.png';
       }
 
       if (file.type === "audio/mp3"){
@@ -55,14 +54,14 @@ export class FileInfoService {
         resultObject['content_type'] = "audio/mp3";
         resultObject['typeForApp'] = 'audio';
         resultObject['ext'] = 'mp3';
-        resultObject['img_src'] =  'assets/img/sound-default.png';
+        resultObject['img_src'] =  'assets/img/tifos_audio_icon.png';
       }
       if (file.type === "audio/wav"){
         resultObject['folder'] = 'posts/audios/';
         resultObject['content_type'] = "audio/wav";
         resultObject['typeForApp'] = 'audio';
         resultObject['ext'] = 'wav';
-        resultObject['img_src'] =  'assets/img/sound-default.png';
+        resultObject['img_src'] =  'assets/img/tifos_audio_icon.png';
       }
 
       resultObject['file'] = file;

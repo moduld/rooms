@@ -26,3 +26,4 @@ export * from './users-messages/users-messages.component';
 export * from './users-posts-in-profile/users-posts-in-profile.component';
 export * from './users-rooms-in-profile/users-rooms-in-profile.component';
 export * from './walls-list/walls-list.component';
+export * from './slider/slider.component';

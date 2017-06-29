@@ -1,4 +1,4 @@
-<form action="#" class="modal_wrapper" #newWallForm="ngForm" (submit)="updateWall(newWallForm)">
+<form action="#" class="modal_wrapper" #newWallForm="ngForm" (submit)="updateWall(newWallForm, $event)">
      <span class="input_wrapp ">
         Title:
         <input type="text" class="input_field" placeholder="Enter wall name" name="wall_name" [(ngModel)]="wallName">

@@ -150,8 +150,9 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
 
 
-  sendNewMessage(messageForm: NgForm):void {
+  sendNewMessage(messageForm: NgForm, event: Event):void {
 
+    event.preventDefault();
 
     if (messageForm.value.text || this.mediaToAppServer){
       let dataToServer = {

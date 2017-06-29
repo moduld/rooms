@@ -3,7 +3,7 @@
   <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
     <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
-                    <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.user_name}}</span>
                 </span>
       <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>

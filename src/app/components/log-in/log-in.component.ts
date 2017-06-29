@@ -37,7 +37,9 @@ export class LogInComponent implements OnInit {
     this.buttonDisabled = false;
   }
 
-  sendLogInData(regForm: NgForm): void {
+  sendLogInData(regForm: NgForm, event:Event): void {
+
+    event.preventDefault();
 
     this.requestService.logIn(regForm.value).subscribe(
         data=>{

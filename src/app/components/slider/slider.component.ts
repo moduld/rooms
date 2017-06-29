@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import {OpenNewWindowService} from '../services/open-new-window.service';
+import {OpenNewWindowService} from '../../services/open-new-window.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+  templateUrl: 'slider.component.html',
+  styleUrls: ['slider.component.scss']
 })
 export class SliderComponent implements OnInit {
 

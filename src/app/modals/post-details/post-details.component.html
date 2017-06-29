@@ -7,7 +7,7 @@
   <div class="post_content">
       <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
-                    <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.display_name}} <br><span>@{{post.owner.user_name}}</span></span>
                 </span>
           <!--use datex to solve issue in IE-->
@@ -82,7 +82,7 @@
           <div class="comments" *ngFor="let comment of comments; let i = index">
               <div class="post_info">
                   <span class="user_info" [routerLink]="['/about-user', comment.owner.user_id*22]">
-                    <span class="avatar" [ngStyle]="{'background-image':'url(' + comment.owner.thumbnail + ')' }" ></span>
+                    <span class="avatar" [ngStyle]="comment.owner.thumbnail && {'background-image':'url(' + comment.owner.thumbnail + ')' }" ></span>
                     <span class="name">{{comment.owner.user_name}}</span>
                 </span>
                   <span class="date">{{ comment.created_at * 1000 | timeAgo }}</span>
@@ -163,7 +163,7 @@
 
 
 
-      <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm)" *ngIf="post.allow_comment_flag && walls.member && !walls.banned">
+      <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm, $event)" *ngIf="post.allow_comment_flag && walls.member && !walls.banned">
           <div class="alighn_wrapp">
               <textarea type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="Enter your comment..."></textarea>
               <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>

@@ -1,4 +1,4 @@
-<form class="modal_wrapper" #postForm="ngForm" (submit)="createNewPost(postForm)">
+<form class="modal_wrapper" #postForm="ngForm" (submit)="createNewPost(postForm, $event)">
   <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
   <div class="top_wrapper">
     <h3 class="title">New Post</h3>

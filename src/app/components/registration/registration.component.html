@@ -1,6 +1,6 @@
 <div class="image"></div>
 <div class="form_wrapper">
-    <form action="#" class="form" #regForm="ngForm" (ngSubmit)="sendRegistrationData(regForm)">
+    <form action="#" class="form" #regForm="ngForm" (ngSubmit)="sendRegistrationData(regForm, $event)">
         <p class="title">Welcome to<span class="title_bold">TIFO!</span></p>
         <p class="subtitle">Sign up to meet photos and videos from your friends.</p>
         <label class="input_wrapp icon-head">

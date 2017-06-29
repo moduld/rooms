@@ -6,7 +6,7 @@
             <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index"
                  [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'last': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
                 <div class="user_info_wrapp">
-                    <span class="user_avatar" [ngStyle]="{'background-image':'url(' + message.avatar + ')' }"></span>
+                    <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')' }"></span>
                     <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
                 </div>
                 <div class="messages_wrapp">
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <form action="#" class="form" #messageForm="ngForm" (submit)="sendNewMessage(messageForm)">
+    <form action="#" class="form" #messageForm="ngForm" (submit)="sendNewMessage(messageForm, $event)">
         <input type="file" id="message_file"  name="files" (change)="fileDropped($event)" hidden>
         <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
             <label for="message_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>

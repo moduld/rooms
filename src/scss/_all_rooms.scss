@@ -94,12 +94,12 @@
 }
 
 @media screen and (max-width: 1000px){
-  .main_container{
+  .rooms_container{
     height: calc(100vh - 114px);
   }
 }
 @media screen and (max-width: 875px){
-  .main_container{
+  .rooms_container{
     justify-content: center;
   }
 }
@@ -107,7 +107,7 @@
 
 
 @media screen and (max-width: 550px){
-  .main_container{
+  .rooms_container{
     height: 100vh;
     transition: 0.5s;
   }

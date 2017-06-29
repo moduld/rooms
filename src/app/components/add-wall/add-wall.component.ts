@@ -31,7 +31,9 @@ export class AddWallComponent implements OnInit {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
   }
 
-  createNewWall(wallForm: NgForm):void {
+  createNewWall(wallForm: NgForm, event: Event):void {
+
+    event.preventDefault();
 
     let name = wallForm.value.wall_name.trim();
     if (name){

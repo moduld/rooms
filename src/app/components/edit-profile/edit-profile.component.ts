@@ -89,7 +89,9 @@ export class EditProfileComponent implements OnInit {
         }
     }
 
-    editUserProfile(editProfileForm: NgForm):void {
+    editUserProfile(editProfileForm: NgForm, event: Event):void {
+
+      event.preventDefault();
 
         this.button_disabled = true;
         if (this.image_dropped){

@@ -50,7 +50,7 @@
     <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
         <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
-                    <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.user_name}}</span>
                 </span>
             <!--use datex to solve IE issue-->
@@ -64,7 +64,7 @@
                  [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
 
                 <div class="post_images" *ngFor="let img of post.media"
-                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-play-circle': img.type === 'video' || img.type === 'audio'}"></div>
+                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-video-not-font': img.type === 'video', 'icon-audio-not-font': img.type === 'audio', 'icon-pdf-not-font': img.type === 'pdf'}"></div>
             </div>
             <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
                 <div class="post_images poll_thumbnail"></div>

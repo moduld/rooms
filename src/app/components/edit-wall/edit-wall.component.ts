@@ -50,7 +50,9 @@ export class EditWallComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  updateWall(updateForm: NgForm): void {
+  updateWall(updateForm: NgForm, event: Event): void {
+
+    event.preventDefault();
 
     let name = updateForm.value.wall_name.trim();
     if(name){

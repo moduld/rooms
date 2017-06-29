@@ -42,8 +42,10 @@ export class RegistrationComponent implements OnInit{
   }
 
 
-  sendRegistrationData(regForm: NgForm): void {
-    console.log(regForm)
+  sendRegistrationData(regForm: NgForm, event: Event): void {
+
+    event.preventDefault();
+
     this.requestService.registration(regForm.value).subscribe(
         data=>{
           this.router.navigateByUrl('/all-rooms');

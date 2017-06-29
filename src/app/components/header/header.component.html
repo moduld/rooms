@@ -24,7 +24,7 @@
             <li class="triangle"><i class="trans_bar"></i></li>
             <li class="drop_down_item user_bar" *ngFor="let message of messages" (click)="goToDialogPage(message)">
 
-                <span class="avatar" [ngStyle]="{'background-image':'url(' + message.user.thumbnail + ')' }"></span>
+                <span class="avatar" [ngStyle]="message.user.thumbnail && {'background-image':'url(' + message.user.thumbnail + ')' }"></span>
 
                 <div class="user_name_and_date" >
                 <span class="top_wrapp">
@@ -54,7 +54,7 @@
           <li class="triangle"><i class="trans_bar"></i></li>
           <li class="drop_down_item user_bar" *ngFor="let notification of notifications">
 
-            <span class="avatar" [ngStyle]="{'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"></span>
+            <span class="avatar" [ngStyle]="notification.data.details.user.thumbnail && {'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"></span>
             <div class="notification_data">
               <span class="name" [ngClass]="{'icon-heart-o': notification.type === 'PostLikeNotification', 'icon-comment-o':
                 notification.type === 'CommentNotification', 'icon-star-empty': notification.type === 'FavedNotification', 'icon-envelope-o':
@@ -82,7 +82,7 @@
 
 
       <div class="user_info drop_down_container" >
-                <span class="avatar" [ngStyle]="{'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
+                <span class="avatar" [ngStyle]="currentUser.user_data.thumbnail && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
 
         <ul class="drop_down_menu">

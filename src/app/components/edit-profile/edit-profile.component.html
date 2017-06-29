@@ -1,4 +1,4 @@
-<form action="#" class="form_wrapper" #editProfileForm="ngForm" (submit)="editUserProfile(editProfileForm)">
+<form action="#" class="form_wrapper" #editProfileForm="ngForm" (submit)="editUserProfile(editProfileForm, $event)">
 
   <div class="image_cropper_wrapp">
     <img-cropper #cropper [image]="added_image" [settings]="cropperSettings"></img-cropper>

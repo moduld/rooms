@@ -8,7 +8,7 @@ import { FileInfoService } from '../../services/file-info.service';
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
-import { SliderComponent } from '../../slider/slider.component';
+import { SliderComponent } from '../../components/slider/slider.component';
 import {OpenNewWindowService} from '../../services/open-new-window.service';
 
 import { UserInfo } from '../../commonClasses/userInfo';

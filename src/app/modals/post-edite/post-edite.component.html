@@ -1,4 +1,4 @@
-<form class="modal_wrapper" #postEditForm="ngForm" (submit)="editThisPost(postEditForm)">
+<form class="modal_wrapper" #postEditForm="ngForm" (submit)="editThisPost(postEditForm, $event)">
   <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
   <div class="top_wrapper">
     <h3 class="title">Edit Post</h3>

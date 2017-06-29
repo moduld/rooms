@@ -253,14 +253,14 @@
     width: auto;
   }
 }
-.icon-play-circle{
+.icon-video-not-font,
+.icon-audio-not-font,
+.icon-pdf-not-font{
   @extend .flex-center;
-  font-size: 40px;
-  color: $blue;
   &:before{
+    height: 44px;
+    width: 44px;
     box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    line-height: 35px;
   }
 }
 .post_with_3_picture > .post_images:first-child{
@@ -411,7 +411,9 @@
   }
 }
 .poll_thumbnail{
-  background: gray;
+  @extend .backgr-center;
+  background-image: url("../../../img/tifos_poll_bg.png");
+  background-size: cover;
 }
 :host{
   .drop_down_menu{
