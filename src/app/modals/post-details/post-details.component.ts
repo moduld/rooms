@@ -9,6 +9,7 @@ import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { SliderComponent } from '../../slider/slider.component';
+import {OpenNewWindowService} from '../../services/open-new-window.service';
 
 import { UserInfo } from '../../commonClasses/userInfo';
 
@@ -42,6 +43,7 @@ export class PostDetailsComponent implements OnInit {
               private fileService: FileInfoService,
               private requestService: RequestService,
               private storeservice: UserStoreService,
+              private openNewWindow: OpenNewWindowService,
               private exchangeService: EventsExchangeService) {
 
       exchangeService.urlChangedEvent.subscribe(
@@ -121,9 +123,10 @@ export class PostDetailsComponent implements OnInit {
     );
   }
 
-  createNewComment(commentForm: NgForm):void {
+  createNewComment(commentForm: NgForm, event: Event):void {
 
-    let text = commentForm.value.text.trim();
+      event.preventDefault();
+    let text = commentForm.value.text ? commentForm.value.text.trim() : '';
     if (text || this.mediaToAppServer){
         this.disable_submit_button = true;
       this.dataToServer.post = this.post;
@@ -349,12 +352,6 @@ export class PostDetailsComponent implements OnInit {
 
     openImageLink(content: any):void {
 
-        let newWidth = Math.round(window.innerWidth * 0.75);
-        let newHeight = Math.round(window.innerHeight * 0.75);
-        let leftPosition = Math.round(window.innerHeight * 0.125);
-        let topPosition = Math.round(window.innerHeight * 0.125);
-        let concat = 'width=' + newWidth + ',' + 'height=' + newHeight + ',' + 'left=' + leftPosition + ',' + 'top=' + topPosition;
-        window.open(content.multimedia, "fullscreen=no",  concat)
+        this.openNewWindow.openImageLink(content)
     }
-
 }

@@ -5,7 +5,7 @@
   color: $gray_text;
   position: relative;
 }
-  .main_container{
+  .rooms_container{
     @extend .flex-between;
     align-items: flex-start;
     flex-wrap: wrap;
@@ -13,6 +13,7 @@
     overflow-y: auto;
     padding-bottom: 20px;
   }
+
   .rooms{
     height: 255px;
     width: 255px;

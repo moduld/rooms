@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {OpenNewWindowService} from '../services/open-new-window.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -12,7 +13,9 @@ export class SliderComponent implements OnInit {
   @Input() contentArray: any;
   zoom_value:number;
 
-  constructor( private config: NgbCarouselConfig) {
+  constructor( private config: NgbCarouselConfig,
+               private openNewWindow: OpenNewWindowService) {
+
     config.interval = -1;
     config.wrap = true;
     config.keyboard = false;
@@ -29,25 +32,13 @@ export class SliderComponent implements OnInit {
     }
   }
 
-  changeZoom(flag:boolean):void {
-
-    if (flag && this.zoom_value < 2){
-      this.zoom_value = Number((this.zoom_value + 0.1).toFixed(1))
-    }
-
-    if(!flag && this.zoom_value > 0.1){
-      this.zoom_value = Number((this.zoom_value - 0.1).toFixed(1))
-    }
-  }
 
   openImageLink(content: any):void {
 
-    let newWidth = Math.round(window.innerWidth * 0.75);
-    let newHeight = Math.round(window.innerHeight * 0.75);
-    let leftPosition = Math.round(window.innerHeight * 0.125);
-    let topPosition = Math.round(window.innerHeight * 0.125);
-    let concat = 'width=' + newWidth + ',' + 'height=' + newHeight + ',' + 'left=' + leftPosition + ',' + 'top=' + topPosition;
-    window.open(content.multimedia, "fullscreen=no",  concat)
+    this.openNewWindow.openImageLink(content)
+
   }
+
+
 
 }

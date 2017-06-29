@@ -10,7 +10,8 @@
                     <span class="avatar" [ngStyle]="{'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.display_name}} <br><span>@{{post.owner.user_name}}</span></span>
                 </span>
-          <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | date: 'h:mm a'}}</span></span>
+          <!--use datex to solve issue in IE-->
+          <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | datex:'hh:mm A'}}</span></span>
       </div>
       <div class="scrollable_part"  appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
           <div class="post_body" >

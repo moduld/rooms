@@ -7,8 +7,8 @@
     <div class="image_cropper_wrapp">
       <img-cropper #cropper [image]="added_image" [settings]="cropperSettings"></img-cropper>
       <img [src]="added_image.image" #previewImg class="image_preview"  *ngIf="added_image.image" >
+      <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
       <label for="input_file" class="room_thumbnail icon-image" [ngClass]="{'image_dropped': image_dropped}">
-        <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
       </label>
     </div>
 

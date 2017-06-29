@@ -13,9 +13,9 @@
 
     <div class="right_zone_wrapper" *ngIf="viewToggle">
       <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
+        <input type="file" id="input_file" name="files" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>
         <label for="input_file" class="file_button">
           Click to upload the file
-          <input type="file" id="input_file" name="files" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>
         </label>
         <span class="drag_zone_text">Allowed file types: png, bmp, gif, jpg, jpeg, pdf, mp4, mp3, m4a, wav</span>
       </div>

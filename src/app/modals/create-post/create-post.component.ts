@@ -52,6 +52,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   fileDropped (event: any): void {
+
+    console.log(event)
     this.makeRequestSettings(event.srcElement.files[0])
   }
 

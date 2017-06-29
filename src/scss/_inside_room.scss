@@ -190,6 +190,7 @@
   flex: auto;
   @extend .flex-column;
   height: 100%;
+  overflow: hidden;
 }
 .post_img{
   max-height: 250px;
