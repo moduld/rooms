@@ -86,7 +86,7 @@ body.safari_browser{
     .opened{
         margin-top: 143px;
     }
-    .opened ~ app-all-rooms > .main_container{
+    .opened ~ app-all-rooms > .rooms_container{
         height: calc(100vh - 143px);
     }
 

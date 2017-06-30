@@ -98,6 +98,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
             this.directionFlag ? this.all_messages = temp.concat(this.all_messages) : this.all_messages = this.all_messages.concat(temp);
             this.flagMoveY = true;
+
           }
           this.autocheckNewMessages();
           this.show_loading = false;

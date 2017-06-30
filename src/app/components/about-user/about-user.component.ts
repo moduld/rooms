@@ -51,6 +51,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
         data=>{
           this.currentUser = data['user'];
           this.currentUser.is_myne = this.currentUser.user_id == loginnedUser.user_data.user_id;
+          console.log(this.currentUser)
         },
         error => {
           this.error = error;

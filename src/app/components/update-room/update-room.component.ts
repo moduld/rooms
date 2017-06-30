@@ -94,6 +94,10 @@ export class UpdateRoomComponent implements OnInit {
             image.onload = function (loadEvent:any) {
                 that.cropper.setImage(image);
             };
+            image.onerror = function (loadEvent:any) {
+                console.log('image error');
+                this.image_dropped = false;
+            };
         }
     }
 
@@ -116,7 +120,7 @@ export class UpdateRoomComponent implements OnInit {
 
     sendTextData(roomForm: NgForm):void {
 
-        let name = roomForm.value.room_name.trim();
+        let name = roomForm.value.room_name && roomForm.value.room_name.trim();
         if (name){
             roomForm.value.room_name = name;
             this.dataToServer['roomData'] = roomForm.value;

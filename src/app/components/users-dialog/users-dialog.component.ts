@@ -18,6 +18,7 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
   virtual_user: any;
   eventToChild:Subject<any> = new Subject();
     routerSubscription: any;
+    users_list_toggle:boolean;
 
   constructor( private requestService: RequestService,
                private router: Router,
@@ -26,6 +27,7 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+      this.users_list_toggle = true;
     this.dialog_user_id = this.route.snapshot.params['user'] / 22;
     this.all_users = [];
 
@@ -100,6 +102,8 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
   }
 
     changeDialogUser(flag: boolean, user: any): void {
+
+      this.users_list_toggle = false;
 
       flag ? this.dialog_user_id = user.user.user_id : this.dialog_user_id = user.user_id;
 

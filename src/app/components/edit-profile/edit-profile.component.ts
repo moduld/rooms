@@ -86,6 +86,10 @@ export class EditProfileComponent implements OnInit {
             image.onload = function (loadEvent:any) {
                 that.cropper.setImage(image);
             };
+            image.onerror = function() {
+                console.log('image error')
+                this.image_dropped = false;
+            }
         }
     }
 
@@ -109,7 +113,7 @@ export class EditProfileComponent implements OnInit {
 
     sendUserInfo(editProfileForm: NgForm):void {
 
-        let name = editProfileForm.value.user_name.trim();
+        let name = editProfileForm.value.user_name && editProfileForm.value.user_name.trim();
         if (name){
             editProfileForm.value.user_name = name;
             this.dataToServer['userData'] = editProfileForm.value;
@@ -127,6 +131,7 @@ export class EditProfileComponent implements OnInit {
                 error => {
                     this.error = error;
                     console.log(error);
+                    this.button_disabled = false;
                     this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
             );
         }
