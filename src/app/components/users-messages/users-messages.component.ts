@@ -47,7 +47,6 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
       this.showComponentBody = true;
       this.virtualUserFlag = event.flag;
       this.userWhoTalkToUs = event.user;
-
       this.userChangedOrStart()
     });
 

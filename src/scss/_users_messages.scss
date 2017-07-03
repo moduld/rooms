@@ -15,9 +15,16 @@
   position: relative;
   flex: auto;
 }
+.messages_info{
+  height: 50px;
+  border-bottom: 1px solid $border_menu;
+  @extend .flex-center;
+  justify-content: flex-start;
+  padding: 0 10px;
+}
 .chat_wrapp{
   position: absolute;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   bottom: 0;

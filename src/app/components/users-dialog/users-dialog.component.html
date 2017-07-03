@@ -2,7 +2,7 @@
     <input type="checkbox" id="users_list_view_toggler" [(ngModel)]="users_list_toggle" hidden>
     <aside class="aside">
         <div class="label_wrapp">
-            <label for="users_list_view_toggler" class="show_menu_label icon-menu"></label>
+            <label for="users_list_view_toggler" class="show_menu_label" [ngClass]="{'icon-menu': !users_list_toggle, 'icon-double-left': users_list_toggle}"></label>
         </div>
         <div class="users_wrapper">
             <div class="user_bar"  *ngIf="virtual_user" [ngClass]="{'active':  virtual_user.user_id == dialog_user_id}" (click)="changeDialogUser(false, virtual_user)">

@@ -3,7 +3,7 @@
     <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
     <aside class="aside">
         <div class="label_wrapp">
-            <label for="navigation_menu_toggle" class="show_menu_label icon-menu"></label>
+            <label for="navigation_menu_toggle" class="show_menu_label" [ngClass]="{'icon-menu': !menu_state_toggle, 'icon-double-left': menu_state_toggle}"></label>
         </div>
         <ul class="aside_content">
             <li class="aside_items aside_items_title">Members</li>

@@ -176,9 +176,6 @@
     }
     &:checked + .aside > .label_wrapp > .show_menu_label{
       background: white;
-      &:before{
-        content: "\e913";
-      }
     }
   }
 }

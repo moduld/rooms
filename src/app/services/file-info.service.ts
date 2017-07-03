@@ -36,6 +36,7 @@ export class FileInfoService {
       if (file.type === "image/jpeg"){
         resultObject['folder'] = 'posts/images/';
         place === 'rooms' ? resultObject['folder'] = 'rooms/images/' : '';
+        place === 'users' ? resultObject['folder'] = 'users/images/' : '';
         resultObject['content_type'] = "image/jpeg";
         resultObject['typeForApp'] = 'image';
         resultObject['ext'] = 'jpeg';

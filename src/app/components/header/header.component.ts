@@ -66,6 +66,11 @@ export class HeaderComponent implements OnInit {
               this.parseUrl()
           }
       })
+
+      this.exchangeService.userAvatarChangedEvent.subscribe(
+          message => {
+              this.currentUser = this.storeservice.getUserData();
+          });
   }
 
 
@@ -145,7 +150,7 @@ export class HeaderComponent implements OnInit {
             data=>{
                 if (data && data['messages'].length){
                     data['messages'] = data['messages'].filter((message)=>{
-                        return message.new_flag
+                        return message.new_flag && message.user_id !== this.currentUser.user_data.user_id
                     });
                     this.messages_quantity = data['messages'].length;
                     data['messages'].length > 5 ? data['messages'].length = 5 : '';

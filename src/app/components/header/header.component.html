@@ -4,7 +4,7 @@
   <div class="main_container">
     <div class="logo" >
       <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
-      <span class="header_link icon-thumbs" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}" (click)="showSuggestionsRoomsorDefault('suggested')">Discover</span>
+      <span class="header_link icon-binocular" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}" (click)="showSuggestionsRoomsorDefault('suggested')">Explore</span>
     </div>
     <div class="search"  >
       <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" >
@@ -81,9 +81,10 @@
 
 
 
-      <div class="user_info drop_down_container" >
+      <div class="user_info drop_down_container" onclick="">
                 <span class="avatar" [ngStyle]="currentUser.user_data.thumbnail && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
+
 
         <ul class="drop_down_menu">
           <li class="triangle"><i class="trans_bar"></i></li>

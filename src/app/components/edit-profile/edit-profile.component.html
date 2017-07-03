@@ -1,10 +1,10 @@
 <form action="#" class="form_wrapper" #editProfileForm="ngForm" (submit)="editUserProfile(editProfileForm, $event)">
 
-  <div class="image_cropper_wrapp">
-    <img-cropper #cropper [image]="added_image" [settings]="cropperSettings"></img-cropper>
+  <div class="image_cropper_wrapp" >
+    <img-cropper #cropper [image]="added_image" [settings]="cropperSettings" *ngIf="image_dropped"></img-cropper>
     <img [src]="added_image.image" #previewImg class="image_preview"  *ngIf="added_image.image" >
     <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
-    <label for="input_file" class="room_thumbnail icon-image" [ngClass]="{'image_dropped': image_dropped}">
+    <label for="input_file" class="room_thumbnail icon-image" [ngStyle]="!image_dropped && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}" [ngClass]="{'image_dropped': image_dropped}">
     </label>
   </div>
 
@@ -19,25 +19,25 @@
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
         Username:
-        <input type="text" class="input_field" placeholder="Enter your name" name="user_name" [ngModel]="userName"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
+        <input type="text" class="input_field" placeholder="Enter your name" name="user_name" (change)="haveChangedData('user_name', userName)" [(ngModel)]="userName"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
         <span class="mistake">Wrong name format</span>
       </span>
       <span class="input_wrapp with_margin">
         Displayed Username:
-        <input type="text" class="input_field" placeholder="Enter your nick name" name="display_name" [ngModel]="userDisplayedName"  minlength="0" maxlength="20">
+        <input type="text" class="input_field" placeholder="Enter your nick name" name="display_name" (change)="haveChangedData('disp_name', userDisplayedName)" [(ngModel)]="userDisplayedName"  minlength="0" maxlength="20">
         <span class="mistake">Wrong name format</span>
       </span>
 
       <div class="input_wrapp with_margin">
         About me:
-        <textarea  class="input_field room_description" placeholder="Enter some info about yourself" [ngModel]="aboutUser" name="about" maxlength="250"></textarea>
+        <textarea  class="input_field room_description" placeholder="Enter some info about yourself" (change)="haveChangedData('about_user', aboutUser)" [(ngModel)]="aboutUser" name="about" maxlength="250"></textarea>
       </div>
 
       <div class="input_wrapp with_margin">
         Receive messages from:
         <div class="toggle_wrapper">
           <span class="toggle_name">All users</span>
-          <input type="checkbox" id="private" class="toggle_input" name="msg_from_anyone"  [(ngModel)]="messageFromAllUsers" checked hidden>
+          <input type="checkbox" id="private" class="toggle_input" name="msg_from_anyone" (change)="haveChangedData('get_message', messageFromAllUsers)" [(ngModel)]="messageFromAllUsers" checked hidden>
           <label for="private" class="toggle_field"></label>
         </div>
       </div>

@@ -16,7 +16,7 @@ import { UploadFilesService } from '../../services/upload-files.service';
 export class EditProfileComponent implements OnInit {
 
   error: any;
-  messageFromAllUsers: boolean = true;
+  messageFromAllUsers: boolean;
   dataToServer: any = {};
   userName: string;
   userDisplayedName: string;
@@ -26,6 +26,7 @@ export class EditProfileComponent implements OnInit {
     image_dropped:boolean;
     subscription: any;
     button_disabled:boolean;
+    changed_data:boolean;
     cropperSettings: CropperSettings;
 
     @ViewChild('cropper', undefined)
@@ -57,11 +58,13 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = this.storeservice.getUserData();
+    console.log(this.currentUser)
     this.dataToServer['multimedia'] = this.currentUser.user_data.thumbnail || '';
-    this.currentUser.user_data.thumbnail && this.fileDropped(false);
+    // this.currentUser.user_data.thumbnail && this.fileDropped(false);
     this.userName = this.currentUser.user_data.user_name;
     this.userDisplayedName = this.currentUser.user_data.display_name;
     this.aboutUser = this.currentUser.user_data.about;
+    this.messageFromAllUsers = this.currentUser.user_data.msg_from_anyone;
   }
 
     fileDropped(event: any): void {
@@ -71,7 +74,7 @@ export class EditProfileComponent implements OnInit {
         let image:any = new Image();
         let that = this;
         let myReader:FileReader = new FileReader();
-        if (event){
+        // if (event){
 
             let file:File = event.target.files[0];
             myReader.onloadend = function (loadEvent:any) {
@@ -80,23 +83,22 @@ export class EditProfileComponent implements OnInit {
             };
             myReader.readAsDataURL(file);
 
-        } else {
-            image.crossOrigin="anonymous";
-            image.src = this.currentUser.user_data.thumbnail;
-            image.onload = function (loadEvent:any) {
-                that.cropper.setImage(image);
-            };
-            image.onerror = function() {
-                console.log('image error')
-                this.image_dropped = false;
-            }
-        }
+        // } else {
+        //     image.crossOrigin="anonymous";
+        //     image.src = this.currentUser.user_data.thumbnail;
+        //     image.onload = function (loadEvent:any) {
+        //         that.cropper.setImage(image);
+        //     };
+        //     image.onerror = function() {
+        //         console.log('image error')
+        //         this.image_dropped = false;
+        //     }
+        // }
     }
 
     editUserProfile(editProfileForm: NgForm, event: Event):void {
 
       event.preventDefault();
-
         this.button_disabled = true;
         if (this.image_dropped){
             this.subscription = this.fileUpload.pushResolve.subscribe(result=>{
@@ -105,7 +107,7 @@ export class EditProfileComponent implements OnInit {
                 this.sendUserInfo(editProfileForm);
                 this.subscription.unsubscribe();
             });
-            this.fileUpload.uploadFiles(this.previewed, 'rooms')
+            this.fileUpload.uploadFiles(this.previewed, 'users')
         } else {
             this.sendUserInfo(editProfileForm)
         }
@@ -113,9 +115,9 @@ export class EditProfileComponent implements OnInit {
 
     sendUserInfo(editProfileForm: NgForm):void {
 
-        let name = editProfileForm.value.user_name && editProfileForm.value.user_name.trim();
-        if (name){
-            editProfileForm.value.user_name = name;
+
+        if (this.changed_data || this.image_dropped){
+            // editProfileForm.value.user_name = name;
             this.dataToServer['userData'] = editProfileForm.value;
             this.requestService.editUserProfile(this.dataToServer).subscribe(
                 data=>{
@@ -126,7 +128,11 @@ export class EditProfileComponent implements OnInit {
                     this.storeservice.saveUserData(newUser);
                     this.currentUser = this.storeservice.getUserData();
                     this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User information changed successful'});
+                    this.exchangeService.changeUserAvatar();
                     this.button_disabled = false;
+                    this.image_dropped = false;
+                    this.added_image = {};
+                    this.changed_data = false
                 },
                 error => {
                     this.error = error;
@@ -134,8 +140,32 @@ export class EditProfileComponent implements OnInit {
                     this.button_disabled = false;
                     this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
             );
+        } else {
+            this.button_disabled = false;
         }
 
+    }
+
+    haveChangedData(flag: string, value:any):void {
+
+      if (flag === 'user_name'){
+          let name = value && value.trim();
+          name && name !== this.currentUser.user_data.user_name ? this.changed_data = true : this.changed_data = false;
+      }
+
+        if (flag === 'disp_name'){
+            let dispName = value && value.trim();
+            dispName && dispName !== this.currentUser.user_data.display_name ? this.changed_data = true : this.changed_data = false;
+        }
+
+        if (flag === 'about_user'){
+            let about = value && value.trim();
+            about && about !== this.currentUser.user_data.about ? this.changed_data = true : this.changed_data = false;
+        }
+
+        if (flag === 'get_message'){
+            value != this.currentUser.user_data.msg_from_anyone ? this.changed_data = true : this.changed_data = false;
+        }
     }
 
 

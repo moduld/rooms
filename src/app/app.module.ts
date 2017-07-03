@@ -83,7 +83,8 @@ let aboutUserChildRoutes = [
   { path: 'user-posts', component: UsersPostsInProfileComponent},
   { path: 'user-fans', component: UsersFansInProfileComponent},
   { path: 'user-faves', component: UsersFavesInProfileComponent},
-  { path: '',redirectTo: 'user-rooms', pathMatch:'full'}
+  { path: '',redirectTo: 'user-rooms', pathMatch:'full'},
+  { path: '**',redirectTo: 'user-rooms', pathMatch:'full'}
 ];
 
 let userSettingsRoutes : Routes = [

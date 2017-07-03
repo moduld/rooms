@@ -33,23 +33,22 @@
 }
 .room_thumbnail{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  @extend .flex-column;
-  justify-content: center;
-  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   transition: 0.5s;
-  white-space: nowrap;
+  @extend .backgr-center;
+  background-size: contain;
+  @extend .flex-center;
   &:before{
     font-size: 60px;
     color: $blue;
   }
 }
 .image_dropped{
-  top: 0;
-  left: 0;
-  transform: translate3d(0,0,0);
+  right: auto;
+  bottom: auto;
   padding: 5px;
   &:before{
     font-size: 30px;

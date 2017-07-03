@@ -13,6 +13,7 @@ export class EventsExchangeService {
   private showVisualMessageForUser = new Subject<any>();
   private urlChanged = new Subject<any>();
   private srcrooReachEnd = new Subject<any>();
+  private userAvatarChanged = new Subject<any>();
 
 
   makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
@@ -21,6 +22,7 @@ export class EventsExchangeService {
   showMessageForUser = this.showVisualMessageForUser.asObservable();
   urlChangedEvent = this.urlChanged.asObservable();
   srcrooReachEndEvent = this.srcrooReachEnd.asObservable();
+  userAvatarChangedEvent = this.userAvatarChanged.asObservable();
 
 
   //event when user clicks search icon in search field in the header.
@@ -50,6 +52,10 @@ export class EventsExchangeService {
   // to push event from parent component to component which output by router-outlet
   pushEventUrlReachEnd(): void {
     this.srcrooReachEnd.next();
+  }
+//  event when users avatar changed. To change automaticaly in header
+  changeUserAvatar():void {
+    this.userAvatarChanged.next()
   }
 
 }
