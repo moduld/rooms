@@ -50,7 +50,7 @@ export class PrivateRoomComponent implements OnInit, Input {
           error => {
             this.error = error;
             console.log(this.error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
       )
     } else {
       this.closeModal()

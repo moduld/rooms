@@ -78,7 +78,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get fans list'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get fans list'})
         }
     );
   }
@@ -100,7 +100,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
           error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
       )
     }
   }

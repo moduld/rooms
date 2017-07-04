@@ -52,7 +52,7 @@ export class NotificationsSettingsComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get  notifications settings from a server'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get  notifications settings from a server'})
         }
     )
   }
@@ -71,7 +71,7 @@ export class NotificationsSettingsComponent implements OnInit {
           },
           error => {
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get  notifications settings from a server'})
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get  notifications settings from a server'})
           }
       )
     } else {

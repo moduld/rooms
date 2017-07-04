@@ -48,7 +48,7 @@ export class WallsListComponent implements OnInit {
         }, error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t delete the wall'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t delete the wall'})}
     );
   }
 
@@ -66,7 +66,7 @@ export class WallsListComponent implements OnInit {
         }, error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save walls order'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t save walls order'})}
     );
   }
 

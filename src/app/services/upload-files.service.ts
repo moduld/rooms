@@ -54,7 +54,7 @@ export class UploadFilesService {
                     },
                     error => {
                         console.log(error);
-                        this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'});
+                        this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t send the file'});
                     }
 
                 );
@@ -62,7 +62,7 @@ export class UploadFilesService {
             },
             error => {
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'});
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get link for the file'});
             }
         )
 

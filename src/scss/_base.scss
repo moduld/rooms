@@ -236,3 +236,19 @@ $font_lora: LoraRegular, serif;
 }
 
 
+.bold_text{
+  font-family: $font_bold;
+  color: black;
+}
+.active{
+  .bold_text{
+    font-family: $font_bold;
+    color: white;
+  }
+}
+.user_bar{
+  &:hover .bold_text{
+    font-family: $font_bold;
+    color: white;
+  }
+}

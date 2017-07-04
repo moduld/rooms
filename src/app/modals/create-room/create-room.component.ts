@@ -109,7 +109,7 @@ export class CreateRoomComponent implements OnInit {
         error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t create new room'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t create new room'})}
     );
 }
 

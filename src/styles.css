@@ -52,11 +52,13 @@ body.safari_browser{
 
 .carousel-control-next,
 .carousel-control-prev{
-    height: 50px;
-    width: 50px;
-    transform: translateY(-50%);
-    top: 50%;
+    height: 30px;
+    width: 40px;
+    /*transform: translateY(-50%);*/
+    top: auto;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.31);
+    z-index: 15;
 }
 .carousel-indicators{
     bottom: 0;
@@ -99,5 +101,9 @@ body.safari_browser{
     }
     .opened ~ app-notifications > .notifications_wrapp{
         height: calc(100vh - 213px);
+    }
+
+    .opened ~ app-users-dialog > .main_container > .aside{
+        top: 178px;
     }
 }

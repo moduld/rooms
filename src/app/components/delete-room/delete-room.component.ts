@@ -34,7 +34,7 @@ export class DeleteRoomComponent implements OnInit {
         }, error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t delete the room'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t delete the room'})}
     );
   }
 

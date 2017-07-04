@@ -49,7 +49,7 @@ export class NotificationsComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new notifications from a server'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get new notifications from a server'})
         }
     )
   }

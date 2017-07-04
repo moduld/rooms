@@ -58,7 +58,6 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = this.storeservice.getUserData();
-    console.log(this.currentUser)
     this.dataToServer['multimedia'] = this.currentUser.user_data.thumbnail || '';
     // this.currentUser.user_data.thumbnail && this.fileDropped(false);
     this.userName = this.currentUser.user_data.user_name;
@@ -138,7 +137,7 @@ export class EditProfileComponent implements OnInit {
                     this.error = error;
                     console.log(error);
                     this.button_disabled = false;
-                    this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
+                    this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t save changes'})}
             );
         } else {
             this.button_disabled = false;

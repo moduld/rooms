@@ -53,7 +53,7 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
         }, error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users rooms'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get users rooms'})}
     );
   }
 }

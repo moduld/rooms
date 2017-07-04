@@ -854,7 +854,7 @@ export class RequestService  {
 
       return resp.json();
     })
-        .catch((error: any)=> { return Observable.throw(error);});
+        .catch((error: any)=> { return Observable.throw(error.json());});
   }
 
   makeGetRequest(data: any): Observable<any> {
@@ -866,7 +866,7 @@ export class RequestService  {
       return resp.json();
     })
         .catch((error: any)=>{
-      return Observable.throw(error);
+      return Observable.throw(error.json());
     });
   }
 

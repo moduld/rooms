@@ -4,8 +4,34 @@
 
   <div class="user_info_wrapp" *ngIf="currentUser">
     <div class="avatar_name_wrapp">
-      <span class="avatar" [ngStyle]="currentUser.thumbnail && {'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
+      <div class="avatar_and_drop">
+        <span class="avatar" [ngStyle]="currentUser.thumbnail && {'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
+          <div class="drop_down_container" *ngIf="!currentUser.is_myne">
+            <div class="dots_wrapp">
+              <i class="dots"></i>
+              <i class="dots"></i>
+              <i class="dots"></i>
+            </div>
+            <ul class="drop_down_menu" >
+              <li class="triangle"><i class="trans_bar"></i></li>
+
+              <li class="drop_down_item"
+                  (click)="userInterraction('mute')">
+                <span class="drop_down_fill icon-mute">Mute User</span>
+              </li>
+
+              <li class="drop_down_item"
+                  (click)="userInterraction('block')">
+                <span class="drop_down_fill icon-eye-blocked">Block User</span>
+              </li>
+
+            </ul>
+          </div>
+
+
+      </div>
       <span class="name">{{currentUser.user_name}}<span class="displayed_name">{{currentUser.display_name}}</span></span>
+
     </div>
     <p class="about_user">{{currentUser.about}}</p>
     <div class="buttons_wrapp">

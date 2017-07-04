@@ -79,7 +79,7 @@ export class PostEditeComponent implements OnInit{
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get link for the file'})}
     );
 
   }
@@ -95,7 +95,7 @@ export class PostEditeComponent implements OnInit{
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -124,7 +124,7 @@ export class PostEditeComponent implements OnInit{
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t save changes'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t save changes'})}
     );
   }
 

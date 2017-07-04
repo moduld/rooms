@@ -23,13 +23,25 @@
   min-width: 280px;
   align-items: center;
 }
+.drop_down_container{
+  margin: 10px auto 0;
+}
+.avatar_and_drop{
+  @extend .flex-column;
+  margin-right: 20px;
+}
+.drop_down_menu{
+  top: 150%;
+  left: -65px;
+  width: 160px;
+}
 .avatar{
   display: block;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: $gray_text;
-  margin-right: 20px;
+
   @extend .backgr-center;
   background-size: contain;
 }

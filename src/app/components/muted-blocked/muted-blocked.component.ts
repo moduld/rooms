@@ -57,7 +57,7 @@ export class MutedBlockedComponent implements OnInit {
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users list from a server'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get users list from a server'})}
     )
   }
 
@@ -76,7 +76,7 @@ export class MutedBlockedComponent implements OnInit {
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
     )
   }
 

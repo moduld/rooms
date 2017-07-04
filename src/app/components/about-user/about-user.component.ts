@@ -51,12 +51,11 @@ export class AboutUserComponent implements OnInit, OnDestroy {
         data=>{
           this.currentUser = data['user'];
           this.currentUser.is_myne = this.currentUser.user_id == loginnedUser.user_data.user_id;
-          console.log(this.currentUser)
         },
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get user info'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get user info'})
         }
     )
   }
@@ -77,7 +76,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
       )
     } else {
       this.exchangeService.doShowVisualMessageForUser({success:false, message: 'You can\'t fave  oneself'})
@@ -100,9 +99,27 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   onScrollRichTheEnd(event): void {
 
-    console.log(event)
     this.exchangeService.pushEventUrlReachEnd()
 
+  }
+
+  userInterraction(int_key: string):void {
+
+    let dataToServer = {
+      user_interract_key: int_key,
+      user_interract_id: this.currentUser.user_id,
+      flag: 1
+    };
+
+    this.requestService.blockOrMuteUser(dataToServer).subscribe(
+        data=>{
+          this.exchangeService.doShowVisualMessageForUser({success:true, message: 'User muted/blocked successful'})
+        },
+        error => {
+          this.error = error;
+          console.log(error);
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
+    )
   }
 
 }

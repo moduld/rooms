@@ -67,7 +67,7 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
           error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users list from a server'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get users list from a server'})}
       );
   }
 
@@ -97,7 +97,7 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
         error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get info about the user'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get info about the user'})}
     );
   }
 

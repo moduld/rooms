@@ -69,7 +69,7 @@ export class AllRoomsComponent implements OnInit {
           }, error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get rooms your from a server'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get rooms your from a server'})}
       );
   }
 
@@ -87,7 +87,7 @@ export class AllRoomsComponent implements OnInit {
           }, error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get searchable rooms from a server'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get searchable rooms from a server'})}
       );
   }
 
@@ -105,7 +105,7 @@ export class AllRoomsComponent implements OnInit {
           }, error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get suggested rooms from a server'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get suggested rooms from a server'})}
       );
   }
 

@@ -95,7 +95,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.wallsArray = [];
                 this.openPrivateRoomModal(error.json().room_detals)
             }else {
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get walls of the room'})
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get walls of the room'})
             }
 
         }
@@ -170,7 +170,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
       this.error = error;
       console.log(error);
-      this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get posts of the room'})
+      this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get posts of the room'})
   }
 
     postOwnerInterraction(int_key: string, block_owner_id: number): void {
@@ -188,7 +188,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -228,7 +228,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t remove this post'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t remove this post'})}
         )
     }
 
@@ -242,7 +242,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -255,7 +255,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -268,7 +268,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -281,7 +281,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t move the post'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t move the post'})}
         )
     }
 
@@ -339,7 +339,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
             error => {
                 this.error = error;
                 console.log(this.error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 

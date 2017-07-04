@@ -108,7 +108,16 @@
   }
 
 }
-
+.no_conversations{
+  border-radius: 5px;
+  border-top: 1px solid $border_menu;
+  border-bottom: 1px solid $border_menu;
+  color: $gray_text;
+  background: white;
+  height: 80px;
+  width: 100%;
+  @extend .flex-center;
+}
 
 
 
@@ -183,6 +192,6 @@
 @media screen and (max-width: 550px){
 
   .aside{
-    top: 178px;
+    top: 35px;
   }
 }

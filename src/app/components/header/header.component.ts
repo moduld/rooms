@@ -91,7 +91,7 @@ export class HeaderComponent implements OnInit {
         error => {
           this.error = error;
           console.log(this.error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t log out'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t log out'})}
     )
   }
 
@@ -139,7 +139,7 @@ export class HeaderComponent implements OnInit {
             },
             error => {
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new notifications from a server'})
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get new notifications from a server'})
             }
         )
     }
@@ -160,7 +160,7 @@ export class HeaderComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new messages from a server'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get new messages from a server'})}
         );
 
         this.requestService.getNotificationSettings().subscribe(
@@ -170,7 +170,7 @@ export class HeaderComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get new messages from a server'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get new messages from a server'})}
         );
     }
 

@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import { RequestService } from '../../services/request.service';
 import { FileInfoService } from '../../services/file-info.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import { LinkPreviewService } from '../../services/link-preview.service';
 
 @Component({
   selector: 'app-users-messages',
@@ -30,13 +31,19 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
   showComponentBody: boolean;
   directionFlag: number;
   interval: any;
+  timiout:any;
+  previousScrollHeight: number;
+
+  @ViewChild('chat_wrapp') chat_wrapp: ElementRef;
 
   constructor( private requestService: RequestService,
                private fileService: FileInfoService,
                private storeservice: UserStoreService,
+               private linkPreview: LinkPreviewService,
                private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
+
 
     this.loginnedUser = this.storeservice.getUserData();
     this.all_messages = [];
@@ -44,6 +51,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
     this.eventFromParent.subscribe(event => {
 
+      this.previousScrollHeight = 0;
       this.showComponentBody = true;
       this.virtualUserFlag = event.flag;
       this.userWhoTalkToUs = event.user;
@@ -51,6 +59,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
     });
 
   }
+
 
   ngOnDestroy() {
 
@@ -88,16 +97,28 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
     this.requestService.getUserMessages(dataToServer).subscribe(
         data=>{
           if (data['messages'].length){
-
             let temp = data['messages'].map((message, i)=>{
                message.user_id ===  this.userWhoTalkToUs.user.user_id ? message.avatar = this.userWhoTalkToUs.user.thumbnail : message.avatar = this.loginnedUser.user_data.thumbnail;
+
+
+               // if (message.text){
+               //   let url = message.text.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+               //   url ? message['url_previews'] = url : '';
+               // }
 
               return message
             });
 
+            this.linkPreview.makePreviews(temp);
+
             this.directionFlag ? this.all_messages = temp.concat(this.all_messages) : this.all_messages = this.all_messages.concat(temp);
             this.flagMoveY = true;
 
+            this.timiout = setTimeout(()=>{
+                this.chat_wrapp.nativeElement.scrollTop = this.chat_wrapp.nativeElement.scrollHeight - this.chat_wrapp.nativeElement.clientHeight - this.previousScrollHeight + 55;
+              this.previousScrollHeight = this.chat_wrapp.nativeElement.scrollHeight;
+              clearTimeout(this.timiout)
+              }, 0)
           }
           this.autocheckNewMessages();
           this.show_loading = false;
@@ -105,7 +126,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get messages from a server'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get messages from a server'})}
     );
   }
 
@@ -126,7 +147,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -136,7 +157,6 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
     this.requestService.fileUpload(settings).subscribe(
         data=>{
           this.inProcess = false;
-          console.log(data)
           if (data.typeForApp === 'image'){
             this.loaded_image_url = data.multimedia
           }
@@ -144,7 +164,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -178,7 +198,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the message'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t send the message'})}
       );
 
       messageForm.resetForm();
@@ -187,7 +207,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   }
 
-  onScrollRichTheEnd(event): void {
+  onScrollRichTheTop(event): void {
 
     if (this.flagMoveY && this.all_messages.length){
         this.directionFlag = 0;
@@ -213,7 +233,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t delete the message'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t delete the message'})}
       );
     }
 

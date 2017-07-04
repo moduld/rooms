@@ -77,7 +77,7 @@ export class PostDetailsComponent implements OnInit {
         error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
     )
   }
 
@@ -100,7 +100,7 @@ export class PostDetailsComponent implements OnInit {
               this.error = error;
               console.log(error);
               this.disable_submit_button = false;
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get link for the file'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get link for the file'})}
       );
     }
   }
@@ -119,7 +119,7 @@ export class PostDetailsComponent implements OnInit {
             this.error = error;
             console.log(error);
             this.disable_submit_button = false;
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t send the file'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t send the file'})}
     );
   }
 
@@ -154,7 +154,7 @@ export class PostDetailsComponent implements OnInit {
                 this.error = error;
                 console.log(error);
                 this.disable_submit_button = false;
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new comment'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t add new comment'})}
         );
 
         commentForm.resetForm();
@@ -206,7 +206,7 @@ export class PostDetailsComponent implements OnInit {
           error => {
               this.error = error;
               console.log(error);
-              this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get comments list'})}
+              this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get comments list'})}
       );
   }
 
@@ -225,7 +225,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         );
     }
 
@@ -245,7 +245,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -282,7 +282,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -299,7 +299,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -312,7 +312,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 
@@ -334,7 +334,7 @@ export class PostDetailsComponent implements OnInit {
             error => {
                 this.error = error;
                 console.log(error);
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t make this action'})}
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t make this action'})}
         )
     }
 

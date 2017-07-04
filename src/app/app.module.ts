@@ -61,6 +61,7 @@ import { SafariErrorsFixService } from './services/safari-errors-fix.service';
 import { ScrollToTopService } from './services/scroll-to-top.service';
 import { UploadFilesService } from './services/upload-files.service';
 import { OpenNewWindowService } from './services/open-new-window.service';
+import { LinkPreviewService } from './services/link-preview.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
@@ -68,6 +69,7 @@ import { ScroolEndDirective } from './directives/scrool-end.directive';
 import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PollTimeLeftPipe } from './pipes/poll-time-left.pipe';
 import { DatexPipe } from './pipes/datex.pipe';
+import { AsteriscReplacePipe } from './pipes/asterisc-replace.pipe';
 
 let roomSettingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
@@ -151,7 +153,8 @@ let appRoutes: Routes =[
     NotificationsSettingsComponent,
     // PdfViewerComponent,
     PollTimeLeftPipe,
-    DatexPipe
+    DatexPipe,
+    AsteriscReplacePipe
   ],
   imports: [
     BrowserModule,
@@ -176,7 +179,8 @@ let appRoutes: Routes =[
     SafariErrorsFixService,
     UploadFilesService,
     ScrollToTopService,
-    OpenNewWindowService
+    OpenNewWindowService,
+    LinkPreviewService
 
   ],
   entryComponents: [

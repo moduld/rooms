@@ -1,3 +1,4 @@
+<span class="first_message" *ngIf="!userWhoTalkToUs">Select a conversation</span>
 <div class="chat_and_form_wrapp" *ngIf="showComponentBody">
 
     <div class="position_container">
@@ -8,23 +9,32 @@
                     <span class="name">{{virtualUserFlag ? userWhoTalkToUs.user.display_name : userWhoTalkToUs.display_name}}</span>
                 </span>
         </div>
-        <div class="chat_wrapp" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+        <div class="chat_wrapp" appScroolEnd (scrollRichTheTop)="onScrollRichTheTop($event)" #chat_wrapp>
 
-            <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index"
-                 [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'last': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
-                <div class="user_info_wrapp">
+            <div class="messages_container">
+                <!--[ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'last': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">-->
 
-                    <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')' }" [routerLink]="['/about-user', message.owner.user_id*22]"></span>
-                    <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
+                <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index"
+                     [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'first': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
+                    <div class="user_info_wrapp">
+
+                        <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')'}" [ngStyle]="message.owner.thumbnail && {'background-image':'url(' + message.owner.thumbnail + ')'}" [routerLink]="['/about-user', message.owner.user_id*22]"></span>
+                        <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
+                    </div>
+                    <div class="messages_wrapp">
+                        <span class="icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
+                        <p class="message" [innerHTML]="message.text | asteriscReplace"></p>
+                        <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
+
+
+                    </div>
                 </div>
-                <div class="messages_wrapp">
-                    <span class="icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
-                    <p class="message">{{message.text}}</p>
-                    <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
-                </div>
+
+                <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
             </div>
 
-            <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
 
         </div>
     </div>

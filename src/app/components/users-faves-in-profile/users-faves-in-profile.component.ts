@@ -78,7 +78,7 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t get users faves'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get users faves'})
         }
     );
   }
@@ -100,7 +100,7 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t this action'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t this action'})}
       )
     }
   }

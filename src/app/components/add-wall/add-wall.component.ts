@@ -50,7 +50,7 @@ export class AddWallComponent implements OnInit {
           error => {
             this.error = error;
             console.log(error);
-            this.exchangeService.doShowVisualMessageForUser({success:false, message: 'Something wrong, can\'t add new wall'})}
+            this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t add new wall'})}
       );
     }
 

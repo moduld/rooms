@@ -6,6 +6,12 @@
   border: 1px solid $border_menu;
 
 }
+.first_message{
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  color: $gray_text;
+}
 .chat_and_form_wrapp{
   width: 100%;
   flex: auto;
@@ -32,15 +38,17 @@
   border-radius: 5px;
   padding: 30px;
   background: white;
-  transform: rotate(180deg);
-  direction: rtl;
+  //transform: scaleY(-1);
+}
+.messages_container{
+  @extend .flex-column;
+  flex-direction: column-reverse;
 }
 .user_content_wrapp{
   width: 100%;
   @extend .flex-start;
   margin-top: 5px;
-  transform: rotate(180deg);
-  direction: ltr;
+  //transform: scaleY(-1);
 }
 .user_info_wrapp{
   @extend .flex-column;
@@ -89,7 +97,8 @@
   font-family: Arial, $font_regular;
 }
 
-.last{
+
+.first{
   .user_avatar{
     display: block;
   }
@@ -98,7 +107,7 @@
       display: block;
     }
   }
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .my_messages{
   flex-direction: row-reverse;
@@ -227,10 +236,7 @@
 }
 
 }
-.loading{
-  transform: rotate(180deg);
-  direction: ltr;
-}
+
 
 @media screen and (max-width: 1000px){
 
