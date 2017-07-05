@@ -58,6 +58,15 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
       this.userChangedOrStart()
     });
 
+    this.linkPreview.getPrevienLinkEvent.subscribe(data=>{
+
+      this.all_messages = this.all_messages.map((message)=>{
+        message.msg_id === data.message_id && message.previews.push(data);
+
+        return message
+      })
+    })
+
   }
 
 
@@ -99,19 +108,14 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
           if (data['messages'].length){
             let temp = data['messages'].map((message, i)=>{
                message.user_id ===  this.userWhoTalkToUs.user.user_id ? message.avatar = this.userWhoTalkToUs.user.thumbnail : message.avatar = this.loginnedUser.user_data.thumbnail;
-
-
-               // if (message.text){
-               //   let url = message.text.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-               //   url ? message['url_previews'] = url : '';
-               // }
+               message['previews'] = [];
 
               return message
             });
 
-            this.linkPreview.makePreviews(temp);
-
             this.directionFlag ? this.all_messages = temp.concat(this.all_messages) : this.all_messages = this.all_messages.concat(temp);
+
+            this.linkPreview.makePreviews(temp);
             this.flagMoveY = true;
 
             this.timiout = setTimeout(()=>{
@@ -191,7 +195,9 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
       this.requestService.sendNewMessage(dataToServer).subscribe(
           data=>{
+            data['message']['previews'] = [];
             this.all_messages.unshift(data['message']);
+            this.linkPreview.makePreviews([data['message']]);
             this.loaded_image_url = '';
             !this.virtualUserFlag && this.firstMessageSent.emit(true)
           },

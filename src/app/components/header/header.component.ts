@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     notifications: any[];
     notifications_quantity: number;
     routerSubscription: any;
-    tree: any;
+    currentRoute: any;
     for_active_class: boolean;
     hide_header: boolean;
     attendeds_links: string[];
@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
         event.keyCode === 13 && this.room_search && this.doRoomSearch(this.room_search)
+        event.keyCode === 13 && console.log('iughuyhj9pjui')
     }
 
     @HostBinding('class') marginClass = '';
@@ -43,29 +44,32 @@ export class HeaderComponent implements OnInit {
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
-              private router: Router) {}
+              private router: Router) {
+
+        // this.routerSubscription = this.router.events.subscribe(event=>{
+        //
+        //     if (event instanceof NavigationEnd ){
+        //         this.parseUrl()
+        //     }
+        // })
+    }
 
   ngOnInit() {
 
-        this.attendeds_links = ['all-rooms'];
+        // this.attendeds_links = ['all-rooms'];
       this.message_notification_offset = 0;
       this.messages = [];
       this.notifications = [];
-      this.showSuggestOrDefault = 'suggested';
+      // this.showSuggestOrDefault = 'suggested';
       this.messages_quantity = 0;
       this.notifications_quantity = 0;
       this.currentUser = this.storeservice.getUserData();
       this.getNewMessages();
       this.getNewNotifications();
-      this.for_active_class = true;
-      this.parseUrl();
+      // this.for_active_class = true;
+      // this.parseUrl();
 
-      this.routerSubscription = this.router.events.subscribe(event=>{
 
-          if (event instanceof NavigationEnd ){
-              this.parseUrl()
-          }
-      })
 
       this.exchangeService.userAvatarChangedEvent.subscribe(
           message => {
@@ -74,12 +78,15 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  parseUrl():void {
-
-      let parses = this.router.parseUrl(this.router.url);
-      this.tree = parses.root.children.primary.segments;
-      this.changeLinkState(this.tree[0].path)
-  }
+  // parseUrl():void {
+  //
+  //     let parses: UrlTree = this.router.parseUrl(this.router.url);
+  //     let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+  //     let segments: UrlSegment[] = segmentGroup.segments;
+  //     this.currentRoute = Number(segments[0].path) / 22;
+  //     // this.changeLinkState(this.currentRoute)
+  //
+  // }
 
   logOut(){
 
@@ -96,26 +103,28 @@ export class HeaderComponent implements OnInit {
   }
 
 
-    showSuggestionsRoomsorDefault(flag: string): void {
-
-      this.showSuggestOrDefault = flag;
-      this.room_search = '';
-      this.storeservice.deleteSearchText();
-
-      this.storeservice.changeSuggestedOrDefault(flag);
-
-      this.exchangeService.getSuggestRoomsOrUserRooms(flag)
-    }
+    // showSuggestionsRoomsorDefault(flag: string): void {
+    //
+    //   this.showSuggestOrDefault = flag;
+    //   this.room_search = '';
+    //   this.storeservice.deleteSearchText();
+    //
+    //   this.storeservice.changeSuggestedOrDefault(flag);
+    //
+    //   this.exchangeService.getSuggestRoomsOrUserRooms(flag)
+    // }
 
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
         let trimmed = request.trim();
         if (trimmed.length > 2 && trimmed !== this.storeservice.getSearchText()){
-          this.showSuggestOrDefault = '';
-          this.router.navigateByUrl('all-rooms');
-          this.storeservice.saveSearchText(trimmed);
-          this.exchangeService.searchByHeaderSearchField(trimmed)
+            this.room_search = '';
+          // this.showSuggestOrDefault = '';
+          // this.router.navigateByUrl('search');
+          this.router.navigate( ['search', {q: trimmed}]);
+          // this.storeservice.saveSearchText(trimmed);
+          // this.exchangeService.searchByHeaderSearchField(trimmed)
       }
     }
 
@@ -179,25 +188,12 @@ export class HeaderComponent implements OnInit {
         this.router.navigate( ['user-dialogs', {user: user.user.user_id*22}])
     }
 
-    changeLinkState(path: any):void {
-
-        // path != this.attendeds_links[this.attendeds_links.length - 1] && this.attendeds_links.push(path);
-
-        path === 'all-rooms'  ? this.for_active_class = true : this.for_active_class = false;
-
-        // if(path === 'room' || path === 'about-user' || path === 'user-settings'){
-        //     this.hide_header = true;
-        //     this.back_link = this.attendeds_links[this.attendeds_links.length - 2] || 'all-rooms';
-        //
-        // }else {
-        //     this.hide_header = false;
-        // }
-    }
-
-    // goBack():void {
+    // changeLinkState(path: any):void {
     //
-    //     this.router.navigateByUrl(this.back_link);
+    //     path === 'explore' || path === 'my-tifos' ? this.for_active_class = true : this.for_active_class = false;
+    //
     // }
+
 
     addHeaderClass(flag: boolean):void {
 

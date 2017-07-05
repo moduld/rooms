@@ -3,8 +3,12 @@
 <header class="header">
   <div class="main_container">
     <div class="logo" >
-      <span class="header_link icon-home" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}" (click)="showSuggestionsRoomsorDefault('default')">My Tifos</span>
-      <span class="header_link icon-binocular" [routerLink]="'/all-rooms'" [ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}" (click)="showSuggestionsRoomsorDefault('suggested')">Explore</span>
+      <!--[ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}"-->
+      <!--(click)="showSuggestionsRoomsorDefault('default')"-->
+      <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active"   >My Tifos</span>
+      <!--[ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}"-->
+      <!--(click)="showSuggestionsRoomsorDefault('suggested')"-->
+      <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >Explore</span>
     </div>
     <div class="search"  >
       <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" >

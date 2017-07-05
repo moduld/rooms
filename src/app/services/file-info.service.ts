@@ -8,10 +8,10 @@ export class FileInfoService {
   //used in components where need to attach some files to upload
   toNowFileInfo (file: any, place?:string): any {
 
+    let resultObject = new Object;
     if (file.type){
-      let resultObject = new Object;
-      if (file.type === "application/pdf"){
 
+      if (file.type === "application/pdf"){
         resultObject['folder'] = 'posts/pdfs/';
         resultObject['content_type'] = "application/pdf";
         resultObject['typeForApp'] = 'pdf';
@@ -69,6 +69,20 @@ export class FileInfoService {
       resultObject['uploaded'] = false;
       return resultObject
     } else {
+
+      let extension = file.name.split('.').pop();
+      console.log(extension)
+      if (extension === 'ppt' || extension === 'pptx'|| extension === 'xls' || extension === 'xlsx' || extension === 'doc' || extension === 'docs'){
+
+        resultObject['folder'] = 'posts/audios/';
+        resultObject['content_type'] = "audio/wav";
+        resultObject['typeForApp'] = 'audio';
+        resultObject['ext'] = 'wav';
+        resultObject['img_src'] =  'assets/img/tifos_audio_icon.png';
+      }
+
+
+
       return false
     }
   }

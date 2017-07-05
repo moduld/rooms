@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, URLSearchParams, Headers, RequestOptions} from '@angular/http';
+import {Http, URLSearchParams, Headers, RequestOptions, Jsonp} from '@angular/http';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -17,6 +17,7 @@ import { UserInfo } from '../commonClasses/userInfo';
 export class RequestService  {
 
   constructor(private http: Http,
+              private _jsonp: Jsonp,
               private storeservice: UserStoreService)  {}
 
   commonLink: string = 'http://dev.tifos.net/';
@@ -248,13 +249,12 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getWalls( room_id: any ): Observable<Wall> {
+  getWalls( room_alias: any ): Observable<Wall> {
 
-    this.roomId = room_id;
-
+    // this.roomId = room_id;
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('room_id', this.roomId);
+    params.set('room_alias', room_alias);
 
     let data = {
       params: params,
@@ -265,9 +265,10 @@ export class RequestService  {
 }
 
   getRoomPosts( dataToServer: any ): Observable<Post[]> {
+
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('room_id', this.roomId);
+    params.set('room_id', dataToServer.room_id);
     params.set('wall_id', dataToServer.wall_id);
     params.set('offset_id', dataToServer.offset_id);
     params.set('direction_flag', '0');
@@ -877,15 +878,19 @@ export class RequestService  {
     this.headers.append('x-time', time);
   }
 
-  getLinkPreview(link: string): Observable<any> {
+  getLinkPreview(link: any): Observable<any> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('key', '595c803f2930c4467c5ebcc8206601625e713d31605f9');
-    params.set('q', link);
+    params.set('q', link.url);
+    params.set('format', 'json');
+    params.set('callback', "JSONP_CALLBACK");
 
-    return this.http.get('http://api.linkpreview.net/', {search: params})
+    return this._jsonp.get('http://api.linkpreview.net/', {search: params})
         .map((resp:Response)=>{
-          return resp.json();
+          let temp = resp.json();
+          temp.message_id = link.message_id;
+          return temp
         })
         .catch((error: any)=>{
           return Observable.throw(error.json());

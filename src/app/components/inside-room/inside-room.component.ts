@@ -30,6 +30,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   error: any;
   roomId: any;
+  roomAlias: string;
   wallId: any;
   allPosts: Post[];
   userArmin: boolean;
@@ -73,29 +74,32 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     this.show_loading = true;
     this.filter_switcher = 'show_all';
     this.currentUserData = this.storeservice.getUserData();
-    this.subscription = this.activateRoute.params.subscribe(params=>{this.roomId = params.id / 22});
-    this.requestService.getWalls(this.roomId).subscribe(
+
+    this.subscription = this.activateRoute.params.subscribe(params=>{this.roomAlias = params['alias']});
+
+    this.requestService.getWalls(this.roomAlias).subscribe(
         data=>{
-            // console.log(data)
             if (data && data['message'] === undefined){
+
                 this.wallsArray = data['room_walls'];
                 this.wallId = this.wallsArray.walls[0].wall_id;
                 this.currentWall = this.wallsArray.walls[0];
                 this.roomTags = this.wallsArray.walls;
                 this.storeservice.storeCurrentUserRooms(this.wallsArray);
                 this.isAdmin();
+                this.roomId = this.wallsArray.room_details.room_id;
                 this.wallsArray['is_admin'] = this.userArmin;
                 this.getPosts();
                 this.wallsIds = this.wallId;
             }
         },
         error => {
-            this.error = error.json();
-            if (error && error.json().room_detals ){
+            if (error && error.room_detals ){
                 this.wallsArray = [];
-                this.openPrivateRoomModal(error.json().room_detals)
+                this.openPrivateRoomModal(error.room_detals)
             }else {
-                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get walls of the room'})
+                this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get walls of the room'});
+                this.router.navigateByUrl('explore')
             }
 
         }

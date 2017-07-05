@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {JsonpModule} from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -98,8 +99,12 @@ let userSettingsRoutes : Routes = [
 ];
 
 let appRoutes: Routes =[
-  { path: 'room/:id', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
-  { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+  { path: 'tifo/:alias', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
+  // { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+  { path: 'explore', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+  { path: 'my-tifos', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+  { path: 'search', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
   { path: 'room-settings', component: RoomSettingsComponent, children: roomSettingsRoutes, canActivate: [CanActivateComponent]},
@@ -107,7 +112,8 @@ let appRoutes: Routes =[
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},
   { path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateComponent]},
-  { path: '**', redirectTo: 'all-rooms', pathMatch:'full' }
+  { path: '**', component: AllRoomsComponent, canActivate: [CanActivateComponent]}
+  // { path: '**', redirectTo: 'explore', pathMatch:'full' }
 ];
 
 @NgModule({
@@ -157,6 +163,7 @@ let appRoutes: Routes =[
     AsteriscReplacePipe
   ],
   imports: [
+    JsonpModule,
     BrowserModule,
     FormsModule,
     HttpModule,

@@ -95,8 +95,9 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
   }
 
   openPostDetailsModal(post: any):void {
-
-    this.requestService.getWalls(post.room_id).subscribe(
+    console.log(post)
+    //  add room alias to posts in this component
+    this.requestService.getWalls(post.room_alias).subscribe(
         data=>{
           if (data && data['message'] === undefined){
             this.wallsArray = data['room_walls'];

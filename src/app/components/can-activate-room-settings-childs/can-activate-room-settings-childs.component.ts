@@ -18,7 +18,7 @@ export class CanActivateRoomSettingsChildsComponent implements OnInit {
 
   canActivate() : Observable<boolean> | boolean{
     let result = this.storeservice.getStoredCurrentUserRooms();
-    !result && this.router.navigateByUrl('/all-rooms');
+    !result && this.router.navigateByUrl('/explore');
     return result ? true : false
   }
 }

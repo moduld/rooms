@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { AddRequiredInfoService } from '../../services/add-required-info.service';
@@ -16,40 +17,78 @@ import {CreateRoomComponent} from '../../modals/create-room/create-room.componen
   templateUrl: 'all-rooms.component.html',
   styleUrls: ['all-rooms.component.scss']
 })
-export class AllRoomsComponent implements OnInit {
+export class AllRoomsComponent implements OnInit, OnDestroy {
 
     error: any;
     allRooms: Room[] = [];
     show_loading:boolean;
+    routerSubscription: any;
+    currentRoute: string;
+    queryString: string;
 
     constructor(private requestService: RequestService,
                 private modalService: NgbModal,
+                private router: Router,
+                private route: ActivatedRoute,
                 private exchangeService: EventsExchangeService,
                 private addRequiredInfo: AddRequiredInfoService,
                 private storeservice: UserStoreService) {
 
-      exchangeService.makeHeaderRoomSearch.subscribe(
-          search => {
-              this.getSearchableRooms(search)
-          });
+      // exchangeService.makeHeaderRoomSearch.subscribe(
+      //     search => {
+      //         this.getSearchableRooms(search)
+      //     });
 
-        exchangeService.makeHeaderRoomSuggestRequest.subscribe(
-            (flag) => {
-                    flag === 'suggested' ? this.getSuggestedRooms() : this.getUserRooms()
-            })
+        // exchangeService.makeHeaderRoomSuggestRequest.subscribe(
+        //     (flag) => {
+        //             flag === 'suggested' ? this.getSuggestedRooms() : this.getUserRooms()
+        //     })
+
+        this.routerSubscription = this.router.events.subscribe(event=>{
+
+            if (event instanceof NavigationEnd ){
+                let parses: UrlTree = this.router.parseUrl(this.router.url);
+                let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+                if (segmentGroup){
+                let segments: UrlSegment[] = segmentGroup.segments;
+                this.currentRoute = segments[0].path;
+                this.queryString = this.route.snapshot.params['q'];
+
+                if (this.currentRoute === 'explore' || this.currentRoute === 'my-tifos' || this.currentRoute === 'search'){
+
+                    this.currentRoute === 'explore' && this.getSuggestedRooms();
+                    this.currentRoute === 'my-tifos' && this.getUserRooms();
+                    this.currentRoute === 'search' && this.getSearchableRooms(this.queryString)
+                } else {
+
+                    this.router.navigateByUrl('tifo/' + this.currentRoute)
+
+                }
+                } else {
+                    this.router.navigateByUrl('explore')
+                }
+            }
+        })
+
   }
 
   ngOnInit() {
         //if default rooms output was changed to search or my rooms, and then user went to another page
         //when he comes to all-rooms page, this check returns previous state(search or my rooms)
-        if (this.storeservice.getSearchText()){
-            this.getSearchableRooms(this.storeservice.getSearchText())
-        } else {
-            this.storeservice.getSuggestedOrDefault() === 'suggested' && this.getSuggestedRooms();
-            this.storeservice.getSuggestedOrDefault() === 'default' && this.getUserRooms();
-            !this.storeservice.getSuggestedOrDefault() && this.getSuggestedRooms()
-        }
+        // if (this.storeservice.getSearchText()){
+        //     this.getSearchableRooms(this.storeservice.getSearchText())
+        // } else {
+        //     this.storeservice.getSuggestedOrDefault() === 'suggested' && this.getSuggestedRooms();
+        //     this.storeservice.getSuggestedOrDefault() === 'default' && this.getUserRooms();
+        //     !this.storeservice.getSuggestedOrDefault() && this.getSuggestedRooms()
+        // }
   }
+
+    ngOnDestroy(): void {
+        this.routerSubscription.unsubscribe();
+    }
+
+
 
   getUserRooms(): void {
 

@@ -33,9 +33,7 @@
   margin-right: 15px;
   background: $gray_background;
   border-radius: 5px;
-  //@extend .flex-column;
-  //justify-content: center;
-  //align-items: center;
+  max-height: 350px;
 }
 .image_preview{
   position: absolute;

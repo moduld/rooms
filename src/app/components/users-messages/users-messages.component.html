@@ -26,6 +26,11 @@
                         <p class="message" [innerHTML]="message.text | asteriscReplace"></p>
                         <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
 
+                        <a class="preview" target="_blank" *ngFor="let preview of message.previews" [href]="preview.url" [ngStyle]="{'background-image':'url(' + preview.image + ')' }">
+                            <span class="link_title">{{preview.title}}</span>
+                            <span class="link_title">{{preview.url}}</span>
+                        </a>
+
 
                     </div>
                 </div>
