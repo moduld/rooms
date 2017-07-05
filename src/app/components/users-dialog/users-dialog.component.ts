@@ -23,13 +23,7 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
   constructor( private requestService: RequestService,
                private router: Router,
                private route: ActivatedRoute,
-               private exchangeService: EventsExchangeService) { }
-
-  ngOnInit() {
-
-      this.users_list_toggle = true;
-    this.dialog_user_id = this.route.snapshot.params['user'] / 22;
-    this.all_users = [];
+               private exchangeService: EventsExchangeService) {
 
       this.routerSubscription = this.router.events.subscribe(event=>{
 
@@ -38,7 +32,13 @@ export class UsersDialogComponent implements OnInit, OnDestroy {
               this.getUsersForDialog();
           }
       });
+  }
 
+  ngOnInit() {
+
+    this.users_list_toggle = true;
+    this.dialog_user_id = this.route.snapshot.params['user'] / 22;
+    this.all_users = [];
   }
 
   ngOnDestroy() {

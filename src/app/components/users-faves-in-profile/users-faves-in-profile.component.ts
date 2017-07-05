@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { RequestService } from '../../services/request.service';
@@ -14,7 +14,6 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
 
   error: any;
   allUsers: any[];
-  tree: any;
   user_id: any;
   users_offset: number;
   flagMoveY: boolean = true;
@@ -25,7 +24,19 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
   constructor(private requestService: RequestService,
               private router: Router,
               private exchangeService: EventsExchangeService,
-              private storeservice: UserStoreService) { }
+              private storeservice: UserStoreService) {
+
+    this.routerSubscription = this.router.events.subscribe(event=>{
+
+      if (event instanceof NavigationEnd ){
+        let parses: UrlTree = this.router.parseUrl(this.router.url);
+        let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+        let segments: UrlSegment[] = segmentGroup.segments;
+        this.user_id = Number(segments[1].path) / 22;
+        this.getUserFaves()
+      }
+    })
+  }
 
   ngOnInit() {
 
@@ -43,15 +54,7 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.routerSubscription = this.router.events.subscribe(event=>{
 
-      if (event instanceof NavigationEnd ){
-        let parses = this.router.parseUrl(this.router.url);
-        this.tree = parses.root.children.primary.segments;
-        this.user_id = this.tree[1].path / 22;
-        this.getUserFaves()
-      }
-    })
 
   }
 

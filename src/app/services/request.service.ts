@@ -877,5 +877,20 @@ export class RequestService  {
     this.headers.append('x-time', time);
   }
 
+  getLinkPreview(link: string): Observable<any> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('key', '595c803f2930c4467c5ebcc8206601625e713d31605f9');
+    params.set('q', link);
+
+    return this.http.get('http://api.linkpreview.net/', {search: params})
+        .map((resp:Response)=>{
+          return resp.json();
+        })
+        .catch((error: any)=>{
+          return Observable.throw(error.json());
+        });
+  }
+
 
 }

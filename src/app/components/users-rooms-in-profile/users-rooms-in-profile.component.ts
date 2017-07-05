@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { Router,  NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
 import { RequestService } from '../../services/request.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
@@ -21,21 +21,23 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
   constructor(
               private requestService: RequestService,
               private router: Router,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+    this.routerSubscription = this.router.events.subscribe(event=>{
+
+      if (event instanceof NavigationEnd ){
+        let parses: UrlTree = this.router.parseUrl(this.router.url);
+        let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+        let segments: UrlSegment[] = segmentGroup.segments;
+        this.user_id = Number(segments[1].path) / 22;
+        this.getUserRooms()
+      }
+    })
+  }
 
   ngOnInit() {
 
     this.show_loading = false;
-    this.routerSubscription = this.router.events.subscribe(event=>{
-
-      if (event instanceof NavigationEnd ){
-        let parses = this.router.parseUrl(this.router.url);
-        this.tree = parses.root.children.primary.segments;
-        this.user_id = this.tree[1].path / 22;
-        this.getUserRooms()
-      }
-    })
-
   }
 
   ngOnDestroy(): void {

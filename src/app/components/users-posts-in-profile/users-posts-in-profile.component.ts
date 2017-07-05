@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd} from '@angular/router';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestService } from '../../services/request.service';
@@ -19,7 +19,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
 
   error: any;
   allPosts: any[];
-  tree: any;
   user_id: any;
   post_offset: number;
   currentUserData: UserInfo;
@@ -34,7 +33,19 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
               private router: Router,
               private modalService: NgbModal,
               private exchangeService: EventsExchangeService,
-              private safariService: SafariErrorsFixService) { }
+              private safariService: SafariErrorsFixService) {
+
+      this.routerSubscription = this.router.events.subscribe(event=>{
+
+          if (event instanceof NavigationEnd ){
+              let parses: UrlTree = this.router.parseUrl(this.router.url);
+              let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+              let segments: UrlSegment[] = segmentGroup.segments;
+              this.user_id = Number(segments[1].path) / 22;
+              this.getUserPosts()
+          }
+      })
+  }
 
   ngOnInit() {
     this.currentUserData = this.storeservice.getUserData();
@@ -51,15 +62,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
         }
     });
 
-      this.routerSubscription = this.router.events.subscribe(event=>{
-
-          if (event instanceof NavigationEnd ){
-              let parses = this.router.parseUrl(this.router.url);
-              this.tree = parses.root.children.primary.segments;
-              this.user_id = this.tree[1].path / 22;
-              this.getUserPosts()
-          }
-      })
   }
 
     ngOnDestroy(): void {
