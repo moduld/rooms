@@ -63,6 +63,12 @@ body.safari_browser{
 .carousel-indicators{
     bottom: 0;
 }
+app-post-details-main .slider_container{
+    height: 40vh;
+}
+app-post-details-main .picture{
+    min-height: 350px;
+}
 @media screen and (max-width: 1000px){
     .post_details_modal_hi_width{
         max-width: 600px!important;
@@ -106,4 +112,12 @@ body.safari_browser{
     .opened ~ app-users-dialog > .main_container > .aside{
         top: 178px;
     }
+    app-post-details-main  .picture{
+        min-height: 285px;
+    }
+    .opened ~ app-inside-room > app-post-details-main  .post_content{
+        height: calc(100vh - 477px);
+    }
+
 }
+

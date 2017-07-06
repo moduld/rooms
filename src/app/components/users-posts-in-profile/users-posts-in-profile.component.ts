@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
 
-import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
 import { UserInfo } from '../../commonClasses/userInfo';
 
 @Component({
@@ -22,8 +20,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
   user_id: any;
   post_offset: number;
   currentUserData: UserInfo;
-  wallsArray: any;
-  userArmin: boolean;
   flagMoveY: boolean = true;
   show_loading: boolean;
     routerSubscription: any;
@@ -31,7 +27,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
   constructor(private storeservice: UserStoreService,
               private requestService: RequestService,
               private router: Router,
-              private modalService: NgbModal,
               private exchangeService: EventsExchangeService,
               private safariService: SafariErrorsFixService) {
 
@@ -83,6 +78,7 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
           if (data['posts'].length){
             this.allPosts = this.allPosts.concat(data['posts']);
             this.flagMoveY = true;
+            console.log(this.allPosts)
           }
           this.show_loading = false;
             this.safariService.addSafariClass()
@@ -92,41 +88,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
             this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get posts from a server'})
         }
     );
-  }
-
-  openPostDetailsModal(post: any):void {
-    console.log(post)
-    //  add room alias to posts in this component
-    this.requestService.getWalls(post.room_alias).subscribe(
-        data=>{
-          if (data && data['message'] === undefined){
-            this.wallsArray = data['room_walls'];
-            this.isAdmin();
-            this.wallsArray['is_admin'] = this.userArmin;
-            this.openModal(post)
-          }
-        },
-        error => {
-          this.error = error;
-          console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get walls list'})}
-    );
-  }
-
-  isAdmin():void {
-
-    this.wallsArray.membership['admin'] || this.wallsArray.membership['moderator'] || this.wallsArray.membership['supermoderator'] ? this.userArmin = true : this.userArmin = false;
-  }
-
-  openModal(post: any):void {
-
-    const modalRef = this.modalService.open(PostDetailsComponent);
-    modalRef.componentInstance.post = post;
-    modalRef.componentInstance.walls = this.wallsArray.membership;
-    modalRef.componentInstance.is_admin = this.userArmin;
-    modalRef.result.then((post) => {
-
-    });
   }
 
   likeAndUnlikePost(post_id: number, flag: number, post: any): void{

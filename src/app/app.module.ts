@@ -43,7 +43,8 @@ import {
   CanActivateRoomSettingsChildsComponent,
   NotificationsComponent,
   SliderComponent,
-  NotificationsSettingsComponent} from './components/index';
+  NotificationsSettingsComponent,
+  PostDetailsMainComponent} from './components/index';
 
 import {
   CreatePostComponent,
@@ -86,8 +87,7 @@ let aboutUserChildRoutes = [
   { path: 'user-posts', component: UsersPostsInProfileComponent},
   { path: 'user-fans', component: UsersFansInProfileComponent},
   { path: 'user-faves', component: UsersFavesInProfileComponent},
-  { path: '',redirectTo: 'user-rooms', pathMatch:'full'},
-  { path: '**',redirectTo: 'user-rooms', pathMatch:'full'}
+  { path: '',redirectTo: 'user-rooms', pathMatch:'full'}
 ];
 
 let userSettingsRoutes : Routes = [
@@ -98,9 +98,13 @@ let userSettingsRoutes : Routes = [
   { path: '',redirectTo: 'edit-profile', pathMatch:'full'}
 ];
 
+let postDetails : Routes = [
+  { path: 'post/:post_id', component: PostDetailsMainComponent}
+];
+
 let appRoutes: Routes =[
-  { path: 'tifo/:alias', component: InsideRoomComponent, canActivate: [CanActivateComponent]},
-  // { path: 'all-rooms', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
+  { path: 'tifo/:alias', component: InsideRoomComponent, children: postDetails, canActivate: [CanActivateComponent]},
+
   { path: 'explore', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'my-tifos', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'search', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
@@ -160,7 +164,8 @@ let appRoutes: Routes =[
     // PdfViewerComponent,
     PollTimeLeftPipe,
     DatexPipe,
-    AsteriscReplacePipe
+    AsteriscReplacePipe,
+    PostDetailsMainComponent
   ],
   imports: [
     JsonpModule,

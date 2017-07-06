@@ -137,6 +137,21 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
+  getPostsById(post_id: any): Observable<Room[]> {
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('user_id', this.userId);
+    params.set('post_id', post_id);
+
+
+    let data = {
+      params: params,
+      apiLink: 'wall/post/get/one'
+    };
+
+    return this.makeGetRequest(data)
+  }
+
   getUserNotifications(dataToServer: any): Observable<Room[]> {
 
     let params: URLSearchParams = new URLSearchParams();

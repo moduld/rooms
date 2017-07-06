@@ -9,7 +9,7 @@
       <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
     </div>
     <i class="line"></i>
-    <div class="post_body"     (click)="openPostDetailsModal(post)">
+    <div class="post_body"     [routerLink]="['/tifo/' + post.room_alias + '/post/'+ post.post_id]">
       <p class="post_text" *ngIf="post.text.length">{{post.text}}</p>
 
       <div class="post_images_wrapp " *ngIf="post.media.length"

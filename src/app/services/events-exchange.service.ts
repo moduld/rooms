@@ -7,34 +7,36 @@ export class EventsExchangeService {
   constructor() { }
 
 
-  private headerRoomSearch = new Subject<any>();
-  private headerRoomSuggetsRooms = new Subject<any>();
+  // private headerRoomSearch = new Subject<any>();
+  // private headerRoomSuggetsRooms = new Subject<any>();
   private dataChangedFromSettings = new Subject<any>();
   private showVisualMessageForUser = new Subject<any>();
   private urlChanged = new Subject<any>();
   private srcrooReachEnd = new Subject<any>();
   private userAvatarChanged = new Subject<any>();
+  private getWallsForRoom = new Subject<any>();
 
 
-  makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
-  makeHeaderRoomSuggestRequest = this.headerRoomSuggetsRooms.asObservable();
+  // makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
+  // makeHeaderRoomSuggestRequest = this.headerRoomSuggetsRooms.asObservable();
   dataChangedFromUserSettings = this.dataChangedFromSettings.asObservable();
   showMessageForUser = this.showVisualMessageForUser.asObservable();
   urlChangedEvent = this.urlChanged.asObservable();
   srcrooReachEndEvent = this.srcrooReachEnd.asObservable();
   userAvatarChangedEvent = this.userAvatarChanged.asObservable();
+  getWallsForRoomEvent = this.getWallsForRoom.asObservable();
 
 
   //event when user clicks search icon in search field in the header.
   //calls in header.component. used in allRooms.component
-  searchByHeaderSearchField(request: string): void {
-    this.headerRoomSearch.next(request);
-  }
+  // searchByHeaderSearchField(request: string): void {
+  //   this.headerRoomSearch.next(request);
+  // }
 //event when user clicks suggested or my Tifos in the header.
 //calls in header.component. used in allRooms.component
-  getSuggestRoomsOrUserRooms(flag: string): void {
-    this.headerRoomSuggetsRooms.next(flag);
-  }
+//   getSuggestRoomsOrUserRooms(flag: string): void {
+//     this.headerRoomSuggetsRooms.next(flag);
+//   }
   //to increase or decrease value inside buttons (switchers between user rooms, posts, favs, fans)
   //calls from UserPostsInProfile, UserFansInProfile, UserFavesInProfile. used in AboutUser.component
   changeQuontityOfItemsInUserSettings(data: string): void {
@@ -56,6 +58,10 @@ export class EventsExchangeService {
 //  event when users avatar changed. To change automaticaly in header
   changeUserAvatar():void {
     this.userAvatarChanged.next()
+  }
+
+  pushEventGetWalls():void {
+    this.getWallsForRoom.next()
   }
 
 }

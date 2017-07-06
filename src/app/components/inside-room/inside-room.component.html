@@ -1,4 +1,5 @@
-<div class="component_wrapp" #scrollArea appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)" (scrollAction)="onScrollAction($event)">
+<router-outlet></router-outlet>
+<div class="component_wrapp" #scrollArea appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)" (scrollAction)="onScrollAction($event)" *ngIf="without_child_route">
 
 
 <div class="name_and_menu" *ngIf="wallsArray">
@@ -57,7 +58,7 @@
             <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | datex:'hh:mm A'}}</span></span>
         </div>
         <i class="line"></i>
-        <div class="post_body"     (click)="openPostDetailsModal(post)">
+        <div class="post_body"   [routerLink]="['./post', post.post_id]">
             <p class="post_text" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text.length">{{post.text}}</p>
 
             <div class="post_images_wrapp " *ngIf="post.media.length"

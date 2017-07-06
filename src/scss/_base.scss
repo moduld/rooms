@@ -252,3 +252,28 @@ $font_lora: LoraRegular, serif;
     color: white;
   }
 }
+
+.show_host{
+  height: calc(100vh - 60px);
+  @extend .flex-column;
+}
+
+@media screen and (max-width: 1000px){
+  .show_host{
+    height: calc(100vh - 114px);
+  }
+}
+
+@media screen and (max-width: 550px){
+  .show_host{
+    transition: 0.5s;
+    height: 100vh
+  }
+  .opened ~ app-inside-room > .show_host{
+    height: calc(100vh - 143px);
+  }
+  .opened ~ app-inside-room > .post_content{
+
+  }
+
+}

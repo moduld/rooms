@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
 import { RequestService } from '../../services/request.service';
@@ -16,7 +15,7 @@ import { SafariErrorsFixService } from '../../services/safari-errors-fix.service
 import { ScrollToTopService } from '../../services/scroll-to-top.service';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
-import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
+// import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
 import {PrivateRoomComponent} from '../../modals/private-room/private-room.component';
 
 
@@ -48,6 +47,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     posts_search: string;
     show_hide_toggle:boolean;
     show_to_top:boolean;
+    currentRoute:string;
+    routerSubscription: any;
+    without_child_route:boolean;
     @ViewChild('scrollArea') scrollArea;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -59,12 +61,26 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 private safariService: SafariErrorsFixService,
                  private scrollToTop: ScrollToTopService){
 
+      this.routerSubscription = this.router.events.subscribe(event=>{
 
+          if (event instanceof NavigationEnd ){
+              let parses: UrlTree = this.router.parseUrl(this.router.url);
+              let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+              let segments: UrlSegment[] = segmentGroup.segments;
+
+              if (window.innerWidth <= 768){
+                  segments.length !== 4 ? this.without_child_route = true : this.without_child_route = false
+              } else {
+                  this.without_child_route = true
+              }
+          }
+      })
   }
 
   ngOnDestroy(){
 
     this.subscription.unsubscribe();
+    this.routerSubscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -87,6 +103,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
                 this.roomTags = this.wallsArray.walls;
                 this.storeservice.storeCurrentUserRooms(this.wallsArray);
                 this.isAdmin();
+                this.exchangeService.pushEventGetWalls();
                 this.roomId = this.wallsArray.room_details.room_id;
                 this.wallsArray['is_admin'] = this.userArmin;
                 this.getPosts();
@@ -355,16 +372,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
 
 
-    openPostDetailsModal(post: Post):void {
 
-        const modalRef = this.modalService.open(PostDetailsComponent);
-        modalRef.componentInstance.post = post;
-        modalRef.componentInstance.walls = this.membership;
-        modalRef.componentInstance.is_admin = this.userArmin;
-        modalRef.result.then((post) => {
-
-        }).catch(()=>{});
-    }
 
     onScrollRichTheEnd(event): void {
 

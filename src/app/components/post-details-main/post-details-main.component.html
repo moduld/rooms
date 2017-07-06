@@ -1,0 +1,183 @@
+<div class="main_container" *ngIf="show_component">
+  <!--<div class="back_button icon-chevron-left" ></div>-->
+  <div class="slider_container" *ngIf="post.media.length">
+    <app-slider [contentArray]="post.media"></app-slider>
+
+  </div>
+  <div class="post_content">
+    <div class="post_info">
+                 <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
+                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span class="name">{{post.owner.display_name}} <br><span>@{{post.owner.user_name}}</span></span>
+                </span>
+      <!--use datex to solve issue in IE-->
+      <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | datex:'hh:mm A'}}</span></span>
+    </div>
+    <div class="scrollable_part"  appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+      <div class="post_body" >
+        <p class="post_text">{{post.text}}</p>
+        <div class="poll_wrapp" *ngIf="post.has_poll_flag">
+          <p class="post_text">{{post.poll.question}}</p>
+          <div class="progress_wrapp">
+            <span class="vote_field" (click)="voteForPost(membership.member ? '1' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice1}}</span>
+            <ngb-progressbar class="progress_bar"
+                             [value]="convertPollPercent().first"
+                             *ngIf="post.poll.voted || !post.poll.time_left">
+              <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 1}">{{post.poll.choice1}}</span>
+            </ngb-progressbar>
+            <span class="curent_vote_value" *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().first}}%</span>
+          </div>
+          <div class="progress_wrapp">
+            <span class="vote_field" (click)="voteForPost(membership.member ? '2' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice2}}</span>
+            <ngb-progressbar class="progress_bar"
+                             [value]="convertPollPercent().second"
+                             *ngIf="post.poll.voted || !post.poll.time_left">
+              <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 2}">{{post.poll.choice2}}</span>
+            </ngb-progressbar>
+            <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().second}}%</span>
+          </div>
+          <div class="progress_wrapp" *ngIf="post.poll.choice3">
+            <span class="vote_field" (click)="voteForPost(membership.member ? '3' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice3}}</span>
+            <ngb-progressbar class="progress_bar"
+                             [value]="convertPollPercent().third"
+                             *ngIf="post.poll.voted || !post.poll.time_left">
+              <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 3}">{{post.poll.choice3}}</span>
+            </ngb-progressbar>
+            <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().third}}%</span>
+          </div>
+          <div class="progress_wrapp" *ngIf="post.poll.choice4">
+            <span class="vote_field" (click)="voteForPost(membership.member ? '4' : '-1')" *ngIf="!post.poll.voted && post.poll.time_left">{{post.poll.choice4}}</span>
+            <ngb-progressbar class="progress_bar"
+                             [value]="convertPollPercent().forth"
+                             *ngIf="post.poll.voted || !post.poll.time_left">
+              <span class="inside_bar" [ngClass]="{'choosen_variant': post.poll.voted == 4}">{{post.poll.choice4}}</span>
+            </ngb-progressbar>
+            <span class="curent_vote_value"  *ngIf="post.poll.voted || !post.poll.time_left">{{convertPollPercent().forth}}%</span>
+          </div>
+
+          <div class="vote_info_wrapp"  *ngIf="post.poll">
+            <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+            <span class="icon-calendar">{{post | pollTimeLeft}}</span>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="post_footer">
+        <div class="icons_wrapper">
+          <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}" (click)="likeAndUnlikePost(post.post_id, post.liked_by_user)">{{post.likes_count}}</span>
+          <span class="icon-bubble">{{post.comments_count}}</span>
+        </div>
+
+        <select  class="sort_select" [(ngModel)]="comments_sort_type" (change)="changeSorting()">
+          <option value="date_newer">New to old</option>
+          <option value="date_older">Old to new</option>
+          <option value="top">Most liked</option>
+        </select>
+
+      </div>
+
+
+      <div class="comments" *ngFor="let comment of comments; let i = index">
+        <div class="post_info">
+                  <span class="user_info" [routerLink]="['/about-user', comment.owner.user_id*22]">
+                    <span class="avatar" [ngStyle]="comment.owner.thumbnail && {'background-image':'url(' + comment.owner.thumbnail + ')' }" ></span>
+                    <span class="name">{{comment.owner.user_name}}</span>
+                </span>
+          <span class="date">{{ comment.created_at * 1000 | timeAgo }}</span>
+        </div>
+        <div class="comment_body">
+          <p class="comment_text">{{comment.text}}</p>
+          <span (click)="openImageLink(comment.media)"  class="picture" *ngIf="comment.has_media_flag" [ngStyle]="{'background-image':'url(' + comment.media.thumbnail + ')' }"></span>
+        </div>
+        <div class="comment_footer">
+          <div class="icons_wrapper">
+            <span class="icon-heart-o" [ngClass]="{'icon-heart': comment.liked_by_user}" (click)="likeAndUnlikeComment(comment)">{{comment.likes_count}}</span>
+          </div>
+          <div class="drop_down_container">
+            <div class="dots_wrapp">
+              <i class="dots"></i>
+              <i class="dots"></i>
+              <i class="dots"></i>
+            </div>
+            <ul class="drop_down_menu" (mouseleave)="onMouseLeave( comment)">
+              <!--done ?-->
+              <li class="triangle"><i class="trans_bar"></i></li>
+              <li class="drop_down_item"
+                  (click)="commentOwnerInterraction('mute', comment.owner.user_id)"
+                  *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id">
+                <span class="drop_down_fill icon-mute">Mute User</span>
+              </li>
+              <!--done ?-->
+              <li class="drop_down_item"
+                  (click)="commentOwnerInterraction('block', comment.owner.user_id)"
+                  *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id">
+
+                <span class="drop_down_fill icon-eye-blocked">Block User</span>
+              </li>
+
+
+              <!--done ?-->
+              <li class="drop_down_item comm_block_with_select"
+                  *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id && is_admin">
+                <span class="drop_down_fill icon-ban" (click)="commentInterraction('ban', comment)">Ban User</span>
+
+
+                <select name="ban_days" class="ban-days" [(ngModel)]="banDays"
+                        *ngIf="comment.bunned"
+                        (change)="commentInterraction('do_ban', comment, i, banDays)">
+                  <option value="0" selected disabled>Days for ban</option>
+                  <option value="3">3 days</option>
+                  <option value="7">7 days</option>
+                  <option value="14">14 days</option>
+                  <option value="30">30 days</option>
+                  <option value="60">60 days</option>
+                  <option value="3000">3000 days</option>
+                </select>
+              </li>
+
+              <!--done-->
+              <li class="drop_down_item" (click)="commentInterraction('remove', comment, i)"
+                  *ngIf="currentUserData.user_data.user_id === comment.owner.user_id || is_admin">
+
+                <span class="drop_down_fill icon-cancel">{{currentUserData.user_data.user_id === comment.owner.user_id ? 'Delete Comment' : 'Remove Comment'}}</span>
+              </li>
+              <!--done-->
+              <li class="drop_down_item" (click)="commentInterraction('inappropriate', comment)"
+                  *ngIf="currentUserData.user_data.user_id !== comment.owner.user_id && !is_admin">
+
+                <span class="drop_down_fill icon-flag">Flag inappropriate </span>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+      <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+
+
+    </div>
+
+
+
+
+    <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm, $event)" *ngIf="post.allow_comment_flag && membership.member && !membership.banned">
+      <div class="alighn_wrapp">
+        <textarea type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="Enter your comment..."></textarea>
+        <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>
+        <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
+          <label for="comment_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
+        </div>
+        <button type="submit" [disabled]="disable_submit_button" class="send_button icon-plane"></button>
+      </div>
+    </form>
+    <p class="comments_not_allowed" *ngIf="!post.allow_comment_flag || !membership.member || membership.banned">{{!post.allow_comment_flag ? 'Comments are disabled' : "You can't comment"}}</p>
+
+
+
+  </div>
+
+
+</div>
