@@ -66,7 +66,8 @@ export class UpdateRoomComponent implements OnInit {
     this.roomName = this.currentRoom.room_details.room_name;
     this.roomAlias = this.currentRoom.room_details.room_alias;
     // this.currentRoom.room_details.thumbnail && this.fileDropped(false);
-    this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
+    this.dataToServer['multimedia'] = '';
+    // this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
     this.roomDeskription = this.currentRoom.room_details.room_desc;
     this.publicFlag = !!this.currentRoom.room_details.public;
     this.searchableFlag = !!this.currentRoom.room_details.searchable_flag;

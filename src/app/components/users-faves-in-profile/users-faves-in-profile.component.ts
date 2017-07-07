@@ -86,18 +86,26 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  unfaveUser(user: any, index: number): void {
+  faveUnfaveUser(user: any, index: number): void {
 
-    if (user.is_fave){
-
-      let dataToServer = {
+    let dataToServer;
+    if (this.user_id != this.currentUser.user_data.user_id && !user.is_fave){
+      dataToServer = {
         user_id_fave: user.user_id,
         is_fave: user.is_fave
       };
+    }
 
-      this.requestService.faveUnfaveUser(dataToServer).subscribe(
+    if (this.user_id == this.currentUser.user_data.user_id && user.is_fave){
+      dataToServer = {
+        user_id_fave: user.user_id,
+        is_fave: user.is_fave
+      };
+    }
+
+    dataToServer && this.requestService.faveUnfaveUser(dataToServer).subscribe(
           data=>{
-            this.allUsers.splice(index, 1);
+            this.user_id != this.currentUser.user_data.user_id ? user.is_fave = 1 : this.allUsers.splice(index, 1);
             this.user_id == this.currentUser.user_data.user_id && this.exchangeService.changeQuontityOfItemsInUserSettings('unfave')
           },
           error => {
@@ -105,7 +113,9 @@ export class UsersFavesInProfileComponent implements OnInit, OnDestroy {
             console.log(error);
             this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t this action'})}
       )
-    }
+
   }
+
+
 
 }

@@ -5,7 +5,8 @@
     <div class="picture audio" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'audio'">
       <audio [src]="content.multimedia" controls type="audio/*" class="picture audio"  ></audio>
     </div>
-    <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'pdf'"></span>
+    <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'pdf' ||
+     content.type === 'ppt' || content.type === 'pptx' || content.type === 'xls' || content.type === 'xlsx' || content.type === 'doc' || content.type === 'docx'"></span>
     <!--<div class="picture pdf"  *ngIf="content.type === 'pdf'">-->
       <!--<div class="zoom_control">-->
         <!--<span class="zoom_items controls" (click)="changeZoom(true)">+</span>-->

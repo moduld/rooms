@@ -58,7 +58,8 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = this.storeservice.getUserData();
-    this.dataToServer['multimedia'] = this.currentUser.user_data.thumbnail || '';
+    // this.dataToServer['multimedia'] = this.currentUser.user_data.thumbnail || '';
+    this.dataToServer['multimedia'] = '';
     // this.currentUser.user_data.thumbnail && this.fileDropped(false);
     this.userName = this.currentUser.user_data.user_name;
     this.userDisplayedName = this.currentUser.user_data.display_name;

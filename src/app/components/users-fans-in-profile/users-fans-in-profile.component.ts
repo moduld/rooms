@@ -84,7 +84,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
     );
   }
 
-  faveUser(user: any): void {
+    faveUser(user: any): void {
 
     if (!user.is_fave){
 
@@ -95,8 +95,7 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
 
       this.requestService.faveUnfaveUser(dataToServer).subscribe(
           data=>{
-            user.is_fave = 1;
-            this.user_id == this.currentUser.user_data.user_id && this.exchangeService.changeQuontityOfItemsInUserSettings('fave')
+              this.user_id != this.currentUser.user_data.user_id ?  user.is_fave = 1 : this.exchangeService.changeQuontityOfItemsInUserSettings('fave')
           },
           error => {
               this.error = error;

@@ -71,17 +71,25 @@ export class FileInfoService {
     } else {
 
       let extension = file.name.split('.').pop();
-      console.log(extension)
+
       if (extension === 'ppt' || extension === 'pptx'|| extension === 'xls' || extension === 'xlsx' || extension === 'doc' || extension === 'docs'){
 
-        resultObject['folder'] = 'posts/audios/';
-        resultObject['content_type'] = "audio/wav";
-        resultObject['typeForApp'] = 'audio';
-        resultObject['ext'] = 'wav';
+        resultObject['folder'] = 'posts/docs/';
+        extension === 'ppt' ?  resultObject['content_type'] = "application/vnd.ms-powerpoint" : '';
+        extension === 'pptx' ?  resultObject['content_type'] = "application/vnd.openxmlformats-officedocument.presentationml.presentation" : '';
+        extension === 'xls' ?  resultObject['content_type'] = "application/vnd.ms-excel" : '';
+        extension === 'xlsx' ?  resultObject['content_type'] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" : '';
+        extension === 'doc' ?  resultObject['content_type'] = "application/msword" : '';
+        extension === 'docx' ?  resultObject['content_type'] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : '';
+
+        resultObject['typeForApp'] = extension;
+        resultObject['ext'] = extension;
         resultObject['img_src'] =  'assets/img/tifos_audio_icon.png';
+
+        resultObject['file'] = file;
+        resultObject['uploaded'] = false;
+        return resultObject
       }
-
-
 
       return false
     }
