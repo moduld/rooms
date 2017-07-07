@@ -120,6 +120,11 @@ $font_lora: LoraRegular, serif;
   &:hover > .drop_down_menu{
     display: block;
   }
+  &.dd_opened > .drop_down_menu{
+    display: block;
+  }
+
+
 }
 .drop_down_menu{
   position: absolute;

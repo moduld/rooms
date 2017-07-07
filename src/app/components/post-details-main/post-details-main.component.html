@@ -4,7 +4,7 @@
     <app-slider [contentArray]="post.media"></app-slider>
 
   </div>
-  <div class="post_content">
+  <div class="post_content" [ngClass]="{'without_media': !post.media.length}">
     <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
                     <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>

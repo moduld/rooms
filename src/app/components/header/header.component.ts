@@ -199,4 +199,5 @@ export class HeaderComponent implements OnInit {
       this.marginClass = flag ? 'opened': ''
     }
 
+
 }

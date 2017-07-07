@@ -65,7 +65,7 @@ export class EditWallComponent implements OnInit, OnDestroy {
           data=>{
             this.currentRoom.walls[this.index] = data.wall;
             this.storeservice.storeCurrentUserRooms(this.currentRoom);
-            this.router.navigateByUrl('/room-settings');
+            this.router.navigateByUrl('/tifo-settings');
             this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall changed successful'})
           },
           error => {

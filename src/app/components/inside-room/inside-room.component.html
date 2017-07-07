@@ -25,10 +25,10 @@
         </div>
 
         <ul class="posts_menu" >
-            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/room-settings'">Room Settings</li>
-            <li class="posts_menu_items icon-question">About Room</li>
-            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">Join Room</li>
-            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">Leave Room</li>
+            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/tifo-settings'">Settings</li>
+            <li class="posts_menu_items icon-question">About</li>
+            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">Join</li>
+            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">Leave</li>
         </ul>
     </div>
 
@@ -54,8 +54,7 @@
                     <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
                     <span class="name">{{post.owner.user_name}}</span>
                 </span>
-            <!--use datex to solve IE issue-->
-            <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}<br> <span>{{post.created_at * 1000 | datex:'hh:mm A'}}</span></span>
+            <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
         </div>
         <i class="line"></i>
         <div class="post_body"   [routerLink]="['./post', post.post_id]">

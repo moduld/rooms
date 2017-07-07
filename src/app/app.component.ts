@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {Router, NavigationEnd} from '@angular/router';
 import {RequestService} from './services/request.service';
@@ -17,11 +17,22 @@ export class AppComponent implements OnInit{
 
   showHeader: boolean;
   showFooter: boolean;
+  // @HostListener('document:click' || 'document:touch', ['$event']) handleKeyboardEvent(event: any) {
+  //   console.log(event)
+  //   if (!event.target.classList.contains('drop_down_container')){
+  //       let elems: any = document.body.getElementsByTagName("*");
+  //         for (let i = 0; i < elems.length; i++){
+  //           elems[i].classList.contains('dd_opened') ? elems[i].classList.remove('dd_opened') : ''
+  //         }
+  //
+  //   }
+  // }
 
   constructor( private router: Router,
                private exchangeService: EventsExchangeService,
                private requestService : RequestService,
                 private safariService: SafariErrorsFixService){
+
 
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
@@ -44,6 +55,8 @@ export class AppComponent implements OnInit{
     this.safariService.addSafariClass()
   }
 
-
+f(event:Event){
+    console.log(Event)
+}
 
 }

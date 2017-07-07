@@ -111,7 +111,7 @@ let appRoutes: Routes =[
 
   { path: 'registration', component: RegistrationComponent},
   { path: 'login', component: LogInComponent},
-  { path: 'room-settings', component: RoomSettingsComponent, children: roomSettingsRoutes, canActivate: [CanActivateComponent]},
+  { path: 'tifo-settings', component: RoomSettingsComponent, children: roomSettingsRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes, canActivate: [CanActivateComponent]},
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},

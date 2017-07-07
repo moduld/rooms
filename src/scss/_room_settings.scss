@@ -10,6 +10,11 @@
   color: white;
   @extend .flex-center;
   font-size: 24px;
+  cursor: pointer;
+  &:before{
+    display: block;
+    margin-right: 10px;
+  }
 }
 .main_container{
   @extend .flex-start;

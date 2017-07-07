@@ -26,6 +26,9 @@
   height: calc(100vh - 490px);
   width: 100%;
 }
+.post_content.without_media{
+  height: calc(100vh - 75px);
+}
 .post_info{
   flex-wrap: wrap;
 
@@ -62,6 +65,7 @@
   font-family: $font_lora;
   font-size: 20px;
   line-height: 32px;
+  word-break: break-all;
 }
 .dots_wrapp{
   padding: 5px 0;
@@ -296,6 +300,9 @@
     height: 25px;
     width: 25px;
   }
+  &:last-child{
+    padding-bottom: 40px;
+  }
 }
 .comment_body{
   margin-left: 46px;
@@ -304,6 +311,7 @@
   color: $dark_text;
   font-size: 13px;
   white-space: pre-line;
+  word-break: break-all;
 }
 .picture{
   display: block;
@@ -359,7 +367,11 @@
   }
   .post_content{
     height: calc(100vh - 545px);
-    //margin-top: 25px;
+    margin-top: 25px;
+  }
+  .post_content.without_media{
+    height: calc(100vh - 128px);
+    margin-top: 0;
   }
   .post_info{
     border-top: 1px solid $line;
@@ -383,6 +395,8 @@
     height: calc(100vh - 335px);
     transition: 0.5s;
   }
-
+  .post_content.without_media{
+    height: calc(100vh - 15px);
+  }
 
 }

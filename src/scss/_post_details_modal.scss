@@ -78,6 +78,7 @@
   font-family: $font_lora;
   font-size: 20px;
   line-height: 32px;
+  word-break: break-all;
 }
 .dots_wrapp{
   padding: 5px 0;
@@ -320,6 +321,7 @@ margin-top: 5px;
   color: $dark_text;
   font-size: 13px;
   white-space: pre-line;
+  word-break: break-all;
 }
 .picture{
   display: block;

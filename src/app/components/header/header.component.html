@@ -18,7 +18,7 @@
 
     <div class="icons_wrapper">
       <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
-      <div class="drop_down_container new_messages">
+      <div class="drop_down_container new_messages" >
         <span class="icon-mail" [ngClass]="{'new_events': messages_quantity}" [routerLink]="'/user-dialogs'"></span>
 
           <ul class="drop_down_menu" >
@@ -48,7 +48,7 @@
 
 
 
-      <div class="drop_down_container new_notifications">
+      <div class="drop_down_container new_notifications" >
         <span class="icon-bell-o" [ngClass]="{'new_events': notifications_quantity}" [routerLink]="'/notifications'"></span>
 
         <ul class="drop_down_menu" >
@@ -85,7 +85,7 @@
 
 
 
-      <div class="user_info drop_down_container" onclick="">
+      <div class="user_info drop_down_container" >
                 <span class="avatar" [ngStyle]="currentUser.user_data.thumbnail && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
 

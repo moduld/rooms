@@ -72,7 +72,7 @@ export class FileInfoService {
 
       let extension = file.name.split('.').pop();
 
-      if (extension === 'ppt' || extension === 'pptx'|| extension === 'xls' || extension === 'xlsx' || extension === 'doc' || extension === 'docs'){
+      if (extension === 'ppt' || extension === 'pptx'|| extension === 'xls' || extension === 'xlsx' || extension === 'doc' || extension === 'docx'){
 
         resultObject['folder'] = 'posts/docs/';
         extension === 'ppt' ?  resultObject['content_type'] = "application/vnd.ms-powerpoint" : '';

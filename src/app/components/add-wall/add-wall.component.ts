@@ -44,7 +44,7 @@ export class AddWallComponent implements OnInit {
           data=>{
             this.currentRoom.walls.push(data.wall);
             this.storeservice.storeCurrentUserRooms(this.currentRoom);
-            this.router.navigateByUrl('/room-settings');
+            this.router.navigateByUrl('/tifo-settings');
             this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Wall added successful'})
           },
           error => {

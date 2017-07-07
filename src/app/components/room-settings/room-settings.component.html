@@ -1,4 +1,4 @@
-<div class="room_settings_header" *ngIf="currentRoom">{{currentRoom.room_details.room_name}}</div>
+<div class="room_settings_header icon-chevron-left" title="Back to tifo!" [routerLink]="['/tifo', currentRoom.room_details.room_alias]" *ngIf="currentRoom">{{currentRoom.room_details.room_name}}</div>
 <div class="main_container">
     <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
     <aside class="aside">
@@ -7,13 +7,13 @@
         </div>
         <ul class="aside_content">
             <li class="aside_items aside_items_title">Members</li>
-            <li class="aside_items" [routerLink]="'/room-settings/members-list'" routerLinkActive="active">Membership</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/members-list'" routerLinkActive="active">Membership</li>
             <li class="aside_items aside_items_title">Walls</li>
-            <li class="aside_items" [routerLink]="'/room-settings/add-wall'" routerLinkActive="active">Add wall</li>
-            <li class="aside_items" [routerLink]="'/room-settings/walls-list'" routerLinkActive="active">Edit walls</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/add-wall'" routerLinkActive="active">Add wall</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/walls-list'" routerLinkActive="active">Edit walls</li>
             <li class="aside_items aside_items_title">Room</li>
-            <li class="aside_items" [routerLink]="'/room-settings/edit-room'" routerLinkActive="active">Edit room</li>
-            <li class="aside_items" [routerLink]="'/room-settings/delete-room'" routerLinkActive="active">Delete room</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/edit-room'" routerLinkActive="active">Edit room</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/delete-room'" routerLinkActive="active">Delete room</li>
         </ul>
     </aside>
 

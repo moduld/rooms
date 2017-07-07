@@ -48,7 +48,7 @@ export class RegistrationComponent implements OnInit{
 
     this.requestService.registration(regForm.value).subscribe(
         data=>{
-          this.router.navigateByUrl('/all-rooms');
+          this.router.navigateByUrl('/explore');
         },
         error => {
           this.error = error.json();

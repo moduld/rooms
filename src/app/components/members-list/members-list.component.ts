@@ -59,7 +59,8 @@ export class MembersListComponent implements OnInit {
 
       let dataToServer = {
           member_type: this.member_toggler,
-          user_id_last: this.offset
+          user_id_last: this.offset,
+          room_id: this.currentRoom.room_details.room_id
       };
 
       this.show_loading = true;

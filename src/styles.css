@@ -62,6 +62,7 @@ body.safari_browser{
 }
 .carousel-indicators{
     bottom: 0;
+    z-index: 1;
 }
 app-post-details-main .slider_container{
     height: 40vh;
@@ -115,8 +116,11 @@ app-post-details-main .picture{
     app-post-details-main  .picture{
         min-height: 285px;
     }
-    .opened ~ app-inside-room > app-post-details-main  .post_content{
-        height: calc(100vh - 477px);
+    .opened ~ app-inside-room > app-post-details-main > .main_container .post_content{
+        height: calc(100vh - 483px);
+    }
+    .opened ~ app-inside-room > app-post-details-main > .main_container .post_content.without_media{
+        height: calc(100vh - 158px);
     }
 
 }

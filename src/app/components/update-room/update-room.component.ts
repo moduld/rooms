@@ -131,7 +131,7 @@ export class UpdateRoomComponent implements OnInit {
                 data=>{
                     this.currentRoom.room_details =  data.room;
                     this.storeservice.storeCurrentUserRooms(this.currentRoom);
-                    this.router.navigateByUrl('/room-settings');
+                    this.router.navigateByUrl('/tifo-settings');
                     this.exchangeService.doShowVisualMessageForUser({success:true, message: 'Room information changed successful'})
                     this.button_disabled = false;
                     this.image_dropped = false;

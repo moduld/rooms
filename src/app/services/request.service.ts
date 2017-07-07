@@ -334,7 +334,7 @@ export class RequestService  {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('room_id', this.roomId);
+    params.set('room_id', dataToServer.room_id);
     params.set('member_type', dataToServer.member_type);
     params.set('user_id_last', dataToServer.user_id_last);
 

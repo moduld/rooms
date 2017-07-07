@@ -43,7 +43,7 @@ export class LogInComponent implements OnInit {
 
     this.requestService.logIn(regForm.value).subscribe(
         data=>{
-          this.router.navigateByUrl('/all-rooms');
+          this.router.navigateByUrl('/explore');
         },
         error => {
           this.error = error.json();

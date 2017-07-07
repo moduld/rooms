@@ -29,7 +29,7 @@ export class RoomSettingsComponent implements OnInit {
   ngOnInit() {
     window.innerWidth > 550 ? this.menu_state_toggle = true : false;
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
-    !this.currentRoom && this.router.navigateByUrl('/all-rooms');
+    !this.currentRoom && this.router.navigateByUrl('/explore');
   }
 
 
