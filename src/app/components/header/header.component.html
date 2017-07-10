@@ -1,6 +1,6 @@
 <input type="checkbox" id="header_opener" [(ngModel)]="header_opener_mod" (change)="addHeaderClass(header_opener_mod)" hidden>
 <!--[ngClass]="{'hide_header': hide_header}"-->
-<header class="header">
+<header class="header" >
   <div class="main_container">
     <div class="logo" >
       <!--[ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}"-->
@@ -85,7 +85,7 @@
 
 
 
-      <div class="user_info drop_down_container" >
+      <div class="user_info drop_down_container" onclick="">
                 <span class="avatar" [ngStyle]="currentUser.user_data.thumbnail && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
                 <span class="name">{{currentUser.user_data.user_name}}</span>
 

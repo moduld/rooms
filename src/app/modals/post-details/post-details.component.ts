@@ -86,7 +86,7 @@ export class PostDetailsComponent implements OnInit {
   fileDropped(event: any): void {
 
       this.disable_submit_button = true;
-    this.mediaToAppServer = this.fileService.toNowFileInfo(event.srcElement.files[0]);
+    this.mediaToAppServer = this.fileService.toNowFileInfo(event.srcElement && event.srcElement.files[0] || event.target && event.target.files[0]);
 
     if (this.mediaToAppServer.typeForApp === 'image' || this.mediaToAppServer.typeForApp === 'audio'){
 

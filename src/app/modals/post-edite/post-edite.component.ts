@@ -58,7 +58,7 @@ export class PostEditeComponent implements OnInit{
   }
 
   fileDropped (event: any): void {
-    this.makeRequestSettings(event.srcElement.files[0])
+    this.makeRequestSettings(event.srcElement && event.srcElement.files[0] || event.target && event.target.files[0])
   }
 
   makeRequestSettings(data: any): void {

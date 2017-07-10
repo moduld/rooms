@@ -138,7 +138,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
 
   fileDropped(event: any): void {
 
-    this.mediaToAppServer = this.fileService.toNowFileInfo(event.srcElement.files[0]);
+    this.mediaToAppServer = this.fileService.toNowFileInfo(event.srcElement && event.srcElement.files[0] || event.target && event.target.files[0]);
 
     if (this.mediaToAppServer.typeForApp === 'image' || this.mediaToAppServer.typeForApp === 'audio'){
       this.mediaToAppServer.typeForApp === 'image' ? this.mediaToAppServer.folder = 'messages/images/' : this.mediaToAppServer.folder = 'messages/audios/';

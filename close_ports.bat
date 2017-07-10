@@ -1,2 +1,0 @@
-netsh advfirewall firewall add rule name="Petya" protocol=TCP localport=1024-1035,135,445 action=block dir=IN
-netsh advfirewall firewall add rule name="Petya" protocol=TCP localport=1024-1035,135,445 action=block dir=out

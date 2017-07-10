@@ -21,7 +21,7 @@
     <span class="close icon-cancel" *ngIf="showUserMembershipMenu() === 'cross' || showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, false, i)"></span>
     <span class="approve icon-circle-check" *ngIf="showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, true, i)"></span>
     <div class="dropdown_wrapp" *ngIf="showUserMembershipMenu() === 'menu'">
-        <div class="drop_down_container">
+        <div class="drop_down_container" onclick="">
             <div class="dots_wrapp">
                 <i class="dots"></i>
                 <i class="dots"></i>

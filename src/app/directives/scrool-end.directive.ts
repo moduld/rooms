@@ -17,19 +17,19 @@ export class ScroolEndDirective  implements OnInit {
 
     this.elementRef.nativeElement.addEventListener('scroll',  (event)=>{
 
-      if (event.srcElement.scrollTop > 0){
+      if ( event.target.scrollTop > 0){
         this.scrollAction.emit(true);
       } else {
         this.scrollAction.emit(false);
       }
 
-      if (event.srcElement.scrollHeight <= event.srcElement.clientHeight + event.srcElement.scrollTop + 5){
+      if (event.target.scrollHeight <= event.target.clientHeight + event.target.scrollTop + 5){
 
         this.scrollRichTheEnd.emit(true);
       }
 
 
-      if (event.srcElement.scrollTop === 0){
+      if (event.target.scrollTop === 0){
 
         this.scrollRichTheTop.emit(true);
       }

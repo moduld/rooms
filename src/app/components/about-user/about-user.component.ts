@@ -24,12 +24,16 @@ export class AboutUserComponent implements OnInit, OnDestroy {
               private activateRoute: ActivatedRoute,
               private requestService: RequestService,
               private router: Router,
-              private exchangeService: EventsExchangeService) { }
+              private exchangeService: EventsExchangeService) {
+
+
+  }
 
   ngOnInit():void {
 
     this.subscription = this.activateRoute.params.subscribe(params=>{
       this.user_id = params.id / 22;
+      console.log('qweqweqweqweqe')
       this.getUserInfo();
     });
 

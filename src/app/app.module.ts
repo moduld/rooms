@@ -83,11 +83,11 @@ let roomSettingsRoutes: Routes = [
   { path: '',redirectTo: 'members-list', pathMatch:'full'}
 ];
 let aboutUserChildRoutes = [
-  { path: 'user-rooms', component: UsersRoomsInProfileComponent},
+  { path: 'user-tifos', component: UsersRoomsInProfileComponent},
   { path: 'user-posts', component: UsersPostsInProfileComponent},
   { path: 'user-fans', component: UsersFansInProfileComponent},
   { path: 'user-faves', component: UsersFavesInProfileComponent},
-  { path: '',redirectTo: 'user-rooms', pathMatch:'full'}
+  { path: '',redirectTo: 'user-tifos', pathMatch:'full'}
 ];
 
 let userSettingsRoutes : Routes = [

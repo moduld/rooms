@@ -3,7 +3,7 @@
     <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'image'"></span>
     <video [src]="content.multimedia" controls type="video/*" class="picture video" [poster]="content.thumbnail" *ngIf="content.type === 'video'"></video>
     <div class="picture audio" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'audio'">
-      <audio [src]="content.multimedia" controls type="audio/*" class="picture audio"  ></audio>
+      <audio [src]="content.multimedia" controls type="audio/*" class="picture audio_tag"  ></audio>
     </div>
     <span (click)="openImageLink(content)" class="picture" [ngStyle]="{'background-image':'url(' + content.thumbnail + ')' }" *ngIf="content.type === 'pdf' ||
      content.type === 'ppt' || content.type === 'pptx' || content.type === 'xls' || content.type === 'xlsx' || content.type === 'doc' || content.type === 'docx'"></span>
