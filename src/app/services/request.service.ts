@@ -589,7 +589,8 @@ export class RequestService  {
       room_name: dataToServer.roomData.room_name,
       room_desc: dataToServer.roomData.room_desc,
       searchable_flag: dataToServer.roomData.searchable_flag ? 1 : 0,
-      multimedia: dataToServer.multimedia
+      multimedia: dataToServer.multimedia,
+      tags: dataToServer.roomData.tags
     };
     sendData['public'] = dataToServer.roomData.public ? 1 : 0;
 
@@ -625,7 +626,8 @@ export class RequestService  {
       room_alias: dataToServer.roomData.room_alias,
       room_desc: dataToServer.roomData.room_desc,
       searchable_flag: dataToServer.roomData.searchable_flag ? 1 : 0,
-      multimedia: dataToServer.multimedia
+      multimedia: dataToServer.multimedia,
+      tags: dataToServer.roomData.tags
     };
     sendData['public'] = dataToServer.roomData.public ? 1 : 0;
 

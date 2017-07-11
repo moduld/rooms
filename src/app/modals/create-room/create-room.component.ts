@@ -9,6 +9,7 @@ import { EventsExchangeService } from '../../services/events-exchange.service';
 import { UploadFilesService } from '../../services/upload-files.service';
 
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-create-room',
@@ -26,7 +27,7 @@ export class CreateRoomComponent implements OnInit {
   subscription: any;
     added_image: any;
     image_dropped:boolean;
-
+    tags: any[];
     cropperSettings: CropperSettings;
 
     @ViewChild('cropper', undefined)
@@ -62,7 +63,7 @@ export class CreateRoomComponent implements OnInit {
 
   ngOnInit() {
     this.dataToServer['multimedia'] = '';
-
+    this.tags = []
   }
 
   fileDropped(event: any): void {
@@ -101,6 +102,7 @@ export class CreateRoomComponent implements OnInit {
 
     sendTextData(roomForm: NgForm):void {
 
+    roomForm.value['tags'] = this.tags;
     this.dataToServer['roomData'] = roomForm.value;
     this.requestService.createNewRoom(this.dataToServer).subscribe(
         data=>{

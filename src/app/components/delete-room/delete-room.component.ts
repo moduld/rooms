@@ -30,7 +30,7 @@ export class DeleteRoomComponent implements OnInit {
 
     this.requestService.deleteRoom(this.currentRoom.room_details.room_id).subscribe(
         data=>{
-          this.router.navigateByUrl('/all-rooms');
+          this.router.navigateByUrl('/my-tifos');
         }, error => {
           this.error = error;
           console.log(error);

@@ -9,8 +9,7 @@ import { EventsExchangeService } from '../../services/events-exchange.service';
 import { UploadFilesService } from '../../services/upload-files.service';
 
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
-
-import { Wall } from '../../commonClasses/wall';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-update-room',
@@ -20,7 +19,7 @@ import { Wall } from '../../commonClasses/wall';
 export class UpdateRoomComponent implements OnInit {
 
   error: any;
-  currentRoom: Wall;
+  currentRoom: any;
   publicFlag: boolean = true;
   searchableFlag: boolean = true;
   dataToServer: any = {};
@@ -34,6 +33,9 @@ export class UpdateRoomComponent implements OnInit {
     button_disabled:boolean;
     cropperSettings: CropperSettings;
     changed_data:boolean;
+    tags: any[];
+    tagsChangetFlag: boolean;
+
     @ViewChild('cropper', undefined)
     cropper:ImageCropperComponent;
 
@@ -67,6 +69,7 @@ export class UpdateRoomComponent implements OnInit {
     this.roomAlias = this.currentRoom.room_details.room_alias;
     // this.currentRoom.room_details.thumbnail && this.fileDropped(false);
     this.dataToServer['multimedia'] = '';
+    this.tags = this.currentRoom.room_details.tags || [];
     // this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
     this.roomDeskription = this.currentRoom.room_details.room_desc;
     this.publicFlag = !!this.currentRoom.room_details.public;
@@ -80,7 +83,6 @@ export class UpdateRoomComponent implements OnInit {
         let image:any = new Image();
         let that = this;
         let myReader:FileReader = new FileReader();
-        // if (event){
 
             let file:File = event.target.files[0];
             myReader.onloadend = function (loadEvent:any) {
@@ -88,18 +90,6 @@ export class UpdateRoomComponent implements OnInit {
                 that.cropper.setImage(image);
             };
             myReader.readAsDataURL(file);
-
-      // } else {
-      //       image.crossOrigin="anonymous";
-      //       image.src = this.currentRoom.room_details.thumbnail;
-      //       image.onload = function (loadEvent:any) {
-      //           that.cropper.setImage(image);
-      //       };
-      //       image.onerror = function (loadEvent:any) {
-      //           console.log('image error');
-      //           this.image_dropped = false;
-      //       };
-      //   }
     }
 
     updateTheRoom(roomForm: NgForm, event: Event):void {
@@ -122,9 +112,10 @@ export class UpdateRoomComponent implements OnInit {
 
     sendTextData(roomForm: NgForm):void {
 
-        if (this.changed_data || this.image_dropped){
+        if (this.changed_data || this.image_dropped || this.tagsChangetFlag){
             // roomForm.value.room_name = name;
             // roomForm.value.room_alias = alias;
+            roomForm.value['tags'] = this.tags;
             this.dataToServer['roomData'] = roomForm.value;
             this.dataToServer.room_id = this.currentRoom.room_details.room_id;
             this.requestService.updateRoom(this.dataToServer).subscribe(
@@ -176,5 +167,9 @@ export class UpdateRoomComponent implements OnInit {
         }
     }
 
+    tagsChanged(): void {
+
+      this.tagsChangetFlag = true;
+    }
 
 }

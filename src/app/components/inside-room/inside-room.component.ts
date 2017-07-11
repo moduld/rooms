@@ -322,9 +322,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(PrivateRoomComponent);
         modalRef.componentInstance.room_details = data;
         modalRef.result.then(() => {
-            this.router.navigateByUrl('/all-rooms');
+            this.router.navigateByUrl('/explore');
         }).catch(() => {
-            this.router.navigateByUrl('/all-rooms');
+            this.router.navigateByUrl('/explore');
         });
     }
 

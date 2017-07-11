@@ -127,4 +127,28 @@ app-post-details-main .picture{
     }
 
 }
+.ng2-tag-input, .ng2-tag-input--focused{
+    border: 1px solid #e6ecf0!important;
+    border-radius: 5px;
+    padding: 7px 10px!important;
+}
 
+.ng2-tag-input.ng2-tag-input--focused{
+    border-bottom: 1px solid #e6ecf0!important;
+}
+tag{
+    background: #e6ecf0!important;
+    color: #868e96!important;
+    border-radius: 5px!important;
+}
+tag path{
+    fill: #868e96!important;
+
+}
+
+/*body  tag:not(.readonly):not(.tag--editing):active{*/
+    /*color: #868e96!important;*/
+/*}*/
+/*body tag:active  path{*/
+    /*fill: #868e96!important;*/
+/*}*/

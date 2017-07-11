@@ -11,6 +11,8 @@ import { DragulaModule } from 'ng2-dragula';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import {ImageCropperModule} from 'ng2-img-cropper/index';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
@@ -176,7 +178,9 @@ let appRoutes: Routes =[
     FileDropModule,
     DragulaModule,
     Ng2DeviceDetectorModule.forRoot(),
-    ImageCropperModule
+    ImageCropperModule,
+    TagInputModule,
+    BrowserAnimationsModule
   ],
   providers: [
     RequestService,

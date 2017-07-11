@@ -28,6 +28,7 @@ interface RoomDetails {
     updated_at: string;
     user_id: number;
     walls_count: number;
+    tags: any[];
 }
 interface Walls {
     allow_comment_flag: number;

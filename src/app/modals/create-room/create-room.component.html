@@ -25,6 +25,10 @@
         Description:
         <textarea  class="input_field room_description" placeholder="Enter room description (optional)" name="room_desc" [(ngModel)]="roomDeskription"  maxlength="250"></textarea>
       </div>
+      <div class="input_wrapp with_margin">
+        Tifo tags:
+        <tag-input [(ngModel)]='tags' name="mod_name"  [maxItems]="4" [addOnBlur]="true" [addOnPaste]="true" [placeholder]="'Tap tifo tag here...'" [secondaryPlaceholder]="'Tap tifo tag here...'"></tag-input>
+      </div>
 
       <div class="input_wrapp with_margin">
         Room type:

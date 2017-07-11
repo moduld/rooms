@@ -32,6 +32,12 @@
       </div>
 
       <div class="input_wrapp with_margin">
+        Tifo tags:
+        <tag-input [(ngModel)]='tags' name="mod_name"  [maxItems]="4" [addOnBlur]="true" [addOnPaste]="true"
+                   [placeholder]="'Tap tifo tag here...'" [secondaryPlaceholder]="'Tap tifo tag here...'" (onAdd)="tagsChanged()" (onRemove)="tagsChanged()" (onPaste)="tagsChanged()"></tag-input>
+      </div>
+
+      <div class="input_wrapp with_margin">
         Room type:
         <div class="toggle_wrapper">
           <span class="toggle_name">Public</span>
