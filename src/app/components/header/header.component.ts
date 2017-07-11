@@ -1,11 +1,9 @@
 import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
+import { Router} from '@angular/router';
 
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
-
-import { Wall } from '../../commonClasses/wall';
 
 
 @Component({
@@ -18,19 +16,12 @@ export class HeaderComponent implements OnInit {
   error: any;
 
   room_search: string;
-    showSuggestOrDefault: string;
     currentUser: any;
     message_notification_offset: number;
     messages: any[];
     messages_quantity: number;
     notifications: any[];
     notifications_quantity: number;
-    routerSubscription: any;
-    currentRoute: any;
-    for_active_class: boolean;
-    hide_header: boolean;
-    attendeds_links: string[];
-    back_link: string;
     header_opener_mod: boolean;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
@@ -43,32 +34,20 @@ export class HeaderComponent implements OnInit {
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
-              private router: Router) {
-
-        // this.routerSubscription = this.router.events.subscribe(event=>{
-        //
-        //     if (event instanceof NavigationEnd ){
-        //         this.parseUrl()
-        //     }
-        // })
-    }
+              private router: Router) { }
 
   ngOnInit() {
 
-        // this.attendeds_links = ['all-rooms'];
       this.message_notification_offset = 0;
       this.messages = [];
       this.notifications = [];
-      // this.showSuggestOrDefault = 'suggested';
       this.messages_quantity = 0;
       this.notifications_quantity = 0;
       this.currentUser = this.storeservice.getUserData();
-      this.getNewMessages();
-      this.getNewNotifications();
-      // this.for_active_class = true;
-      // this.parseUrl();
-
-
+      if (this.currentUser.token !== 'guest'){
+          this.getNewMessages();
+          this.getNewNotifications();
+      }
 
       this.exchangeService.userAvatarChangedEvent.subscribe(
           message => {
@@ -76,23 +55,12 @@ export class HeaderComponent implements OnInit {
           });
   }
 
-
-  // parseUrl():void {
-  //
-  //     let parses: UrlTree = this.router.parseUrl(this.router.url);
-  //     let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-  //     let segments: UrlSegment[] = segmentGroup.segments;
-  //     this.currentRoute = Number(segments[0].path) / 22;
-  //     // this.changeLinkState(this.currentRoute)
-  //
-  // }
-
   logOut(){
 
     this.requestService.logOut().subscribe(
         data=>{
-            this.storeservice.deleteUserData();
-            this.router.navigateByUrl('/login');
+            this.currentUser = this.storeservice.getUserData();
+            this.router.navigateByUrl('/explore');
         },
         error => {
           this.error = error;
@@ -101,29 +69,13 @@ export class HeaderComponent implements OnInit {
     )
   }
 
-
-    // showSuggestionsRoomsorDefault(flag: string): void {
-    //
-    //   this.showSuggestOrDefault = flag;
-    //   this.room_search = '';
-    //   this.storeservice.deleteSearchText();
-    //
-    //   this.storeservice.changeSuggestedOrDefault(flag);
-    //
-    //   this.exchangeService.getSuggestRoomsOrUserRooms(flag)
-    // }
-
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
         let trimmed = request.trim();
         if (trimmed.length > 2 && trimmed !== this.storeservice.getSearchText()){
-            this.room_search = '';
-          // this.showSuggestOrDefault = '';
-          // this.router.navigateByUrl('search');
+          this.room_search = '';
           this.router.navigate( ['search', {q: trimmed}]);
-          // this.storeservice.saveSearchText(trimmed);
-          // this.exchangeService.searchByHeaderSearchField(trimmed)
       }
     }
 
@@ -186,13 +138,6 @@ export class HeaderComponent implements OnInit {
 
         this.router.navigate( ['user-dialogs', {user: user.user.user_id*22}])
     }
-
-    // changeLinkState(path: any):void {
-    //
-    //     path === 'explore' || path === 'my-tifos' ? this.for_active_class = true : this.for_active_class = false;
-    //
-    // }
-
 
     addHeaderClass(flag: boolean):void {
 

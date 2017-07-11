@@ -3,11 +3,7 @@
 <header class="header" >
   <div class="main_container">
     <div class="logo" >
-      <!--[ngClass]="{'active': showSuggestOrDefault === 'default' && for_active_class}"-->
-      <!--(click)="showSuggestionsRoomsorDefault('default')"-->
       <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active"   >My Tifos</span>
-      <!--[ngClass]="{'active': showSuggestOrDefault === 'suggested' && for_active_class}"-->
-      <!--(click)="showSuggestionsRoomsorDefault('suggested')"-->
       <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >Explore</span>
     </div>
     <div class="search"  >
@@ -16,15 +12,12 @@
     </div>
 
 
-    <div class="icons_wrapper">
+    <div class="icons_wrapper" *ngIf="currentUser.token !== 'guest'">
       <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
       <div class="drop_down_container new_messages" >
         <span class="icon-mail" [ngClass]="{'new_events': messages_quantity}" [routerLink]="'/user-dialogs'"></span>
 
           <ul class="drop_down_menu" >
-            <!--<li class="drop_down_item drop_down_title messages_title">-->
-              <!--Messages <span class="messages_quantity" *ngIf=" messages_quantity">{{1  + ' - ' + messages.length + ' of ' + messages_quantity}}</span>-->
-            <!--</li>-->
             <li class="triangle"><i class="trans_bar"></i></li>
             <li class="drop_down_item user_bar" *ngFor="let message of messages" (click)="goToDialogPage(message)">
 
@@ -105,6 +98,16 @@
 
       </div>
     </div>
+
+
+    <div class="icons_wrapper" *ngIf="currentUser.token === 'guest'">
+      <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
+      <span class="reg_log_buttons" [routerLink]="'/login'">Log in</span>
+      <span class="reg_log_buttons" [routerLink]="'/registration'">Register</span>
+    </div>
+
+
+
   </div>
   <!--<div class="back_wrapp" ><span class="button_back icon-chevron-left" (click)="goBack()"></span></div>-->
 </header>

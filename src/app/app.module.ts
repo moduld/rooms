@@ -117,7 +117,6 @@ let appRoutes: Routes =[
   { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},
   { path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateComponent]},
   { path: '**', component: AllRoomsComponent, canActivate: [CanActivateComponent]}
-  // { path: '**', redirectTo: 'explore', pathMatch:'full' }
 ];
 
 @NgModule({

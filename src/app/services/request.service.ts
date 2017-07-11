@@ -30,17 +30,50 @@ export class RequestService  {
   // this method runs from app.component onInit, and from logIn and registration methods in this service
   addRequiredDataToTheService(): void {
 
-    if (!this.token){
-      let storedUserData = this.storeservice.getUserData();
-      if (storedUserData){
-        this.userId = storedUserData['user_data']['user_id'];
-        this.token = storedUserData['token'];
-        if (this.headers.get('Authorization') === null){
-          this.headers.append('Authorization', "Bearer " + this.token);
-          this.options = new RequestOptions({ headers: this.headers })
-        }
+    let storedUserData = this.storeservice.getUserData();
+    !storedUserData && this.setGuestUser();
+    this.setServiceVariables()
+  }
+
+  setServiceVariables():void {
+
+    this.headers.delete('Authorization');
+    this.token = '';
+
+    let storedUserData = this.storeservice.getUserData();
+    if (storedUserData){
+      this.userId = storedUserData['user_data']['user_id'];
+      this.token = storedUserData['token'];
+      if (this.headers.get('Authorization') === null){
+        this.headers.append('Authorization', "Bearer " + this.token);
+        this.options = new RequestOptions({ headers: this.headers })
       }
     }
+  }
+
+  setGuestUser():void {
+
+    let user = {
+      token: 'guest',
+      user_data: {
+        about: "",
+        active: 0,
+        created_at: new Date(),
+        display_name: "guest",
+        fans_count: 0,
+        faves_count: 0,
+        msg_from_anyone: 0,
+        multimedia: "",
+        posts_count: 0,
+        rooms_count: 0,
+        thumbnail: "",
+        updated_at: "",
+        user_id: 0,
+        user_name: "guest"
+      }
+    };
+
+    this.storeservice.saveUserData(user)
   }
 
   getAllRooms(): Observable<Room[]> {
@@ -388,8 +421,10 @@ export class RequestService  {
     this.addTimeToHeaders();
 
     return this.http.get(this.commonLink + 'user/logout', this.options).map((resp:Response)=>{
-      this.headers.delete('Authorization');
-      this.token = '';
+
+      this.setGuestUser();
+      this.addRequiredDataToTheService();
+
       return resp.json();
     })
         .catch((error: any)=> {

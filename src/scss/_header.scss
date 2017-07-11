@@ -289,6 +289,17 @@ margin-bottom: 60px;
   }
 
 }
+.reg_log_buttons{
+  padding: 5px 8px;
+  transition: 0.5s;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin: 0 5px;
+  &:hover{
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+}
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
   /* STYLES IE11 */

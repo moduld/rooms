@@ -20,20 +20,21 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   user_id: any;
   currentUser: any;
 
+
   constructor(private storeservice: UserStoreService,
               private activateRoute: ActivatedRoute,
               private requestService: RequestService,
               private router: Router,
               private exchangeService: EventsExchangeService) {
 
-
   }
 
   ngOnInit():void {
 
     this.subscription = this.activateRoute.params.subscribe(params=>{
+
       this.user_id = params.id / 22;
-      console.log('qweqweqweqweqe')
+
       this.getUserInfo();
     });
 
@@ -51,6 +52,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
   getUserInfo(): void {
 
     let loginnedUser = this.storeservice.getUserData();
+
     this.requestService.getUserDetails(this.user_id).subscribe(
         data=>{
           this.currentUser = data['user'];

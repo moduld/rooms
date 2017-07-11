@@ -73,15 +73,7 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-        //if default rooms output was changed to search or my rooms, and then user went to another page
-        //when he comes to all-rooms page, this check returns previous state(search or my rooms)
-        // if (this.storeservice.getSearchText()){
-        //     this.getSearchableRooms(this.storeservice.getSearchText())
-        // } else {
-        //     this.storeservice.getSuggestedOrDefault() === 'suggested' && this.getSuggestedRooms();
-        //     this.storeservice.getSuggestedOrDefault() === 'default' && this.getUserRooms();
-        //     !this.storeservice.getSuggestedOrDefault() && this.getSuggestedRooms()
-        // }
+
   }
 
     ngOnDestroy(): void {
@@ -97,14 +89,16 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
 
       this.requestService.getAllRooms().subscribe(
           data=>{
-              for(let i = 0; i < data['rooms'].length; i++){
-                  //this cycle need to remove broken items which can come from server
-                  if (!data['rooms'][i].room || !data['rooms'][i].room_id){
-                      data['rooms'].splice(i, 1)
+              if (data && data['rooms'] && data['rooms'].length){
+                  for(let i = 0; i < data['rooms'].length; i++){
+                      //this cycle need to remove broken items which can come from server
+                      if (!data['rooms'][i].room || !data['rooms'][i].room_id){
+                          data['rooms'].splice(i, 1)
+                      }
                   }
+                  this.show_loading = false;
+                  this.allRooms = data['rooms'];
               }
-              this.show_loading = false;
-              this.allRooms = data['rooms'];
           }, error => {
               this.error = error;
               console.log(error);

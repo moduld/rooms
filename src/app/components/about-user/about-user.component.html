@@ -43,7 +43,8 @@
   </div>
 
   <div class="tags_wrapp" *ngIf="currentUser">
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active">Tifos ({{currentUser.rooms_count}})</span>
+   <!--ng class is hack for router. Active class not add when routing goes prom profile to another profile-->
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">Tifos ({{currentUser.rooms_count}})</span>
     <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">Posts ({{currentUser.posts_count}})</span>
     <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">Fans ({{currentUser.fans_count}})</span>
     <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">Favs ({{currentUser.faves_count}})</span>
