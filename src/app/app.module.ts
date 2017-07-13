@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import {JsonpModule} from '@angular/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http } from '@angular/http';
 import {Routes, RouterModule} from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileDropModule } from 'angular2-file-drop';
@@ -12,7 +13,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 import { Ng2DeviceDetectorModule } from 'ng2-device-detector';
 import {ImageCropperModule} from 'ng2-img-cropper/index';
 import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 
@@ -46,7 +48,8 @@ import {
   NotificationsComponent,
   SliderComponent,
   NotificationsSettingsComponent,
-  PostDetailsMainComponent} from './components/index';
+  PostDetailsMainComponent,
+  AboutRoomComponent} from './components/index';
 
 import {
   CreatePostComponent,
@@ -121,6 +124,11 @@ let appRoutes: Routes =[
   { path: '**', component: AllRoomsComponent, canActivate: [CanActivateComponent]}
 ];
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: Http) {
+  return new TranslateHttpLoader(http, "assets/translates/", ".json");
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -162,11 +170,11 @@ let appRoutes: Routes =[
     CanActivateRoomSettingsChildsComponent,
     NotificationsComponent,
     NotificationsSettingsComponent,
-    // PdfViewerComponent,
     PollTimeLeftPipe,
     DatexPipe,
     AsteriscReplacePipe,
-    PostDetailsMainComponent
+    PostDetailsMainComponent,
+    AboutRoomComponent
   ],
   imports: [
     JsonpModule,
@@ -180,7 +188,14 @@ let appRoutes: Routes =[
     Ng2DeviceDetectorModule.forRoot(),
     ImageCropperModule,
     TagInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [Http]
+      }
+    })
   ],
   providers: [
     RequestService,

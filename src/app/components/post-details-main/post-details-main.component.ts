@@ -133,9 +133,11 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.is_admin = this.userArmin;
       modalRef.result.then((post) => {
         this.router.navigate(['./'])
-      }).catch(()=>{this.router.navigate(["../../"], {relativeTo: this.activateRoute})  });
-
+      }).catch(() => {
+        this.router.navigate(["../../"], {relativeTo: this.activateRoute})
+      });
     }
+
 
     }
 

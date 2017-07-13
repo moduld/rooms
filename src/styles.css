@@ -30,9 +30,9 @@ body.safari_browser{
 .post_details_modal_hi_width{
     max-width: 1175px!important;
 }
-.post_details_modal_low_width{
-    max-width: 600px!important;
-}
+/*.post_details_modal_low_width{*/
+    /*max-width: 600px!important;*/
+/*}*/
 .modal_low_width{
     max-width: 540px!important;
 }
@@ -52,19 +52,33 @@ body.safari_browser{
     transition: 0.3s;
 }
 
-.carousel-control-next,
-.carousel-control-prev{
-    height: 30px;
-    width: 40px;
-    /*transform: translateY(-50%);*/
-    top: auto;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.31);
-    z-index: 15;
-}
+/*.carousel-control-next,*/
+/*.carousel-control-prev{*/
+    /*height: 30px;*/
+    /*width: 40px;*/
+    /*!*transform: translateY(-50%);*!*/
+    /*top: auto;*/
+    /*bottom: 0;*/
+    /*background: rgba(0, 0, 0, 0.31);*/
+    /*z-index: 15;*/
+/*}*/
 .carousel-indicators{
-    bottom: 0;
+    bottom: auto;
+    top: 100%;
     z-index: 1;
+    background: white!important;
+    height: 40px!important;
+}
+.carousel-indicators li{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #00a7cf;
+    max-width: 16px;
+    border-radius: 50%;
+    background-color: #e6ecf0;
+}
+.carousel-indicators li.active{
+    background-color: #00a7cf;
 }
 app-post-details-main .slider_container{
     height: 40vh;
@@ -72,17 +86,14 @@ app-post-details-main .slider_container{
 app-post-details-main .picture{
     min-height: 0;
 }
-@media screen and (max-width: 1000px){
-    .post_details_modal_hi_width{
-        max-width: 600px!important;
-    }
-}
+
 
 @media screen and (max-width: 575px){
     .modal-dialog{
-        margin: 10px auto 0;
+        margin: 30px auto 30px;
     }
 }
+
 
 .cropper_field{
     width: 100%;
@@ -90,6 +101,10 @@ app-post-details-main .picture{
     border-radius: 5px;
 }
 @media screen and (max-width: 550px){
+    .post_details_modal_hi_width{
+        margin: auto;
+    }
+
     app-header{
         transition: 0.5s;
 
@@ -119,12 +134,10 @@ app-post-details-main .picture{
         min-height: 0;
         /*min-height: 285px;*/
     }
-    .opened ~ app-inside-room > app-post-details-main > .main_container .post_content{
-        height: calc(100vh - 483px);
+    .opened ~ app-inside-room > app-post-details-main > .main_container  .scrollable_part{
+        height: calc(100vh - 309px);
     }
-    .opened ~ app-inside-room > app-post-details-main > .main_container .post_content.without_media{
-        height: calc(100vh - 158px);
-    }
+
 
 }
 .ng2-tag-input, .ng2-tag-input--focused{

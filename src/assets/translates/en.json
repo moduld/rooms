@@ -1,0 +1,39 @@
+{
+  "HEADER": {
+    "MY_TIFOS": "My Tifos",
+    "EXPLORE": "Explore",
+    "SEARCH": "Search",
+    "MEDIA_MESSAGE": "Media message...",
+    "NO_NEW_MESSAGES": "No new messages",
+    "SEE_ALL_MESSAGES": "See all messages",
+    "NO_NEW_NOTIFICATIONS": "No new notifications",
+    "SEE_ALL_ACTIVITY": "See all activity",
+    "PROFILE": "Profile",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Logout",
+    "LOGIN": "Log in",
+    "REGISTER": "Register"
+  },
+
+  "INSIDE_ROOM": {
+    "SHOW_ALL_POSTS": "Show all posts",
+    "FAVES_USES": "My faves users",
+    "BY_TEXT": "Search by text",
+    "BY_NAME": "Search by username",
+    "SETTINGS": "Settings",
+    "ABOUT": "About",
+    "JOIN": "Join",
+    "LEAVE": "Leave",
+    "VOTES": "votes",
+    "MUTE_USER": "Mute User",
+    "BLOCK_USER": "Block User",
+    "EDIT_USER": "Edit Post",
+    "BAN_USER": "Ban User"
+
+  }
+
+
+
+
+
+}

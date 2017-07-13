@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
 import { Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
@@ -34,7 +35,13 @@ export class HeaderComponent implements OnInit {
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
-              private router: Router) { }
+              private router: Router,
+              private translate: TranslateService) {
+
+        translate.addLangs(["en", "fr"]);
+        translate.setDefaultLang('en');
+        translate.use('en')
+    }
 
   ngOnInit() {
 

@@ -3,11 +3,11 @@
 <header class="header" >
   <div class="main_container">
     <div class="logo" >
-      <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active"   >My Tifos</span>
-      <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >Explore</span>
+      <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active">{{'HEADER.MY_TIFOS' | translate}}</span>
+      <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >{{'HEADER.EXPLORE' | translate}}</span>
     </div>
     <div class="search"  >
-      <input type="text" class="search_field" placeholder="Search" [(ngModel)]="room_search" >
+      <input type="text" class="search_field" placeholder="{{'HEADER.SEARCH' | translate}}" [(ngModel)]="room_search" >
       <span class="icon-search" (click)="doRoomSearch(room_search)"></span>
     </div>
 
@@ -28,12 +28,12 @@
                     <span class="name">{{message.user.user_name}}</span>
                     <span class="date">{{message.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                  <p class="text">{{message.text || 'Media message...'}}</p>
+                  <p class="text">{{message.text || 'HEADER.MEDIA_MESSAGE' | translate}}</p>
                 </div>
 
             </li>
-            <li class="see_all_messages" *ngIf="!messages_quantity" >No new messages</li>
-            <li class="see_all_messages" *ngIf="messages_quantity > 5" [routerLink]="'/user-dialogs'">See all messages</li>
+            <li class="see_all_messages" *ngIf="!messages_quantity" >{{'HEADER.NO_NEW_MESSAGES' | translate}}</li>
+            <li class="see_all_messages" *ngIf="messages_quantity > 5" [routerLink]="'/user-dialogs'">{{'HEADER.SEE_ALL_MESSAGES' | translate}}</li>
 
           </ul>
 
@@ -69,8 +69,8 @@
 
 
           </li>
-          <li class="see_all_messages" *ngIf="!notifications_quantity" >No new notifications</li>
-          <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/notifications'">See all activity</li>
+          <li class="see_all_messages" *ngIf="!notifications_quantity" >{{'HEADER.NO_NEW_NOTIFICATIONS' | translate}}</li>
+          <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/notifications'">{{'HEADER.SEE_ALL_ACTIVITY' | translate}}</li>
 
         </ul>
 
@@ -86,13 +86,13 @@
         <ul class="drop_down_menu">
           <li class="triangle"><i class="trans_bar"></i></li>
           <li class="drop_down_item" >
-            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id * 22]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Profile</span>
+            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id * 22]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'HEADER.PROFILE' | translate}}</span>
           </li>
           <li class="drop_down_item">
-            <span class="drop_down_fill" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">Settings</span>
+            <span class="drop_down_fill" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'HEADER.SETTINGS' | translate}}</span>
           </li>
           <li class="drop_down_item">
-            <span class="drop_down_fill" (click)="logOut()">Logout</span>
+            <span class="drop_down_fill" (click)="logOut()">{{'HEADER.LOGOUT' | translate}}</span>
           </li>
         </ul>
 
@@ -102,8 +102,8 @@
 
     <div class="icons_wrapper" *ngIf="currentUser.token === 'guest'">
       <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
-      <span class="reg_log_buttons" [routerLink]="'/login'">Log in</span>
-      <span class="reg_log_buttons" [routerLink]="'/registration'">Register</span>
+      <span class="reg_log_buttons" [routerLink]="'/login'">{{'HEADER.LOGIN' | translate}}</span>
+      <span class="reg_log_buttons" [routerLink]="'/registration'">{{'HEADER.REGISTER' | translate}}</span>
     </div>
 
 

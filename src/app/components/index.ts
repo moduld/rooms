@@ -28,3 +28,4 @@ export * from './users-rooms-in-profile/users-rooms-in-profile.component';
 export * from './walls-list/walls-list.component';
 export * from './slider/slider.component';
 export * from './post-details-main/post-details-main.component';
+export * from './about-room/about-room.component';

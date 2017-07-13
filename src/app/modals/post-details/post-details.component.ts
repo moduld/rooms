@@ -63,7 +63,8 @@ export class PostDetailsComponent implements OnInit {
 
     setTimeout(()=>{
       let modaldialog = document.querySelector('.modal-dialog');
-      this.post.media && this.post.media.length ? modaldialog.classList.add('post_details_modal_hi_width') : modaldialog.classList.add('post_details_modal_low_width')
+      modaldialog && modaldialog.classList.add('post_details_modal_hi_width')
+      // this.post.media && this.post.media.length ? modaldialog.classList.add('post_details_modal_hi_width') : modaldialog.classList.add('post_details_modal_low_width')
     });
   }
 

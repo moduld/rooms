@@ -22,24 +22,9 @@
   background-size: contain;
   width: 100%;
   background-repeat: no-repeat;
-  min-height: 509px;
-}
-.video{
-  margin-bottom: 30px;
 }
 .audio{
   @extend .flex-default;
   flex-direction: column-reverse;
-  height: 92%;
 }
 
-@media screen and (max-width: 1000px) {
-  .pdf_wrapp{
-
-    max-height: 350px;
-  }
-  .picture{
-    min-height: 0;
-    align-items: center;
-  }
-}
