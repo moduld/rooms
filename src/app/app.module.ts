@@ -77,6 +77,7 @@ import { NameFilterPipe } from './pipes/name-filter.pipe';
 import { PollTimeLeftPipe } from './pipes/poll-time-left.pipe';
 import { DatexPipe } from './pipes/datex.pipe';
 import { AsteriscReplacePipe } from './pipes/asterisc-replace.pipe';
+import { AboutRoomModalComponent } from './modals/about-room-modal/about-room-modal.component';
 
 let roomSettingsRoutes: Routes = [
   { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
@@ -103,12 +104,13 @@ let userSettingsRoutes : Routes = [
   { path: '',redirectTo: 'edit-profile', pathMatch:'full'}
 ];
 
-let postDetails : Routes = [
-  { path: 'post/:post_id', component: PostDetailsMainComponent}
+let roomChildRoutes : Routes = [
+  { path: 'post/:post_id', component: PostDetailsMainComponent},
+  { path: 'about', component: AboutRoomComponent}
 ];
 
 let appRoutes: Routes =[
-  { path: 'tifo/:alias', component: InsideRoomComponent, children: postDetails, canActivate: [CanActivateComponent]},
+  { path: 'tifo/:alias', component: InsideRoomComponent, children: roomChildRoutes, canActivate: [CanActivateComponent]},
 
   { path: 'explore', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
   { path: 'my-tifos', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
@@ -174,7 +176,8 @@ export function HttpLoaderFactory(http: Http) {
     DatexPipe,
     AsteriscReplacePipe,
     PostDetailsMainComponent,
-    AboutRoomComponent
+    AboutRoomComponent,
+    AboutRoomModalComponent
   ],
   imports: [
     JsonpModule,
@@ -218,7 +221,8 @@ export function HttpLoaderFactory(http: Http) {
     PostEditeComponent,
     CreateRoomComponent,
     PostDetailsComponent,
-    PrivateRoomComponent
+    PrivateRoomComponent,
+    AboutRoomModalComponent
   ],
   bootstrap: [AppComponent]
 })

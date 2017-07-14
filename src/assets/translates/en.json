@@ -1,4 +1,8 @@
 {
+  "COMMON": {
+    "LOADING": "Loading, please wait ..."
+  },
+
   "HEADER": {
     "MY_TIFOS": "My Tifos",
     "EXPLORE": "Explore",
@@ -28,9 +32,15 @@
     "MUTE_USER": "Mute User",
     "BLOCK_USER": "Block User",
     "EDIT_USER": "Edit Post",
-    "BAN_USER": "Ban User"
-
+    "BAN_USER": "Ban User",
+    "DAYS_FOR_BAN": "Days for ban",
+    "DAYS": "days",
+    "MOVE_POST": "Move Post",
+    "DELETE_POST": "Delete Post",
+    "REMOVE_POST": "Remove Post",
+    "INAPPROPRIATE": "Flag inappropriate"
   }
+
 
 
 

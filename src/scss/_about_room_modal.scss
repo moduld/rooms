@@ -1,0 +1,85 @@
+.modal_wrapper{
+  width: 100%;
+  max-height: 1000px;
+  background: white;
+  position: relative;
+  padding: 40px 30px 30px;
+  @extend .flex-column;
+  color: $gray_text;
+  font-family: $font_medium;
+  border-radius: 5px;
+}
+.close_button{
+  position: absolute;
+  color: white;
+  top: -17px;
+  right: -40px;
+  font-size: 20px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover{
+    color: $blue;
+  }
+}
+.picture{
+  height: 255px;
+  width: 255px;
+  margin: 0 auto;
+  @extend .backgr-center;
+  background-size: cover;
+}
+.title{
+  color: $blue;
+  font-size: 35px;
+  margin-top: 25px;
+}
+.properties_wrap{
+  margin-top: 25px;
+  @extend .flex-default;
+}
+.property{
+  text-transform: uppercase;
+  margin-right: 15px;
+  @extend .flex-center;
+  &:before{
+    margin-right: 5px;
+  }
+}
+.icon-eye{
+  &:before{
+    font-size: 24px;
+
+  }
+}
+.describe{
+  margin-top: 25px;
+
+}
+.titled_wrapp{
+  margin-top: 25px;
+  @extend .flex-column;
+}
+.labels{
+  color: $blue;
+}
+.tags_wrapp{
+  @extend .flex-default;
+  flex-wrap: wrap;
+}
+.tag{
+  padding: 6px;
+  color: white;
+  background: $tags_about;
+  margin: 0 15px 10px 0;
+}
+
+@media screen and (max-width: 1260px){
+  .close_button{
+    color: $gray_text;
+    top: 5px;
+    right: 20px;
+    padding: 6px;
+    line-height: 15px;
+  }
+}

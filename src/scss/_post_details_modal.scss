@@ -4,10 +4,11 @@
   max-height: 1000px;
   background: white;
   position: relative;
-  padding: 40px 30px 80px 30px;
+  padding: 40px 15% 80px 15%;
   @extend .flex-column;
   color: $gray_text;
   font-family: $font_medium;
+  border-radius: 5px;
 }
 .close_button{
   position: absolute;
@@ -46,7 +47,7 @@
 .scrollable_part{
   overflow-y: auto;
   //padding-right: 30px;
-  height: calc(100vh - 230px);
+  height: calc(100vh - 237px);
   word-wrap: break-word;
   padding: 0 17px 20px;
 }
@@ -229,8 +230,8 @@ margin-top: 5px;
 .new_comment_wrapp{
   position: absolute;
   bottom: 30px;
-  left: 30px;
-  right: 30px;
+  left: 15%;
+  right: 15%;
   flex-wrap: wrap;
   @extend .flex-default;
   padding-right: 17px;
@@ -422,4 +423,10 @@ margin-top: 5px;
 .new_comment_wrapp{
   bottom: 10px;
 }
+  .new_comment_wrapp{
+
+    left: 30px;
+    right: 30px;
+
+  }
 }

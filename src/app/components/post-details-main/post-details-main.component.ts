@@ -120,7 +120,7 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
   openPostDetails(post: Post):void {
 
 
-    if (window.innerWidth <= 768){
+    if (window.innerWidth <= 1024){
       this.post = post;
       this.getComments();
       this.show_component = true;

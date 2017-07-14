@@ -15,7 +15,7 @@ import { SafariErrorsFixService } from '../../services/safari-errors-fix.service
 import { ScrollToTopService } from '../../services/scroll-to-top.service';
 import {CreatePostComponent} from '../../modals/create-post/create-post.component';
 import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
-// import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
+
 import {PrivateRoomComponent} from '../../modals/private-room/private-room.component';
 
 
@@ -68,11 +68,12 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
               let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
               let segments: UrlSegment[] = segmentGroup.segments;
 
-              if (window.innerWidth <= 768){
-                  segments.length !== 4 ? this.without_child_route = true : this.without_child_route = false
+              if (window.innerWidth <= 1024){
+                  segments.length === 2 ? this.without_child_route = true : this.without_child_route = false
               } else {
                   this.without_child_route = true
               }
+
           }
       })
   }

@@ -72,6 +72,9 @@
   &:checked + .aside > .label_wrapp > .show_menu_label{
     background: white;
   }
+  &:checked ~ .main_field{
+    margin-left: 183px;
+  }
 }
 .aside_items{
   list-style: none;
@@ -105,6 +108,7 @@
   align-items: center;
   margin-top: 8px;
   width: 100%;
+  transition: 0.5s;
 }
 
 .confirm_block{
@@ -133,8 +137,14 @@
 }
 
 @media screen and (max-width: 1000px){
-  .main_container{
-    flex-direction: column;
+  //.main_container{
+  //  flex-direction: column;
+  //}
+  #navigation_menu_toggle{
+
+    &:checked ~ .main_field{
+      margin-left: 0;
+    }
   }
 }
 

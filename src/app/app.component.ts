@@ -4,6 +4,7 @@ import {Router, NavigationEnd} from '@angular/router';
 import {RequestService} from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
 import { SafariErrorsFixService } from './services/safari-errors-fix.service';
+import {TranslateService} from '@ngx-translate/core';
 
 
 
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit{
   constructor( private router: Router,
                private exchangeService: EventsExchangeService,
                private requestService : RequestService,
-                private safariService: SafariErrorsFixService){
+                private safariService: SafariErrorsFixService,
+               private translate: TranslateService){
 
 
     router.events.forEach((event) => {
@@ -37,6 +39,12 @@ export class AppComponent implements OnInit{
         this.exchangeService.pushEventUrlChanged()
       }
     });
+
+
+    translate.addLangs(["en", "fr"]);
+    translate.setDefaultLang('en');
+    translate.use('en')
+
 
   }
 

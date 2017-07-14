@@ -12,10 +12,10 @@
 
 
                 <select class="filter_switcher"  [(ngModel)]="filter_switcher" (change)="doFilteringResults(filter_switcher)">
-                    <option value="show_all">Show all posts</option>
-                    <option value="faves">My faves users</option>
-                    <option value="search_term">Search by text</option>
-                    <option value="user_name_post">Search by username</option>
+                    <option value="show_all">{{'INSIDE_ROOM.SHOW_ALL_POSTS' | translate}}</option>
+                    <option value="faves">{{'INSIDE_ROOM.FAVES_USES' | translate}}</option>
+                    <option value="search_term">{{'INSIDE_ROOM.BY_TEXT' | translate}}</option>
+                    <option value="user_name_post">{{'INSIDE_ROOM.BY_NAME' | translate}}</option>
                 </select>
                 <div class="search_wrapp" *ngIf="filter_switcher === 'search_term' || filter_switcher === 'user_name_post'">
                     <input type="text" class="posts_search" [(ngModel)]="posts_search">
@@ -25,10 +25,10 @@
         </div>
 
         <ul class="posts_menu" >
-            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/tifo-settings'">Settings</li>
-            <li class="posts_menu_items icon-question">About</li>
-            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">Join</li>
-            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">Leave</li>
+            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/tifo-settings'">{{'INSIDE_ROOM.SETTINGS' | translate}}</li>
+            <li class="posts_menu_items icon-question" [routerLink]="'./about'">{{'INSIDE_ROOM.ABOUT' | translate}}</li>
+            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">{{'INSIDE_ROOM.JOIN' | translate}}</li>
+            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">{{'INSIDE_ROOM.LEAVE' | translate}}</li>
         </ul>
     </div>
 
@@ -71,7 +71,7 @@
             </div>
 
             <div class="vote_info_wrapp"  *ngIf="post.poll">
-                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
+                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'INSIDE_ROOM.VOTES' | translate}}</span>
                 <span class="icon-calendar">{{post | pollTimeLeft}}</span>
             </div>
 
@@ -92,45 +92,45 @@
             <li class="drop_down_item"
                 (click)="postOwnerInterraction('mute', post.owner.user_id)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
-                <span class="drop_down_fill icon-mute">Mute User</span>
+                <span class="drop_down_fill icon-mute">{{'INSIDE_ROOM.MUTE_USER' | translate}}</span>
             </li>
             <!--all done-->
             <li class="drop_down_item"
                 (click)="postOwnerInterraction('block', post.owner.user_id)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
 
-                <span class="drop_down_fill icon-eye-blocked">Block User</span>
+                <span class="drop_down_fill icon-eye-blocked">{{'INSIDE_ROOM.BLOCK_USER' | translate}}</span>
             </li>
 
             <!--all done-->
             <li class="drop_down_item" (click)="postInterraction('edite',  post, i)"
                 *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
 
-                <span class="drop_down_fill icon-pencil">Edit Post</span>
+                <span class="drop_down_fill icon-pencil">{{'INSIDE_ROOM.EDIT_USER' | translate}}</span>
             </li>
             <!--all done-->
             <li class="drop_down_item comm_block_with_select"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
-                <span class="drop_down_fill icon-ban" (click)="postInterraction('ban', post)">Ban User</span>
+                <span class="drop_down_fill icon-ban" (click)="postInterraction('ban', post)">{{'INSIDE_ROOM.BAN_USER' | translate}}</span>
 
 
                 <select name="ban_days" class="ban-days" [(ngModel)]="banDays"
                         *ngIf="post.bunned"
                         (change)="postInterraction('do_ban', post, i, banDays)">
-                    <option value="0" selected disabled>Days for ban</option>
-                    <option value="3">3 days</option>
-                    <option value="7">7 days</option>
-                    <option value="14">14 days</option>
-                    <option value="30">30 days</option>
-                    <option value="60">60 days</option>
-                    <option value="3000">3000 days</option>
+                    <option value="0" selected disabled>{{'INSIDE_ROOM.DAYS_FOR_BAN' | translate}}</option>
+                    <option value="3">3 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="7">7 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="14">14 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="30">30 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="60">60 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="3000">3000 {{'INSIDE_ROOM.DAYS' | translate}}</option>
                 </select>
             </li>
             <!--all done-->
             <li class="drop_down_item comm_block_with_select" *ngIf="userArmin">
                 <div class="comm__icon-pos list_item_with_select"
                      (click)="postInterraction('move', post)">
-                    <span class="drop_down_fill icon-move-right">Move Post</span>
+                    <span class="drop_down_fill icon-move-right">{{'INSIDE_ROOM.MOVE_POST' | translate}}</span>
 
                 </div>
                 <select name="move_to" class="ban-days" [(ngModel)]="wallsIds"
@@ -145,13 +145,14 @@
             <li class="drop_down_item" (click)="postInterraction('remove', post, i)"
                 *ngIf="currentUserData.user_data.user_id === post.owner.user_id || userArmin">
 
-                <span class="drop_down_fill icon-cancel">{{currentUserData.user_data.user_id === post.owner.user_id ? 'Delete Post' : 'Remove Post'}}</span>
+                <span class="drop_down_fill icon-cancel" *ngIf="currentUserData.user_data.user_id === post.owner.user_id">{{'INSIDE_ROOM.DELETE_POST' | translate}}</span>
+                <span class="drop_down_fill icon-cancel" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">{{ 'INSIDE_ROOM.REMOVE_POST' | translate}}</span>
             </li>
             <!--all done-->
             <li class="drop_down_item" (click)="postInterraction('inappropriate', post)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
 
-                <span class="drop_down_fill icon-flag">Flag inappropriate </span>
+                <span class="drop_down_fill icon-flag">{{'INSIDE_ROOM.INAPPROPRIATE' | translate}}</span>
             </li>
             <li class="for_dots">
                 <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
@@ -169,7 +170,7 @@
 
     <span class="to_top icon-chevron-left" *ngIf="show_to_top" (click)="scrollToTopFunction()"></span>
 
-    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+    <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 </div>
 
 </div>

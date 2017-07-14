@@ -29,6 +29,7 @@ body.safari_browser{
 }
 .post_details_modal_hi_width{
     max-width: 1175px!important;
+    width: 80%;
 }
 /*.post_details_modal_low_width{*/
     /*max-width: 600px!important;*/
@@ -103,6 +104,7 @@ app-post-details-main .picture{
 @media screen and (max-width: 550px){
     .post_details_modal_hi_width{
         margin: auto;
+        width: 100%;
     }
 
     app-header{

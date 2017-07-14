@@ -1,8 +1,8 @@
-<div class="back_button_wrapp">
-  <span class="back_button icon-chevron-left" [routerLink]="['../../']">back to tifo</span>
-</div>
 
 <div class="main_container" *ngIf="show_component">
+  <div class="back_button_wrapp">
+    <span class="back_button icon-chevron-left" [routerLink]="['../../']">back to tifo</span>
+  </div>
   <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
                     <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
