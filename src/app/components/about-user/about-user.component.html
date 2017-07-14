@@ -17,12 +17,12 @@
 
               <li class="drop_down_item"
                   (click)="userInterraction('mute')">
-                <span class="drop_down_fill icon-mute">Mute User</span>
+                <span class="drop_down_fill icon-mute">{{'COMMON.MUTE_USER' | translate}}</span>
               </li>
 
               <li class="drop_down_item"
                   (click)="userInterraction('block')">
-                <span class="drop_down_fill icon-eye-blocked">Block User</span>
+                <span class="drop_down_fill icon-eye-blocked">{{'COMMON.BLOCK_USER' | translate}}</span>
               </li>
 
             </ul>
@@ -44,10 +44,10 @@
 
   <div class="tags_wrapp" *ngIf="currentUser">
    <!--ng class is hack for router. Active class not add when routing goes prom profile to another profile-->
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">Tifos ({{currentUser.rooms_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">Posts ({{currentUser.posts_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">Fans ({{currentUser.fans_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">Favs ({{currentUser.faves_count}})</span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">{{'ABOUT_USER.TIFOS' | translate}} ({{currentUser.rooms_count}})</span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">{{'ABOUT_USER.POSTS' | translate}} ({{currentUser.posts_count}})</span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">{{'ABOUT_USER.FANS' | translate}} ({{currentUser.fans_count}})</span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">{{'ABOUT_USER.FAVS' | translate}} ({{currentUser.faves_count}})</span>
   </div>
 
   <router-outlet></router-outlet>

@@ -1,6 +1,18 @@
 {
   "COMMON": {
-    "LOADING": "Loading, please wait ..."
+    "LOADING": "Loading, please wait ...",
+    "MUTE_USER": "Mute User",
+    "BLOCK_USER": "Block User",
+    "TITLE": "Title",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "WRONG_NAME_FORMAT": "Wrong name format",
+    "ALLOW_MEMBERS": "Allow members to post",
+    "ALLOW_COMMENT": "Allow members to comment",
+    "ABOUT_US": "ABOUT US",
+    "SUPPORT": "SUPPORT",
+    "PRIVACY": "PRIVACY",
+    "TERMS": "TERMS"
   },
 
   "HEADER": {
@@ -29,8 +41,7 @@
     "JOIN": "Join",
     "LEAVE": "Leave",
     "VOTES": "votes",
-    "MUTE_USER": "Mute User",
-    "BLOCK_USER": "Block User",
+
     "EDIT_USER": "Edit Post",
     "BAN_USER": "Ban User",
     "DAYS_FOR_BAN": "Days for ban",
@@ -39,6 +50,56 @@
     "DELETE_POST": "Delete Post",
     "REMOVE_POST": "Remove Post",
     "INAPPROPRIATE": "Flag inappropriate"
+  },
+
+  "ABOUT_USER": {
+    "TIFOS": "Tifos",
+    "POSTS": "Posts",
+    "FANS": "Fans",
+    "FAVS": "Favs"
+  },
+
+  "ADD_WALL": {
+    "WALL_NAME": "Enter wall name"
+  },
+
+  "DELETE_ROOM": {
+    "DELETE_ROOM": "Delete Room",
+    "DESCRIPT": "Description",
+    "ROOM_TYPE": "Room type",
+    "PUBLIC": "Public",
+    "SEARCHABLE": "Searchable"
+  },
+
+  "EDIT_PROFILE": {
+    "USERNAME": "Username",
+    "ENTER_NAME": "Enter your name",
+    "DISPLAYED_US_NAME": "Displayed Username",
+    "ENTER_NICK": "Enter your nick name",
+    "ABOUT_ME": "About me",
+    "SOME_INFO_ABOUT": "Enter some info about yourself",
+    "RECEIVED_MESSAGES": "Receive messages from",
+    "ALL_USERS": "All users"
+
+  },
+
+  "EDIT_WALL": {
+    "WALL_NAME": "Enter wall name"
+  },
+
+  "LOGIN_AND_REGISTER": {
+    "WELCOME": "Welcome to",
+    "TIFO": "TIFO",
+    "LOG_IN_TO": "Log in to meet photos and videos from your friends.",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "LOG_IN": "Log in",
+    "HAVE_ACCOUNT": "Have an account",
+    "SIGN_UP": "Sign up",
+    "WRONG_E_FORMAT": "Wrong email format",
+    "PASSWORD_LENGTH": "Password must be from 4 to 21 character length",
+    "WRONG_DATA": "Wrong email or password"
+
   }
 
 

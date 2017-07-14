@@ -92,14 +92,14 @@
             <li class="drop_down_item"
                 (click)="postOwnerInterraction('mute', post.owner.user_id)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
-                <span class="drop_down_fill icon-mute">{{'INSIDE_ROOM.MUTE_USER' | translate}}</span>
+                <span class="drop_down_fill icon-mute">{{'COMMON.MUTE_USER' | translate}}</span>
             </li>
             <!--all done-->
             <li class="drop_down_item"
                 (click)="postOwnerInterraction('block', post.owner.user_id)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
 
-                <span class="drop_down_fill icon-eye-blocked">{{'INSIDE_ROOM.BLOCK_USER' | translate}}</span>
+                <span class="drop_down_fill icon-eye-blocked">{{'COMMON.BLOCK_USER' | translate}}</span>
             </li>
 
             <!--all done-->

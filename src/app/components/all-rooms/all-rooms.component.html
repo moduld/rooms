@@ -1,5 +1,5 @@
 <div class="rooms_container" appIeHeight>
-    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+    <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 
     <div class="rooms"  *ngFor="let room of allRooms; let i = index"
          [routerLink]="['/tifo', room.room.room_alias]" [style.backgroundColor]="room.room.color" [ngStyle]="room.room.thumbnail && {'background-image':'url(' + room.room.thumbnail + ')'}"  >

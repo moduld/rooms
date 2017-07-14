@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {RequestService} from '../../services/request.service';
 import {ErrorShowService} from '../../services/error-show.service';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-log-in',
   templateUrl: 'log-in.component.html',
@@ -24,7 +26,15 @@ export class LogInComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor(private requestService : RequestService, private errorService: ErrorShowService, private router: Router) { }
+  WRONG_E_FORMAT: string;
+  PASSWORD_LENGTH: string;
+  WRONG_DATA: string;
+
+  constructor(private requestService : RequestService,
+              private errorService: ErrorShowService,
+              private router: Router,
+              private translate: TranslateService) { }
+
   @ViewChild("inputEmail")
   inputEmail: ElementRef;
 
@@ -32,10 +42,30 @@ export class LogInComponent implements OnInit {
   inputPassword: ElementRef;
 
   ngOnInit() {
-    this.emailMistake = 'Wrong email format';
-    this.passwordMistake = 'Password must be from 4 to 21 character length';
+
+    this.translate.get('LOGIN_AND_REGISTER.WRONG_E_FORMAT').subscribe(
+        value => {
+         this.WRONG_E_FORMAT = value;
+          this.emailMistake = this.WRONG_E_FORMAT
+        }
+    );
+    this.translate.get('LOGIN_AND_REGISTER.PASSWORD_LENGTH').subscribe(
+        value => {
+         this.PASSWORD_LENGTH = value;
+          this.passwordMistake = this.PASSWORD_LENGTH
+        }
+    );
+    this.translate.get('LOGIN_AND_REGISTER.WRONG_DATA').subscribe(
+        value => {
+         this.WRONG_DATA = value;
+        }
+    );
+
+
     this.buttonDisabled = false;
   }
+
+
 
   sendLogInData(regForm: NgForm, event:Event): void {
 
@@ -56,8 +86,8 @@ export class LogInComponent implements OnInit {
 
   handleErrors(error): void {
 
-    this.emailMistake = 'Wrong email or password';
-    this.passwordMistake = 'Wrong email or password';
+    this.emailMistake = this.WRONG_DATA;
+    this.passwordMistake = this.WRONG_DATA;
     this.errorService.errorShow(this.inputEmail);
     this.errorService.errorShow(this.inputPassword);
     this.emailFieldState = false;
@@ -70,14 +100,14 @@ export class LogInComponent implements OnInit {
       if (field === 'email' && data.trim() !== this.oldEmailValue){
         this.oldEmailValue = data;
         this.errorService.errorHide(this.inputEmail);
-        this.emailMistake = 'Wrong email format';
+        this.emailMistake = this.WRONG_E_FORMAT;
         this.emailFieldState = true;
       }
 
       if (field === 'password' && data.trim() !== this.oldPasswordValue){
         this.oldPasswordValue = data;
         this.errorService.errorHide(this.inputPassword);
-        this.passwordMistake = 'Password must be from 4 to 21 character length';
+        this.passwordMistake = this.PASSWORD_LENGTH;
         this.passwordFieldState = true;
       }
       this.emailFieldState && this.passwordFieldState ? this.buttonDisabled = false : this.buttonDisabled = true;
