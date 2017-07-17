@@ -338,6 +338,27 @@ margin-top: 5px;
   @extend .backgr-center;
   border: 1px solid $border_menu;
 }
+.preview_wrapp{
+  height: 100px;
+  background-size: contain;
+  margin-top: 10px;
+  @extend .backgr-center;
+  border: 1px solid $border_menu;
+  @extend .flex-column;
+  flex-direction: column-reverse;
+}
+.link_title{
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  &:hover{
+    text-decoration: none;
+  }
+}
 .loading{
   padding: 30px;
   text-align: center;

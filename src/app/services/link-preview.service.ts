@@ -19,28 +19,33 @@ export class LinkPreviewService {
       if (messages[i].text){
 
         for (let t = 0; t < this.linksArchive.length; t++){
-          if (messages[i].msg_id === this.linksArchive[t].message_id){
+          if (messages[i].msg_id === this.linksArchive[t].message_id || messages[i].comment_id === this.linksArchive[t].message_id){
             this.getPrevienLink.next(this.linksArchive[t]);
-            return
+            messages.splice(i, 1);
+
           }
               }
 
-        let url = messages[i].text.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
-        if (url){
-          for (let j = 0; j < url.length; j++){
-            allLinks.push({url: url[j], message_id: messages[i].msg_id});
+        if (messages.length){
+          let url = messages[i].text.match(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi);
+          if (url){
+            for (let j = 0; j < url.length; j++){
+              allLinks.push({url: url[j], message_id: messages[i].msg_id ? messages[i].msg_id : messages[i].comment_id});
 
+            }
           }
         }
       }
     }
 
     for (let k = 0; k < allLinks.length; k++){
-
+      console.log()
       this.requestService.getLinkPreview(allLinks[k]).subscribe(data=>{
         this.getPrevienLink.next(data);
         this.linksArchive.push(data);
         for (let p = allLinks.length; p--; allLinks[p].message_id === data.message_id && allLinks.splice(p, 1)){}
+
+
       }, error=>{
 
       })

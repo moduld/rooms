@@ -8,8 +8,8 @@ import { FileInfoService } from '../../services/file-info.service';
 import { RequestService } from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
-import { SliderComponent } from '../../components/slider/slider.component';
 import {OpenNewWindowService} from '../../services/open-new-window.service';
+import { LinkPreviewService } from '../../services/link-preview.service';
 
 import { UserInfo } from '../../commonClasses/userInfo';
 
@@ -44,6 +44,7 @@ export class PostDetailsComponent implements OnInit {
               private requestService: RequestService,
               private storeservice: UserStoreService,
               private openNewWindow: OpenNewWindowService,
+              private linkPreview: LinkPreviewService,
               private exchangeService: EventsExchangeService) {
 
       exchangeService.urlChangedEvent.subscribe(
@@ -66,6 +67,15 @@ export class PostDetailsComponent implements OnInit {
       modaldialog && modaldialog.classList.add('post_details_modal_hi_width')
       // this.post.media && this.post.media.length ? modaldialog.classList.add('post_details_modal_hi_width') : modaldialog.classList.add('post_details_modal_low_width')
     });
+
+      this.linkPreview.getPrevienLinkEvent.subscribe(data=>{
+          this.comments = this.comments.map((comment)=>{
+
+              comment.comment_id === data.message_id && comment.previews.push(data);
+
+              return comment
+          })
+      })
   }
 
   likeAndUnlikePost(post_id: number, flag: number): void{
@@ -198,8 +208,12 @@ export class PostDetailsComponent implements OnInit {
 
       this.requestService.getPostComments(dataToServer).subscribe(
           data=>{
-              if (data['comments'].length){
+              if (data['comments'] && data['comments'].length){
+                  for(let i = data['comments'].length; i--; data['comments'][i]['previews'] = []){}
+
                   this.comments = this.comments.concat(data['comments']);
+
+                  this.linkPreview.makePreviews(data['comments']);
                   this.flagMoveY = true;
               }
               this.show_loading = false;

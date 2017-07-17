@@ -9,6 +9,7 @@ import { EventsExchangeService } from '../../services/events-exchange.service';
 import { Post } from '../../commonClasses/posts';
 import { FileInfoService } from '../../services/file-info.service';
 import {OpenNewWindowService} from '../../services/open-new-window.service';
+import { LinkPreviewService } from '../../services/link-preview.service';
 
 @Component({
   selector: 'app-post-details-main',
@@ -50,6 +51,7 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
       private modalService: NgbModal,
       private router: Router,
       private fileService: FileInfoService,
+      private linkPreview: LinkPreviewService,
       private openNewWindow: OpenNewWindowService
   ) {
 
@@ -75,6 +77,15 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.linkPreview.getPrevienLinkEvent.subscribe(data=>{
+      this.comments = this.comments.map((comment)=>{
+
+        comment.comment_id === data.message_id && comment.previews.push(data);
+
+        return comment
+      })
+    })
 
   }
 
@@ -272,8 +283,12 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
 
     this.requestService.getPostComments(dataToServer).subscribe(
         data=>{
-          if (data['comments'].length){
+          if (data['comments'] && data['comments'].length){
+            for(let i = data['comments'].length; i--; data['comments'][i]['previews'] = []){}
+
             this.comments = this.comments.concat(data['comments']);
+
+            this.linkPreview.makePreviews(data['comments'])
             this.flagMoveY = true;
           }
           this.show_loading = false;
