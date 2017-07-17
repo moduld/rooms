@@ -1,16 +1,16 @@
 
 <div class="radio_wrapp">
     <select name="member_type" class="select" [(ngModel)]="member_toggler" (change)="memberTypeChanged(member_toggler)">
-        <option value="member">Members</option>
-        <option value="requester">Requesters</option>
-        <option value="supermoderator">Supermoderators</option>
-        <option value="moderator">Moderators</option>
-        <option value="talker">Speaker</option>
-        <option value="admin">Admins</option>
+        <option value="member">{{'MEMBERS_LIST.MEMBERS' | translate}}</option>
+        <option value="requester">{{'MEMBERS_LIST.REQUESTERS' | translate}}</option>
+        <option value="supermoderator">{{'MEMBERS_LIST.SUPERMODERATIRS' | translate}}</option>
+        <option value="moderator">{{'MEMBERS_LIST.MODERATORS' | translate}}</option>
+        <option value="talker">{{'MEMBERS_LIST.SPEAKER' | translate}}</option>
+        <option value="admin">{{'MEMBERS_LIST.ADMINS' | translate}}</option>
     </select>
-    <input type="text" class="user_search_field" placeholder="Tap user name..." [(ngModel)]="search_model" *ngIf="member_toggler === 'member'">
-    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 0)">Reject all</button>
-    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 1)">Accept all</button>
+    <input type="text" class="user_search_field" placeholder="{{'MEMBERS_LIST.TAP_NAME' | translate}}" [(ngModel)]="search_model" *ngIf="member_toggler === 'member'">
+    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 0)">{{'MEMBERS_LIST.REJECT_ALL' | translate}}</button>
+    <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 1)">{{'MEMBERS_LIST.ACCEPT_ALL' | translate}}</button>
 </div>
 
 <div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
@@ -29,15 +29,15 @@
             </div>
             <ul class="drop_down_menu" >
                 <li class="triangle"><i class="trans_bar"></i></li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'talker', true, i)">Add as Talker</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'moderator', true, i)">Add as Moderator</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'supermoderator', true, i)">Add as Super Moderator</li>
-                <li class="drop_down_item" (click)="updateMembers(user, 'member', false, i)">Revoke membership</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'talker', true, i)">{{'MEMBERS_LIST.ADD_TALKER' | translate}}</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'moderator', true, i)">{{'MEMBERS_LIST.ADD_MODERATOR' | translate}}</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'supermoderator', true, i)">{{'MEMBERS_LIST.ADD_SUPERMODERATOR' | translate}}</li>
+                <li class="drop_down_item" (click)="updateMembers(user, 'member', false, i)">{{'MEMBERS_LIST.REVOKE_M_S' | translate}}</li>
             </ul>
         </div>
     </div>
 </div>
 
-    <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+    <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 
 </div>

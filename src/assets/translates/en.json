@@ -12,7 +12,30 @@
     "ABOUT_US": "ABOUT US",
     "SUPPORT": "SUPPORT",
     "PRIVACY": "PRIVACY",
-    "TERMS": "TERMS"
+    "TERMS": "TERMS",
+    "USER": "User",
+    "MODERATOR": "Moderator",
+    "NEW_TO_OLD": "New to old",
+    "OLD_TO_NEW": "Old to new",
+    "MOST_LIKED": "Most liked",
+    "VOTES": "votes",
+    "BAN_USER": "Ban User",
+    "DAYS_FOR_BAN": "Days for ban",
+    "DAYS": "days",
+    "INAPPROPRIATE": "Flag inappropriate",
+    "COMMENTS_DISABLED": "Comments are disabled",
+    "YOU_CANT_COMMENT": "You can't comment",
+    "ENTER_YOUR_COMMENT": "Enter your comment...",
+    "BACK_TO_TIFO": "back to tifo",
+    "DESCRIPT": "Description",
+    "ROOM_TYPE": "Room type",
+    "PUBLIC": "Public",
+    "SEARCHABLE": "Searchable",
+    "ENTER_TIFO_NAME": "Enter tifo name",
+    "WRONG_ROOM_NAME": "Wrong tifo name format",
+    "DAYS_LEFT": "days left",
+    "PRIVATE": "private",
+    "OK": "Ok"
   },
 
   "HEADER": {
@@ -40,16 +63,11 @@
     "ABOUT": "About",
     "JOIN": "Join",
     "LEAVE": "Leave",
-    "VOTES": "votes",
-
     "EDIT_USER": "Edit Post",
-    "BAN_USER": "Ban User",
-    "DAYS_FOR_BAN": "Days for ban",
-    "DAYS": "days",
     "MOVE_POST": "Move Post",
     "DELETE_POST": "Delete Post",
-    "REMOVE_POST": "Remove Post",
-    "INAPPROPRIATE": "Flag inappropriate"
+    "REMOVE_POST": "Remove Post"
+
   },
 
   "ABOUT_USER": {
@@ -64,11 +82,7 @@
   },
 
   "DELETE_ROOM": {
-    "DELETE_ROOM": "Delete Room",
-    "DESCRIPT": "Description",
-    "ROOM_TYPE": "Room type",
-    "PUBLIC": "Public",
-    "SEARCHABLE": "Searchable"
+    "DELETE_ROOM": "Delete Room"
   },
 
   "EDIT_PROFILE": {
@@ -80,7 +94,6 @@
     "SOME_INFO_ABOUT": "Enter some info about yourself",
     "RECEIVED_MESSAGES": "Receive messages from",
     "ALL_USERS": "All users"
-
   },
 
   "EDIT_WALL": {
@@ -98,8 +111,139 @@
     "SIGN_UP": "Sign up",
     "WRONG_E_FORMAT": "Wrong email format",
     "PASSWORD_LENGTH": "Password must be from 4 to 21 character length",
-    "WRONG_DATA": "Wrong email or password"
+    "WRONG_DATA": "Wrong email or password",
+    "SIGN_UP_TO": "Sign up to meet photos and videos from your friends.",
+    "USER_NAME": "Username",
+    "SIGN_IN": "Sign in",
+    "WRONG_NAME_OR_LENGTH": "Wrong user name or name length"
+  },
 
+  "MEMBERS_LIST": {
+    "MEMBERS": "Members",
+    "REQUESTERS": "Requesters",
+    "SUPERMODERATIRS": "Supermoderators",
+    "MODERATORS": "Moderators",
+    "SPEAKER": "Speaker",
+    "ADMINS": "Admins",
+    "TAP_NAME": "Tap user name...",
+    "REJECT_ALL": "Reject all",
+    "ACCEPT_ALL": "Accept all",
+    "ADD_TALKER": "Add as Talker",
+    "ADD_MODERATOR": "Add as Moderator",
+    "ADD_SUPERMODERATOR": "Add as Super Moderator",
+    "REVOKE_M_S": "Revoke membership"
+  },
+
+  "MUTED_BLOCKED": {
+    "MUTED": "Muted",
+    "BLOCKED": "Blocked"
+  },
+
+  "NOTIFICATION_SETT": {
+    "IN_APP": "In app notifications",
+    "PUSH": "Push notifications",
+    "POST_LIKED": "Post liked",
+    "COMMENT_RECEIVED": "Comment received",
+    "FAN_RECEIVED": "Fan received",
+    "MESSAGE_RECEIVED": "Message received",
+    "JOIN_REQUEST": "Room join request",
+    "MODER_ADDED": "Moderator added",
+    "TALKER_ADDED": "Talker added",
+    "POST_IN_ROOM": "Post in room"
+  },
+
+  "POST_DETAILS_MAIN": {
+    "DELETE_COMMENT": "Delete Comment",
+    "REMOVE_COMMENT": "Remove Comment"
+  },
+
+  "ROOM_SETTINGS": {
+    "MEMBERS": "Members",
+    "MEMBERSHIP": "Membership",
+    "WALLS": "Walls",
+    "ADD_WALL": "Add wall",
+    "EDIT_WALLS": "Edit walls",
+    "TIFO": "Tifo",
+    "EDIT_TIFO": "Edit tifo",
+    "DELETE_TIFO": "Delete tifo"
+  },
+
+  "UPDATE_ROOM": {
+    "EDIT_ROOM": "Edit Tifo",
+    "ALIAS": "Alias",
+    "ENTER_ALIAS": "Enter tifo alias",
+    "WRONG_ALIAS": "Wrong tifo alias format",
+    "ENTER_DESCRIPT": "Enter tifo description (optional)",
+    "TIFO_TAGS": "Tifo tags",
+    "TAP_TAGS": "Tap tifo tag here...",
+    "TIFO_TYPE": "Tifo type",
+    "SAVE_CHANGES": "Save changes"
+  },
+
+  "USER_SETTINGS": {
+    "USER_MENU": "User Menu",
+    "EDIT_PROFILE": "Edit Profile",
+    "MUTED_BLOCKED": "Muted/Blocked Users",
+    "CHANGE_PASSWORD": "Change Password",
+    "NOTIF_SETT": "Notifications Settings"
+  },
+
+  "USERS_DIALOG": {
+    "NO_CONVERSATION": "No conversations yet",
+    "SEND_FIRST_MESS": "Send first message ...",
+    "MEDIA_MESSAGE": "Media message ..."
+  },
+
+  "USER_MESSAGES": {
+    "SELECT_CONVERS": "Select a conversation",
+    "DELETE_POST": "Delete Post"
+  },
+
+  "WALLS_LIST": {
+    "WALLS": "Walls",
+    "EDIT_WALL": "Edit wall",
+    "DELETE_WALL": "Delete wall",
+    "CONFIRM": "Confirm"
+  },
+
+  "ABOUT_ROOM": {
+    "TAGS": "TAGS"
+  },
+
+  "CREATE_POST": {
+    "NEW_POST": "New Post",
+    "TYPE_HERE": "Type here ...",
+    "CLICK_TO_UPLOAD": "Click to upload the file",
+    "ALLOWED_TYPES": "Allowed file types",
+    "QUESTION": "Question",
+    "ENTER_QUESTION": "Enter your question",
+    "CHOISES": "Choises",
+    "ENTER_CHOISE": "Enter choice",
+    "POLL_DURATION": "Poll Duration (days)",
+    "CREATE": "Create a post"
+  },
+
+  "CREATE_ROOM": {
+    "NEW_ROOM": "New Tifo",
+    "ENTER_NAME": "Enter room name",
+    "WRONG_NAME": "Wrong tifo name format",
+    "ENTER_DESCRIPT": "Enter tifo description (optional)",
+    "TIFO_TAGS": "Tifo tags",
+    "TAP_TAGS": "Tap tifo tag here...",
+    "TIFO_TYPE": "Tifo type",
+    "CREATE": "Create tifo"
+  },
+
+  "POST_EDIT": {
+    "EDIT_POST": "Edit Post",
+    "TYPE_HERE": "Type here ...",
+    "CLICK_TO_UPLOAD": "Click to upload the file",
+    "ALLOWED_FILES": "Allowed file types",
+    "EDIT": "Edit post"
+  },
+
+  "PRIVATE_ROOM": {
+    "PRIVATE": "This room is private, would you like to send join request?"
   }
 
 

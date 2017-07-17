@@ -2,15 +2,15 @@
     <div class="switch_wrapp">
         <label class="toggle_wrapp">
             <input type="checkbox" class="toggler" name="mod_type" id="mod_type"  [ngModel]="states_switcher" (change)="states_switcher = !states_switcher" hidden>
-            <i class="toggle_item in_app">In app notifications</i>
-            <i class="toggle_item push">Push notifications</i>
+            <i class="toggle_item in_app">{{'NOTIFICATION_SETT.IN_APP' | translate}}</i>
+            <i class="toggle_item push">{{'NOTIFICATION_SETT.PUSH' | translate}}</i>
         </label>
     </div>
 
     <div class="settings">
-        <span class="title">User</span>
+        <span class="title">{{'COMMON.USER' | translate}}</span>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Post liked</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.POST_LIKED' | translate}}</span>
             <input type="checkbox" id="post_liked" class="toggle_input"
                    [ngModel]="switchers.post_like_notification_app"
                    (change)="changeValue('post_like_notification_app')" *ngIf="states_switcher"  hidden>
@@ -20,7 +20,7 @@
             <label for="post_liked" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Comment received</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.COMMENT_RECEIVED' | translate}}</span>
             <input type="checkbox" id="comment_received" class="toggle_input"
                    [ngModel]="switchers.comment_notification_app"
                    (change)="changeValue('comment_notification_app')" *ngIf="states_switcher" hidden>
@@ -30,7 +30,7 @@
             <label for="comment_received" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Fan received</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.FAN_RECEIVED' | translate}}</span>
             <input type="checkbox" id="fan_received" class="toggle_input"
                    [ngModel]="switchers.faved_notification_app"
                    (change)="changeValue('faved_notification_app')" *ngIf="states_switcher" hidden>
@@ -40,7 +40,7 @@
             <label for="fan_received" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Message received</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.MESSAGE_RECEIVED' | translate}}</span>
             <input type="checkbox" id="message_received" class="toggle_input"
                    [ngModel]="switchers.message_notification_app"
                    (change)="changeValue('message_notification_app')" *ngIf="states_switcher" hidden>
@@ -50,9 +50,9 @@
             <label for="message_received" class="toggle_field"></label>
         </div>
 
-        <span class="title">Moderator</span>
+        <span class="title">{{'COMMON.MODERATOR' | translate}}</span>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Room join request</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.JOIN_REQUEST' | translate}}</span>
             <input type="checkbox" id="room_join_request" class="toggle_input"
                    [ngModel]="switchers.room_join_request_notification_app"
                    (change)="changeValue('room_join_request_notification_app')" *ngIf="states_switcher" hidden>
@@ -62,7 +62,7 @@
             <label for="room_join_request" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Moderator added</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.MODER_ADDED' | translate}}</span>
             <input type="checkbox" id="moderator_added" class="toggle_input"
                    [ngModel]="switchers.added_moderator_notification_app"
                    (change)="changeValue('added_moderator_notification_app')" *ngIf="states_switcher" hidden>
@@ -72,7 +72,7 @@
             <label for="moderator_added" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Talker added</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.TALKER_ADDED' | translate}}</span>
             <input type="checkbox" id="talker_added" class="toggle_input"
                    [ngModel]="switchers.added_talker_notification_app"
                    (change)="changeValue('added_talker_notification_app')" *ngIf="states_switcher" hidden>
@@ -82,7 +82,7 @@
             <label for="talker_added" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-            <span class="toggle_name">Post in room</span>
+            <span class="toggle_name">{{'NOTIFICATION_SETT.POST_IN_ROOM' | translate}}</span>
             <input type="checkbox" id="post_in_room" class="toggle_input"
                    [ngModel]="switchers.post_in_room_notification_app"
                    (change)="changeValue('post_in_room_notification_app')" *ngIf="states_switcher" hidden>
@@ -92,6 +92,6 @@
             <label for="post_in_room" class="toggle_field"></label>
         </div>
 
-        <button type="button" class="form_button" (click)="saveSettings()">Save</button>
+        <button type="button" class="form_button" (click)="saveSettings()">{{'COMMON.SAVE' | translate}}</button>
     </div>
 </div>

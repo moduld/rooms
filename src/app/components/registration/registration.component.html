@@ -1,26 +1,26 @@
 <div class="image"></div>
 <div class="form_wrapper">
     <form action="#" class="form" #regForm="ngForm" (ngSubmit)="sendRegistrationData(regForm, $event)">
-        <p class="title">Welcome to<span class="title_bold">TIFO!</span></p>
-        <p class="subtitle">Sign up to meet photos and videos from your friends.</p>
+        <p class="title">{{'LOGIN_AND_REGISTER.WELCOME' | translate}}<span class="title_bold">{{'LOGIN_AND_REGISTER.TIFO' | translate}}!</span></p>
+        <p class="subtitle">{{'LOGIN_AND_REGISTER.SIGN_UP_TO' | translate}}</p>
         <label class="input_wrapp icon-head">
-            Username
+            {{'LOGIN_AND_REGISTER.USER_NAME' | translate}}
             <input type="text" class="input_field"  name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="34" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
             <span class="mistake">{{userNameMistake}}</span>
         </label>
         <label class="input_wrapp icon-mail">
-            Email
+            {{'LOGIN_AND_REGISTER.EMAIL' | translate}}
             <input type="email" class="input_field" name="email" #inputEmail [(ngModel)]="email"  (input)="changeState('email', email)" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required>
             <span class="mistake">{{emailMistake}}</span>
         </label>
         <label class="input_wrapp icon-lock">
-            Password
+            {{'LOGIN_AND_REGISTER.PASSWORD' | translate}}
             <input type="password" class="input_field" name="password" #inputPassword [(ngModel)]="password" minlength="4" maxlength="21" required>
             <span class="mistake">{{passwordMistake}}</span>
         </label>
-        <button type="submit" class="form_button" [disabled]="regForm.invalid" [disabled]="buttonDisabled">Sign in</button>
+        <button type="submit" class="form_button" [disabled]="regForm.invalid" [disabled]="buttonDisabled">{{'LOGIN_AND_REGISTER.SIGN_UP' | translate}}</button>
 
-        <p class="link_prew">Have an account?<span class="link_to" [routerLink]="'/login'">Log in</span></p>
+        <p class="link_prew">{{'LOGIN_AND_REGISTER.HAVE_ACCOUNT' | translate}}?<span class="link_to" [routerLink]="'/login'">{{'LOGIN_AND_REGISTER.LOG_IN' | translate}}</span></p>
     </form>
     <div class="footer_wrapper">
         <div class="links_wrap">
@@ -28,61 +28,10 @@
             <a href="#" class="app_links android"></a>
         </div>
         <footer class="form_footer">
-            <a href="#" class="link">ABOUT US</a>
-            <a href="#" class="link">SUPPORT</a>
-            <a href="#" class="link">PRIVACY</a>
-            <a href="#" class="link">TERMS</a>
+            <a href="#" class="link">{{'COMMON.ABOUT_US' | translate}}</a>
+            <a href="#" class="link">{{'COMMON.SUPPORT' | translate}}</a>
+            <a href="#" class="link">{{'COMMON.PRIVACY' | translate}}</a>
+            <a href="#" class="link">{{'COMMON.TERMS' | translate}}</a>
         </footer>
     </div>
 </div>
-
-
-
-
-
-<!--<div class="sign">-->
-    <!--<div class="sign__bg  visible-lg"></div>-->
-    <!--<div class="sign__block ">-->
-        <!--<div class="login sticky">-->
-            <!--<div class="login__container">-->
-                <!--<h2 class="login__welcome login__welcome-pos">Welcome to <span>TIFO!</span></h2>-->
-                <!--<p class="login__desc login__desc-pos">Sign up to meet photos and videos-->
-                    <!--from your friends.</p>-->
-                <!--<form action="" class="login__form" #regForm="ngForm" (ngSubmit)="sendRegistrationData(regForm)">-->
-                    <!--<label for="username" class="login__label">Username</label>-->
-                    <!--<div class="login__input-wrap">-->
-                        <!--<input id="username" type="text" class="login__input" name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="34" pattern="[a-zA-Z0-9-]+" required>-->
-                        <!--<span class="icon icon-username"></span>-->
-                        <!--<span class="mistake">{{userNameMistake}}</span>-->
-                    <!--</div>-->
-                    <!--<label for="email" class="login__label">Email</label>-->
-                    <!--<div class="login__input-wrap">-->
-                        <!--<input id="email" type="email" class="login__input" name="email" #inputEmail [(ngModel)]="email"  (input)="changeState('email', email)" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required>-->
-                        <!--<span class="icon icon-email"></span>-->
-                        <!--<span class="mistake">{{emailMistake}}</span>-->
-                    <!--</div>-->
-                    <!--<label for="password" class="login__label">Password</label>-->
-                    <!--<div class="login__input-wrap">-->
-                        <!--<input id="password" type="password" class="login__input"  name="password" #inputPassword [(ngModel)]="password" minlength="4" maxlength="21" required>-->
-                        <!--<span class="icon icon-pass"></span>-->
-                        <!--<span class="mistake">{{passwordMistake}}</span>-->
-                    <!--</div>-->
-                    <!--<button class="login__submit" [disabled]="regForm.invalid" [disabled]="buttonDisabled" type="submit">Sign up</button>-->
-                <!--</form>-->
-                <!--<span class="login__account">Have an account? <a href="" class="" [routerLink]="'/login'">Log in</a></span>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="footer footer-rooms sign-footer">-->
-            <!--<div class="sign__links">-->
-                <!--<a href="" class="sign__app sign__app-as"></a>-->
-                <!--<a href="" class="sign__app sign__app-gp"></a>-->
-            <!--</div>-->
-            <!--<ul class="footer__menu">-->
-                <!--<li class="footer__item"><a href="">ABOUT US</a></li>-->
-                <!--<li class="footer__item"><a href="">SUPPORT</a></li>-->
-                <!--<li class="footer__item"><a href="">PRIVACY</a></li>-->
-                <!--<li class="footer__item"><a href="">TERMS</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->

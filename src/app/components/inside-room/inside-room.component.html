@@ -71,7 +71,7 @@
             </div>
 
             <div class="vote_info_wrapp"  *ngIf="post.poll">
-                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'INSIDE_ROOM.VOTES' | translate}}</span>
+                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'COMMON.VOTES' | translate}}</span>
                 <span class="icon-calendar">{{post | pollTimeLeft}}</span>
             </div>
 
@@ -111,19 +111,19 @@
             <!--all done-->
             <li class="drop_down_item comm_block_with_select"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
-                <span class="drop_down_fill icon-ban" (click)="postInterraction('ban', post)">{{'INSIDE_ROOM.BAN_USER' | translate}}</span>
+                <span class="drop_down_fill icon-ban" (click)="postInterraction('ban', post)">{{'COMMON.BAN_USER' | translate}}</span>
 
 
                 <select name="ban_days" class="ban-days" [(ngModel)]="banDays"
                         *ngIf="post.bunned"
                         (change)="postInterraction('do_ban', post, i, banDays)">
-                    <option value="0" selected disabled>{{'INSIDE_ROOM.DAYS_FOR_BAN' | translate}}</option>
-                    <option value="3">3 {{'INSIDE_ROOM.DAYS' | translate}}</option>
-                    <option value="7">7 {{'INSIDE_ROOM.DAYS' | translate}}</option>
-                    <option value="14">14 {{'INSIDE_ROOM.DAYS' | translate}}</option>
-                    <option value="30">30 {{'INSIDE_ROOM.DAYS' | translate}}</option>
-                    <option value="60">60 {{'INSIDE_ROOM.DAYS' | translate}}</option>
-                    <option value="3000">3000 {{'INSIDE_ROOM.DAYS' | translate}}</option>
+                    <option value="0" selected disabled>{{'COMMON.DAYS_FOR_BAN' | translate}}</option>
+                    <option value="3">3 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="7">7 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="14">14 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="30">30 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="60">60 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="3000">3000 {{'COMMON.DAYS' | translate}}</option>
                 </select>
             </li>
             <!--all done-->
@@ -152,7 +152,7 @@
             <li class="drop_down_item" (click)="postInterraction('inappropriate', post)"
                 *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
 
-                <span class="drop_down_fill icon-flag">{{'INSIDE_ROOM.INAPPROPRIATE' | translate}}</span>
+                <span class="drop_down_fill icon-flag">{{'COMMON.INAPPROPRIATE' | translate}}</span>
             </li>
             <li class="for_dots">
                 <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">

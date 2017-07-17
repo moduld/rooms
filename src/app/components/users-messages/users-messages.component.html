@@ -1,4 +1,4 @@
-<span class="first_message" *ngIf="!userWhoTalkToUs">Select a conversation</span>
+<span class="first_message" *ngIf="!userWhoTalkToUs">{{'USER_MESSAGES.SELECT_CONVERS' | translate}}</span>
 <div class="chat_and_form_wrapp" *ngIf="showComponentBody">
 
     <div class="position_container">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+                <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 
             </div>
 

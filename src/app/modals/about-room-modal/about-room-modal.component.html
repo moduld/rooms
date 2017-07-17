@@ -4,18 +4,18 @@
   <div class="picture" [style.backgroundColor]="room_details.color" [ngStyle]="room_details.thumbnail && {'background-image':'url(' + room_details.thumbnail + ')'}"></div>
   <h3 class="title">{{room_details.room_name}}</h3>
   <div class="properties_wrap">
-    <span class="property icon-earth" *ngIf="room_details.public">public</span>
-    <span class="property icon-earth" *ngIf="!room_details.public">private</span>
+    <span class="property icon-earth" *ngIf="room_details.public">{{'COMMON.PUBLIC' | translate}}</span>
+    <span class="property icon-earth" *ngIf="!room_details.public">{{'COMMON.PRIVATE' | translate}}</span>
     <span class="property icon-users">{{room_details.members_count}}</span>
     <span class="property icon-eye">{{room_details.visits_count}}</span>
   </div>
   <p class="describe" *ngIf="room_details.room_desc">{{room_details.room_desc}}</p>
   <div class="titled_wrapp">
-    <span class="labels">TAGS</span>
+    <span class="labels">{{'ABOUT_ROOM.TAGS' | translate}}</span>
     <div class="tags_wrapp">
-      <span class="tag">dcascadas</span>
-      <span class="tag">dcascadas</span>
-      <span class="tag">dcascadas</span>
+      <span class="tag">tag1</span>
+      <span class="tag">tag2</span>
+      <span class="tag">tag2</span>
     </div>
   </div>
 

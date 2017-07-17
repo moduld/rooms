@@ -5,11 +5,11 @@
       <label for="navigation_menu_toggle" class="show_menu_label " [ngClass]="{'icon-menu': !menu_state_toggle, 'icon-double-left': menu_state_toggle}"></label>
     </div>
     <ul class="aside_content">
-      <li class="aside_items aside_items_title">User Menu</li>
-      <li class="aside_items" [routerLink]="'/user-settings/edit-profile'" routerLinkActive="active">Edit Profile</li>
-      <li class="aside_items" [routerLink]="'/user-settings/muted-blocked'" routerLinkActive="active">Muted/Blocked Users</li>
-      <li class="aside_items" [routerLink]="'/user-settings/change-password'" routerLinkActive="active">Change Password</li>
-      <li class="aside_items" [routerLink]="'/user-settings/notifications-settings'" routerLinkActive="active">Notifications Settings</li>
+      <li class="aside_items aside_items_title">{{'USER_SETTINGS.USER_MENU' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/edit-profile'" routerLinkActive="active">{{'USER_SETTINGS.EDIT_PROFILE' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/muted-blocked'" routerLinkActive="active">{{'USER_SETTINGS.MUTED_BLOCKED' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/change-password'" routerLinkActive="active">{{'USER_SETTINGS.CHANGE_PASSWORD' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/notifications-settings'" routerLinkActive="active">{{'USER_SETTINGS.NOTIF_SETT' | translate}}</li>
 
     </ul>
   </aside>

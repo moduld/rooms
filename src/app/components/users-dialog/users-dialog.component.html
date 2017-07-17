@@ -5,7 +5,7 @@
             <label for="users_list_view_toggler" class="show_menu_label" [ngClass]="{'icon-menu': !users_list_toggle, 'icon-double-left': users_list_toggle}"></label>
         </div>
         <div class="users_wrapper">
-            <span class="no_conversations" *ngIf="!all_users.length && !virtual_user">No conversations yet</span>
+            <span class="no_conversations" *ngIf="!all_users.length && !virtual_user">{{'USERS_DIALOG.NO_CONVERSATION' | translate}}</span>
             <div class="user_bar"  *ngIf="virtual_user" [ngClass]="{'active':  virtual_user.user_id == dialog_user_id}" (click)="changeDialogUser(false, virtual_user)">
             <span class="avatar" [ngStyle]="virtual_user.thumbnail && {'background-image':'url(' + virtual_user.thumbnail + ')' }"
                   [routerLink]="['/about-user', virtual_user.user_id*22]"></span>
@@ -14,7 +14,7 @@
                 <span class="top_wrapp">
                     <span class="name">{{virtual_user.user_name}}</span>
                 </span>
-                    <p class="text">Send first message ...</p>
+                    <p class="text">{{'USERS_DIALOG.SEND_FIRST_MESS' | translate}}</p>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     <span class="name">{{user.user.user_name}}</span>
                     <span class="date">{{user.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                    <p class="text" [innerHTML]="user.text | asteriscReplace: 'Media message ...'"></p>
+                    <p class="text" [innerHTML]="user.text | asteriscReplace: 'USERS_DIALOG.MEDIA_MESSAGE' | translate"></p>
                 </div>
             </div>
         </div>

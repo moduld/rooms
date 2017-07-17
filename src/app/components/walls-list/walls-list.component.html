@@ -1,4 +1,4 @@
-    <p class="title">Walls</p>
+    <p class="title">{{'WALLS_LIST.WALLS' | translate}}</p>
     <div class="walls" [dragula]='"walls"' [dragulaModel]='walls'>
         <div class="wall  icon-menu" *ngFor="let wall of walls; let i = index">
 
@@ -13,13 +13,13 @@
                 <ul class="drop_down_menu">
                     <li class="triangle"><i class="trans_bar"></i></li>
                     <li class="drop_down_item" >
-                        <span class="drop_down_fill icon-pencil" [routerLink]="['/tifo-settings/edit-wall', wall.wall_id]" >Edit wall</span>
+                        <span class="drop_down_fill icon-pencil" [routerLink]="['/tifo-settings/edit-wall', wall.wall_id]" >{{'WALLS_LIST.EDIT_WALL' | translate}}</span>
                     </li>
                     <li class="drop_down_item">
-                        <span class="drop_down_fill icon-cancel" (click)="wall.showDeleteConfirm = true">Delete wall</span>
+                        <span class="drop_down_fill icon-cancel" (click)="wall.showDeleteConfirm = true">{{'WALLS_LIST.DELETE_WALL' | translate}}</span>
                         <div class="buttons_wrapp" *ngIf="wall.showDeleteConfirm">
-                            <button class="action_button" (click)="wall.showDeleteConfirm = false">Cancel</button>
-                            <button class="action_button" (click)="deleteWall(wall, i)">Confirm</button>
+                            <button class="action_button" (click)="wall.showDeleteConfirm = false">{{'COMMON.CANCEL' | translate}}</button>
+                            <button class="action_button" (click)="deleteWall(wall, i)">{{'WALLS_LIST.CONFIRM' | translate}}</button>
                         </div>
                     </li>
                 </ul>
@@ -28,4 +28,4 @@
         </div>
     </div>
 
-    <button type="button" class="form_button" (click)="saveOrder()">Save</button>
+    <button type="button" class="form_button" (click)="saveOrder()">{{'COMMON.SAVE' | translate}}</button>

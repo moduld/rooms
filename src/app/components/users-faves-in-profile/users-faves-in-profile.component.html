@@ -9,6 +9,6 @@
     <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="faveUnfaveUser(user, i)" *ngIf="user.user_id != currentUser.user_data.user_id"></span>
   </div>
 
-  <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+  <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 
 </div>

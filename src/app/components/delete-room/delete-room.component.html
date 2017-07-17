@@ -12,19 +12,19 @@
       </span>
 
       <div class="input_wrapp with_margin">
-        {{'DELETE_ROOM.DESCRIPT' | translate}}:
+        {{'COMMON.DESCRIPT' | translate}}:
         <div class="text_field">{{currentRoom.room_details.room_desc}}</div>
       </div>
 
       <div class="input_wrapp with_margin">
-        {{'DELETE_ROOM.ROOM_TYPE' | translate}}:
+        {{'COMMON.ROOM_TYPE' | translate}}:
         <div class="toggle_wrapper">
-          <span class="toggle_name">{{'DELETE_ROOM.PUBLIC' | translate}}</span>
+          <span class="toggle_name">{{'COMMON.PUBLIC' | translate}}</span>
           <input type="checkbox"  class="toggle_input" name="public"  [(ngModel)]="currentRoom.room_details.public"  hidden>
           <span  class="toggle_field"></span>
         </div>
         <div class="toggle_wrapper">
-          <span class="toggle_name">{{'DELETE_ROOM.SEARCHABLE' | translate}}</span>
+          <span class="toggle_name">{{'COMMON.SEARCHABLE' | translate}}</span>
           <input type="checkbox"  class="toggle_input" name="searchable_flag" [(ngModel)]="currentRoom.room_details.searchable_flag"  hidden>
           <span  class="toggle_field"></span>
         </div>

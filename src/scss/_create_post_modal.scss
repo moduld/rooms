@@ -266,3 +266,12 @@
     }
   }
 }
+
+@media screen and (max-width: 550px){
+  .dropzone{
+    justify-content: space-around;
+  }
+  .drag_zone_text{
+    position: static;
+  }
+}

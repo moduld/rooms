@@ -23,8 +23,8 @@
       </div>
 
       <div class="vote_info_wrapp"  *ngIf="post.poll">
-        <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} votes</span>
-        <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} days left</span>
+        <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'COMMON.VOTES' | translate}}</span>
+        <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} {{'COMMON.DAYS_LEFT' | translate}}</span>
       </div>
 
 
@@ -42,7 +42,7 @@
     <ul class="drop_down_menu"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
 
       <li class="drop_down_item" (click)="removePost(post, i)">
-        <span class="drop_down_fill icon-cancel">Delete Post</span>
+        <span class="drop_down_fill icon-cancel">{{'USER_MESSAGES.DELETE_POST' | translate}}</span>
       </li>
       <li class="for_dots">
         <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
@@ -54,5 +54,5 @@
     </ul>
   </div>
 
-  <span class="loading" *ngIf="show_loading">Loading, please wait ...</span>
+  <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
 </div>

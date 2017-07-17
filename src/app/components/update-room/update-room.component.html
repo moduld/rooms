@@ -1,6 +1,6 @@
 <form action="#" class="modal_wrapper" #updateRoomForm="ngForm" (submit)="updateTheRoom(updateRoomForm, $event)">
   <div class="top_wrapper">
-    <h3 class="title">Edit Room</h3>
+    <h3 class="title">{{'UPDATE_ROOM.EDIT_ROOM' | translate}}</h3>
   </div>
   <div class="main_wrapper">
 
@@ -15,43 +15,43 @@
 
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
-        Title:
-        <input type="text" class="input_field" placeholder="Enter room name" name="room_name" (change)="haveChangedData('room_name', roomName)" [(ngModel)]="roomName"  minlength="3" maxlength="20" required>
-        <span class="mistake">Wrong room name format</span>
+        {{'COMMON.TITLE' | translate}}:
+        <input type="text" class="input_field" placeholder="{{'COMMON.ENTER_TIFO_NAME' | translate}}" name="room_name" (change)="haveChangedData('room_name', roomName)" [(ngModel)]="roomName"  minlength="3" maxlength="20" required>
+        <span class="mistake">{{'COMMON.WRONG_ROOM_NAME' | translate}}</span>
       </span>
 
       <span class="input_wrapp with_margin">
-        Alias:
-        <input type="text" class="input_field" placeholder="Enter room alias" name="room_alias" (change)="haveChangedData('room_alias', roomAlias)" [(ngModel)]="roomAlias"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[-]?[a-zA-Z0-9]+$" required>
-        <span class="mistake">Wrong room name format</span>
+        {{'UPDATE_ROOM.ALIAS' | translate}}:
+        <input type="text" class="input_field" placeholder="{{'UPDATE_ROOM.ENTER_ALIAS' | translate}}" name="room_alias" (change)="haveChangedData('room_alias', roomAlias)" [(ngModel)]="roomAlias"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[-]?[a-zA-Z0-9]+$" required>
+        <span class="mistake">{{'UPDATE_ROOM.WRONG_ALIAS' | translate}}</span>
       </span>
 
       <div class="input_wrapp with_margin">
-        Description:
-        <textarea  class="input_field room_description" placeholder="Enter room description (optional)" name="room_desc" (change)="haveChangedData('room_desc', roomDeskription)" [(ngModel)]="roomDeskription" maxlength="250" ></textarea>
+        {{'COMMON.DESCRIPT' | translate}}:
+        <textarea  class="input_field room_description" placeholder="{{'UPDATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" (change)="haveChangedData('room_desc', roomDeskription)" [(ngModel)]="roomDeskription" maxlength="250" ></textarea>
       </div>
 
       <div class="input_wrapp with_margin">
-        Tifo tags:
+        {{'UPDATE_ROOM.TIFO_TAGS' | translate}}:
         <tag-input [(ngModel)]='tags' name="mod_name"  [maxItems]="4" [addOnBlur]="true" [addOnPaste]="true"
-                   [placeholder]="'Tap tifo tag here...'" [secondaryPlaceholder]="'Tap tifo tag here...'" (onAdd)="tagsChanged()" (onRemove)="tagsChanged()" (onPaste)="tagsChanged()"></tag-input>
+                   [placeholder]="'UPDATE_ROOM.TAP_TAGS' | translate" [separatorKeyCodes]="[32]" [secondaryPlaceholder]="'UPDATE_ROOM.TAP_TAGS' | translate" (onAdd)="tagsChanged()" (onRemove)="tagsChanged()" (onPaste)="tagsChanged()"></tag-input>
       </div>
 
       <div class="input_wrapp with_margin">
-        Room type:
+        {{'UPDATE_ROOM.TIFO_TYPE' | translate}}:
         <div class="toggle_wrapper">
-          <span class="toggle_name">Public</span>
+          <span class="toggle_name">{{'COMMON.PUBLIC' | translate}}</span>
           <input type="checkbox" id="private" class="toggle_input" name="public" (change)="haveChangedData('public', publicFlag)" [(ngModel)]="publicFlag" checked hidden>
           <label for="private" class="toggle_field"></label>
         </div>
         <div class="toggle_wrapper">
-          <span class="toggle_name">Searchable</span>
+          <span class="toggle_name">{{'COMMON.SEARCHABLE' | translate}}</span>
           <input type="checkbox" id="searchable" class="toggle_input" name="searchable_flag" (change)="haveChangedData('searchable_flag', searchableFlag)" [(ngModel)]="searchableFlag" checked hidden>
           <label for="searchable" class="toggle_field"></label>
         </div>
       </div>
 
-      <button type="submit" class="form_button" [disabled]="updateRoomForm.invalid || button_disabled">Save changes</button>
+      <button type="submit" class="form_button" [disabled]="updateRoomForm.invalid || button_disabled">{{'UPDATE_ROOM.SAVE_CHANGES' | translate}}</button>
 
     </div>
 

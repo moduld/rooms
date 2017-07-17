@@ -1,4 +1,4 @@
-<div class="room_settings_header icon-chevron-left" title="Back to tifo!" [routerLink]="['/tifo', currentRoom.room_details.room_alias]" *ngIf="currentRoom">{{currentRoom.room_details.room_name}}</div>
+<div class="room_settings_header icon-chevron-left" title="{{'COMMON.BACK_TO_TIFO' | translate}}!" [routerLink]="['/tifo', currentRoom.room_details.room_alias]" *ngIf="currentRoom">{{currentRoom.room_details.room_name}}</div>
 <div class="main_container">
     <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
     <aside class="aside">
@@ -6,14 +6,14 @@
             <label for="navigation_menu_toggle" class="show_menu_label" [ngClass]="{'icon-menu': !menu_state_toggle, 'icon-double-left': menu_state_toggle}"></label>
         </div>
         <ul class="aside_content">
-            <li class="aside_items aside_items_title">Members</li>
-            <li class="aside_items" [routerLink]="'/tifo-settings/members-list'" routerLinkActive="active">Membership</li>
-            <li class="aside_items aside_items_title">Walls</li>
-            <li class="aside_items" [routerLink]="'/tifo-settings/add-wall'" routerLinkActive="active">Add wall</li>
-            <li class="aside_items" [routerLink]="'/tifo-settings/walls-list'" routerLinkActive="active">Edit walls</li>
-            <li class="aside_items aside_items_title">Room</li>
-            <li class="aside_items" [routerLink]="'/tifo-settings/edit-room'" routerLinkActive="active">Edit room</li>
-            <li class="aside_items" [routerLink]="'/tifo-settings/delete-room'" routerLinkActive="active">Delete room</li>
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.MEMBERS' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/members-list'" routerLinkActive="active">{{'ROOM_SETTINGS.MEMBERSHIP' | translate}}</li>
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.WALLS' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/add-wall'" routerLinkActive="active">{{'ROOM_SETTINGS.ADD_WALL' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/walls-list'" routerLinkActive="active">{{'ROOM_SETTINGS.EDIT_WALLS' | translate}}</li>
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.TIFO' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/edit-tifo'" routerLinkActive="active">{{'ROOM_SETTINGS.EDIT_TIFO' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/delete-tifo'" routerLinkActive="active">{{'ROOM_SETTINGS.DELETE_TIFO' | translate}}</li>
         </ul>
     </aside>
 

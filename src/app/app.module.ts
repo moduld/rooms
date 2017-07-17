@@ -80,8 +80,8 @@ import { AsteriscReplacePipe } from './pipes/asterisc-replace.pipe';
 import { AboutRoomModalComponent } from './modals/about-room-modal/about-room-modal.component';
 
 let roomSettingsRoutes: Routes = [
-  { path: 'edit-room', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
-  { path: 'delete-room', component: DeleteRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'edit-tifo', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
+  { path: 'delete-tifo', component: DeleteRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: 'add-wall', component: AddWallComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: 'edit-wall/:id', component: EditWallComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},
   { path: 'walls-list', component: WallsListComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},

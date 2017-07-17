@@ -1,18 +1,18 @@
 <form class="modal_wrapper" #postEditForm="ngForm" (submit)="editThisPost(postEditForm, $event)">
   <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
   <div class="top_wrapper">
-    <h3 class="title">Edit Post</h3>
+    <h3 class="title">{{'POST_EDIT.EDIT_POST' | translate}}</h3>
   </div>
   <div class="main_wrapper">
-    <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="Type here ..."></textarea>
+    <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="{{'POST_EDIT.TYPE_HERE' | translate}}"></textarea>
 
     <div class="right_zone_wrapper" >
       <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
         <input type="file" name="files" id="newpost_file" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>
         <label for="newpost_file" class="file_button">
-          Click to upload the file
+          {{'POST_EDIT.CLICK_TO_UPLOAD' | translate}}
         </label>
-        <span class="drag_zone_text">Allowed file types: png, bmp, gif, jpg, jpeg, pdf, mp4, mp3, m4a, wav</span>
+        <span class="drag_zone_text">{{'POST_EDIT.ALLOWED_FILES' | translate}}: png, bmp, gif, jpg, jpeg, pdf, mp4, mp3, m4a, wav, ppt, pptx, xls, xlsx, doc, docx</span>
       </div>
       <div class="preview_wrapp">
        <span class="images" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}" [ngStyle]="{'background-image':'url(' + imgObj.img_src + ')'}">
@@ -22,5 +22,5 @@
     </div>
 
   </div>
-  <button type="submit" class="form_button" [disabled]="postEditForm.invalid || disable_while_upload">Edit post</button>
+  <button type="submit" class="form_button" [disabled]="postEditForm.invalid || disable_while_upload">{{'POST_EDIT.EDIT' | translate}}</button>
 </form>

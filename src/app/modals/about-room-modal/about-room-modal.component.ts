@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
+import { EventsExchangeService } from '../../services/events-exchange.service';
 
 @Component({
   selector: 'app-about-room-modal',
@@ -12,13 +13,16 @@ export class AboutRoomModalComponent implements OnInit{
   @Input() room_details;
 
   constructor(public activeModal: NgbActiveModal,
+              private exchangeService: EventsExchangeService,
               private modalService: NgbModal) {
 
-
+    exchangeService.urlChangedEvent.subscribe(
+        () => {
+          this.activeModal.dismiss()
+        });
   }
 
   ngOnInit() {
-    console.log(this.room_details)
   }
 
 

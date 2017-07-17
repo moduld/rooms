@@ -28,7 +28,7 @@
                     <span class="name">{{message.user.user_name}}</span>
                     <span class="date">{{message.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                  <p class="text">{{message.text || 'HEADER.MEDIA_MESSAGE' | translate}}</p>
+                  <p class="text" [innerHTML]="message.text | asteriscReplace: 'HEADER.MEDIA_MESSAGE' | translate"></p>
                 </div>
 
             </li>

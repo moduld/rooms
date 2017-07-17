@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {RequestService} from '../../services/request.service';
 import {ErrorShowService} from '../../services/error-show.service';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-registration',
   templateUrl: 'registration.component.html',
@@ -27,7 +29,15 @@ export class RegistrationComponent implements OnInit{
   email: string = '';
   password: string = '';
 
-  constructor(private requestService : RequestService, private errorService: ErrorShowService, private router: Router) { }
+  WRONG_E_FORMAT: string;
+  PASSWORD_LENGTH: string;
+  WRONG_NAME_OR_LENGTH: string;
+
+  constructor(private requestService : RequestService,
+              private errorService: ErrorShowService,
+              private router: Router,
+              private translate: TranslateService) { }
+
   @ViewChild("inputEmail")
   inputEmail: ElementRef;
 
@@ -35,9 +45,27 @@ export class RegistrationComponent implements OnInit{
   inputName: ElementRef;
 
   ngOnInit() {
-    this.emailMistake = 'Wrong email format';
-    this.userNameMistake = 'Wrong user name or name length';
-    this.passwordMistake = 'Password must be from 4 to 21 character length';
+
+    this.translate.get('LOGIN_AND_REGISTER.WRONG_E_FORMAT').subscribe(
+        value => {
+          this.WRONG_E_FORMAT = value;
+          this.emailMistake = this.WRONG_E_FORMAT
+        }
+    );
+    this.translate.get('LOGIN_AND_REGISTER.PASSWORD_LENGTH').subscribe(
+        value => {
+          this.PASSWORD_LENGTH = value;
+          this.passwordMistake = this.PASSWORD_LENGTH
+        }
+    );
+    this.translate.get('LOGIN_AND_REGISTER.WRONG_NAME_OR_LENGTH').subscribe(
+        value => {
+          this.WRONG_NAME_OR_LENGTH = value;
+          this.userNameMistake = this.WRONG_NAME_OR_LENGTH;
+
+        }
+    );
+
     this.buttonDisabled = false;
   }
 
@@ -79,14 +107,14 @@ export class RegistrationComponent implements OnInit{
       if (field === 'email' && data.trim() !== this.oldEmailValue){
         this.oldEmailValue = data;
         this.errorService.errorHide(this.inputEmail);
-        this.emailMistake = 'Wrong email format';
+        this.emailMistake = this.WRONG_E_FORMAT;
         this.emailFieldState = true;
       }
 
       if (field === 'name' && data.trim() !== this.oldNameValue){
         this.oldNameValue = data;
         this.errorService.errorHide(this.inputName);
-        this.userNameMistake = 'Wrong user name or name length';
+        this.userNameMistake = this.WRONG_NAME_OR_LENGTH;
         this.nameFieldState = true;
       }
        this.emailFieldState && this.nameFieldState ? this.buttonDisabled = false : this.buttonDisabled = true;
