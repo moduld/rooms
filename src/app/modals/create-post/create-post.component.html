@@ -9,7 +9,7 @@
     </label>
   </div>
   <div class="main_wrapper">
-    <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="{{'CREATE_POST.TYPE_HERE' | translate}}"></textarea>
+    <textarea name="text" dir="auto" [(ngModel)]="textField"  class="text_field" placeholder="{{'CREATE_POST.TYPE_HERE' | translate}}"></textarea>
 
     <div class="right_zone_wrapper" *ngIf="viewToggle">
       <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
@@ -29,15 +29,15 @@
     <div class="right_zone_wrapper" *ngIf="!viewToggle">
       <span class="input_wrapp ">
         {{'CREATE_POST.QUESTION' | translate}}:
-        <input type="text" class="input_field" placeholder=" {{'CREATE_POST.ENTER_QUESTION' | translate}}" [(ngModel)]="question" name="question" required>
+        <input type="text" dir="auto" class="input_field" placeholder=" {{'CREATE_POST.ENTER_QUESTION' | translate}}" [(ngModel)]="question" name="question" required>
       </span>
 
      <div class="input_wrapp with_margin">
        {{'CREATE_POST.CHOISES' | translate}}:
-       <input type="text" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #1" name="choice1" [(ngModel)]="choice_1" required>
-       <input type="text" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #2" name="choice2" [(ngModel)]="choice_2" required>
-       <input type="text" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #3" name="choice3" [(ngModel)]="choice_3">
-       <input type="text" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #4" name="choice4" [(ngModel)]="choice_4">
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #1" name="choice1" [(ngModel)]="choice_1" required>
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #2" name="choice2" [(ngModel)]="choice_2" required>
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #3" name="choice3" [(ngModel)]="choice_3">
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #4" name="choice4" [(ngModel)]="choice_4">
      </div>
       <div class="input_wrapp with_margin">
         {{'CREATE_POST.POLL_DURATION' | translate}}:

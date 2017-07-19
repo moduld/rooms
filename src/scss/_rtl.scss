@@ -1,0 +1,600 @@
+body.rtl{
+
+  .toggle_input{
+    &:checked + .toggle_field:before{
+    transform: translate3d(-25px, 0, 0)!important;
+  }
+  }
+
+
+  .header .main_container{
+    .logo{
+      background-position: right center;
+      padding: 0 80px 0 0;
+    }
+    .header_link{
+      margin: 0 10px 0 0;
+      &:before{
+        margin: 0 0 0 8px;
+      }
+    }
+    .search_field{
+      padding: 6px 10px 6px 45px;
+    }
+    .icon-search{
+      right: auto;
+      left: 0;
+    }
+    .icon-mail,
+    .icon-bell-o{
+      margin: 0 0 0 20px;
+    }
+    .avatar{
+      margin: 0 0 0 10px;
+    }
+    .open_header{
+      margin: 0 0 0 20px;
+    }
+    .new_notifications{
+      .drop_down_menu{
+        left: -113px!important;
+      }
+      .triangle{
+        &:before{
+          left: 50%!important;
+        }
+        &:after{
+          left: 50%!important;
+        }
+      }
+    }
+    .select_wrapp{
+      margin: 0 20px 0 0;
+    }
+    .lang_select{
+      margin: 0 5px 0 0;
+    }
+    .new_messages{
+      .triangle{
+        &:before{
+          left: 62%!important;
+        }
+        &:after{
+          left: 62%!important;
+        }
+      }
+    }
+
+  }
+//  all rooms styles and user rooms in profile
+
+  .rooms_container{
+    .members{
+      margin-left: 15px;
+      &:before{
+        margin: 0 0 0 5px;
+      }
+    }
+    .views{
+      margin: 0;
+      &:before{
+        margin: 0 0 0 5px;
+      }
+    }
+  }
+//  about user styles
+
+  app-about-user{
+    .avatar_and_drop{
+      margin: 0 0 0 20px;
+    }
+    .dots_wrapp{
+      direction: ltr;
+    }
+    .drop_down_fill{
+      &:before{
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+// inside room styles and profile posts
+
+  app-users-posts-in-profile,
+  app-inside-room{
+      .posts_menu_items{
+        margin: 0 15px 0 0;
+        &:before{
+          margin: 0 0 0 5px;
+        }
+      }
+      .posts_search{
+        padding: 6px 10px 6px 50px;
+      }
+      .icon-search{
+        right: auto;
+        left: 0;
+      }
+      .date{
+        direction: ltr;
+      }
+      .user_info{
+        .avatar{
+          margin: 0 0 0 10px;
+        }
+      }
+      .post_images_wrapp{
+        justify-content: space-around;
+      }
+      .post_images{
+        :last-child{
+          margin-right: 1%;
+          margin-left: 0;
+        }
+        :first-child{
+          margin-left: 1%;
+          margin-right: 0;
+        }
+      }
+      .dots_wrapp{
+        direction: ltr;
+      }
+     .icon-heart-o{
+       margin: 0 0 0 15px;
+     }
+    .icon-heart-o,
+    .icon-bubble{
+      &:before{
+        margin: 0 0 0 5px;
+      }
+    }
+
+
+    .posts{
+      .drop_down_menu{
+        right: auto;
+        left: 0;
+        transform: translate3d(-100%, 0, 0);
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+      }
+      .dots_wrapp{
+        left: auto;
+        right: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+      &:before{
+        left: auto;
+        right: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+    }
+    .with_opened_menu{
+      .drop_down_menu{
+        transform: translate3d(0, 0, 0);
+      }
+      .dots_wrapp{
+        transform: translate3d(0, 0, 0);
+      }
+      .dots{
+        transform: rotate(-135deg)!important;
+
+      }
+      &:before{
+        transform: translate3d(0, 0, 0);
+      }
+    }
+      .drop_down_fill{
+        &:before{
+          margin: 0 0 0 10px;
+        }
+      }
+
+  }
+
+//  about room
+  app-about-room-modal{
+    .property{
+      margin: 0 0 0 15px;
+      &:before{
+        margin: 0 0 0 5px;
+      }
+    }
+    .tag{
+      margin: 0 0 10px 15px;
+    }
+  }
+
+//  room settings and user settings
+  app-user-settings,
+  app-room-settings{
+    .room_settings_header{
+      &:before{
+        transform: rotate(180deg);
+      }
+    }
+    .user_search_field{
+      margin: 0 20px 0 0;
+    }
+    .aside{
+      transform: translate3d(100%, 0, 0);
+      left: auto;
+      right: 0;
+      padding: 0 20px 0 0;
+      border-radius: 5px 0 0 5px;
+    }
+    .show_menu_label{
+      left: auto;
+      right: 100%;
+      border-radius: 5px 0 0 5px;
+      border-right: none;
+      border-left: 1px solid #e6ecf0;
+      &:before{
+        transform: rotate(180deg);
+      }
+    }
+    #navigation_menu_toggle:checked  {
+      &:checked + .aside .show_menu_label{
+        right: calc(100% - 60px);
+        left: auto;
+      }
+      &:checked~ .main_field{
+        margin-left: 0;
+        margin-right: 183px;
+      }
+
+    }
+
+  }
+
+//  members list styles
+  app-members-list{
+    .dots_wrapp{
+      direction: ltr;
+    }
+  }
+
+//  walls list styles
+  app-walls-list{
+    .dots_wrapp{
+      direction: ltr;
+    }
+    .drop_down_menu{
+      left: -8px;
+    }
+    .triangle{
+      &:before{
+        left: 12%;
+      }
+      &:after{
+        left: 12%;
+      }
+    }
+    .drop_down_fill{
+      &:before{
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+//  user fans and faves
+  app-users-faves-in-profile,
+  app-users-fans-in-profile{
+    .avatar{
+      margin: 0 0 0 10px;
+    }
+  }
+
+//  edit profile
+  app-edit-profile{
+    .image_cropper_wrapp{
+      margin: 0 0 0 15px;
+    }
+  }
+
+//  notifications
+  app-notifications{
+    .avatar{
+      margin: 0 0 0 10px;
+    }
+    .name{
+      margin: 0 0 0 10px;
+      &:before{
+        margin: 0 0 0 5px;
+      }
+    }
+  }
+
+  // user dialogs
+  app-users-dialog{
+    .aside{
+      margin: 0 0 0 10px;
+    }
+    .avatar{
+      margin: 0 0 0 10px;
+    }
+    .date{
+      direction: ltr;
+    }
+  }
+
+//  user messages
+  app-users-messages{
+    .user_info_wrapp{
+      margin: 0 0 0 20px;
+    }
+    .user_avatar{
+      margin: 0;
+    }
+    .messages_wrapp{
+      &:after{
+        border-left: 20px solid #f1f3f5;
+        border-right: none;
+        border-bottom: 10px solid transparent;
+        left: auto;
+        right: -15px;
+      }
+    }
+    .my_messages{
+      .user_info_wrapp{
+        margin: 0 20px 0 0!important;
+      }
+      .messages_wrapp{
+        &:after{
+          border-right: 20px solid $my_message!important;
+          border-left: none!important;
+          right: auto!important;
+          left: -15px!important;
+        }
+      }
+    }
+    .add_button_wrapp{
+      margin: 0 0 0 20px;
+    }
+    .send_button{
+      margin: 0 20px 0 0;
+    }
+  }
+
+//  create room
+  app-create-room{
+    .image_cropper_wrapp{
+      margin: 0 0 0 15px;
+    }
+  }
+
+//  create post
+  app-post-edite,
+  app-create-post{
+    .text_field{
+      margin: 0 0 0 15px;
+    }
+  }
+
+//  post details modal
+  app-post-details{
+    .avatar{
+      margin: 0 0 0 10px;
+    }
+    .date{
+      direction: ltr;
+    }
+    .icon-heart-o{
+      margin: 0 0 0 15px;
+    }
+    .icon-heart-o,
+    .icon-bubble{
+      &:before{
+      margin: 0 0 0 5px;
+    }
+    }
+    .dots_wrapp{
+      direction: ltr;
+    }
+    .drop_down_menu{
+      left: -35px;
+    }
+    .triangle{
+      &:before{
+        left: 25%;
+      }
+      &:after{
+        left: 25%;
+      }
+    }
+    .drop_down_fill{
+      &:before{
+        margin: 0 0 0 10px;
+      }
+    }
+    .new_comment_wrapp{
+      padding: 0 0 0 17px;
+    }
+    .text_field{
+      margin: 0 0 0 20px;
+    }
+    .add_button_wrapp{
+      right: 1px;
+    }
+  }
+
+//  post details main
+  app-post-details-main{
+    .back_button{
+      &:before{
+        transform: rotate(180deg);
+      }
+    }
+   .drop_down_menu{
+     left: -55px;
+   }
+    .triangle{
+      &:before{
+        left: 35%;
+      }
+      &:after{
+        left: 35%;
+      }
+    }
+    .new_comment_wrapp{
+      padding: 0 0 0 17px;
+    }
+    .text_field{
+      margin: 0 0 0 20px;
+    }
+    .add_button_wrapp{
+      right: 1px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1000px){
+  body.rtl{
+    .header .main_container{
+      .new_notifications{
+        .drop_down_menu{
+          left: -124px!important;
+        }
+        .triangle{
+          &:before{
+            left: 54%!important;
+          }
+          &:after{
+            left: 54%!important;
+          }
+        }
+      }
+    }
+
+    app-user-settings,
+    app-room-settings{
+        #navigation_menu_toggle:checked {
+
+          &:checked ~ .main_field {
+            margin-left: 0;
+            margin-right: 0;
+          }
+
+        }
+
+    }
+    // user dialogs
+    app-users-dialog{
+      .aside{
+        left: auto;
+        right: 0;
+        transform: translate3d(100%, 0, 0);
+      }
+      .show_menu_label{
+        left: -60px;
+        border: 1px solid $border_menu;
+        border-right: none;
+        &:before{
+          transform: rotate(180deg);
+        }
+      }
+
+      #users_list_view_toggler{
+        &:checked + .aside{
+          transform: translate3d(0, 0, 0);
+          .show_menu_label{
+            left: 0!important;
+          }
+        }
+
+      }
+    }
+
+  }
+
+
+
+}
+
+@media screen and (max-width: 768px){
+  body.rtl{
+    //  create room
+    app-create-room{
+      .image_cropper_wrapp{
+        margin: 0;
+      }
+    }
+    //  create post, edit posr
+    app-post-edite,
+    app-create-post{
+      .text_field{
+        margin: 0;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 550px){
+  body.rtl{
+    .header .main_container{
+      .user_info{
+        .drop_down_menu{
+          right: 0!important;
+        }
+      }
+      .new_notifications{
+        .triangle{
+          &:before{
+            left: 44%!important;
+          }
+          &:after{
+            left: 44%!important;
+          }
+        }
+        .drop_down_menu{
+          left: -86px!important;
+        }
+      }
+      .new_messages{
+        .drop_down_menu{
+          left: -140px!important;
+        }
+        .triangle{
+          &:before{
+            left: 64%!important;
+          }
+          &:after{
+            left: 64%!important;
+          }
+        }
+      }
+    }
+
+    app-room-settings{
+      .user_search_field{
+        margin: 20px 0 0 0;
+      }
+    }
+
+    //  user messages
+    app-users-messages{
+
+      .add_button_wrapp{
+        margin: 0 0 0 5px;
+      }
+      .send_button{
+        margin: 0 5px 0 0;
+      }
+    }
+
+    app-post-details-main,
+    app-post-details{
+      .new_comment_wrapp{
+        padding: 0;
+      }
+      .text_field{
+        margin: 0 0 0 10px;
+      }
+    }
+
+  }
+
+
+
+}

@@ -5,12 +5,12 @@
         <p class="subtitle">{{'LOGIN_AND_REGISTER.LOG_IN_TO' | translate}}</p>
         <label class="input_wrapp icon-mail">
             {{'LOGIN_AND_REGISTER.EMAIL' | translate}}
-            <input type="email" class="input_field" name="email" #inputEmail [(ngModel)]="email"  (input)="changeState('email', email)" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required>
+            <input type="email" dir="auto" class="input_field" name="email" #inputEmail [(ngModel)]="email"  (input)="changeState('email', email)" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"  required>
             <span class="mistake">{{emailMistake}}</span>
         </label>
         <label class="input_wrapp icon-lock">
             {{'LOGIN_AND_REGISTER.PASSWORD' | translate}}
-            <input type="password" class="input_field" name="password" #inputPassword [(ngModel)]="password" (input)="changeState('password', password)" minlength="4" maxlength="21" required>
+            <input type="password" dir="auto" class="input_field" name="password" #inputPassword [(ngModel)]="password" (input)="changeState('password', password)" minlength="4" maxlength="21" required>
             <span class="mistake">{{passwordMistake}}</span>
         </label>
         <button type="submit" class="form_button" [disabled]="regForm.invalid" [disabled]="buttonDisabled">Log in</button>

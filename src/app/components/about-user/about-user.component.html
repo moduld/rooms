@@ -44,10 +44,10 @@
 
   <div class="tags_wrapp" *ngIf="currentUser">
    <!--ng class is hack for router. Active class not add when routing goes prom profile to another profile-->
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">{{'ABOUT_USER.TIFOS' | translate}} ({{currentUser.rooms_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">{{'ABOUT_USER.POSTS' | translate}} ({{currentUser.posts_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">{{'ABOUT_USER.FANS' | translate}} ({{currentUser.fans_count}})</span>
-    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">{{'ABOUT_USER.FAVS' | translate}} ({{currentUser.faves_count}})</span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">{{'ABOUT_USER.TIFOS' | translate}} <span>({{currentUser.rooms_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">{{'ABOUT_USER.POSTS' | translate}} <span>({{currentUser.posts_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">{{'ABOUT_USER.FANS' | translate}} <span>({{currentUser.fans_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">{{'ABOUT_USER.FAVS' | translate}} <span>({{currentUser.faves_count}})</span></span>
   </div>
 
   <router-outlet></router-outlet>

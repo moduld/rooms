@@ -51,7 +51,8 @@
     "SETTINGS": "Settings",
     "LOGOUT": "Logout",
     "LOGIN": "Log in",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "LANG": "Lang"
   },
 
   "INSIDE_ROOM": {
@@ -93,7 +94,8 @@
     "ABOUT_ME": "About me",
     "SOME_INFO_ABOUT": "Enter some info about yourself",
     "RECEIVED_MESSAGES": "Receive messages from",
-    "ALL_USERS": "All users"
+    "ALL_USERS": "All users",
+    "SELECT_LANG": "Select language"
   },
 
   "EDIT_WALL": {

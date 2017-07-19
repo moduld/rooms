@@ -11,12 +11,20 @@ export class UserStoreService {
 
   currentUserRooms: Wall;
   searchRequest: string;
-  suggestedRoomsShow: string;
 
   private roomChanged = new Subject<any>();
-  roomChangedAsObservable = this.roomChanged.asObservable();
 
   constructor() { }
+
+  setLanguage(lang: any):void {
+
+    localStorage.setItem('tifo-user-lang', JSON.stringify(lang))
+  }
+
+  getLanguages(): any {
+
+    return localStorage.getItem('tifo-user-lang') && JSON.parse(localStorage.getItem('tifo-user-lang')) || ''
+  }
 
   getUserData ():UserInfo {
     return localStorage.getItem('tifo-user-data') && JSON.parse(localStorage.getItem('tifo-user-data')) || ''
@@ -39,25 +47,9 @@ export class UserStoreService {
     return  this.currentUserRooms
   }
 
-  saveSearchText(text: string): void {
-    this.searchRequest = text;
-  }
 
   getSearchText(): string {
     return this.searchRequest
   }
-
-  deleteSearchText(): void {
-    this.searchRequest = ''
-  }
-
-  changeSuggestedOrDefault(flag: string): void {
-    this.suggestedRoomsShow = flag;
-  }
-
-  getSuggestedOrDefault(): string {
-    return this.suggestedRoomsShow
-  }
-
 
 }

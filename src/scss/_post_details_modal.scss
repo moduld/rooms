@@ -346,6 +346,9 @@ margin-top: 5px;
   border: 1px solid $border_menu;
   @extend .flex-column;
   flex-direction: column-reverse;
+  &:hover{
+    text-decoration: none;
+  }
 }
 .link_title{
   padding: 5px;

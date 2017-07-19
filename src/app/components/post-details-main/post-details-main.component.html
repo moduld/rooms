@@ -177,7 +177,7 @@
 
     <form class="new_comment_wrapp" #commentForm="ngForm" (submit)="createNewComment(commentForm, $event)" *ngIf="post.allow_comment_flag && membership.member && !membership.banned">
       <div class="alighn_wrapp">
-        <textarea type="text" class="text_field" name="text" [(ngModel)]="textField" placeholder="{{'COMMON.ENTER_YOUR_COMMENT' | translate}}"></textarea>
+        <textarea type="text" dir="auto" class="text_field" name="text" [(ngModel)]="textField" placeholder="{{'COMMON.ENTER_YOUR_COMMENT' | translate}}"></textarea>
         <input type="file" id="comment_file" name="files" (change)="fileDropped($event)" hidden>
         <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
           <label for="comment_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>

@@ -90,6 +90,12 @@
   resize: none;
   height: 79px;
 }
+.languages{
+    height: 35px;
+    border-radius: 5px;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid $gray_text;
+}
 .form_button{
   border: none;
   background: $blue;

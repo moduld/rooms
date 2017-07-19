@@ -16,19 +16,19 @@
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
         {{'COMMON.TITLE' | translate}}:
-        <input type="text" class="input_field" placeholder="{{'COMMON.ENTER_TIFO_NAME' | translate}}" name="room_name" (change)="haveChangedData('room_name', roomName)" [(ngModel)]="roomName"  minlength="3" maxlength="20" required>
+        <input type="text" dir="auto" class="input_field" placeholder="{{'COMMON.ENTER_TIFO_NAME' | translate}}" name="room_name" (change)="haveChangedData('room_name', roomName)" [(ngModel)]="roomName"  minlength="3" maxlength="20" required>
         <span class="mistake">{{'COMMON.WRONG_ROOM_NAME' | translate}}</span>
       </span>
 
       <span class="input_wrapp with_margin">
         {{'UPDATE_ROOM.ALIAS' | translate}}:
-        <input type="text" class="input_field" placeholder="{{'UPDATE_ROOM.ENTER_ALIAS' | translate}}" name="room_alias" (change)="haveChangedData('room_alias', roomAlias)" [(ngModel)]="roomAlias"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[-]?[a-zA-Z0-9]+$" required>
+        <input type="text" dir="auto" class="input_field" placeholder="{{'UPDATE_ROOM.ENTER_ALIAS' | translate}}" name="room_alias" (change)="haveChangedData('room_alias', roomAlias)" [(ngModel)]="roomAlias"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[-]?[a-zA-Z0-9]+$" required>
         <span class="mistake">{{'UPDATE_ROOM.WRONG_ALIAS' | translate}}</span>
       </span>
 
       <div class="input_wrapp with_margin">
         {{'COMMON.DESCRIPT' | translate}}:
-        <textarea  class="input_field room_description" placeholder="{{'UPDATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" (change)="haveChangedData('room_desc', roomDeskription)" [(ngModel)]="roomDeskription" maxlength="250" ></textarea>
+        <textarea  dir="auto" class="input_field room_description" placeholder="{{'UPDATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" (change)="haveChangedData('room_desc', roomDeskription)" [(ngModel)]="roomDeskription" maxlength="250" ></textarea>
       </div>
 
       <div class="input_wrapp with_margin">

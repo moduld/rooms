@@ -4,7 +4,7 @@
     <h3 class="title">{{'POST_EDIT.EDIT_POST' | translate}}</h3>
   </div>
   <div class="main_wrapper">
-    <textarea name="text" [(ngModel)]="textField"  class="text_field" placeholder="{{'POST_EDIT.TYPE_HERE' | translate}}"></textarea>
+    <textarea name="text" dir="auto" [(ngModel)]="textField"  class="text_field" placeholder="{{'POST_EDIT.TYPE_HERE' | translate}}"></textarea>
 
     <div class="right_zone_wrapper" >
       <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">

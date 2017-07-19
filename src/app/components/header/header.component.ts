@@ -5,6 +5,7 @@ import { Router} from '@angular/router';
 import {RequestService} from '../../services/request.service';
 import {UserStoreService} from '../../services/user-store.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit {
     constructor(private requestService : RequestService,
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
+              private translate: TranslateService,
               private router: Router) {
 
 
@@ -76,10 +78,12 @@ export class HeaderComponent implements OnInit {
     // event go to all-rooms component, and request to server makes there
     doRoomSearch(request: string): void {
 
-        let trimmed = request.trim();
-        if (trimmed.length > 2 && trimmed !== this.storeservice.getSearchText()){
-          this.room_search = '';
-          this.router.navigate( ['search', {q: trimmed}]);
+      if (request){
+          let trimmed = request.trim();
+          if (trimmed.length > 2 && trimmed !== this.storeservice.getSearchText()){
+              this.room_search = '';
+              this.router.navigate( ['search', {q: trimmed}]);
+          }
       }
     }
 

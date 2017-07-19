@@ -92,6 +92,7 @@
   @extend .flex-column;
   align-items: center;
   width: 100%;
+  transition: 0.5s;
 }
 
 @media screen and (max-width: 1000px){

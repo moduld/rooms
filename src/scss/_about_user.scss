@@ -110,6 +110,9 @@
   &:active{
     box-shadow: none;
   }
+  span{
+    padding: 0 5px;
+  }
 }
 .active{
   background: $blue;

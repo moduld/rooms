@@ -11,18 +11,18 @@
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
         {{'EDIT_PROFILE.USERNAME' | translate}}:
-        <input type="text" class="input_field" placeholder=" {{'EDIT_PROFILE.ENTER_NAME' | translate}}" name="user_name" (change)="haveChangedData('user_name', userName)" [(ngModel)]="userName"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
+        <input type="text" dir="auto" class="input_field" placeholder=" {{'EDIT_PROFILE.ENTER_NAME' | translate}}" name="user_name" (change)="haveChangedData('user_name', userName)" [(ngModel)]="userName"  minlength="3" maxlength="15" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
         <span class="mistake">{{'COMMON.WRONG_NAME_FORMAT' | translate}}</span>
       </span>
       <span class="input_wrapp with_margin">
         {{'EDIT_PROFILE.DISPLAYED_US_NAME' | translate}}:
-        <input type="text" class="input_field" placeholder="{{'EDIT_PROFILE.ENTER_NICK' | translate}}" name="display_name" (change)="haveChangedData('disp_name', userDisplayedName)" [(ngModel)]="userDisplayedName"  minlength="0" maxlength="20">
+        <input type="text" dir="auto" class="input_field" placeholder="{{'EDIT_PROFILE.ENTER_NICK' | translate}}" name="display_name" (change)="haveChangedData('disp_name', userDisplayedName)" [(ngModel)]="userDisplayedName"  minlength="0" maxlength="20">
         <span class="mistake">{{'COMMON.WRONG_NAME_FORMAT' | translate}}</span>
       </span>
 
       <div class="input_wrapp with_margin">
         {{'EDIT_PROFILE.ABOUT_ME' | translate}}:
-        <textarea  class="input_field room_description" placeholder="{{'EDIT_PROFILE.SOME_INFO_ABOUT' | translate}}" (change)="haveChangedData('about_user', aboutUser)" [(ngModel)]="aboutUser" name="about" maxlength="250"></textarea>
+        <textarea  dir="auto" class="input_field room_description" placeholder="{{'EDIT_PROFILE.SOME_INFO_ABOUT' | translate}}" (change)="haveChangedData('about_user', aboutUser)" [(ngModel)]="aboutUser" name="about" maxlength="250"></textarea>
       </div>
 
       <div class="input_wrapp with_margin">
@@ -32,6 +32,13 @@
           <input type="checkbox" id="private" class="toggle_input" name="msg_from_anyone" (change)="haveChangedData('get_message', messageFromAllUsers)" [(ngModel)]="messageFromAllUsers" checked hidden>
           <label for="private" class="toggle_field"></label>
         </div>
+      </div>
+
+      <div class="input_wrapp with_margin">
+        {{'EDIT_PROFILE.SELECT_LANG' | translate}}:
+        <select name="languages" class="languages"  #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
+        </select>
       </div>
 
       <button type="submit" class="form_button" [disabled]="editProfileForm.invalid || button_disabled">{{'COMMON.SAVE' | translate}}</button>

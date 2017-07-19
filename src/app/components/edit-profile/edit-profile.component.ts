@@ -7,6 +7,7 @@ import {UserStoreService} from '../../services/user-store.service';
 import { FileInfoService } from '../../services/file-info.service';
 import { EventsExchangeService } from '../../services/events-exchange.service';
 import { UploadFilesService } from '../../services/upload-files.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -28,6 +29,8 @@ export class EditProfileComponent implements OnInit {
     button_disabled:boolean;
     changed_data:boolean;
     cropperSettings: CropperSettings;
+    languages: any[];
+    selectedLang: any;
 
     @ViewChild('cropper', undefined)
     cropper:ImageCropperComponent;
@@ -38,6 +41,7 @@ export class EditProfileComponent implements OnInit {
               private storeservice: UserStoreService,
               private fileService: FileInfoService,
               private fileUpload: UploadFilesService,
+              private translate: TranslateService,
               private exchangeService: EventsExchangeService) {
 
       this.cropperSettings = new CropperSettings();
@@ -58,13 +62,13 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
 
     this.currentUser = this.storeservice.getUserData();
-    // this.dataToServer['multimedia'] = this.currentUser.user_data.thumbnail || '';
     this.dataToServer['multimedia'] = '';
-    // this.currentUser.user_data.thumbnail && this.fileDropped(false);
     this.userName = this.currentUser.user_data.user_name;
     this.userDisplayedName = this.currentUser.user_data.display_name;
     this.aboutUser = this.currentUser.user_data.about;
     this.messageFromAllUsers = this.currentUser.user_data.msg_from_anyone;
+    this.languages = this.storeservice.getLanguages();
+    this.selectedLang = {lang: 'english',  direction: 'ltr'}
   }
 
     fileDropped(event: any): void {

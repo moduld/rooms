@@ -1,7 +1,7 @@
 <form action="#" class="modal_wrapper" #newWallForm="ngForm" (submit)="updateWall(newWallForm, $event)">
      <span class="input_wrapp ">
         {{'COMMON.TITLE' | translate}}:
-        <input type="text" class="input_field" placeholder="{{'EDIT_WALL.WALL_NAME' | translate}}" name="wall_name" [(ngModel)]="wallName">
+        <input type="text" dir="auto" class="input_field" placeholder="{{'EDIT_WALL.WALL_NAME' | translate}}" name="wall_name" [(ngModel)]="wallName">
     </span>
   <div class="toggle_wrapper">
     <span class="toggle_name">{{'COMMON.ALLOW_MEMBERS' | translate}}</span>

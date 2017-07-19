@@ -49,7 +49,7 @@
         <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
             <label for="message_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
         </div>
-        <textarea  class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your message ..."></textarea>
+        <textarea dir="auto" class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your message ..."></textarea>
         <button type="submit" class="send_button icon-plane"></button>
 
     </form>

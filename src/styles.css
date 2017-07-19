@@ -7,7 +7,12 @@ body{
     flex-direction: column;
 
 }
-
+.rtl{
+    direction: rtl;
+}
+.ltr{
+    direction: ltr;
+}
 
 app-root{
     flex: auto;

@@ -1,10 +1,10 @@
-import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
 import {RequestService} from './services/request.service';
 import { EventsExchangeService } from './services/events-exchange.service';
 import { SafariErrorsFixService } from './services/safari-errors-fix.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateAppService } from './services/translate-app.service';
+
 
 
 
@@ -17,14 +17,13 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent implements OnInit{
 
   showHeader: boolean;
-  showFooter: boolean;
 
 
   constructor( private router: Router,
                private exchangeService: EventsExchangeService,
                private requestService : RequestService,
-                private safariService: SafariErrorsFixService,
-               private translate: TranslateService){
+               private translateService: TranslateAppService,
+               private safariService: SafariErrorsFixService ){
 
 
     router.events.forEach((event) => {
@@ -40,20 +39,14 @@ export class AppComponent implements OnInit{
       }
     });
 
-
-    translate.addLangs(["en", "fr"]);
-    translate.setDefaultLang('en');
-    translate.use('en')
-
-
+    translateService.runTranslation()
   }
 
   ngOnInit():void {
 
     this.requestService.addRequiredDataToTheService();
-    this.safariService.addSafariClass()
+    this.safariService.addSafariClass();
   }
-
 
 
 }

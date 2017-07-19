@@ -69,6 +69,7 @@ import { ScrollToTopService } from './services/scroll-to-top.service';
 import { UploadFilesService } from './services/upload-files.service';
 import { OpenNewWindowService } from './services/open-new-window.service';
 import { LinkPreviewService } from './services/link-preview.service';
+import { TranslateAppService } from './services/translate-app.service';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
@@ -213,8 +214,8 @@ export function HttpLoaderFactory(http: Http) {
     UploadFilesService,
     ScrollToTopService,
     OpenNewWindowService,
-    LinkPreviewService
-
+    LinkPreviewService,
+    TranslateAppService
   ],
   entryComponents: [
     CreatePostComponent,

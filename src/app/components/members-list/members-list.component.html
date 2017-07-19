@@ -8,7 +8,7 @@
         <option value="talker">{{'MEMBERS_LIST.SPEAKER' | translate}}</option>
         <option value="admin">{{'MEMBERS_LIST.ADMINS' | translate}}</option>
     </select>
-    <input type="text" class="user_search_field" placeholder="{{'MEMBERS_LIST.TAP_NAME' | translate}}" [(ngModel)]="search_model" *ngIf="member_toggler === 'member'">
+    <input type="text" dir="auto" class="user_search_field" placeholder="{{'MEMBERS_LIST.TAP_NAME' | translate}}" [(ngModel)]="search_model" *ngIf="member_toggler === 'member'">
     <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('requester', 0)">{{'MEMBERS_LIST.REJECT_ALL' | translate}}</button>
     <button class="add_button" type="button" *ngIf="member_toggler === 'requester' && membership.is_admin && users.length" (click)="forAllUsers('member', 1)">{{'MEMBERS_LIST.ACCEPT_ALL' | translate}}</button>
 </div>

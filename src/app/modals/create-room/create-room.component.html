@@ -17,13 +17,13 @@
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
         {{'COMMON.TITLE' | translate}}:
-        <input type="text" class="input_field" placeholder="{{'CREATE_ROOM.ENTER_NAME' | translate}}" name="room_name" [(ngModel)]="roomName"  minlength="3" maxlength="20" required >
+        <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_ROOM.ENTER_NAME' | translate}}" name="room_name" [(ngModel)]="roomName"  minlength="3" maxlength="20" required >
         <span class="mistake">{{'CREATE_ROOM.WRONG_NAME' | translate}}</span>
       </span>
 
       <div class="input_wrapp with_margin">
         {{'COMMON.DESCRIPT' | translate}}:
-        <textarea  class="input_field room_description" placeholder="{{'CREATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" [(ngModel)]="roomDeskription"  maxlength="250"></textarea>
+        <textarea dir="auto" class="input_field room_description" placeholder="{{'CREATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" [(ngModel)]="roomDeskription"  maxlength="250"></textarea>
       </div>
       <div class="input_wrapp with_margin">
         {{'CREATE_ROOM.TIFO_TAGS' | translate}}:

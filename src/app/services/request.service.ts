@@ -27,8 +27,10 @@ export class RequestService  {
   headers: Headers = new Headers({ 'Content-Type': 'application/json', 'AppKey': 'abcd1234', 'AppVersion': 'Tifo 1.0', 'x-public': 'Angular', 'OS': 'NodeJs'});
   options: RequestOptions  = new RequestOptions({ headers: this.headers });
 
-  // this method runs from app.component onInit, and from logIn and registration methods in this service
-  addRequiredDataToTheService(): void {
+  // this method runs from app.component onInit, and from logIn, logOut and registration methods in this service
+  addRequiredDataToTheService(user?:any): void {
+
+    user && this.storeservice.saveUserData(user);
 
     let storedUserData = this.storeservice.getUserData();
     !storedUserData && this.setGuestUser();
@@ -397,8 +399,8 @@ export class RequestService  {
     this.addTimeToHeaders();
 
     return this.http.post(this.commonLink + 'user/register', JSON.stringify(user_data) , this.options).map((resp:Response)=>{
-      this.storeservice.saveUserData(resp.json());
-      this.addRequiredDataToTheService();
+
+      this.addRequiredDataToTheService(resp.json());
       return resp.json();
     })
         .catch((error: any)=> { return Observable.throw(error);});
@@ -409,8 +411,8 @@ export class RequestService  {
     this.addTimeToHeaders();
 
     return this.http.post(this.commonLink + 'user/login', JSON.stringify(user_data) , this.options).map((resp:Response)=>{
-      this.storeservice.saveUserData(resp.json());
-      this.addRequiredDataToTheService();
+
+      this.addRequiredDataToTheService(resp.json());
       return resp.json();
     })
         .catch((error: any)=> { return Observable.throw(error);});
