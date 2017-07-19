@@ -76,7 +76,18 @@ $font_lora: LoraRegular, serif;
   background: $gray_text!important;
   pointer-events: none;
 }
-
+.room_settings_header{
+  min-height: 60px;
+  background: $blue;
+  color: white;
+  @extend .flex-center;
+  font-size: 24px;
+  cursor: pointer;
+  &:before{
+    display: block;
+    margin-right: 10px;
+  }
+}
 
 .user_info{
   @extend .flex-center;

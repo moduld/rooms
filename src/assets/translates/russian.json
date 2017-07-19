@@ -35,7 +35,8 @@
     "WRONG_ROOM_NAME": "Wrong tifo name format",
     "DAYS_LEFT": "days left",
     "PRIVATE": "private",
-    "OK": "Ok"
+    "OK": "Ok",
+    "NOTIFICATIONS": "Notifications"
   },
 
   "HEADER": {
@@ -183,6 +184,7 @@
   },
 
   "USER_SETTINGS": {
+    "PROFILE_SETTINGS": "Profile Settings",
     "USER_MENU": "User Menu",
     "EDIT_PROFILE": "Edit Profile",
     "MUTED_BLOCKED": "Muted/Blocked Users",
@@ -191,6 +193,7 @@
   },
 
   "USERS_DIALOG": {
+    "MESSAGES": "Messages",
     "NO_CONVERSATION": "No conversations yet",
     "SEND_FIRST_MESS": "Send first message ...",
     "MEDIA_MESSAGE": "Media message ..."

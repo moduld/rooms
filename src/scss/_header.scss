@@ -8,13 +8,14 @@ margin-bottom: 60px;
   background: white;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   position: fixed;
-  z-index: 3;
+  z-index: 4;
   left: 0;
   top: 0;
   .main_container{
     @extend .flex-between;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
   }
   .main_container.safari_browser{
     @extend .flex-between;
@@ -30,6 +31,7 @@ margin-bottom: 60px;
     padding-left: 80px;
     @extend .flex-center;
     justify-content: flex-start;
+    position: relative;
     &:before{
     transform: rotate(-90deg);
   }
@@ -103,8 +105,10 @@ margin-bottom: 60px;
   }
   .icons_wrapper{
     @extend .flex-center;
+    z-index: 1;
+    background: white;
   }
-  .open_header,
+
   .icon-bell-o,
   .icon-mail{
     height: 34px;
@@ -117,9 +121,38 @@ margin-bottom: 60px;
     margin-right: 20px;
   }
   .open_header{
+    height: 32px;
+    width: 105px;
+    padding-left: 80px;
+    background: left center no-repeat;
+    background-image: url("../../../img/Logo.png");
+    background-size: contain;
+    @extend .flex-center;
     display: none;
     font-size: 20px;
     transition: 0.5s;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 0 0 5px 5px;
+    &:before{
+      transform: rotate(-90deg);
+    }
+    &:hover{
+      color: $blue;
+      background-color: white;
+    }
+  }
+  .over_logo{
+    top: 0;
+    left: 0;
+    display: none;
+    &:before{
+      transform: rotate(90deg);
+    }
   }
   .icon-bell-o{
     &:before{
@@ -377,6 +410,10 @@ margin-bottom: 60px;
     transform: translate3d(0, 0, 0);
   }
 
+  #header_opener:checked ~ .header .open_header{
+    transform: translate3d(-50%, -100%, 0);
+  }
+
   .header{
 
     .main_container{
@@ -385,6 +422,7 @@ margin-bottom: 60px;
     .logo{
       margin: 10px auto;
       width: auto;
+      padding-left: 105px;
       &.safari_browser{
         width: auto;
       }
@@ -407,6 +445,15 @@ margin-bottom: 60px;
     .open_header{
       display: flex;
 
+    }
+    .over_logo{
+      display: flex;
+      transform: translate3d(0,0,0)!important;
+      color: $gray_text;
+      background-color: white;
+      &:hover{
+        color: $blue;
+      }
     }
 .icon-menu{
   transform: translate3d(-75%, 44px, 0);
@@ -451,6 +498,7 @@ margin-bottom: 60px;
     .header_link{
       font-size: 12px;
       padding: 5px;
+      margin-left: 5px;
       &:before{
         line-height: 12px;
         font-size: 15px;

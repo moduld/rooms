@@ -131,11 +131,19 @@ app-post-details-main .picture{
         height: calc(100vh - 143px);
     }
     .opened ~ app-notifications > .notifications_wrapp{
-        height: calc(100vh - 213px);
+        height: calc(100vh - 273px);
     }
 
     .opened ~ app-users-dialog > .main_container > .aside{
-        top: 178px;
+        top: 143px!important;
+    }
+
+    .opened ~ app-user-settings > .main_container > .aside{
+        top: 143px!important;
+    }
+
+    .opened ~ app-room-settings > .main_container > .aside{
+        top: 143px!important;
     }
     app-post-details-main  .picture{
         min-height: 0;

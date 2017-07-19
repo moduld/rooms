@@ -6,6 +6,12 @@ body.rtl{
   }
   }
 
+  .room_settings_header{
+    &:before{
+      margin: 0 10px;
+    }
+  }
+
 
   .header .main_container{
     .logo{
@@ -33,7 +39,12 @@ body.rtl{
       margin: 0 0 0 10px;
     }
     .open_header{
-      margin: 0 0 0 20px;
+
+
+    }
+    .over_logo{
+      left: auto;
+      right: 0;
     }
     .new_notifications{
       .drop_down_menu{
@@ -468,6 +479,11 @@ body.rtl{
 
     app-user-settings,
     app-room-settings{
+      .show_menu_label{
+        &:before{
+          transform: rotate(180deg);
+        }
+      }
         #navigation_menu_toggle:checked {
 
           &:checked ~ .main_field {
@@ -486,6 +502,7 @@ body.rtl{
         transform: translate3d(100%, 0, 0);
       }
       .show_menu_label{
+        border-radius: 5px 0 0 5px;
         left: -60px;
         border: 1px solid $border_menu;
         border-right: none;
@@ -533,6 +550,9 @@ body.rtl{
 @media screen and (max-width: 550px){
   body.rtl{
     .header .main_container{
+      .logo{
+        padding: 0 105px 0 0;
+      }
       .user_info{
         .drop_down_menu{
           right: 0!important;

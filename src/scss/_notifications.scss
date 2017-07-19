@@ -6,7 +6,9 @@
   @extend .flex-column;
   margin: 0 auto;
 }
-
+.room_settings_header{
+  cursor: default;
+}
 .tags_wrapp{
   @extend .flex-center;
   margin: 30px auto 5px;
@@ -39,7 +41,7 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  height: calc(100vh - 130px);
+  height: calc(100vh - 190px);
   overflow-y: auto;
   background: $posts_background;
 }
@@ -99,7 +101,7 @@
 @media screen and (max-width: 1000px){
 
   .notifications_wrapp{
-    height: calc(100vh - 187px);
+    height: calc(100vh - 247px);
   }
 }
 
@@ -110,7 +112,7 @@
     font-size: 14px;
   }
   .notifications_wrapp{
-    height: calc(100vh - 70px);
+    height: calc(100vh - 130px);
     transition: 0.5s;
   }
   .notification_data{

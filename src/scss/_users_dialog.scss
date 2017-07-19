@@ -10,6 +10,9 @@
   @extend .flex-default;
   flex: 1;
 }
+.room_settings_header{
+  cursor: default;
+}
 .label_wrapp{
   display: none;
 }
@@ -133,7 +136,7 @@
   .show_menu_label{
     position: absolute;
     left: 100%;
-    top: 0;
+    top: -1px;
     height: 60px;
     width: 60px;
     border-radius: 0 5px 5px 0;
@@ -158,10 +161,9 @@
     transform: translate3d(-100%, 0, 0);
     left: 0;
     transition: 0.5s;
-    top: 151px;
+    top: 114px;
     bottom: 30px;
     background: white;
-    max-height: 550px;
     z-index: 2;
     border-radius: 0 5px 5px 0;
     border: 1px solid transparent;
@@ -192,6 +194,7 @@
 @media screen and (max-width: 550px){
 
   .aside{
-    top: 35px;
+    top: 0;
+    width: 100%;
   }
 }
