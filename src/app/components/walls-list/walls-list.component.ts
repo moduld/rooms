@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 
-import {UserStoreService} from '../../services/user-store.service';
-import { RequestService } from '../../services/request.service';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
-import { EventsExchangeService } from '../../services/events-exchange.service';
 
-import { Wall } from '../../commonClasses/wall';
+import { UserStoreService, RequestService, EventsExchangeService} from '../../services/index';
 
 @Component({
   selector: 'app-walls-list',
@@ -16,15 +12,13 @@ import { Wall } from '../../commonClasses/wall';
 export class WallsListComponent implements OnInit {
 
   error: any;
-  currentRoom: Wall;
+  currentRoom: any;
   walls: any[] = [];
-  showDeleteBlock: boolean;
   dataToServer: any = {};
 
 
   constructor(private storeservice: UserStoreService,
               private requestService: RequestService,
-              private router: Router,
               private dragulaService: DragulaService,
               private exchangeService: EventsExchangeService) {
 

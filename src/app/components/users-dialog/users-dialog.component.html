@@ -13,7 +13,7 @@
 
                 <div class="user_name_and_date" >
                 <span class="top_wrapp">
-                    <span class="name">{{virtual_user.user_name}}</span>
+                    <span dir="auto" class="name">{{virtual_user.user_name}}</span>
                 </span>
                     <p class="text">{{'USERS_DIALOG.SEND_FIRST_MESS' | translate}}</p>
                 </div>
@@ -24,10 +24,10 @@
 
                 <div class="user_name_and_date" >
                 <span class="top_wrapp">
-                    <span class="name">{{user.user.user_name}}</span>
+                    <span dir="auto" class="name">{{user.user.user_name}}</span>
                     <span class="date">{{user.updated_at * 1000 | timeAgo }}</span>
                 </span>
-                    <p class="text" [innerHTML]="user.text | asteriscReplace: 'USERS_DIALOG.MEDIA_MESSAGE' | translate"></p>
+                    <p class="text" dir="auto" [innerHTML]="user.text | asteriscReplace: 'USERS_DIALOG.MEDIA_MESSAGE' | translate"></p>
                 </div>
             </div>
         </div>

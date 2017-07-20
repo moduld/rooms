@@ -3,7 +3,7 @@
   <div class="rooms"  *ngFor="let room of allRooms; let i = index"
        [routerLink]="['/tifo', room.room.room_alias]" [style.backgroundColor]="room.room.color" [ngStyle]="room.room.thumbnail && {'background-image':'url(' + room.room.thumbnail + ')'}">
 
-    <h4 class="room_name">{{room.room.room_name}}</h4>
+    <h4 dir="auto" class="room_name">{{room.room.room_name}}</h4>
     <div class="room_info">
       <span class="members icon-users">{{room.room.members_count}}</span>
       <span class="views icon-eye">{{room.room.visits_count}}</span>

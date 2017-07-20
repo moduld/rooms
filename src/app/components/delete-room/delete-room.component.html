@@ -1,6 +1,6 @@
 <div class="modal_wrapper">
   <div class="top_wrapper">
-    <h3 class="title">{{'DELETE_ROOM.DELETE_ROOM' | translate}}</h3>
+    <h3 dir="auto" class="title">{{'DELETE_ROOM.DELETE_ROOM' | translate}}</h3>
   </div>
   <div class="main_wrapper">
     <div class="room_thumbnail" [ngStyle]="{'background-image': 'url(' + currentRoom.room_details.thumbnail + ')'}"></div>
@@ -8,12 +8,12 @@
     <div class="right_zone_wrapper">
       <span class="input_wrapp ">
         {{'COMMON.TITLE' | translate}}:
-        <span class="text_field">{{currentRoom.room_details.room_name}}</span>
+        <span dir="auto" class="text_field">{{currentRoom.room_details.room_name}}</span>
       </span>
 
       <div class="input_wrapp with_margin">
         {{'COMMON.DESCRIPT' | translate}}:
-        <div class="text_field">{{currentRoom.room_details.room_desc}}</div>
+        <div dir="auto" class="text_field">{{currentRoom.room_details.room_desc}}</div>
       </div>
 
       <div class="input_wrapp with_margin">

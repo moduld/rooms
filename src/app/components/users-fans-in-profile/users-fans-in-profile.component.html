@@ -3,7 +3,7 @@
     <div class="user_wrapp" *ngFor="let user of allUsers; let i = index">
      <span class="user_info" [routerLink]="['/about-user', user.user_id*22]">
        <span class="avatar" [ngStyle]="user.thumbnail && {'background-image':'url(' + user.thumbnail + ')' }"></span>
-       <span class="name">{{user.user_name}}</span>
+       <span dir="auto" class="name">{{user.user_name}}</span>
      </span>
 
         <span class="button icon-star-empty" [ngClass]="{'icon-star-full': user.is_fave}" (click)="faveUnfaveUser(user)" *ngIf="user.user_id != currentUser.user_data.user_id"></span>

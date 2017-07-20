@@ -3,3 +3,4 @@ export * from './create-room/create-room.component';
 export * from './post-details/post-details.component';
 export * from './post-edite/post-edite.component';
 export * from './private-room/private-room.component';
+export * from './about-room-modal/about-room-modal.component';

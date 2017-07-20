@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestService } from '../../services/request.service';
-
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { UserInfo } from '../../commonClasses/userInfo';
-import { Wall } from '../../commonClasses/wall';
+import { RequestService, UserStoreService, EventsExchangeService } from '../../services/index';
 
 
 @Component({
@@ -15,8 +10,8 @@ import { Wall } from '../../commonClasses/wall';
 export class MembersListComponent implements OnInit {
 
   error: any;
-  currentUserData: UserInfo;
-  currentRoom: Wall;
+  currentUserData: any;
+  currentRoom: any;
   member_toggler: string;
   users: any[];
   membership: any;

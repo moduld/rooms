@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { RequestService } from './request.service';
 import { FileInfoService } from './file-info.service';
 import { EventsExchangeService } from './events-exchange.service';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
 import { Subject } from 'rxjs/Subject';
 

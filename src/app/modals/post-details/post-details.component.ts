@@ -4,14 +4,7 @@ import { NgForm} from '@angular/forms';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { FileInfoService } from '../../services/file-info.service';
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import {OpenNewWindowService} from '../../services/open-new-window.service';
-import { LinkPreviewService } from '../../services/link-preview.service';
-
-import { UserInfo } from '../../commonClasses/userInfo';
+import { FileInfoService, RequestService, UserStoreService, EventsExchangeService, OpenNewWindowService, LinkPreviewService } from '../../services/index';
 
 @Component({
   selector: 'app-post-details',
@@ -30,7 +23,7 @@ export class PostDetailsComponent implements OnInit {
   dataToServer: any = {};
   textField: string = '';
     banDays: number = 0;
-    currentUserData: UserInfo;
+    currentUserData: any;
     flagMoveY: boolean = true;
     comments_sort_type: string;
     comment_offset: number;

@@ -1,11 +1,9 @@
 import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
 import { Router} from '@angular/router';
 
-
-import {RequestService} from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
 import {TranslateService} from '@ngx-translate/core';
+
+import {RequestService, UserStoreService, EventsExchangeService} from '../../services/index';
 
 
 @Component({

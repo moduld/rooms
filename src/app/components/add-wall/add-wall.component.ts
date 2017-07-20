@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { NgForm} from '@angular/forms';
 
-import {UserStoreService} from '../../services/user-store.service';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-
-import { Wall } from '../../commonClasses/wall';
+import {UserStoreService, RequestService, EventsExchangeService} from '../../services/index';
 
 @Component({
   selector: 'app-add-wall',
@@ -19,7 +15,7 @@ export class AddWallComponent implements OnInit {
   wallName: string = '';
   postFlag: boolean = true;
   commentFlag: boolean = true;
-  currentRoom: Wall;
+  currentRoom: any;
   dataToServer: any;
 
   constructor(private requestService: RequestService,

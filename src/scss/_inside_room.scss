@@ -228,16 +228,16 @@
   }
 }
 .post_images_wrapp{
-  @extend .flex-default;
+  @extend .flex-between;
   flex: auto;
   flex-wrap: wrap;
 }
 .post_images{
   width: 100%;
-  max-width: 22%;
+  max-width: 23%;
   border-radius: 5px;
   max-height: 45%;
-  margin: 5px 1%;
+  margin: 5px 0;
   background-size: cover;
   flex: auto;
   background: 50% no-repeat;

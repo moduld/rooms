@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 
-import {UserStoreService} from '../../services/user-store.service';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-
-import { Wall } from '../../commonClasses/wall';
+import {UserStoreService, RequestService, EventsExchangeService} from '../../services/index';
 
 @Component({
   selector: 'app-delete-room',
@@ -15,7 +11,7 @@ import { Wall } from '../../commonClasses/wall';
 export class DeleteRoomComponent implements OnInit {
 
   error: any;
-  currentRoom: Wall;
+  currentRoom: any;
 
   constructor(private requestService: RequestService,
               private storeservice: UserStoreService,

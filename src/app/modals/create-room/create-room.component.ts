@@ -4,9 +4,7 @@ import { NgForm} from '@angular/forms';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { UploadFilesService } from '../../services/upload-files.service';
+import { RequestService, EventsExchangeService, UploadFilesService } from '../../services/index';
 
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import 'rxjs/add/operator/filter';

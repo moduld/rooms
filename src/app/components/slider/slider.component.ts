@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import {OpenNewWindowService} from '../../services/open-new-window.service';
+import {OpenNewWindowService} from '../../services/index';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,8 +27,9 @@ export class SliderComponent implements OnInit {
       let leftArr = document.getElementsByClassName('carousel-control-prev');
       leftArr && leftArr[0].setAttribute('hidden', 'hidden');
       let rightArr = document.getElementsByClassName('carousel-control-next');
-      rightArr && rightArr[0].setAttribute('hidden', 'hidden')
-
+      rightArr && rightArr[0].setAttribute('hidden', 'hidden');
+      let pagination = document.getElementsByClassName('carousel-indicators');
+      pagination && this.contentArray && this.contentArray.length < 2 && pagination[0].setAttribute('hidden', 'hidden')
   }
 
 

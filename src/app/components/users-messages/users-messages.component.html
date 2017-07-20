@@ -6,7 +6,7 @@
                   <span class="user_info" [routerLink]="['/about-user', virtualUserFlag ? userWhoTalkToUs.user.user_id*22 : userWhoTalkToUs.user_id*22]">
                     <span class="avatar" [ngStyle]="virtualUserFlag ? userWhoTalkToUs.user.thumbnail && {'background-image':'url(' + userWhoTalkToUs.user.thumbnail + ')' } :
                      userWhoTalkToUs.thumbnail && {'background-image':'url(' + userWhoTalkToUs.thumbnail + ')' }" ></span>
-                    <span class="name">{{virtualUserFlag ? userWhoTalkToUs.user.display_name : userWhoTalkToUs.display_name}}</span>
+                    <span dir="auto" class="name">{{virtualUserFlag ? userWhoTalkToUs.user.display_name : userWhoTalkToUs.display_name}}</span>
                 </span>
         </div>
         <div class="chat_wrapp" appScroolEnd (scrollRichTheTop)="onScrollRichTheTop($event)" #chat_wrapp>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="messages_wrapp">
                         <span class="icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
-                        <p class="message" [innerHTML]="message.text | asteriscReplace"></p>
+                        <p dir="auto" class="message" [innerHTML]="message.text | asteriscReplace"></p>
                         <a class="image" [href]="message.media.multimedia" *ngIf="message.has_media_flag" target="_blank" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></a>
 
                         <a class="preview" target="_blank" *ngFor="let preview of message.previews" [href]="preview.url" [ngStyle]="{'background-image':'url(' + preview.image + ')' }">

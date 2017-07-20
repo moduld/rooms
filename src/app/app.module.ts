@@ -16,6 +16,9 @@ import { TagInputModule } from 'ngx-chips';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+import { IeHeightDirective } from './directives/ie-height.directive';
+import { ScroolEndDirective } from './directives/scrool-end.directive';
+
 import { AppComponent } from './app.component';
 
 import {
@@ -56,29 +59,28 @@ import {
   PostEditeComponent,
   CreateRoomComponent,
   PostDetailsComponent,
-  PrivateRoomComponent} from './modals/index'
+  PrivateRoomComponent,
+  AboutRoomModalComponent} from './modals/index'
 
-import { RequestService } from './services/request.service';
-import { EventsExchangeService } from './services/events-exchange.service';
-import { UserStoreService } from './services/user-store.service';
-import { ErrorShowService } from './services/error-show.service';
-import { FileInfoService } from './services/file-info.service';
-import { AddRequiredInfoService } from './services/add-required-info.service';
-import { SafariErrorsFixService } from './services/safari-errors-fix.service';
-import { ScrollToTopService } from './services/scroll-to-top.service';
-import { UploadFilesService } from './services/upload-files.service';
-import { OpenNewWindowService } from './services/open-new-window.service';
-import { LinkPreviewService } from './services/link-preview.service';
-import { TranslateAppService } from './services/translate-app.service';
+import {
+  RequestService,
+  EventsExchangeService,
+  UserStoreService,
+  ErrorShowService,
+  FileInfoService,
+  AddRequiredInfoService,
+  SafariErrorsFixService,
+  ScrollToTopService,
+  UploadFilesService,
+  OpenNewWindowService,
+  LinkPreviewService,
+  TranslateAppService} from './services/index';
 
-import { IeHeightDirective } from './directives/ie-height.directive';
-import { ScroolEndDirective } from './directives/scrool-end.directive';
+import {NameFilterPipe,
+        PollTimeLeftPipe,
+        DatexPipe,
+        AsteriscReplacePipe} from './pipes/index'
 
-import { NameFilterPipe } from './pipes/name-filter.pipe';
-import { PollTimeLeftPipe } from './pipes/poll-time-left.pipe';
-import { DatexPipe } from './pipes/datex.pipe';
-import { AsteriscReplacePipe } from './pipes/asterisc-replace.pipe';
-import { AboutRoomModalComponent } from './modals/about-room-modal/about-room-modal.component';
 
 let roomSettingsRoutes: Routes = [
   { path: 'edit-tifo', component: UpdateRoomComponent, canActivate: [CanActivateRoomSettingsChildsComponent]},

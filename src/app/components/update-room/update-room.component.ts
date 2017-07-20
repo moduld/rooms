@@ -1,12 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Router} from '@angular/router';
 import { NgForm} from '@angular/forms';
 
-import {UserStoreService} from '../../services/user-store.service';
-import { RequestService } from '../../services/request.service';
-import { FileInfoService } from '../../services/file-info.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { UploadFilesService } from '../../services/upload-files.service';
+import {UserStoreService, RequestService, EventsExchangeService, UploadFilesService} from '../../services/index';
 
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import 'rxjs/add/operator/filter';
@@ -23,7 +19,6 @@ export class UpdateRoomComponent implements OnInit {
   publicFlag: boolean = true;
   searchableFlag: boolean = true;
   dataToServer: any = {};
-  imagePreview: string = '';
   roomName: string = '';
   roomDeskription: string = '';
     roomAlias: string = '';
@@ -41,8 +36,7 @@ export class UpdateRoomComponent implements OnInit {
 
     @ViewChild('previewImg') previewed:ElementRef;
 
-  constructor( private fileService: FileInfoService,
-               private requestService: RequestService,
+  constructor(  private requestService: RequestService,
                private storeservice: UserStoreService,
                private router: Router,
                private fileUpload: UploadFilesService,
@@ -52,8 +46,6 @@ export class UpdateRoomComponent implements OnInit {
       this.cropperSettings.noFileInput = true;
       this.cropperSettings.width = 255;
       this.cropperSettings.height = 255;
-      // this.cropperSettings.minWidth = 255;
-      // this.cropperSettings.minHeight = 255;
       this.cropperSettings.minWithRelativeToResolution = true;
       this.cropperSettings.fileType = 'image/jpeg';
       this.cropperSettings.preserveSize = true;
@@ -67,10 +59,8 @@ export class UpdateRoomComponent implements OnInit {
     this.currentRoom = this.storeservice.getStoredCurrentUserRooms();
     this.roomName = this.currentRoom.room_details.room_name;
     this.roomAlias = this.currentRoom.room_details.room_alias;
-    // this.currentRoom.room_details.thumbnail && this.fileDropped(false);
     this.dataToServer['multimedia'] = '';
     this.tags = this.currentRoom.room_details.tags || [];
-    // this.dataToServer['multimedia'] = this.currentRoom.room_details.thumbnail || '';
     this.roomDeskription = this.currentRoom.room_details.room_desc;
     this.publicFlag = !!this.currentRoom.room_details.public;
     this.searchableFlag = !!this.currentRoom.room_details.searchable_flag;
@@ -113,8 +103,6 @@ export class UpdateRoomComponent implements OnInit {
     sendTextData(roomForm: NgForm):void {
 
         if (this.changed_data || this.image_dropped || this.tagsChangetFlag){
-            // roomForm.value.room_name = name;
-            // roomForm.value.room_alias = alias;
             roomForm.value['tags'] = this.tags;
             this.dataToServer['roomData'] = roomForm.value;
             this.dataToServer.room_id = this.currentRoom.room_details.room_id;

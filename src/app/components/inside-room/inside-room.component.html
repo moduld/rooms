@@ -18,7 +18,7 @@
                     <option value="user_name_post">{{'INSIDE_ROOM.BY_NAME' | translate}}</option>
                 </select>
                 <div class="search_wrapp" *ngIf="filter_switcher === 'search_term' || filter_switcher === 'user_name_post'">
-                    <input type="text" class="posts_search" [(ngModel)]="posts_search">
+                    <input type="text" dir="auto" class="posts_search" [(ngModel)]="posts_search">
                     <i class="icon-search" (click)="doSearch(posts_search)"></i>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         </ul>
     </div>
 
-    <span class="room_name">{{wallsArray.room_details.room_name}}</span>
+    <span dir="auto" class="room_name">{{wallsArray.room_details.room_name}}</span>
 </div>
 
 
@@ -51,14 +51,14 @@
     <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
         <div class="post_info">
                  <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
-                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
-                    <span class="name">{{post.owner.user_name}}</span>
+                    <span dir="auto" class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span dir="auto" class="name">{{post.owner.user_name}}</span>
                 </span>
             <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
         </div>
         <i class="line"></i>
         <div class="post_body"   [routerLink]="['./post', post.post_id]">
-            <p class="post_text" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text.length">{{post.text}}</p>
+            <p class="post_text" dir="auto" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text.length">{{post.text}}</p>
 
             <div class="post_images_wrapp " *ngIf="post.media.length"
                  [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">

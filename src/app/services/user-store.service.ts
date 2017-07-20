@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Wall } from '../commonClasses/wall';
-import { UserInfo } from '../commonClasses/userInfo';
-
 import { Subject } from 'rxjs/Subject';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class UserStoreService {
 
-  currentUserRooms: Wall;
+  currentUserRooms: any;
   searchRequest: string;
 
   private roomChanged = new Subject<any>();
@@ -26,7 +22,7 @@ export class UserStoreService {
     return localStorage.getItem('tifo-user-lang') && JSON.parse(localStorage.getItem('tifo-user-lang')) || ''
   }
 
-  getUserData ():UserInfo {
+  getUserData ():any {
     return localStorage.getItem('tifo-user-data') && JSON.parse(localStorage.getItem('tifo-user-data')) || ''
   }
 
@@ -38,12 +34,12 @@ export class UserStoreService {
     localStorage.removeItem('tifo-user-data')
   }
 
-  storeCurrentUserRooms(data: Wall): void {
+  storeCurrentUserRooms(data: any): void {
     this.currentUserRooms = data;
     this.roomChanged.next(data);
   }
 
-  getStoredCurrentUserRooms(): Wall {
+  getStoredCurrentUserRooms(): any {
     return  this.currentUserRooms
   }
 

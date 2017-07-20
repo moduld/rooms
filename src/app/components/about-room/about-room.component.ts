@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import {AboutRoomModalComponent} from '../../modals/about-room-modal/about-room-modal.component';
+import { RequestService, UserStoreService, EventsExchangeService } from '../../services/index';
+import {AboutRoomModalComponent} from '../../modals/index';
 
 @Component({
   selector: 'app-about-room',

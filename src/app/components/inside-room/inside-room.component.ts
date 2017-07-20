@@ -2,21 +2,12 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
+import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService, ScrollToTopService } from '../../services/index';
 
-import { Post } from '../../commonClasses/posts';
-import { UserInfo } from '../../commonClasses/userInfo';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
-import { ScrollToTopService } from '../../services/scroll-to-top.service';
-import {CreatePostComponent} from '../../modals/create-post/create-post.component';
-import {PostEditeComponent} from '../../modals/post-edite/post-edite.component';
-
-import {PrivateRoomComponent} from '../../modals/private-room/private-room.component';
+import {CreatePostComponent, PostEditeComponent, PrivateRoomComponent} from '../../modals/index';
 
 
 @Component({
@@ -31,11 +22,11 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   roomId: any;
   roomAlias: string;
   wallId: any;
-  allPosts: Post[];
+  allPosts: any[];
   userArmin: boolean;
   roomTags: any[];
   membership: any;
-  currentUserData: UserInfo;
+  currentUserData: any;
   banDays: number = 0;
   wallsIds: number;
   wallsArray: any;
@@ -47,9 +38,9 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     posts_search: string;
     show_hide_toggle:boolean;
     show_to_top:boolean;
-    currentRoute:string;
     routerSubscription: any;
     without_child_route:boolean;
+
     @ViewChild('scrollArea') scrollArea;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -214,7 +205,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         )
     }
 
-    postInterraction(int_key: string, post: Post, index?: number, data?: number): void {
+    postInterraction(int_key: string, post: any, index?: number, data?: number): void {
 
       if (int_key === 'remove'){
           this.removePost(post, index)
@@ -241,7 +232,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         }
     }
 
-    removePost(post: Post, index: number): void {
+    removePost(post: any, index: number): void {
 
         this.requestService.postDelete(post.post_id, post.room_id).subscribe(
             data=>{
@@ -268,7 +259,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         )
     }
 
-    inappropriatePost(post: Post):void {
+    inappropriatePost(post: any):void {
 
         this.requestService.postInappropriate(post.post_id).subscribe(
             data=>{
@@ -329,7 +320,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         });
     }
 
-    openEditPOstModal(post: Post, index):void {
+    openEditPOstModal(post: any, index):void {
 
         const modalRef = this.modalService.open(PostEditeComponent);
         modalRef.componentInstance.post = post;
@@ -365,7 +356,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         )
     }
 
-    onMouseLeave(post: Post): void {
+    onMouseLeave(post: any): void {
 
        post['bunned'] = false;
        post['movedTo'] = false;

@@ -2,12 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NgForm} from '@angular/forms';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { FileInfoService } from '../../services/file-info.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { UploadFilesService } from '../../services/upload-files.service';
 import {TranslateService} from '@ngx-translate/core';
+
+import { RequestService, UserStoreService, EventsExchangeService, UploadFilesService } from '../../services/index';
 
 @Component({
   selector: 'app-edit-profile',
@@ -23,14 +20,12 @@ export class EditProfileComponent implements OnInit {
   userDisplayedName: string;
   aboutUser: string;
   currentUser: any;
-    added_image: any;
-    image_dropped:boolean;
-    subscription: any;
-    button_disabled:boolean;
-    changed_data:boolean;
-    cropperSettings: CropperSettings;
-    languages: any[];
-    selectedLang: any;
+  added_image: any;
+  image_dropped:boolean;
+  subscription: any;
+  button_disabled:boolean;
+  changed_data:boolean;
+  cropperSettings: CropperSettings;
 
     @ViewChild('cropper', undefined)
     cropper:ImageCropperComponent;
@@ -39,17 +34,14 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private requestService: RequestService,
               private storeservice: UserStoreService,
-              private fileService: FileInfoService,
               private fileUpload: UploadFilesService,
-              private translate: TranslateService,
+              public translate: TranslateService,
               private exchangeService: EventsExchangeService) {
 
       this.cropperSettings = new CropperSettings();
       this.cropperSettings.noFileInput = true;
       this.cropperSettings.width = 150;
       this.cropperSettings.height = 150;
-      // this.cropperSettings.minWidth = 100;
-      // this.cropperSettings.minHeight = 100;
       this.cropperSettings.minWithRelativeToResolution = true;
       this.cropperSettings.fileType = 'image/jpeg';
       this.cropperSettings.preserveSize = true;
@@ -67,8 +59,6 @@ export class EditProfileComponent implements OnInit {
     this.userDisplayedName = this.currentUser.user_data.display_name;
     this.aboutUser = this.currentUser.user_data.about;
     this.messageFromAllUsers = this.currentUser.user_data.msg_from_anyone;
-    this.languages = this.storeservice.getLanguages();
-    this.selectedLang = {lang: 'english',  direction: 'ltr'}
   }
 
     fileDropped(event: any): void {
@@ -78,7 +68,6 @@ export class EditProfileComponent implements OnInit {
         let image:any = new Image();
         let that = this;
         let myReader:FileReader = new FileReader();
-        // if (event){
 
             let file:File = event.target.files[0];
             myReader.onloadend = function (loadEvent:any) {
@@ -86,18 +75,6 @@ export class EditProfileComponent implements OnInit {
                 that.cropper.setImage(image);
             };
             myReader.readAsDataURL(file);
-
-        // } else {
-        //     image.crossOrigin="anonymous";
-        //     image.src = this.currentUser.user_data.thumbnail;
-        //     image.onload = function (loadEvent:any) {
-        //         that.cropper.setImage(image);
-        //     };
-        //     image.onerror = function() {
-        //         console.log('image error')
-        //         this.image_dropped = false;
-        //     }
-        // }
     }
 
     editUserProfile(editProfileForm: NgForm, event: Event):void {
@@ -121,7 +98,6 @@ export class EditProfileComponent implements OnInit {
 
 
         if (this.changed_data || this.image_dropped){
-            // editProfileForm.value.user_name = name;
             this.dataToServer['userData'] = editProfileForm.value;
             this.requestService.editUserProfile(this.dataToServer).subscribe(
                 data=>{

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { EventsExchangeService } from '../../services/index';
 
 
 @Component({

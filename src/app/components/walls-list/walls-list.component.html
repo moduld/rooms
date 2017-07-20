@@ -2,7 +2,7 @@
     <div class="walls" [dragula]='"walls"' [dragulaModel]='walls'>
         <div class="wall  icon-menu" *ngFor="let wall of walls; let i = index">
 
-            <span class="wall_name">{{wall.wall_name}}</span>
+            <span dir="auto" class="wall_name">{{wall.wall_name}}</span>
 
             <div class="drop_down_container" (mouseleave)="wall.showDeleteConfirm = false" onclick="">
                 <div class="dots_wrapp">

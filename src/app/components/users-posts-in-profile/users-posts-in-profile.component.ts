@@ -1,12 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { SafariErrorsFixService } from '../../services/safari-errors-fix.service';
-
-import { UserInfo } from '../../commonClasses/userInfo';
+import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService } from '../../services/index';
 
 @Component({
   selector: 'app-users-posts-in-profile',
@@ -19,7 +14,7 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
   allPosts: any[];
   user_id: any;
   post_offset: number;
-  currentUserData: UserInfo;
+  currentUserData: any;
   flagMoveY: boolean = true;
   show_loading: boolean;
     routerSubscription: any;

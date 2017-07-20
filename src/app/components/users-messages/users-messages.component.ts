@@ -1,11 +1,7 @@
 import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
-import { RequestService } from '../../services/request.service';
-import { FileInfoService } from '../../services/file-info.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { LinkPreviewService } from '../../services/link-preview.service';
+import { RequestService, FileInfoService, UserStoreService, EventsExchangeService, LinkPreviewService } from '../../services/index';
 
 @Component({
   selector: 'app-users-messages',

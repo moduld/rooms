@@ -1,15 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { AddRequiredInfoService } from '../../services/add-required-info.service';
-import {UserStoreService} from '../../services/user-store.service';
-
-import { Room } from '../../commonClasses/room';
+import { RequestService, EventsExchangeService, AddRequiredInfoService } from '../../services/index';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {CreateRoomComponent} from '../../modals/create-room/create-room.component';
+import {CreateRoomComponent} from '../../modals/index';
 
 
 @Component({
@@ -20,7 +15,7 @@ import {CreateRoomComponent} from '../../modals/create-room/create-room.componen
 export class AllRoomsComponent implements OnInit, OnDestroy {
 
     error: any;
-    allRooms: Room[] = [];
+    allRooms: any[] = [];
     show_loading:boolean;
     routerSubscription: any;
     currentRoute: string;
@@ -31,18 +26,7 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute,
                 private exchangeService: EventsExchangeService,
-                private addRequiredInfo: AddRequiredInfoService,
-                private storeservice: UserStoreService) {
-
-      // exchangeService.makeHeaderRoomSearch.subscribe(
-      //     search => {
-      //         this.getSearchableRooms(search)
-      //     });
-
-        // exchangeService.makeHeaderRoomSuggestRequest.subscribe(
-        //     (flag) => {
-        //             flag === 'suggested' ? this.getSuggestedRooms() : this.getUserRooms()
-        //     })
+                private addRequiredInfo: AddRequiredInfoService) {
 
         this.routerSubscription = this.router.events.subscribe(event=>{
 

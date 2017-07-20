@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RequestService} from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { RequestService, EventsExchangeService } from '../../services/index';
 
 @Component({
   selector: 'app-notifications',

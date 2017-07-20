@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
+import { EventsExchangeService, RequestService, UserStoreService } from '../../services/index';
 
 @Component({
   selector: 'app-users-fans-in-profile',

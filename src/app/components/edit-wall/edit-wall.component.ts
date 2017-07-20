@@ -3,10 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import { NgForm} from '@angular/forms';
 
-import {UserStoreService} from '../../services/user-store.service';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { Wall } from '../../commonClasses/wall';
+import {UserStoreService, RequestService, EventsExchangeService} from '../../services/index';
 
 @Component({
   selector: 'app-edit-wall',
@@ -20,7 +17,7 @@ export class EditWallComponent implements OnInit, OnDestroy {
   wallName: string;
   postFlag: boolean;
   commentFlag: boolean;
-  currentRoom: Wall;
+  currentRoom: any;
   currentWall: any;
   dataToServer: any;
   wallId: any;

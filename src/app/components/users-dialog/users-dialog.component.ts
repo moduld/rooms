@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import { Subject } from 'rxjs/Subject';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { RequestService, EventsExchangeService } from '../../services/index';
 
 @Component({
   selector: 'app-users-dialog',

@@ -7,8 +7,8 @@ import {TranslateService} from '@ngx-translate/core';
 @Injectable()
 export class TranslateAppService {
 
-  languages:any[] = [{lang: 'english', short: 'en', direction: 'ltr'}, {lang: 'russian', short: 'ru', direction: 'rtl'}];
-  langsForTranslate: string[] = ["english", "russian"];
+  languages:any[] = [{lang: 'english', short: 'en', direction: 'ltr'}, {lang: 'русский', short: 'ru', direction: 'rtl'}];
+  langsForTranslate: string[] = ["english", "русский"];
 
   constructor(private storeservice: UserStoreService, private translate: TranslateService) {
 

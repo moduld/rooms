@@ -17,7 +17,7 @@
 
 <div class="members" *ngFor="let user of users | nameFilter: search_model; let i = index ">
     <span class="avatar image" [ngStyle]="user.user.thumbnail && {'background-image':'url(' + user.user.thumbnail + ')' }" [routerLink]="['/about-user', user.user.user_id*22]"></span>
-    <span class="user_name">{{user.user.user_name}}</span>
+    <span dir="auto" class="user_name">{{user.user.user_name}}</span>
     <span class="close icon-cancel" *ngIf="showUserMembershipMenu() === 'cross' || showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, false, i)"></span>
     <span class="approve icon-circle-check" *ngIf="showUserMembershipMenu() === 'check'" (click)="updateMembers(user, member_toggler, true, i)"></span>
     <div class="dropdown_wrapp" *ngIf="showUserMembershipMenu() === 'menu'">

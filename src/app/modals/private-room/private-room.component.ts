@@ -2,8 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import {RequestService} from '../../services/request.service';
+import { EventsExchangeService, RequestService } from '../../services/index';
 
 @Component({
   selector: 'app-private-room',

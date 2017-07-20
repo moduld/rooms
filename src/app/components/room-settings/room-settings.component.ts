@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import {UserStoreService} from '../../services/user-store.service';
-
-import { Wall } from '../../commonClasses/wall';
+import { EventsExchangeService, UserStoreService } from '../../services/index';
 
 @Component({
   selector: 'app-room-settings',
@@ -13,7 +10,7 @@ import { Wall } from '../../commonClasses/wall';
 export class RoomSettingsComponent implements OnInit {
 
   error: any;
-  currentRoom: Wall;
+  currentRoom: any;
   menu_state_toggle: boolean;
 
   constructor( private storeservice: UserStoreService,

@@ -1,15 +1,9 @@
 import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm} from '@angular/forms';
-import {PostDetailsComponent} from '../../modals/post-details/post-details.component';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { RequestService } from '../../services/request.service';
-import {UserStoreService} from '../../services/user-store.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
-import { Post } from '../../commonClasses/posts';
-import { FileInfoService } from '../../services/file-info.service';
-import {OpenNewWindowService} from '../../services/open-new-window.service';
-import { LinkPreviewService } from '../../services/link-preview.service';
+import {PostDetailsComponent} from '../../modals/index';
+import { RequestService, UserStoreService, EventsExchangeService, FileInfoService, OpenNewWindowService, LinkPreviewService } from '../../services/index';
 
 @Component({
   selector: 'app-post-details-main',
@@ -128,7 +122,7 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
 
 
 
-  openPostDetails(post: Post):void {
+  openPostDetails(post: any):void {
 
 
     if (window.innerWidth <= 1024){

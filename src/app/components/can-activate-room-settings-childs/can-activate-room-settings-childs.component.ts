@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from "@angular/router";
 import {Observable} from "rxjs/Rx";
 
-import {UserStoreService} from '../../services/user-store.service';
+import {UserStoreService} from '../../services/index';
 
 @Component({
   selector: 'app-can-activate-room-settings-childs',

@@ -4,9 +4,7 @@ import { NgForm} from '@angular/forms';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { FileInfoService } from '../../services/file-info.service';
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { FileInfoService, RequestService, EventsExchangeService } from '../../services/index';
 
 @Component({
   selector: 'app-post-edite',

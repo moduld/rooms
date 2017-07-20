@@ -6,7 +6,7 @@
       <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active">{{'HEADER.MY_TIFOS' | translate}}</span>
       <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >{{'HEADER.EXPLORE' | translate}}</span>
     </div>
-    <div class="search"  >
+    <div class="search">
       <input type="text" dir="auto" class="search_field" placeholder="{{'HEADER.SEARCH' | translate}}" [(ngModel)]="room_search" >
       <span class="icon-search" (click)="doRoomSearch(room_search)"></span>
     </div>
@@ -110,7 +110,6 @@
 
 
     <div class="icons_wrapper" *ngIf="currentUser.token === 'guest'">
-      <label for="header_opener" class="open_header " [ngClass]="{'icon-menu': !header_opener_mod, 'icon-cancel': header_opener_mod}"></label>
       <span class="reg_log_buttons" [routerLink]="'/login'">{{'HEADER.LOGIN' | translate}}</span>
       <span class="reg_log_buttons" [routerLink]="'/registration'">{{'HEADER.REGISTER' | translate}}</span>
 

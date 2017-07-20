@@ -30,10 +30,10 @@
 
 
       </div>
-      <span class="name">{{currentUser.user_name}}<span class="displayed_name">{{currentUser.display_name}}</span></span>
+      <span dir="auto" class="name">{{currentUser.user_name}}<span class="displayed_name">{{currentUser.display_name}}</span></span>
 
     </div>
-    <p class="about_user">{{currentUser.about}}</p>
+    <p dir="auto" class="about_user">{{currentUser.about}}</p>
     <div class="buttons_wrapp">
       <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave}" (click)="faveAndUnfave(currentUser.is_myne)" *ngIf="!currentUser.is_myne"></span>
       <span class="button icon-gear" [routerLink]="'/user-settings'"   *ngIf="currentUser.is_myne"></span>

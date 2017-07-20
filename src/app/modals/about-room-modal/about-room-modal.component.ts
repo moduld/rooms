@@ -1,7 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { EventsExchangeService } from '../../services/index';
 
 @Component({
   selector: 'app-about-room-modal',

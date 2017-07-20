@@ -8,10 +8,6 @@ import 'rxjs/add/observable/throw';
 
 import {UserStoreService} from './user-store.service';
 
-import { Room } from '../commonClasses/room';
-import { Wall } from '../commonClasses/wall';
-import { Post } from '../commonClasses/posts';
-import { UserInfo } from '../commonClasses/userInfo';
 
 @Injectable()
 export class RequestService  {
@@ -78,7 +74,7 @@ export class RequestService  {
     this.storeservice.saveUserData(user)
   }
 
-  getAllRooms(): Observable<Room[]> {
+  getAllRooms(): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -91,7 +87,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getOnlyUsersRooms(dataToServer: any): Observable<Room[]> {
+  getOnlyUsersRooms(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -105,7 +101,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUserDetails(dataToServer: any): Observable<Room[]> {
+  getUserDetails(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -119,7 +115,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUserMessages(dataToServer: any): Observable<Room[]> {
+  getUserMessages(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -135,7 +131,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getOnlyUsersPosts(dataToServer: any): Observable<Room[]> {
+  getOnlyUsersPosts(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -154,7 +150,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getPostsBySearchText(dataToServer: any): Observable<Room[]> {
+  getPostsBySearchText(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -172,7 +168,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getPostsById(post_id: any): Observable<Room[]> {
+  getPostsById(post_id: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -187,7 +183,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUserNotifications(dataToServer: any): Observable<Room[]> {
+  getUserNotifications(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -204,7 +200,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUserNotificationsSettings(): Observable<Room[]> {
+  getUserNotificationsSettings(): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -217,7 +213,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUserDialogUsersList(): Observable<Room[]> {
+  getUserDialogUsersList(): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -230,7 +226,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUsersFans(dataToServer: any): Observable<Room[]> {
+  getUsersFans(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id_profile', dataToServer.user_id);
@@ -244,7 +240,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getUsersFaves(dataToServer: any): Observable<Room[]> {
+  getUsersFaves(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id_profile', dataToServer.user_id);
@@ -258,7 +254,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getMutedOrBlockedUsersList(dataToServer: any): Observable<Room[]> {
+  getMutedOrBlockedUsersList(dataToServer: any): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -272,7 +268,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getSuggestionRooms(): Observable<Room[]> {
+  getSuggestionRooms(): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -285,7 +281,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getRoomsBySearch(search: string): Observable<Room[]> {
+  getRoomsBySearch(search: string): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -299,7 +295,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getWalls( room_alias: any ): Observable<Wall> {
+  getWalls( room_alias: any ): Observable<any> {
 
     // this.roomId = room_id;
     let params: URLSearchParams = new URLSearchParams();
@@ -314,7 +310,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
 }
 
-  getRoomPosts( dataToServer: any ): Observable<Post[]> {
+  getRoomPosts( dataToServer: any ): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -331,7 +327,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getFavedRoomsPosts( dataToServer: any ): Observable<Post[]> {
+  getFavedRoomsPosts( dataToServer: any ): Observable<any[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
     params.set('room_id', this.roomId);
@@ -347,7 +343,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  getPostComments( dataToServer: any ): Observable<Post[]> {
+  getPostComments( dataToServer: any ): Observable<any[]> {
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
@@ -394,7 +390,7 @@ export class RequestService  {
     return this.makeGetRequest(data)
   }
 
-  registration(user_data: any) : Observable<UserInfo> {
+  registration(user_data: any) : Observable<any> {
 
     this.addTimeToHeaders();
 
@@ -406,7 +402,7 @@ export class RequestService  {
         .catch((error: any)=> { return Observable.throw(error);});
   }
 
-  logIn(user_data: any) : Observable<UserInfo> {
+  logIn(user_data: any) : Observable<any> {
 
     this.addTimeToHeaders();
 

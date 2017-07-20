@@ -1,12 +1,6 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {RequestService} from './services/request.service';
-import { EventsExchangeService } from './services/events-exchange.service';
-import { SafariErrorsFixService } from './services/safari-errors-fix.service';
-import { TranslateAppService } from './services/translate-app.service';
-
-
-
+import {RequestService, EventsExchangeService, SafariErrorsFixService, TranslateAppService } from './services/index';
 
 @Component({
   selector: 'app-root',

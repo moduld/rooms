@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-
-import {RequestService} from '../../services/request.service';
-import {ErrorShowService} from '../../services/error-show.service';
-
 import { TranslateService } from '@ngx-translate/core';
+
+import {RequestService, ErrorShowService} from '../../services/index';
 
 @Component({
   selector: 'app-registration',

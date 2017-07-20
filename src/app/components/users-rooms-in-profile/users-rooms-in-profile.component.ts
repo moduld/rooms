@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
 
-import { RequestService } from '../../services/request.service';
-import { EventsExchangeService } from '../../services/events-exchange.service';
+import { RequestService, EventsExchangeService } from '../../services/index';
 
 @Component({
   selector: 'app-users-rooms-in-profile',
@@ -13,7 +12,6 @@ export class UsersRoomsInProfileComponent implements OnInit, OnDestroy{
 
   error: any;
   user_id: any;
-  tree: any;
   allRooms: any[];
   routerSubscription: any;
   show_loading: boolean;

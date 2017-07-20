@@ -20,7 +20,7 @@
 
 
           <div class="post_body" >
-              <p class="post_text">{{post.text}}</p>
+              <p dir="auto" class="post_text">{{post.text}}</p>
               <div class="poll_wrapp" *ngIf="post.has_poll_flag">
                   <p class="post_text">{{post.poll.question}}</p>
                   <div class="progress_wrapp">
@@ -93,7 +93,7 @@
                   <span class="date">{{ comment.created_at * 1000 | timeAgo }}</span>
               </div>
               <div class="comment_body">
-                  <p class="comment_text">{{comment.text}}</p>
+                  <p dir="auto" class="comment_text">{{comment.text}}</p>
                   <span (click)="openImageLink(comment.media)"  class="picture" *ngIf="comment.has_media_flag" [ngStyle]="{'background-image':'url(' + comment.media.thumbnail + ')' }"></span>
 
                   <a class="preview_wrapp" target="_blank" *ngFor="let preview of comment.previews" [href]="preview.url" [ngStyle]="{'background-image':'url(' + preview.image + ')' }">

@@ -9,7 +9,7 @@
 
 <div class="members" *ngFor="let user of users; let i = index ">
   <span class="avatar image" [ngStyle]="user.thumbnail && {'background-image':'url(' + user.thumbnail + ')' }"></span>
-  <span class="user_name">{{user.user_name}}</span>
+  <span dir="auto" class="user_name">{{user.user_name}}</span>
   <span class="close icon-cancel" (click)="removeUserFromList(user, i)"></span>
 </div>
 
