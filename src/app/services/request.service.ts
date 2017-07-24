@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Http, URLSearchParams, Headers, RequestOptions, Jsonp} from '@angular/http';
-import {Response} from '@angular/http';
+import {Http, URLSearchParams, Headers, RequestOptions, Jsonp, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import {Router} from '@angular/router';
 
 import {UserStoreService} from './user-store.service';
 
@@ -14,6 +14,7 @@ export class RequestService  {
 
   constructor(private http: Http,
               private _jsonp: Jsonp,
+              private router: Router,
               private storeservice: UserStoreService)  {}
 
   commonLink: string = 'http://dev.tifos.net/';
@@ -897,6 +898,22 @@ export class RequestService  {
     return this.makePostRequest(data)
   }
 
+  changePassword(dataToServer: any): Observable<any> {
+
+    let sendData = {
+      user_id: this.userId,
+      old_password: dataToServer.old_password,
+      new_password: dataToServer.new_password
+    };
+
+    let data = {
+      sendData: sendData,
+      apiLink: 'user/password/change'
+    };
+
+    return this.makePostRequest(data)
+  }
+
   makePostRequest(data: any): Observable<any> {
 
     this.addTimeToHeaders();
@@ -905,7 +922,9 @@ export class RequestService  {
 
       return resp.json();
     })
-        .catch((error: any)=> { return Observable.throw(error.json());});
+        .catch((error: any)=> {
+          error.json().message && error.json().message == 'token_not_authorized' && this.router.navigateByUrl('/login');
+      return Observable.throw(error.json());});
   }
 
   makeGetRequest(data: any): Observable<any> {
@@ -917,6 +936,8 @@ export class RequestService  {
       return resp.json();
     })
         .catch((error: any)=>{
+          error.json().message && error.json().message == 'token_not_authorized' && this.router.navigateByUrl('/login');
+
       return Observable.throw(error.json());
     });
   }

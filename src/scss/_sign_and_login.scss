@@ -76,13 +76,14 @@
   color: white;
 }
 
-.input_field.ng-touched.input_field.ng-valid{
+
+.input_field.ng-touched.input_field.ng-valid.input_field.ng-dirty{
   border: 1px solid green;
 }
-.input_field.ng-touched.input_field.ng-invalid{
+.input_field.ng-touched.input_field.ng-invalid.input_field.ng-dirty{
   border: 1px solid $red_dot;
 }
-.input_field.ng-touched.input_field.ng-invalid ~ .mistake{
+.input_field.ng-touched.input_field.ng-invalid.input_field.ng-dirty ~ .mistake{
   display: block;
 }
 
@@ -94,9 +95,17 @@
   text-align: center;
   padding: 10px 45px;
   border-radius: 27px;
-  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
   margin-top: 35px;
   cursor: pointer;
+  &:hover{
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:active{
+    box-shadow: none;
+  }
+}
+.disabled_button{
+  background-color: $gray_text;
 }
 .link_prew{
   font-size: 14px;

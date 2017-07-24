@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NgForm} from '@angular/forms';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
-import {TranslateService} from '@ngx-translate/core';
 
 import { RequestService, UserStoreService, EventsExchangeService, UploadFilesService } from '../../services/index';
 
@@ -35,7 +34,6 @@ export class EditProfileComponent implements OnInit {
   constructor(private requestService: RequestService,
               private storeservice: UserStoreService,
               private fileUpload: UploadFilesService,
-              public translate: TranslateService,
               private exchangeService: EventsExchangeService) {
 
       this.cropperSettings = new CropperSettings();

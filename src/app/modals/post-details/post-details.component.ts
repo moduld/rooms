@@ -3,8 +3,9 @@ import { Component, OnInit, Input} from '@angular/core';
 import { NgForm} from '@angular/forms';
 
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Lightbox } from 'angular2-lightbox';
 
-import { FileInfoService, RequestService, UserStoreService, EventsExchangeService, OpenNewWindowService, LinkPreviewService } from '../../services/index';
+import { FileInfoService, RequestService, UserStoreService, EventsExchangeService,  LinkPreviewService } from '../../services/index';
 
 @Component({
   selector: 'app-post-details',
@@ -36,8 +37,8 @@ export class PostDetailsComponent implements OnInit {
               private fileService: FileInfoService,
               private requestService: RequestService,
               private storeservice: UserStoreService,
-              private openNewWindow: OpenNewWindowService,
               private linkPreview: LinkPreviewService,
+              private _lightbox: Lightbox,
               private exchangeService: EventsExchangeService) {
 
       exchangeService.urlChangedEvent.subscribe(
@@ -358,8 +359,14 @@ export class PostDetailsComponent implements OnInit {
       return result
     }
 
-    openImageLink(content: any):void {
+    openLightBox(content):void {
 
-        this.openNewWindow.openImageLink(content)
+        let album = [{
+            src: content.multimedia,
+            caption: '',
+            thumb: content.thumbnail
+        }];
+
+        this._lightbox.open(album);
     }
 }

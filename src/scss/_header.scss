@@ -122,34 +122,33 @@ margin-bottom: 60px;
   }
   .open_header{
     height: 32px;
-    width: 105px;
+    width: 100%;
     padding-left: 80px;
     background: left center no-repeat;
     background-image: url("../../../img/Logo.png");
     background-size: contain;
     @extend .flex-center;
+    justify-content: flex-start;
     display: none;
     font-size: 20px;
     transition: 0.5s;
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.5);
+    left: 0;
+    background-color: white;
     color: $gray_text;
+
     border-radius: 0 0 5px 5px;
     &:before{
       transform: rotate(-90deg);
     }
-    &:hover{
-      color: $blue;
-      background-color: white;
-    }
+
   }
   .over_logo{
     top: 0;
     left: 0;
     display: none;
+    width: 105px;
     &:before{
       transform: rotate(90deg);
     }
@@ -162,16 +161,7 @@ margin-bottom: 60px;
   .new_events{
     background: $blue;
     color: white;
-    //position: relative;
-    //&:after{
-    //  content: '';
-    //  position: absolute;
-    //  top: 1px;
-    //  right: 5px;
-    //  padding: 3px;
-    //  border-radius: 50%;
-    //  background: $red_dot;
-    //}
+
   }
   .active{
     color: $blue;
@@ -402,7 +392,7 @@ margin-bottom: 60px;
 
 @media screen and (max-width: 550px){
   :host{
-    margin-bottom: 0;
+    margin-bottom: 32px;
   }
   .header{
     transform: translate3d(0, -100%, 0);
@@ -412,9 +402,9 @@ margin-bottom: 60px;
     transform: translate3d(0, 0, 0);
   }
 
-  #header_opener:checked ~ .header .open_header{
-    transform: translate3d(-50%, -100%, 0);
-  }
+  //#header_opener:checked ~ .header .open_header{
+  //  transform: translate3d(-50%, -100%, 0);
+  //}
 
   .header{
 

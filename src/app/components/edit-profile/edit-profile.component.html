@@ -34,13 +34,6 @@
         </div>
       </div>
 
-      <div class="input_wrapp with_margin">
-        {{'EDIT_PROFILE.SELECT_LANG' | translate}}:
-        <select name="languages" class="languages"  #langSelect (change)="translate.use(langSelect.value)">
-          <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
-        </select>
-      </div>
-
       <button type="submit" class="form_button" [disabled]="editProfileForm.invalid || button_disabled">{{'COMMON.SAVE' | translate}}</button>
 
     </div>

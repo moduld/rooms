@@ -337,6 +337,13 @@ margin-top: 5px;
   @extend .backgr-center;
   border: 1px solid $border_menu;
 }
+.audio{
+  display: flex!important;
+  flex-direction: column-reverse;
+}
+.audio_tag{
+  width: 100%;
+}
 .preview_wrapp{
   height: 100px;
   background-size: contain;

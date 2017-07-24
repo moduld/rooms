@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import {OpenNewWindowService} from '../../services/index';
+import { Lightbox } from 'angular2-lightbox';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -14,7 +15,8 @@ export class SliderComponent implements OnInit {
   zoom_value:number;
 
   constructor( private config: NgbCarouselConfig,
-               private openNewWindow: OpenNewWindowService) {
+               private openNewWindow: OpenNewWindowService,
+               private _lightbox: Lightbox) {
 
     config.interval = -1;
     config.wrap = true;
@@ -37,6 +39,17 @@ export class SliderComponent implements OnInit {
 
     this.openNewWindow.openImageLink(content)
 
+  }
+
+  openLightBox(content):void {
+
+    let album = [{
+      src: content.multimedia,
+      caption: '',
+      thumb: content.thumbnail
+    }];
+
+    this._lightbox.open(album);
   }
 
 

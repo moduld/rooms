@@ -3,7 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm} from '@angular/forms';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {PostDetailsComponent} from '../../modals/index';
-import { RequestService, UserStoreService, EventsExchangeService, FileInfoService, OpenNewWindowService, LinkPreviewService } from '../../services/index';
+import { RequestService, UserStoreService, EventsExchangeService, FileInfoService, LinkPreviewService } from '../../services/index';
+
+import { Lightbox } from 'angular2-lightbox';
 
 @Component({
   selector: 'app-post-details-main',
@@ -46,7 +48,7 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
       private router: Router,
       private fileService: FileInfoService,
       private linkPreview: LinkPreviewService,
-      private openNewWindow: OpenNewWindowService
+      private _lightbox: Lightbox
   ) {
 
   }
@@ -434,9 +436,16 @@ export class PostDetailsMainComponent implements OnInit, OnDestroy {
     return result
   }
 
-  openImageLink(content: any):void {
 
-    this.openNewWindow.openImageLink(content)
+  openLightBox(content):void {
+
+    let album = [{
+      src: content.multimedia,
+      caption: '',
+      thumb: content.thumbnail
+    }];
+
+    this._lightbox.open(album);
   }
 
 

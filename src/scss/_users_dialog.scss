@@ -12,6 +12,7 @@
 }
 .room_settings_header{
   cursor: default;
+  position: relative;
 }
 .label_wrapp{
   display: none;
@@ -82,6 +83,7 @@
   width: 265px;
   overflow: hidden;
   text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 .active{
@@ -134,25 +136,23 @@
     margin-bottom: 60px;
   }
   .show_menu_label{
-    position: absolute;
-    left: 100%;
-    top: -1px;
     height: 60px;
     width: 60px;
-    border-radius: 0 5px 5px 0;
-    border: 1px solid $border_menu;
-    border-left: none;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
-    color: $blue;
-    background: rgba(255, 255, 255, 0.51);
-    transition: 0.5s;
     cursor: pointer;
-    &:hover{
-      background: white;
-    }
+  }
+  .outside{
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .inside{
+    margin-left: auto;
+    color: $blue;
   }
 
   .aside{
@@ -180,21 +180,16 @@
     &:checked + .aside{
       transform: translate3d(0, 0, 0);
       border: 1px solid $border_menu;
-      .show_menu_label{
-        left: calc(100% - 60px);
-        border-color: transparent;
-      }
-    }
-    &:checked + .aside > .label_wrapp > .show_menu_label{
-      background: white;
     }
   }
+
+
 }
 
 @media screen and (max-width: 550px){
 
   .aside{
-    top: 0;
+    top: 32px;
     width: 100%;
   }
 }

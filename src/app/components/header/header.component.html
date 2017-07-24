@@ -100,7 +100,6 @@
       </div>
 
       <div class="select_wrapp">
-        <span>{{'HEADER.LANG' | translate}}:</span>
         <select name="languages" class="lang_select"  #headerLangSelect (change)="translate.use(headerLangSelect.value)">
           <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
         </select>
@@ -114,7 +113,6 @@
       <span class="reg_log_buttons" [routerLink]="'/registration'">{{'HEADER.REGISTER' | translate}}</span>
 
       <div class="select_wrapp">
-        <span>{{'HEADER.LANG' | translate}}:</span>
         <select name="languages" class="lang_select"  #headerLangSelect (change)="translate.use(headerLangSelect.value)">
           <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
         </select>

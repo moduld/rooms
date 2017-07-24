@@ -52,8 +52,7 @@
     "SETTINGS": "Settings",
     "LOGOUT": "Logout",
     "LOGIN": "Log in",
-    "REGISTER": "Register",
-    "LANG": "Lang"
+    "REGISTER": "Register"
   },
 
   "INSIDE_ROOM": {
@@ -95,8 +94,7 @@
     "ABOUT_ME": "About me",
     "SOME_INFO_ABOUT": "Enter some info about yourself",
     "RECEIVED_MESSAGES": "Receive messages from",
-    "ALL_USERS": "All users",
-    "SELECT_LANG": "Select language"
+    "ALL_USERS": "All users"
   },
 
   "EDIT_WALL": {
@@ -118,7 +116,9 @@
     "SIGN_UP_TO": "Sign up to meet photos and videos from your friends.",
     "USER_NAME": "Username",
     "SIGN_IN": "Sign in",
-    "WRONG_NAME_OR_LENGTH": "Wrong user name or name length"
+    "WRONG_NAME_OR_LENGTH": "Wrong user name or name length",
+    "WRONG_USER_NAME": "Username can include letters, numbers, and one of - . _ in the middle, and must starts with letter",
+    "MIN_NAME_LENGTH": "User name must be at least 3 chars"
   },
 
   "MEMBERS_LIST": {
@@ -249,6 +249,14 @@
 
   "PRIVATE_ROOM": {
     "PRIVATE": "This room is private, would you like to send join request?"
+  },
+
+  "CHANGE_PASSWORD": {
+    "CHANGE_PASS": "Change password",
+    "OLD_PASSWORD": "Old password",
+    "NEW_PASSWORD": "New password",
+    "PASSWORD_LENGTH": "Password must be from 4 to 21 character length",
+    "IDENTICAL": "New password is identical to old"
   }
 
 

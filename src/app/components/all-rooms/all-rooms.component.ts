@@ -74,12 +74,12 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
       this.requestService.getAllRooms().subscribe(
           data=>{
               if (data && data['rooms'] && data['rooms'].length){
-                  for(let i = 0; i < data['rooms'].length; i++){
-                      //this cycle need to remove broken items which can come from server
-                      if (!data['rooms'][i].room || !data['rooms'][i].room_id){
-                          data['rooms'].splice(i, 1)
-                      }
-                  }
+                  // for(let i = 0; i < data['rooms'].length; i++){
+                  //     //this cycle need to remove broken items which can come from server
+                  //     if (!data['rooms'][i].room || !data['rooms'][i].room_id){
+                  //         data['rooms'].splice(i, 1)
+                  //     }
+                  // }
                   this.show_loading = false;
                   this.allRooms = data['rooms'];
               }

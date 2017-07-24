@@ -1,9 +1,9 @@
-<div class="room_settings_header icon-menu">{{'USERS_DIALOG.MESSAGES' | translate}}</div>
+<div class="room_settings_header">  <label for="users_list_view_toggler" class="show_menu_label outside icon-menu" ></label>{{'USERS_DIALOG.MESSAGES' | translate}}</div>
 <div class="main_container">
     <input type="checkbox" id="users_list_view_toggler" [(ngModel)]="users_list_toggle" hidden>
     <aside class="aside">
         <div class="label_wrapp">
-            <label for="users_list_view_toggler" class="show_menu_label" [ngClass]="{'icon-menu': !users_list_toggle, 'icon-double-left': users_list_toggle}"></label>
+            <label for="users_list_view_toggler" class="show_menu_label inside icon-double-left" ></label>
         </div>
         <div class="users_wrapper">
             <span class="no_conversations" *ngIf="!all_users.length && !virtual_user">{{'USERS_DIALOG.NO_CONVERSATION' | translate}}</span>

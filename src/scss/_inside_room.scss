@@ -191,6 +191,7 @@
   @extend .flex-column;
   height: 100%;
   overflow: hidden;
+  cursor: pointer;
 }
 .post_img{
   max-height: 250px;

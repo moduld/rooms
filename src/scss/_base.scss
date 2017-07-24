@@ -83,6 +83,7 @@ $font_lora: LoraRegular, serif;
   @extend .flex-center;
   font-size: 24px;
   cursor: pointer;
+  position: relative;
   &:before{
     display: block;
     margin-right: 10px;

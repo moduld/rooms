@@ -22,6 +22,7 @@
         "libs/bootstrap.min.css",
         "libs/dragula.css",
         "libs/scroolbar.css",
+        "../node_modules/angular2-lightbox/lightbox.css",
         "styles.css"
       ],
       "scripts": [],

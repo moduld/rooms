@@ -15,6 +15,7 @@ import {ImageCropperModule} from 'ng2-img-cropper/index';
 import { TagInputModule } from 'ngx-chips';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { LightboxModule } from 'angular2-lightbox';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
@@ -201,7 +202,8 @@ export function HttpLoaderFactory(http: Http) {
         useFactory: HttpLoaderFactory,
         deps: [Http]
       }
-    })
+    }),
+    LightboxModule
   ],
   providers: [
     RequestService,

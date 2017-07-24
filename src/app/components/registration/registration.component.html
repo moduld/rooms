@@ -5,8 +5,9 @@
         <p class="subtitle">{{'LOGIN_AND_REGISTER.SIGN_UP_TO' | translate}}</p>
         <label class="input_wrapp icon-head">
             {{'LOGIN_AND_REGISTER.USER_NAME' | translate}}
-            <input type="text" dir="auto" class="input_field"  name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="34" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
+            <input type="text" dir="auto" class="input_field"  name="user_name" #inputName [(ngModel)]="user_name" (input)="changeState('name', user_name)" minlength="3" maxlength="20" pattern="^[a-zA-Z][a-zA-Z0-9]*[._-]?[a-zA-Z0-9]+$" required>
             <span class="mistake">{{userNameMistake}}</span>
+
         </label>
         <label class="input_wrapp icon-mail">
             {{'LOGIN_AND_REGISTER.EMAIL' | translate}}
@@ -15,10 +16,10 @@
         </label>
         <label class="input_wrapp icon-lock">
             {{'LOGIN_AND_REGISTER.PASSWORD' | translate}}
-            <input type="password" dir="auto" class="input_field" name="password" #inputPassword [(ngModel)]="password" minlength="4" maxlength="21" required>
+            <input type="password" dir="auto" class="input_field" name="password" #inputPassword [(ngModel)]="password" (input)="changeState('password', password)" minlength="4" maxlength="21" required>
             <span class="mistake">{{passwordMistake}}</span>
         </label>
-        <button type="submit" class="form_button" [disabled]="regForm.invalid" [disabled]="buttonDisabled">{{'LOGIN_AND_REGISTER.SIGN_UP' | translate}}</button>
+        <button type="submit" class="form_button" [ngClass]="{'disabled_button': regForm.invalid || buttonDisabled}" [disabled]="regForm.invalid" [disabled]="buttonDisabled">{{'LOGIN_AND_REGISTER.SIGN_UP' | translate}}</button>
 
         <p class="link_prew">{{'LOGIN_AND_REGISTER.HAVE_ACCOUNT' | translate}}?<span class="link_to" [routerLink]="'/login'">{{'LOGIN_AND_REGISTER.LOG_IN' | translate}}</span></p>
     </form>

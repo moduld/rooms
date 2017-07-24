@@ -15,9 +15,14 @@ export class AsteriscReplacePipe implements PipeTransform {
       return `<span class="bold_text">${newVal}</span>`
     }
 
+    function linkReplace(val){
+
+      return `<a href="${val}" class="prev_link">${val}</a>`
+    }
+
     if (value){
       value =  value.replace(/\*([^*]*)\*/g, cutString);
-
+      value = value.replace(/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi, linkReplace)
 
     } else {
       args ? value = args : ''

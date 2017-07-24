@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild, El
 import { NgForm} from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 import { RequestService, FileInfoService, UserStoreService, EventsExchangeService, LinkPreviewService } from '../../services/index';
+import { Lightbox } from 'angular2-lightbox';
 
 @Component({
   selector: 'app-users-messages',
@@ -36,6 +37,7 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
                private fileService: FileInfoService,
                private storeservice: UserStoreService,
                private linkPreview: LinkPreviewService,
+               private _lightbox: Lightbox,
                private exchangeService: EventsExchangeService) { }
 
   ngOnInit() {
@@ -250,6 +252,17 @@ export class UsersMessagesComponent implements OnInit, OnDestroy {
       this.getAllMessages();
     }, 10000);
 
+  }
+
+  openLightBox(content):void {
+
+    let album = [{
+      src: content.multimedia,
+      caption: '',
+      thumb: content.thumbnail
+    }];
+
+    this._lightbox.open(album);
   }
 
 
