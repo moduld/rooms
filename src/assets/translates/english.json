@@ -56,7 +56,7 @@
   },
 
   "INSIDE_ROOM": {
-    "SHOW_ALL_POSTS": "Show all posts",
+    "CLEAR_FILTER": "Clear filter",
     "FAVES_USES": "My faves users",
     "BY_TEXT": "Search by text",
     "BY_NAME": "Search by username",

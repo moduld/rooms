@@ -212,6 +212,8 @@
   max-height: 63px;
   text-overflow: ellipsis;
   word-wrap: break-word;
+  white-space: pre;
+  pointer-events: none;
 }
 .no_media_in_post{
   max-height: none;
@@ -531,22 +533,14 @@
 }
 
 @media screen and (max-width: 550px){
-  :host{
-    //margin-top: 142px;
-  }
   .main_container{
-    //max-height: calc(100vh - 182px);
     .name,
     .date{
       font-size: 12px;
     }
   }
   .component_wrapp{
-    //height: calc(100vh - 142px);
-    //margin-top: 142px;
-    //margin-top: 29px;
-    height:100vh;
-    //height: 100%;
+    height: calc(100vh - 32px);
     margin-top: 0;
     transition: 0.5s;
   }
@@ -559,10 +553,6 @@
   .posts_search{
     font-size: 12px;
   }
-  //.posts_menu{
-  //  justify-content: center;
-  //  padding: 0;
-  //}
   .posts_menu_items{
     font-size: 13px;
     margin: 0 10px;

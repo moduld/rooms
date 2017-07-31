@@ -331,7 +331,7 @@ export class RequestService  {
   getFavedRoomsPosts( dataToServer: any ): Observable<any[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('user_id', this.userId);
-    params.set('room_id', this.roomId);
+    params.set('room_id', dataToServer.room_id);
     params.set('wall_id', dataToServer.wall_id);
     params.set('offset_id', dataToServer.offset_id);
     params.set('direction_flag', '0');

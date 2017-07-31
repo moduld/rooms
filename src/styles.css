@@ -20,12 +20,12 @@ app-root{
     flex-direction: column;
 }
 
-body.safari_browser{
-    display: -webkit-box;
-}
-.safari_browser app-root{
-        display:-webkit-box;
-}
+/*body.safari_browser{*/
+    /*display: -webkit-box;*/
+/*}*/
+/*.safari_browser app-root{*/
+        /*display:-webkit-box;*/
+/*}*/
 
 
 .modal-dialog{
@@ -120,30 +120,36 @@ app-post-details-main .picture{
         margin-top: 143px;
     }
     .opened ~ app-all-rooms > .rooms_container{
-        height: calc(100vh - 143px);
+        height: calc(100vh - 175px);
     }
 
     .opened ~ app-inside-room > .component_wrapp{
-        height: calc(100vh - 143px);
+        height: calc(100vh - 175px);
     }
 
     .opened ~ app-about-user > .main_container{
-        height: calc(100vh - 143px);
+        height: calc(100vh - 175px);
     }
     .opened ~ app-notifications > .notifications_wrapp{
         height: calc(100vh - 273px);
     }
 
     .opened ~ app-users-dialog > .main_container > .aside{
-        top: 143px!important;
+        top: 175px!important;
     }
 
     .opened ~ app-user-settings > .main_container > .aside{
-        top: 143px!important;
+        top: 175px!important;
+    }
+    .opened ~ app-user-settings app-muted-blocked .main_container {
+        max-height: calc(100vh - 327px);
     }
 
     .opened ~ app-room-settings > .main_container > .aside{
-        top: 143px!important;
+        top: 175px!important;
+    }
+    .opened ~ app-room-settings  app-members-list  .main_container{
+        max-height: calc(100vh - 357px);
     }
     app-post-details-main  .picture{
         min-height: 0;
@@ -173,10 +179,3 @@ tag path{
     fill: #868e96!important;
 
 }
-
-/*body  tag:not(.readonly):not(.tag--editing):active{*/
-    /*color: #868e96!important;*/
-/*}*/
-/*body tag:active  path{*/
-    /*fill: #868e96!important;*/
-/*}*/

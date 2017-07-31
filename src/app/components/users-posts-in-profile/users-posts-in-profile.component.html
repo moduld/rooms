@@ -10,7 +10,7 @@
     </div>
     <i class="line"></i>
     <div class="post_body"     [routerLink]="['/tifo/' + post.room_alias + '/post/'+ post.post_id]">
-      <p dir="auto" class="post_text" *ngIf="post.text.length">{{post.text}}</p>
+      <p dir="auto" class="post_text" *ngIf="post.text && post.text.length" [innerHTML]="post.text | asteriscReplace"></p>
 
       <div class="post_images_wrapp " *ngIf="post.media.length"
            [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">

@@ -9,8 +9,13 @@
 
 .main_container{
   @extend .flex-start;
-
-  margin-top: 35px;
+  overflow-y: auto;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  //margin-top: 35px;
 }
 .room_settings_header{
   position: absolute;
@@ -20,7 +25,6 @@
 }
 .label_wrapp{
   position: relative;
-  height: 0;
   width: 100%;
 }
 .link_holder{
@@ -106,6 +110,7 @@
   margin-top: 8px;
   width: 100%;
   transition: 0.5s;
+  height: calc(100% - 8px);
 }
 
 .confirm_block{

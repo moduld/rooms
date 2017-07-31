@@ -155,7 +155,7 @@
 @media screen and (max-width: 550px){
   .main_container{
     margin-top: 0;
-    height: 100vh;
+    height: calc(100vh - 32px);
   }
   .user_info_wrapp{
     padding: 10px;

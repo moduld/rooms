@@ -37,6 +37,7 @@
   align-items: center;
   @extend .backgr-center;
   background-size: cover;
+  max-height: 355px;
 }
 .right_zone_wrapper{
   flex: 1;
@@ -50,7 +51,7 @@
   color: white;
   font-family: $font_bold;
   text-align: center;
-  padding: 10px 45px;
+  padding: 10px 40px;
   border-radius: 27px;
   margin: 0 5px;
   cursor: pointer;

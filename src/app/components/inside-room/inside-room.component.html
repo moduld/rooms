@@ -12,7 +12,7 @@
 
 
                 <select class="filter_switcher"  [(ngModel)]="filter_switcher" (change)="doFilteringResults(filter_switcher)">
-                    <option value="show_all">{{'INSIDE_ROOM.SHOW_ALL_POSTS' | translate}}</option>
+                    <option value="show_all">{{'INSIDE_ROOM.CLEAR_FILTER' | translate}}</option>
                     <option value="faves">{{'INSIDE_ROOM.FAVES_USES' | translate}}</option>
                     <option value="search_term">{{'INSIDE_ROOM.BY_TEXT' | translate}}</option>
                     <option value="user_name_post">{{'INSIDE_ROOM.BY_NAME' | translate}}</option>
@@ -58,7 +58,7 @@
         </div>
         <i class="line"></i>
         <div class="post_body"   [routerLink]="['./post', post.post_id]">
-            <p class="post_text" dir="auto" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text.length">{{post.text}}</p>
+            <p class="post_text" dir="auto" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text && post.text.length" [innerHTML]="post.text | asteriscReplace"></p>
 
             <div class="post_images_wrapp " *ngIf="post.media.length"
                  [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">

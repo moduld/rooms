@@ -9,11 +9,11 @@
         <span class="avatar" [ngStyle]="notification.data.details.user.thumbnail && {'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"
               [routerLink]="['/about-user', notification.data.details.user.user_id*22]"></span>
         <div class="notification_data">
-            <div class="string" [routerLink]="notification.type === 'PostLikeNotification' && '/room/' + notification.data.details.post.room_id*22 || notification.type === 'CommentNotification' && '/room/' + notification.data.details.comment.room_id*22 ||
+            <div class="string" [routerLink]="notification.type === 'PostLikeNotification' && '/tifo/' + notification.data.details.post.room_alias || notification.type === 'CommentNotification' && '/tifo/' + notification.data.details.comment.room_alias ||
                 notification.type === 'FavedNotification' && ['/about-user', notification.data.details.user.user_id*22] ||  notification.type === 'MessageNotification' && '/user-dialogs' ||
-                notification.type === 'RoomJoinRequestNotification' && '/room/' + notification.data.details.room.room_id*22 || notification.type === 'JoinedRoomNotification' && '/room/' + notification.data.details.room.room_id*22 ||
-                notification.type === 'AddedModeratorNotification' && '/room/' + notification.data.details.room.room_id*22 ||  notification.type === 'AddedTalkerNotification' && '/room/' + notification.data.details.room.room_id*22 ||
-                notification.type === 'PostInRoomNotification' && '/room/' + notification.data.details.post.room_id*22">
+                notification.type === 'RoomJoinRequestNotification' && '/tifo/' + notification.data.details.room.room_alias || notification.type === 'JoinedRoomNotification' && '/tifo/' + notification.data.details.room.room_alias ||
+                notification.type === 'AddedModeratorNotification' && '/tifo/' + notification.data.details.room.room_alias ||  notification.type === 'AddedTalkerNotification' && '/tifo/' + notification.data.details.room.room_alias ||
+                notification.type === 'PostInRoomNotification' && '/tifo/' + notification.data.details.post.room_alias">
 
               <span class="name" [ngClass]="{'icon-heart-o': notification.type === 'PostLikeNotification', 'icon-comment-o':
                 notification.type === 'CommentNotification', 'icon-star-empty': notification.type === 'FavedNotification', 'icon-envelope-o':

@@ -26,6 +26,11 @@
     @extend .flex-column;
       background-color: transparent;
       background-size: cover;
+    transition: 0.5s;
+    &:hover{
+      box-shadow: 2px 4px 1px 0 rgba(0, 0, 0, 0.3);
+
+    }
   }
   //.image{
   //  height: 255px;
@@ -110,7 +115,7 @@
 
 @media screen and (max-width: 550px){
   .rooms_container{
-    height: 100vh;
+    height: calc(100vh - 32px);
     transition: 0.5s;
   }
 }

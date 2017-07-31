@@ -81,6 +81,7 @@
   font-family: $font_lora;
   font-size: 20px;
   line-height: 32px;
+  white-space: pre;
 }
 .dots_wrapp{
   padding: 5px 0;
@@ -224,7 +225,6 @@ margin-top: 5px;
   color: $dark_text;
   font-size: 18px;
   @extend .flex-center;
-  padding-right: 95px;
 }
 .new_comment_wrapp{
   position: absolute;

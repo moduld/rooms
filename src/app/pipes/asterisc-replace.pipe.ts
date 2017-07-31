@@ -17,7 +17,7 @@ export class AsteriscReplacePipe implements PipeTransform {
 
     function linkReplace(val){
 
-      return `<a href="${val}" class="prev_link">${val}</a>`
+      return `<a href="${val}" class="prev_link" target="_blank">${val}</a>`
     }
 
     if (value){

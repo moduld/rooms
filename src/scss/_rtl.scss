@@ -235,13 +235,16 @@ body.rtl{
     }
     .show_menu_label{
       left: auto;
-      right: 100%;
+      right: 0;
       border-radius: 5px 0 0 5px;
-      border-right: none;
-      border-left: 1px solid #e6ecf0;
+      border: none;
       &:before{
         transform: rotate(180deg);
       }
+    }
+    .inside{
+      margin-left: 0;
+      margin-right: auto;
     }
     #navigation_menu_toggle:checked  {
       &:checked + .aside .show_menu_label{

@@ -238,7 +238,15 @@ $font_lora: LoraRegular, serif;
   100% { opacity: 0; }
 }
 
-
+.prev_link{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+  &:visited{
+    text-decoration: none;
+  }
+}
 
 @media screen and (max-width: 1190px){
   .main_container{

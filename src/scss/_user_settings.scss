@@ -3,6 +3,7 @@
   background: $line;
   font-family: $font_medium;
   width: 100%;
+  position: relative;
 }
 .room_settings_header{
   cursor: default;
@@ -12,6 +13,12 @@
   @extend .flex-start;
   align-items: flex-start;
   margin-top: 35px;
+  overflow-y: auto;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 .label_wrapp{
   position: relative;
@@ -56,6 +63,9 @@
     transform: translate3d(0, 0, 0);
     border: 1px solid $border_menu;
   }
+  &:checked ~ .main_field{
+    margin-left: 184px;
+  }
 }
 .aside_items{
   list-style: none;
@@ -94,6 +104,13 @@
 @media screen and (max-width: 1000px){
   .main_container{
     flex-direction: column;
+    margin-top: 32px;
+  }
+  #navigation_menu_toggle{
+
+    &:checked ~ .main_field{
+      margin-left: 0;
+    }
   }
   .aside{
     top: 114px;
