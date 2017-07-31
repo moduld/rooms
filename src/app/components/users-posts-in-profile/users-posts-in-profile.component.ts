@@ -73,7 +73,6 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
           if (data['posts'].length){
             this.allPosts = this.allPosts.concat(data['posts']);
             this.flagMoveY = true;
-            console.log(this.allPosts)
           }
           this.show_loading = false;
             this.safariService.addSafariClass()

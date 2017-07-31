@@ -2,7 +2,7 @@
 <div class="component_wrapp" #scrollArea appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)" (scrollAction)="onScrollAction($event)" *ngIf="without_child_route">
 
 
-<div class="name_and_menu" *ngIf="wallsArray">
+<div class="name_and_menu" *ngIf="roomData">
     <div class="string_wrapp">
         <div class="left_position">
 
@@ -25,14 +25,14 @@
         </div>
 
         <ul class="posts_menu" >
-            <li class="posts_menu_items icon-gear" *ngIf="wallsArray.membership.member && wallsArray.is_admin" [routerLink]="'/tifo-settings'">{{'INSIDE_ROOM.SETTINGS' | translate}}</li>
+            <li class="posts_menu_items icon-gear" *ngIf="roomData && roomData.membership.member && roomData.is_admin" [routerLink]="'/tifo-settings'">{{'INSIDE_ROOM.SETTINGS' | translate}}</li>
             <li class="posts_menu_items icon-question" [routerLink]="'./about'">{{'INSIDE_ROOM.ABOUT' | translate}}</li>
-            <li class="posts_menu_items icon-room-in" *ngIf="!wallsArray.membership.member" (click)="interractWithUser('join')">{{'INSIDE_ROOM.JOIN' | translate}}</li>
-            <li class="posts_menu_items icon-room-out" *ngIf="wallsArray.membership.member" (click)="interractWithUser('leave')">{{'INSIDE_ROOM.LEAVE' | translate}}</li>
+            <li class="posts_menu_items icon-room-in" *ngIf="roomData && !roomData.membership.member" (click)="interractWithUser('join')">{{'INSIDE_ROOM.JOIN' | translate}}</li>
+            <li class="posts_menu_items icon-room-out" *ngIf="roomData && roomData.membership.member" (click)="interractWithUser('leave')">{{'INSIDE_ROOM.LEAVE' | translate}}</li>
         </ul>
     </div>
 
-    <span dir="auto" class="room_name">{{wallsArray.room_details.room_name}}</span>
+    <span dir="auto" class="room_name">{{roomData && roomData.room_details.room_name}}</span>
 </div>
 
 

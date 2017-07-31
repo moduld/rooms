@@ -18,7 +18,7 @@
                      [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'first': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
                     <div class="user_info_wrapp">
 
-                        <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')'}" [ngStyle]="message.owner.thumbnail && {'background-image':'url(' + message.owner.thumbnail + ')'}" [routerLink]="['/about-user', message.owner.user_id*22]"></span>
+                        <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')'}" [style.backgroundImage]="message.owner.thumbnail && 'url(' + message.owner.thumbnail + ')'" [routerLink]="['/about-user', message.owner.user_id*22]"></span>
                         <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
                     </div>
                     <div class="messages_wrapp">

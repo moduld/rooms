@@ -29,7 +29,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
   currentUserData: any;
   banDays: number = 0;
   wallsIds: number;
-  wallsArray: any;
+  roomData: any;
   currentWall: any;
   offset: number;
   flagMoveY: boolean = true;
@@ -88,23 +88,23 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     this.requestService.getWalls(this.roomAlias).subscribe(
         data=>{
             if (data && data['message'] === undefined){
-
-                this.wallsArray = data['room_walls'];
-                this.wallId = this.wallsArray.walls[0].wall_id;
-                this.currentWall = this.wallsArray.walls[0];
-                this.roomTags = this.wallsArray.walls;
-                this.storeservice.storeCurrentUserRooms(this.wallsArray);
+                this.roomData = data['room_walls'];
+                this.wallId = this.roomData.walls[0].wall_id;
+                this.currentWall = this.roomData.walls[0];
+                this.roomTags = this.roomData.walls;
+                this.storeservice.storeCurrentUserRooms(this.roomData);
                 this.isAdmin();
                 this.exchangeService.pushEventGetWalls();
-                this.roomId = this.wallsArray.room_details.room_id;
-                this.wallsArray['is_admin'] = this.userArmin;
+                this.roomId = this.roomData.room_details.room_id;
+                this.roomData['is_admin'] = this.userArmin;
                 this.getPosts();
                 this.wallsIds = this.wallId;
             }
         },
         error => {
             if (error && error.room_detals ){
-                this.wallsArray = [];
+
+                this.roomData = '';
                 this.openPrivateRoomModal(error.room_detals)
             }else {
                 this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get walls of the room'});
@@ -303,7 +303,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
         const modalRef = this.modalService.open(CreatePostComponent);
         modalRef.componentInstance.room_id = this.roomId;
         modalRef.componentInstance.wall_id = this.wallId;
-        modalRef.componentInstance.allow_comment_flag = this.wallsArray.walls[0].allow_comment_flag;
+        modalRef.componentInstance.allow_comment_flag = this.roomData.walls[0].allow_comment_flag;
         modalRef.result.then((newPost) => {
             this.allPosts.unshift(newPost.post)
         }).catch(()=>{});
@@ -344,10 +344,10 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
     interractWithUser(flag: string):void {
 
-        this.wallsArray.room_details.flag = flag;
-        this.requestService.joinAndLeaveRoom(this.wallsArray.room_details).subscribe(
+        this.roomData.room_details.flag = flag;
+        this.requestService.joinAndLeaveRoom(this.roomData.room_details).subscribe(
             data=>{
-                this.wallsArray.membership.member = this.wallsArray.membership.member === 1 ? 0 : 1;
+                this.roomData.membership.member = this.roomData.membership.member === 1 ? 0 : 1;
             },
             error => {
                 this.error = error;
