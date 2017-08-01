@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
     notifications: any[];
     notifications_quantity: number;
     header_opener_mod: boolean;
+    checkInterval: any;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
@@ -51,6 +52,11 @@ export class HeaderComponent implements OnInit {
       if (this.currentUser.token !== 'guest'){
           this.getNewMessages();
           this.getNewNotifications();
+          let self = this;
+          this.checkInterval = setInterval(function int() {
+              self.getNewMessages();
+              self.getNewNotifications();
+          }, 5000)
       }
 
       this.exchangeService.userAvatarChangedEvent.subscribe(
@@ -63,6 +69,7 @@ export class HeaderComponent implements OnInit {
 
     this.requestService.logOut().subscribe(
         data=>{
+            clearInterval(this.checkInterval);
             this.currentUser = this.storeservice.getUserData();
             this.router.navigateByUrl('/explore');
         },

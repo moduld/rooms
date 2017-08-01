@@ -53,7 +53,8 @@ import {
   SliderComponent,
   NotificationsSettingsComponent,
   PostDetailsMainComponent,
-  AboutRoomComponent} from './components/index';
+  AboutRoomComponent,
+  PasswordRecoveryComponent} from './components/index';
 
 import {
   CreatePostComponent,
@@ -80,7 +81,7 @@ import {
 import {NameFilterPipe,
         PollTimeLeftPipe,
         DatexPipe,
-        AsteriscReplacePipe} from './pipes/index'
+        AsteriscReplacePipe} from './pipes/index';
 
 
 let roomSettingsRoutes: Routes = [
@@ -121,6 +122,7 @@ let appRoutes: Routes =[
   { path: 'search', component: AllRoomsComponent, canActivate: [CanActivateComponent]},
 
   { path: 'registration', component: RegistrationComponent},
+  { path: 'password-recovery', component: PasswordRecoveryComponent},
   { path: 'login', component: LogInComponent},
   { path: 'tifo-settings', component: RoomSettingsComponent, children: roomSettingsRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-settings', component: UserSettingsComponent, children: userSettingsRoutes, canActivate: [CanActivateComponent]},
@@ -181,7 +183,8 @@ export function HttpLoaderFactory(http: Http) {
     AsteriscReplacePipe,
     PostDetailsMainComponent,
     AboutRoomComponent,
-    AboutRoomModalComponent
+    AboutRoomModalComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     JsonpModule,

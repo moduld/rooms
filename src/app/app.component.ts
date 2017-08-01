@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd ){
         //registration and log-in pages have their oun footer and do not have header
-        if (event.url === '/registration' || event.url === '/login'){
+        if (event.url === '/registration' || event.url === '/login' || event.url === '/password-recovery'){
           this.showHeader = false;
         } else {
           this.showHeader = true;

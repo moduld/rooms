@@ -29,3 +29,4 @@ export * from './walls-list/walls-list.component';
 export * from './slider/slider.component';
 export * from './post-details-main/post-details-main.component';
 export * from './about-room/about-room.component';
+export * from './password-recovery/password-recovery.component';

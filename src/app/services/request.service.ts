@@ -900,15 +900,30 @@ export class RequestService  {
 
   changePassword(dataToServer: any): Observable<any> {
 
+  let sendData = {
+    user_id: this.userId,
+    old_password: dataToServer.old_password,
+    new_password: dataToServer.new_password
+  };
+
+  let data = {
+    sendData: sendData,
+    apiLink: 'user/password/change'
+  };
+
+  return this.makePostRequest(data)
+}
+
+  passwordRecovery(dataToServer: any): Observable<any> {
+
     let sendData = {
       user_id: this.userId,
-      old_password: dataToServer.old_password,
-      new_password: dataToServer.new_password
+      email: dataToServer.email
     };
 
     let data = {
       sendData: sendData,
-      apiLink: 'user/password/change'
+      apiLink: 'user/password/renew'
     };
 
     return this.makePostRequest(data)

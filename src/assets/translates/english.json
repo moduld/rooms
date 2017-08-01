@@ -118,7 +118,9 @@
     "SIGN_IN": "Sign in",
     "WRONG_NAME_OR_LENGTH": "Wrong user name or name length",
     "WRONG_USER_NAME": "Username can include letters, numbers, and one of - . _ in the middle, and must starts with letter",
-    "MIN_NAME_LENGTH": "User name must be at least 3 chars"
+    "MIN_NAME_LENGTH": "User name must be at least 3 chars",
+    "FORGOT_PASSWORD": "Forgot your password",
+    "RECOVERY": "Recovery"
   },
 
   "MEMBERS_LIST": {
@@ -257,6 +259,12 @@
     "NEW_PASSWORD": "New password",
     "PASSWORD_LENGTH": "Password must be from 4 to 21 character length",
     "IDENTICAL": "New password is identical to old"
+  },
+
+  "PASSWORD_RECOVERY": {
+    "PASS_RECOVERY": "Password Recovery",
+    "EMAIL": "Enter your email to get the password",
+    "SEND": "Send"
   }
 
 

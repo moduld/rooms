@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "paths": { "fileapi": ["../node_modules/fileapi/dist/FileAPI.html5.min.js"] },
+
+    "removeComments": true,
     "baseUrl": "src",
     "sourceMap": true,
     "declaration": false,

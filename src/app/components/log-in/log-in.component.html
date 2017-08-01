@@ -14,6 +14,7 @@
         <button type="submit" [ngClass]="{'disabled_button': regForm.invalid}" class="form_button" [disabled]="regForm.invalid">Log in</button>
 
         <p class="link_prew">{{'LOGIN_AND_REGISTER.HAVE_ACCOUNT' | translate}}?<span class="link_to" [routerLink]="'/registration'">{{'LOGIN_AND_REGISTER.SIGN_UP' | translate}}</span></p>
+        <p class="link_prew">{{'LOGIN_AND_REGISTER.FORGOT_PASSWORD' | translate}}?<span class="link_to" [routerLink]="'/password-recovery'">{{'LOGIN_AND_REGISTER.RECOVERY' | translate}}</span></p>
     </form>
     <div class="footer_wrapper">
         <div class="links_wrap">
