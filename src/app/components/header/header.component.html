@@ -33,7 +33,7 @@
                 </div>
 
             </li>
-            <li class="see_all_messages" *ngIf="!messages_quantity" >{{'HEADER.NO_NEW_MESSAGES' | translate}}</li>
+            <li class="see_all_messages" *ngIf="!messages_quantity" [routerLink]="'/user-dialogs'">{{'HEADER.NO_NEW_MESSAGES' | translate}}</li>
             <li class="see_all_messages" *ngIf="messages_quantity > 5" [routerLink]="'/user-dialogs'">{{'HEADER.SEE_ALL_MESSAGES' | translate}}</li>
 
           </ul>
@@ -70,7 +70,7 @@
 
 
           </li>
-          <li class="see_all_messages" *ngIf="!notifications_quantity" >{{'HEADER.NO_NEW_NOTIFICATIONS' | translate}}</li>
+          <li class="see_all_messages" *ngIf="!notifications_quantity" [routerLink]="'/notifications'">{{'HEADER.NO_NEW_NOTIFICATIONS' | translate}}</li>
           <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/notifications'">{{'HEADER.SEE_ALL_ACTIVITY' | translate}}</li>
 
         </ul>

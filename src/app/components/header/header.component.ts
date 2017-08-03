@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
-import { Router} from '@angular/router';
+import { Router, NavigationEnd} from '@angular/router';
 
 import {TranslateService} from '@ngx-translate/core';
 
@@ -38,7 +38,16 @@ export class HeaderComponent implements OnInit {
               private translate: TranslateService,
               private router: Router) {
 
+        router.events.forEach((event) => {
+            if (event instanceof NavigationEnd ){
+                //registration and log-in pages have their oun footer and do not have header
+                if (event.url === '/explore' || event.url === '/my-tifos'){
+                    this.getNewMessages();
+                    this.getNewNotifications();
+                }
 
+            }
+        });
     }
 
   ngOnInit() {
@@ -56,7 +65,7 @@ export class HeaderComponent implements OnInit {
           this.checkInterval = setInterval(function int() {
               self.getNewMessages();
               self.getNewNotifications();
-          }, 5000)
+          }, 300000)
       }
 
       this.exchangeService.userAvatarChangedEvent.subscribe(

@@ -319,6 +319,7 @@
   font-size: 13px;
   white-space: pre-line;
   word-break: break-all;
+  font-family: $font_lato;
 }
 .picture{
   display: block;
@@ -372,7 +373,7 @@
 }
 
 .comment_footer{
-  padding: 10px 0 10px 46px;
+  padding: 10px 0 10px 13px;
   border-bottom: 1px solid $line;
   @extend .flex-between;
 }

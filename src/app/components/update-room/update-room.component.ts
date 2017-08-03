@@ -103,7 +103,16 @@ export class UpdateRoomComponent implements OnInit {
     sendTextData(roomForm: NgForm):void {
 
         if (this.changed_data || this.image_dropped || this.tagsChangetFlag){
-            roomForm.value['tags'] = this.tags;
+
+            roomForm.value['tags'] = [];
+            for (let i = 0; i < this.tags.length; i++){
+                if ( typeof this.tags[i] === 'string'){
+                    roomForm.value['tags'].push(this.tags[i])
+                } else {
+                    roomForm.value['tags'].push(this.tags[i]['value'])
+                }
+
+            }
             this.dataToServer['roomData'] = roomForm.value;
             this.dataToServer.room_id = this.currentRoom.room_details.room_id;
             this.requestService.updateRoom(this.dataToServer).subscribe(

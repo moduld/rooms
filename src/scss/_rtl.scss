@@ -588,7 +588,12 @@ body.rtl{
         }
       }
     }
+    app-about-user{
+      .avatar_and_drop{
+        margin: 0 0 0 10px;
+      }
 
+    }
     app-room-settings{
       .user_search_field{
         margin: 20px 0 0 0;

@@ -100,7 +100,10 @@ export class CreateRoomComponent implements OnInit {
 
     sendTextData(roomForm: NgForm):void {
 
-    roomForm.value['tags'] = this.tags;
+    roomForm.value['tags'] = [];
+    for (let i = 0; i < this.tags.length; i++){
+        roomForm.value['tags'].push(this.tags[i]['value'])
+    }
     this.dataToServer['roomData'] = roomForm.value;
     this.requestService.createNewRoom(this.dataToServer).subscribe(
         data=>{

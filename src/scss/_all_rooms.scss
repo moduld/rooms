@@ -42,10 +42,10 @@
   //}
   .room_info{
     padding: 15px;
-    color: white;
+    color: $gray_text;
     //@extend .flex-column;
     font-size: 14px;
-    background: black;
+    background: white;
     @extend .flex-default;
     border-radius: 0 0 5px 5px;
   }
