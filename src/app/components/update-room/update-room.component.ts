@@ -60,7 +60,7 @@ export class UpdateRoomComponent implements OnInit {
     this.roomName = this.currentRoom.room_details.room_name;
     this.roomAlias = this.currentRoom.room_details.room_alias;
     this.dataToServer['multimedia'] = '';
-    this.tags = this.currentRoom.room_details.tags || [];
+    this.tags = this.currentRoom.room_details.tags && this.currentRoom.room_details.tags.split(' ') || [];
     this.roomDeskription = this.currentRoom.room_details.room_desc;
     this.publicFlag = !!this.currentRoom.room_details.public;
     this.searchableFlag = !!this.currentRoom.room_details.searchable_flag;
@@ -104,15 +104,19 @@ export class UpdateRoomComponent implements OnInit {
 
         if (this.changed_data || this.image_dropped || this.tagsChangetFlag){
 
-            roomForm.value['tags'] = [];
-            for (let i = 0; i < this.tags.length; i++){
-                if ( typeof this.tags[i] === 'string'){
-                    roomForm.value['tags'].push(this.tags[i])
-                } else {
-                    roomForm.value['tags'].push(this.tags[i]['value'])
-                }
+            if (this.tagsChangetFlag){
 
+                roomForm.value['tags'] = '';
+                for (let i = 0; i < this.tags.length; i++){
+                    if ( typeof this.tags[i] === 'string'){
+                        roomForm.value['tags'] += " " + this.tags[i];
+                    } else {
+                        roomForm.value['tags'] += " " + this.tags[i]['value'];
+                    }
+
+                }
             }
+
             this.dataToServer['roomData'] = roomForm.value;
             this.dataToServer.room_id = this.currentRoom.room_details.room_id;
             this.requestService.updateRoom(this.dataToServer).subscribe(

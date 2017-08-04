@@ -24,17 +24,19 @@ margin-bottom: 60px;
   }
   .logo{
     height: 32px;
-    background: left center no-repeat;
-    background-image: url("../../../img/Logo.png");
     margin: 14px 0;
-    background-size: contain;
-    padding-left: 80px;
     @extend .flex-center;
     justify-content: flex-start;
     position: relative;
-    &:before{
-    transform: rotate(-90deg);
+
   }
+  .logo_link{
+    display: block;
+    width: 80px;
+    height: 100%;
+    background: left center no-repeat;
+    background-image: url("../../../img/Logo.png");
+    background-size: contain;
   }
   .header_link{
     font-size: 16px;
@@ -148,15 +150,7 @@ margin-bottom: 60px;
     }
 
   }
-  //.over_logo{
-  //  top: 0;
-  //  left: 0;
-  //  display: none;
-  //  width: 105px;
-  //  &:before{
-  //    transform: rotate(90deg);
-  //  }
-  //}
+
   .icon-bell-o{
     &:before{
       font-size: 20px;
@@ -412,10 +406,6 @@ margin-bottom: 60px;
     }
   }
 
-  //#header_opener:checked ~ .header .open_header{
-  //  transform: translate3d(-50%, -100%, 0);
-  //}
-
   .header{
 
     .main_container{
@@ -424,11 +414,13 @@ margin-bottom: 60px;
     .logo{
       margin: 10px auto;
       width: auto;
-      padding-left: 0;
       background-image: none;
       &.safari_browser{
         width: auto;
       }
+    }
+    .logo_link{
+      display: none;
     }
     .search{
       width: 100%;
@@ -452,15 +444,7 @@ margin-bottom: 60px;
       }
 
     }
-    //.over_logo{
-    //  display: flex;
-    //  transform: translate3d(0,0,0)!important;
-    //  color: $gray_text;
-    //  background-color: white;
-    //  &:hover{
-    //    color: $blue;
-    //  }
-    //}
+
 .icon-menu{
   transform: translate3d(-75%, 44px, 0);
   background: white;

@@ -1,7 +1,7 @@
-import { Component, OnInit} from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
+import { Component} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { RequestService, UserStoreService, EventsExchangeService } from '../../services/index';
+import { RequestService, UserStoreService, EventsExchangeService, RouterEventsListenerService } from '../../services/index';
 import {AboutRoomModalComponent} from '../../modals/index';
 
 @Component({
@@ -9,10 +9,10 @@ import {AboutRoomModalComponent} from '../../modals/index';
   templateUrl: 'about-room.component.html',
   styleUrls: ['about-room.component.scss']
 })
-export class AboutRoomComponent implements OnInit {
+export class AboutRoomComponent {
 
 
-  routerSubscription:any;
+  routerChangeSubscription: any;
   roomAlias: string;
   roomDetails: any;
 
@@ -21,28 +21,19 @@ export class AboutRoomComponent implements OnInit {
               private exchangeService: EventsExchangeService,
               private storeservice: UserStoreService,
               private modalService: NgbModal,
+              private routesListener: RouterEventsListenerService,
               private router: Router) {
 
-    this.routerSubscription = this.router.events.subscribe(event=>{
-
-      if (event instanceof NavigationEnd ){
-        let parses: UrlTree = this.router.parseUrl(this.router.url);
-        let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-        let segments: UrlSegment[] = segmentGroup.segments;
-        this.roomAlias = segments[1].path;
-        this.getRoomInfo();
-
-
-      }
-    })
+    this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
+      this.roomAlias = data.segmentsArr[1].path;
+      this.getRoomInfo();
+    });
   }
 
-  ngOnInit() {
-  }
 
   ngOnDestroy(){
 
-    this.routerSubscription.unsubscribe();
+    this.routerChangeSubscription.unsubscribe();
   }
 
   getRoomInfo():void {

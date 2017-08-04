@@ -54,7 +54,11 @@ import {
   NotificationsSettingsComponent,
   PostDetailsMainComponent,
   AboutRoomComponent,
-  PasswordRecoveryComponent} from './components/index';
+  PasswordRecoveryComponent,
+  TermsComponent,
+  SupportComponent,
+  AboutComponent,
+  PrivacyComponent} from './components/index';
 
 import {
   CreatePostComponent,
@@ -76,12 +80,14 @@ import {
   UploadFilesService,
   OpenNewWindowService,
   LinkPreviewService,
-  TranslateAppService} from './services/index';
+  TranslateAppService,
+  RouterEventsListenerService} from './services/index';
 
 import {NameFilterPipe,
         PollTimeLeftPipe,
         DatexPipe,
         AsteriscReplacePipe} from './pipes/index';
+
 
 
 let roomSettingsRoutes: Routes = [
@@ -129,6 +135,12 @@ let appRoutes: Routes =[
   { path: 'about-user/:id', component: AboutUserComponent, children: aboutUserChildRoutes, canActivate: [CanActivateComponent]},
   { path: 'user-dialogs', component: UsersDialogComponent, canActivate: [CanActivateComponent]},
   { path: 'notifications', component: NotificationsComponent, canActivate: [CanActivateComponent]},
+
+  { path: 'term', component: TermsComponent},
+  { path: 'support', component: SupportComponent},
+  { path: 'about', component: AboutComponent},
+  { path: 'privacy', component: PrivacyComponent},
+
   { path: '**', component: AllRoomsComponent, canActivate: [CanActivateComponent]}
 ];
 
@@ -184,7 +196,11 @@ export function HttpLoaderFactory(http: Http) {
     PostDetailsMainComponent,
     AboutRoomComponent,
     AboutRoomModalComponent,
-    PasswordRecoveryComponent
+    PasswordRecoveryComponent,
+    TermsComponent,
+    SupportComponent,
+    AboutComponent,
+    PrivacyComponent
   ],
   imports: [
     JsonpModule,
@@ -222,7 +238,8 @@ export function HttpLoaderFactory(http: Http) {
     ScrollToTopService,
     OpenNewWindowService,
     LinkPreviewService,
-    TranslateAppService
+    TranslateAppService,
+    RouterEventsListenerService
   ],
   entryComponents: [
     CreatePostComponent,

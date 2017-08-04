@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 
-import { EventsExchangeService, RequestService, UserStoreService } from '../../services/index';
+import { EventsExchangeService, RequestService, UserStoreService, RouterEventsListenerService } from '../../services/index';
 
 @Component({
   selector: 'app-users-fans-in-profile',
   templateUrl: 'users-fans-in-profile.component.html',
   styleUrls: ['users-fans-in-profile.component.scss']
 })
-export class UsersFansInProfileComponent implements OnInit, OnDestroy {
+export class UsersFansInProfileComponent implements OnInit, OnDestroy{
 
   error: any;
   allUsers: any[];
@@ -16,24 +15,18 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
   users_offset: number;
   flagMoveY: boolean = true;
   show_loading: boolean;
-    routerSubscription: any;
     currentUser: any;
+    routerChangeSubscription: any;
 
   constructor(private requestService: RequestService,
-              private router: Router,
               private exchangeService: EventsExchangeService,
-              private storeservice: UserStoreService) {
+              private storeservice: UserStoreService,
+              private routesListener: RouterEventsListenerService) {
 
-      this.routerSubscription = this.router.events.subscribe(event=>{
-
-          if (event instanceof NavigationEnd ){
-              let parses: UrlTree = this.router.parseUrl(this.router.url);
-              let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-              let segments: UrlSegment[] = segmentGroup.segments;
-              this.user_id = Number(segments[1].path) / 22;
-              this.getUserFans()
-          }
-      })
+      this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
+          this.user_id = Number(data.segmentsArr[1].path) / 22;
+          this.getUserFans()
+      });
   }
 
   ngOnInit() {
@@ -51,12 +44,13 @@ export class UsersFansInProfileComponent implements OnInit, OnDestroy {
               this.getUserFans()
           }
       });
-
   }
 
-    ngOnDestroy(): void {
-        this.routerSubscription.unsubscribe();
+    ngOnDestroy() {
+
+        this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
     }
+
 
   getUserFans():void {
 

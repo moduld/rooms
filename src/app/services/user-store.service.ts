@@ -8,9 +8,13 @@ export class UserStoreService {
   currentUserRooms: any;
   searchRequest: string;
 
+
+
   private roomChanged = new Subject<any>();
 
   constructor() { }
+
+
 
   setLanguage(lang: any):void {
 

@@ -30,3 +30,7 @@ export * from './slider/slider.component';
 export * from './post-details-main/post-details-main.component';
 export * from './about-room/about-room.component';
 export * from './password-recovery/password-recovery.component';
+export * from './terms/terms.component';
+export * from './support/support.component';
+export * from './about/about.component';
+export * from './privacy/privacy.component';

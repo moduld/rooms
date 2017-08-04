@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
+import { Router,  ActivatedRoute } from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService, ScrollToTopService } from '../../services/index';
+import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService, ScrollToTopService, RouterEventsListenerService } from '../../services/index';
 
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -38,7 +38,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
     posts_search: string;
     show_hide_toggle:boolean;
     show_to_top:boolean;
-    routerSubscription: any;
+    routerChangeSubscription: any;
     without_child_route:boolean;
 
     @ViewChild('scrollArea') scrollArea;
@@ -50,29 +50,24 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
               private modalService: NgbModal,
               private router: Router,
                 private safariService: SafariErrorsFixService,
+              private routesListener: RouterEventsListenerService,
                  private scrollToTop: ScrollToTopService){
 
-      this.routerSubscription = this.router.events.subscribe(event=>{
+      this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
-          if (event instanceof NavigationEnd ){
-              let parses: UrlTree = this.router.parseUrl(this.router.url);
-              let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-              let segments: UrlSegment[] = segmentGroup.segments;
-
-              if (window.innerWidth <= 1024){
-                  segments.length === 2 ? this.without_child_route = true : this.without_child_route = false
-              } else {
-                  this.without_child_route = true
-              }
-
+          if (window.innerWidth <= 1024){
+              data.segmentsArr.length === 2 ? this.without_child_route = true : this.without_child_route = false
+          } else {
+              this.without_child_route = true
           }
-      })
+      });
+
   }
 
   ngOnDestroy(){
 
     this.subscription.unsubscribe();
-    this.routerSubscription.unsubscribe();
+    this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
   }
 
   ngOnInit() {

@@ -10,3 +10,4 @@ export * from './scroll-to-top.service';
 export * from './translate-app.service';
 export * from './upload-files.service';
 export * from './user-store.service';
+export * from './router-events-listener.service';

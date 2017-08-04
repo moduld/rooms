@@ -13,9 +13,7 @@
   <div class="titled_wrapp">
     <span class="labels">{{'ABOUT_ROOM.TAGS' | translate}}</span>
     <div class="tags_wrapp">
-      <span dir="auto" class="tag">tag1</span>
-      <span class="tag">tag2</span>
-      <span class="tag">tag2</span>
+      <span dir="auto" class="tag" *ngFor="let tag of room_details.tags && room_details.tags.split(' ') || []">{{tag}}</span>
     </div>
   </div>
 

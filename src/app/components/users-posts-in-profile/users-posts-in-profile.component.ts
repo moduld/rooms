@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment } from '@angular/router';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 
-import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService } from '../../services/index';
+import { RequestService, UserStoreService, EventsExchangeService, SafariErrorsFixService, RouterEventsListenerService } from '../../services/index';
 
 @Component({
   selector: 'app-users-posts-in-profile',
   templateUrl: 'users-posts-in-profile.component.html',
   styleUrls: ['users-posts-in-profile.component.scss']
 })
-export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
+export class UsersPostsInProfileComponent implements OnInit, OnDestroy{
 
   error: any;
   allPosts: any[];
@@ -17,24 +16,18 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
   currentUserData: any;
   flagMoveY: boolean = true;
   show_loading: boolean;
-    routerSubscription: any;
+    routerChangeSubscription: any;
 
   constructor(private storeservice: UserStoreService,
               private requestService: RequestService,
-              private router: Router,
               private exchangeService: EventsExchangeService,
-              private safariService: SafariErrorsFixService) {
+              private safariService: SafariErrorsFixService,
+              private routesListener: RouterEventsListenerService) {
 
-      this.routerSubscription = this.router.events.subscribe(event=>{
-
-          if (event instanceof NavigationEnd ){
-              let parses: UrlTree = this.router.parseUrl(this.router.url);
-              let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-              let segments: UrlSegment[] = segmentGroup.segments;
-              this.user_id = Number(segments[1].path) / 22;
-              this.getUserPosts()
-          }
-      })
+      this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
+          this.user_id = Number(data.segmentsArr[1].path) / 22;
+          this.getUserPosts()
+      });
   }
 
   ngOnInit() {
@@ -42,6 +35,8 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
     this.allPosts = [];
     this.post_offset = 0;
     this.show_loading = false;
+
+
 
     this.exchangeService.srcrooReachEndEvent.subscribe(()=>{
 
@@ -54,9 +49,11 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy {
 
   }
 
-    ngOnDestroy(): void {
-        this.routerSubscription.unsubscribe();
+    ngOnDestroy() {
+
+        this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
     }
+
 
   getUserPosts():void {
 

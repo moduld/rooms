@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET, UrlSegment, ActivatedRoute } from '@angular/router';
-import { RequestService, EventsExchangeService, AddRequiredInfoService } from '../../services/index';
+import { Router,  ActivatedRoute } from '@angular/router';
+import { RequestService, EventsExchangeService, AddRequiredInfoService, RouterEventsListenerService } from '../../services/index';
 
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,7 +17,7 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
     error: any;
     allRooms: any[] = [];
     show_loading:boolean;
-    routerSubscription: any;
+    routerChangeSubscription: any;
     currentRoute: string;
     queryString: string;
 
@@ -26,16 +26,13 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private route: ActivatedRoute,
                 private exchangeService: EventsExchangeService,
+                private routesListener: RouterEventsListenerService,
                 private addRequiredInfo: AddRequiredInfoService) {
 
-        this.routerSubscription = this.router.events.subscribe(event=>{
+        this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
-            if (event instanceof NavigationEnd ){
-                let parses: UrlTree = this.router.parseUrl(this.router.url);
-                let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-                if (segmentGroup){
-                let segments: UrlSegment[] = segmentGroup.segments;
-                this.currentRoute = segments[0].path;
+            if (data.segmentGroup){
+                this.currentRoute = data.segmentsArr[0].path;
                 this.queryString = this.route.snapshot.params['q'];
 
                 if (this.currentRoute === 'explore' || this.currentRoute === 'my-tifos' || this.currentRoute === 'search'){
@@ -48,20 +45,20 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
                     this.router.navigateByUrl('tifo/' + this.currentRoute)
 
                 }
-                } else {
-                    this.router.navigateByUrl('explore')
-                }
+            } else {
+                this.router.navigateByUrl('explore')
             }
-        })
 
+        });
   }
 
   ngOnInit() {
 
   }
 
-    ngOnDestroy(): void {
-        this.routerSubscription.unsubscribe();
+    ngOnDestroy() {
+
+        this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
     }
 
 
@@ -74,12 +71,6 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
       this.requestService.getAllRooms().subscribe(
           data=>{
               if (data && data['rooms'] && data['rooms'].length){
-                  // for(let i = 0; i < data['rooms'].length; i++){
-                  //     //this cycle need to remove broken items which can come from server
-                  //     if (!data['rooms'][i].room || !data['rooms'][i].room_id){
-                  //         data['rooms'].splice(i, 1)
-                  //     }
-                  // }
                   this.show_loading = false;
                   this.allRooms = data['rooms'];
               }

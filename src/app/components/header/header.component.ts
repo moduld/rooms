@@ -1,9 +1,9 @@
-import { Component, OnInit, HostListener, HostBinding} from '@angular/core';
-import { Router, NavigationEnd} from '@angular/router';
+import { Component, OnInit, HostListener, HostBinding, OnDestroy} from '@angular/core';
+import { Router} from '@angular/router';
 
 import {TranslateService} from '@ngx-translate/core';
 
-import {RequestService, UserStoreService, EventsExchangeService} from '../../services/index';
+import {RequestService, UserStoreService, EventsExchangeService, RouterEventsListenerService} from '../../services/index';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {RequestService, UserStoreService, EventsExchangeService} from '../../ser
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   error: any;
 
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     notifications_quantity: number;
     header_opener_mod: boolean;
     checkInterval: any;
+    routerChangeSubscription: any;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
 
@@ -36,17 +37,16 @@ export class HeaderComponent implements OnInit {
               private storeservice: UserStoreService,
               private exchangeService: EventsExchangeService,
               private translate: TranslateService,
+              private routesListener: RouterEventsListenerService,
               private router: Router) {
 
-        router.events.forEach((event) => {
-            if (event instanceof NavigationEnd ){
-                //registration and log-in pages have their oun footer and do not have header
-                if (event.url === '/explore' || event.url === '/my-tifos'){
-                    this.getNewMessages();
-                    this.getNewNotifications();
-                }
+        this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
+            if (data.urlValue === '/explore' || data.urlValue === '/my-tifos'){
+                this.getNewMessages();
+                this.getNewNotifications();
             }
+
         });
     }
 
@@ -73,6 +73,11 @@ export class HeaderComponent implements OnInit {
               this.currentUser = this.storeservice.getUserData();
           });
   }
+
+    ngOnDestroy() {
+
+        this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
+    }
 
   logOut(){
 

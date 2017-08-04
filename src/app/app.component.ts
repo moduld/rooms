@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
-import {RequestService, EventsExchangeService, SafariErrorsFixService, TranslateAppService } from './services/index';
+import { Component, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import {RequestService, EventsExchangeService, SafariErrorsFixService, TranslateAppService, RouterEventsListenerService } from './services/index';
 
 @Component({
   selector: 'app-root',
@@ -8,30 +7,16 @@ import {RequestService, EventsExchangeService, SafariErrorsFixService, Translate
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
 
   showHeader: boolean;
+  routerChangeSubscription: any;
 
-
-  constructor( private router: Router,
-               private exchangeService: EventsExchangeService,
+  constructor( private exchangeService: EventsExchangeService,
                private requestService : RequestService,
                private translateService: TranslateAppService,
-               private safariService: SafariErrorsFixService ){
-
-
-    router.events.forEach((event) => {
-      if (event instanceof NavigationEnd ){
-        //registration and log-in pages have their oun footer and do not have header
-        if (event.url === '/registration' || event.url === '/login' || event.url === '/password-recovery'){
-          this.showHeader = false;
-        } else {
-          this.showHeader = true;
-        }
-// need to close opened modals when url changed by click "back" button or else
-        this.exchangeService.pushEventUrlChanged()
-      }
-    });
+               private safariService: SafariErrorsFixService,
+               private routesListener: RouterEventsListenerService){
 
     translateService.runTranslation()
   }
@@ -40,6 +25,24 @@ export class AppComponent implements OnInit{
 
     this.requestService.addRequiredDataToTheService();
     this.safariService.addSafariClass();
+    this.routesListener.routerEventsSubscribe()
+
+    this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
+
+      if (data.urlValue === '/registration' || data.urlValue === '/login' || data.urlValue === '/password-recovery'){
+        this.showHeader = false;
+      } else {
+        this.showHeader = true;
+      }
+
+      // need to close opened modals when url changed by click "back" button or else
+      this.exchangeService.pushEventUrlChanged()
+    });
+  }
+
+  ngOnDestroy() {
+
+    this.routerChangeSubscription && this.routerChangeSubscription.unsubscribe()
   }
 
 

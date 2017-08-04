@@ -16,7 +16,7 @@ body.rtl{
   .header .main_container{
     .logo{
       background-position: right center;
-      padding: 0 80px 0 0;
+      //padding: 0 80px 0 0;
     }
     .header_link{
       margin: 0 10px 0 0;
@@ -553,13 +553,15 @@ body.rtl{
 @media screen and (max-width: 550px){
   body.rtl{
     .header .main_container{
-      .logo{
-        padding: 0 105px 0 0;
-      }
       .user_info{
         .drop_down_menu{
           right: 0!important;
         }
+      }
+      .open_header{
+        padding-right: 80px;
+        background-position: right center;
+        margin-left: 0;
       }
       .new_notifications{
         .triangle{
