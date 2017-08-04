@@ -9,12 +9,12 @@ export class EventsExchangeService {
 
   // private headerRoomSearch = new Subject<any>();
   // private headerRoomSuggetsRooms = new Subject<any>();
-  private dataChangedFromSettings = new Subject<any>();
-  private showVisualMessageForUser = new Subject<any>();
-  private urlChanged = new Subject<any>();
-  private srcrooReachEnd = new Subject<any>();
-  private userAvatarChanged = new Subject<any>();
-  private getWallsForRoom = new Subject<any>();
+  private dataChangedFromSettings =  new Subject<any>();
+  private showVisualMessageForUser =  new Subject<any>();
+  private urlChanged =  new Subject<any>();
+  private srcrooReachEnd =  new Subject<any>();
+  private userAvatarChanged =  new Subject<any>();
+  private getWallsForRoom =  new Subject<any>();
 
 
   // makeHeaderRoomSearch = this.headerRoomSearch.asObservable();
@@ -49,19 +49,19 @@ export class EventsExchangeService {
   }
   //calls from app.component when url changed. need to close modals. used in all modals components
   pushEventUrlChanged(): void {
-    this.urlChanged.next();
+    this.urlChanged.next(true);
   }
   // to push event from parent component to component which output by router-outlet
   pushEventUrlReachEnd(): void {
-    this.srcrooReachEnd.next();
+    this.srcrooReachEnd.next(true);
   }
 //  event when users avatar changed. To change automaticaly in header
   changeUserAvatar():void {
-    this.userAvatarChanged.next()
+    this.userAvatarChanged.next(true)
   }
 
   pushEventGetWalls():void {
-    this.getWallsForRoom.next()
+    this.getWallsForRoom.next(true)
   }
 
 }

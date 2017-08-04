@@ -11,7 +11,7 @@ import { EventsExchangeService, RequestService, UserStoreService } from '../../s
 })
 export class AboutUserComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
+  private subscription: any;
   error: any;
   user_id: any;
   currentUser: any;
@@ -27,16 +27,16 @@ export class AboutUserComponent implements OnInit, OnDestroy {
 
   ngOnInit():void {
 
-    this.subscription = this.activateRoute.params.subscribe(params=>{
+    this.subscription = this.activateRoute.params.subscribe((params)=>{
 
-      this.user_id = params.id / 22;
+      this.user_id = params['id'] / 22;
 
       this.getUserInfo();
     });
 
     //to increase or decrease value inside buttons (switchers between user rooms, posts, favs, fans)
-    this.exchangeService.dataChangedFromUserSettings.subscribe(
-        search => {
+    this.exchangeService.dataChangedFromUserSettings.subscribe((search) => {
+
           this.changeTagsData(search)
         });
   }
@@ -57,7 +57,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
         error => {
           this.error = error;
           console.log(error);
-          this.exchangeService.doShowVisualMessageForUser({success:false, message: error.message || 'Something wrong, can\'t get user info'})
+          this.exchangeService.doShowVisualMessageForUser({success:false, message: error['message'] || 'Something wrong, can\'t get user info'})
         }
     )
   }
@@ -85,7 +85,7 @@ export class AboutUserComponent implements OnInit, OnDestroy {
     }
   }
   //when user delete or add post or user e.t.c. this method change value in according button
-  changeTagsData(flag: string):void {
+  changeTagsData(flag: any):void {
 
     flag === 'post' &&  this.currentUser.posts_count--;
     flag === 'fave' && this.currentUser.faves_count++;

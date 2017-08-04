@@ -25,7 +25,7 @@ export class UsersPostsInProfileComponent implements OnInit, OnDestroy{
               private routesListener: RouterEventsListenerService) {
 
       this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
-          this.user_id = Number(data.segmentsArr[1].path) / 22;
+          this.user_id = Number(data['segmentsArr'][1].path) / 22;
           this.getUserPosts()
       });
   }

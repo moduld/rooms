@@ -17,7 +17,7 @@ import {CreatePostComponent, PostEditeComponent, PrivateRoomComponent} from '../
 })
 export class InsideRoomComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
+  private subscription: any;
   error: any;
   roomId: any;
   roomAlias: string;
@@ -56,7 +56,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
       this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
           if (window.innerWidth <= 1024){
-              data.segmentsArr.length === 2 ? this.without_child_route = true : this.without_child_route = false
+              data['segmentsArr'].length === 2 ? this.without_child_route = true : this.without_child_route = false
           } else {
               this.without_child_route = true
           }
@@ -167,6 +167,7 @@ export class InsideRoomComponent implements OnInit, OnDestroy {
 
       if (data['posts'].length){
           this.allPosts = this.allPosts.concat(data['posts']);
+          console.log( this.allPosts)
           this.flagMoveY = true;
           this.wallId = dataToServer.wall_id
           this.safariService.addSafariClass()

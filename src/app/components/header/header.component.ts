@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     notifications: any[];
     notifications_quantity: number;
     header_opener_mod: boolean;
-    checkInterval: any;
     routerChangeSubscription: any;
 
     @HostListener('window:keydown', ['$event']) keyboardInput(event: KeyboardEvent) {
@@ -42,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
-            if (data.urlValue === '/explore' || data.urlValue === '/my-tifos'){
+            if (data['urlValue'] === '/explore' || data['urlValue'] === '/my-tifos'){
                 this.getNewMessages();
                 this.getNewNotifications();
             }
@@ -61,11 +60,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (this.currentUser.token !== 'guest'){
           this.getNewMessages();
           this.getNewNotifications();
-          let self = this;
-          this.checkInterval = setInterval(function int() {
-              self.getNewMessages();
-              self.getNewNotifications();
-          }, 300000)
       }
 
       this.exchangeService.userAvatarChangedEvent.subscribe(
@@ -83,7 +77,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.requestService.logOut().subscribe(
         data=>{
-            clearInterval(this.checkInterval);
             this.currentUser = this.storeservice.getUserData();
             this.router.navigateByUrl('/explore');
         },

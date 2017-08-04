@@ -31,8 +31,10 @@ export class AllRoomsComponent implements OnInit, OnDestroy {
 
         this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
 
-            if (data.segmentGroup){
-                this.currentRoute = data.segmentsArr[0].path;
+
+
+            if (data['segmentGroup']){
+                this.currentRoute = data['segmentsArr'][0].path;
                 this.queryString = this.route.snapshot.params['q'];
 
                 if (this.currentRoute === 'explore' || this.currentRoute === 'my-tifos' || this.currentRoute === 'search'){

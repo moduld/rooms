@@ -9,7 +9,7 @@ import { EventsExchangeService, RequestService } from '../../services/index';
   templateUrl: 'private-room.component.html',
   styleUrls: ['private-room.component.scss']
 })
-export class PrivateRoomComponent implements OnInit, Input {
+export class PrivateRoomComponent implements OnInit{
 
   @Input() room_details;
   error: any;

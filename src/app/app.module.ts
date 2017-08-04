@@ -19,6 +19,7 @@ import { LightboxModule } from 'angular2-lightbox';
 
 import { IeHeightDirective } from './directives/ie-height.directive';
 import { ScroolEndDirective } from './directives/scrool-end.directive';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -145,7 +146,7 @@ let appRoutes: Routes =[
 ];
 
 // AoT requires an exported function for factories
-export function HttpLoaderFactory(http: Http) {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "assets/translates/", ".json");
 }
 
@@ -201,6 +202,7 @@ export function HttpLoaderFactory(http: Http) {
     SupportComponent,
     AboutComponent,
     PrivacyComponent
+
   ],
   imports: [
     JsonpModule,
@@ -219,10 +221,12 @@ export function HttpLoaderFactory(http: Http) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [Http]
+        deps: [HttpClient]
       }
     }),
-    LightboxModule
+    LightboxModule,
+    HttpClientModule
+
   ],
   providers: [
     RequestService,

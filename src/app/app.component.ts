@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy{
     this.safariService.addSafariClass();
     this.routesListener.routerEventsSubscribe()
 
-    this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data)=>{
+    this.routerChangeSubscription = this.routesListener.routeChangedEvent.subscribe((data: any)=>{
 
       if (data.urlValue === '/registration' || data.urlValue === '/login' || data.urlValue === '/password-recovery'){
         this.showHeader = false;

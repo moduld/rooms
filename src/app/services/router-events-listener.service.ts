@@ -16,11 +16,20 @@ export class RouterEventsListenerService {
     this.routerSubscription = this.router.events.subscribe(event=>{
 
       if (event instanceof NavigationEnd ){
-        let parses: UrlTree = this.router.parseUrl(this.router.url);
-        let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
-        let segments: UrlSegment[] = segmentGroup.segments;
+        // console.log(event)
+        if (this.router.url !== "/"){
+          let parses: UrlTree = this.router.parseUrl(this.router.url);
+          let segmentGroup: UrlSegmentGroup = parses.root.children[PRIMARY_OUTLET];
+          let segments: UrlSegment[] = segmentGroup.segments;
+          this.routeChanged.next({segmentGroup: segmentGroup, segmentsArr: segments, urlValue: event.url})
+        } else {
+          this.routeChanged.next({segmentGroup: false, segmentsArr: false, urlValue: event.url})
+        }
 
-        this.routeChanged.next({segmentGroup: segmentGroup, segmentsArr: segments, urlValue: event.url})
+
+
+
+
       }
     })
   }
